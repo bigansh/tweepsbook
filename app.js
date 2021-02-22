@@ -62,7 +62,7 @@ var tweet = {
 
 //REQUESTS
 app.get('/', function (req, res) {
-    res.render("index")
+    res.redirect('https://offf.to/tweepsbookapp')
 });
 
 var stream = T.stream('statuses/filter', { track: ['@bigansh_ bookmark'] });
