@@ -118,7 +118,8 @@ class Monitor extends EventEmitter {
   }
 
   reset() {
-    if (isInCloseState(this)) {
+    const topologyVersion = this[kServer].description.topologyVersion;
+    if (isInCloseState(this) || topologyVersion == null) {
       return;
     }
 
@@ -152,7 +153,6 @@ class Monitor extends EventEmitter {
 }
 
 function resetMonitorState(monitor) {
-  stateTransition(monitor, STATE_CLOSING);
   if (monitor[kMonitorId]) {
     monitor[kMonitorId].stop();
     monitor[kMonitorId] = null;
@@ -200,16 +200,19 @@ function checkServer(monitor, callback) {
     const topologyVersion = monitor[kServer].description.topologyVersion;
     const isAwaitable = topologyVersion != null;
 
-    const cmd = isAwaitable
-      ? { ismaster: true, maxAwaitTimeMS, topologyVersion: makeTopologyVersion(topologyVersion) }
-      : { ismaster: true };
+    const cmd = { ismaster: true };
+    const options = { socketTimeout: connectTimeoutMS };
 
-    const options = isAwaitable
-      ? { socketTimeout: connectTimeoutMS + maxAwaitTimeMS, exhaustAllowed: true }
-      : { socketTimeout: connectTimeoutMS };
-
-    if (isAwaitable && monitor[kRTTPinger] == null) {
-      monitor[kRTTPinger] = new RTTPinger(monitor[kCancellationToken], monitor.connectOptions);
+    if (isAwaitable) {
+      cmd.maxAwaitTimeMS = maxAwaitTimeMS;
+      cmd.topologyVersion = makeTopologyVersion(topologyVersion);
+      if (connectTimeoutMS) {
+        options.socketTimeout = connectTimeoutMS + maxAwaitTimeMS;
+      }
+      options.exhaustAllowed = true;
+      if (monitor[kRTTPinger] == null) {
+        monitor[kRTTPinger] = new RTTPinger(monitor[kCancellationToken], monitor.connectOptions);
+      }
     }
 
     monitor[kConnection].command('admin.$cmd', cmd, options, (err, result) => {

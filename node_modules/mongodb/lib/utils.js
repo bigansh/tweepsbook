@@ -518,6 +518,22 @@ function decorateWithReadConcern(command, coll, options) {
   }
 }
 
+/**
+ * Applies an explain to a given command.
+ * @internal
+ *
+ * @param {object} command - the command on which to apply the explain
+ * @param {Explain} explain - the options containing the explain verbosity
+ * @return the new command
+ */
+function decorateWithExplain(command, explain) {
+  if (command.explain) {
+    return command;
+  }
+
+  return { explain: command, verbosity: explain.verbosity };
+}
+
 const emitProcessWarning = msg => process.emitWarning(msg, 'DeprecationWarning');
 const emitConsoleWarning = msg => console.error(msg);
 const emitDeprecationWarning = process.emitWarning ? emitProcessWarning : emitConsoleWarning;
@@ -793,8 +809,11 @@ function hasAtomicOperators(doc) {
     return doc.reduce((err, u) => err || hasAtomicOperators(u), null);
   }
 
-  const keys = Object.keys(doc);
-  return keys.length > 0 && keys[0][0] === '$';
+  return (
+    Object.keys(typeof doc.toBSON !== 'function' ? doc : doc.toBSON())
+      .map(k => k[0])
+      .indexOf('$') >= 0
+  );
 }
 
 module.exports = {
@@ -820,6 +839,7 @@ module.exports = {
   isPromiseLike,
   decorateWithCollation,
   decorateWithReadConcern,
+  decorateWithExplain,
   deprecateOptions,
   SUPPORTS,
   MongoDBNamespace,

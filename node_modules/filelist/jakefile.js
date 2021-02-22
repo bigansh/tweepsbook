@@ -4,11 +4,12 @@ testTask('FileList', function () {
 
 publishTask('FileList', function () {
   this.packageFiles.include([
-    'Jakefile'
-  , 'README.md'
-  , 'package.json'
-  , 'index.js'
-    ]);
+  'jakefile.js',
+  'README.md',
+  'package.json',
+  'index.js',
+  'index.d.ts'
+  ]);
 });
 
 

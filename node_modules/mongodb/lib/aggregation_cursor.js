@@ -202,7 +202,7 @@ class AggregationCursor extends Cursor {
   /**
    * Add a unwind stage to the aggregation pipeline
    * @method
-   * @param {number} field The unwind field name.
+   * @param {(string|object)} field The unwind field name or stage document.
    * @return {AggregationCursor}
    */
   unwind(field) {
@@ -322,7 +322,13 @@ AggregationCursor.prototype.get = AggregationCursor.prototype.toArray;
 
 /**
  * Execute the explain for the cursor
+ *
+ * For backwards compatibility, a verbosity of true is interpreted as "allPlansExecution"
+ * and false as "queryPlanner". Prior to server version 3.6, aggregate()
+ * ignores the verbosity parameter and executes in "queryPlanner".
+ *
  * @method AggregationCursor.prototype.explain
+ * @param {'queryPlanner'|'queryPlannerExtended'|'executionStats'|'allPlansExecution'|boolean} [verbosity=true] - An optional mode in which to run the explain.
  * @param {AggregationCursor~resultCallback} [callback] The result callback.
  * @return {Promise} returns Promise if no callback passed
  */

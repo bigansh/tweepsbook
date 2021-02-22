@@ -11,6 +11,11 @@ const ReadPreference = require('./topologies/read_preference');
  */
 const HOSTS_RX = /(mongodb(?:\+srv|)):\/\/(?: (?:[^:]*) (?: : ([^@]*) )? @ )?([^/?]*)(?:\/|)(.*)/;
 
+// Options that reference file paths should not be parsed
+const FILE_PATH_OPTIONS = new Set(
+  ['sslCA', 'sslCert', 'sslKey', 'tlsCAFile', 'tlsCertificateKeyFile'].map(key => key.toLowerCase())
+);
+
 /**
  * Determines whether a provided address matches the provided parent domain in order
  * to avoid certain attack vectors.
@@ -86,7 +91,7 @@ function parseSrvConnectionString(uri, options, callback) {
     // Resolve TXT record and add options from there if they exist.
     dns.resolveTxt(lookupAddress, (err, record) => {
       if (err) {
-        if (err.code !== 'ENODATA') {
+        if (err.code !== 'ENODATA' && err.code !== 'ENOTFOUND') {
           return callback(err);
         }
         record = null;
@@ -424,7 +429,9 @@ function parseQueryString(query, options) {
     }
 
     const normalizedKey = key.toLowerCase();
-    const parsedValue = parseQueryStringItemValue(normalizedKey, value);
+    const parsedValue = FILE_PATH_OPTIONS.has(normalizedKey)
+      ? value
+      : parseQueryStringItemValue(normalizedKey, value);
     applyConnectionStringOption(result, normalizedKey, parsedValue, options);
   }
 
@@ -685,6 +692,15 @@ function parseConnectionString(uri, options, callback) {
     // If the option is set to true, the driver MUST validate that there is exactly one host given
     // in the host list in the URI, and fail client creation otherwise.
     return callback(new MongoParseError('directConnection option requires exactly one host'));
+  }
+
+  // NOTE: this behavior will go away in v4.0, we will always auto discover there
+  if (
+    parsedOptions.directConnection == null &&
+    hosts.length === 1 &&
+    parsedOptions.replicaSet == null
+  ) {
+    parsedOptions.directConnection = true;
   }
 
   const result = {
