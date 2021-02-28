@@ -6,18 +6,8 @@ var express = require("express"),
     passport = require('passport'),
     Strategy = require('passport-twitter').Strategy,
     session = require('express-session'),
+    MongoStore = require('connect-mongo').default,
     app = express();
-
-//TOKENS
-var T = new twit({
-    consumer_key: 'byiphhH8THY87ADDYvTv8Upl8',
-    consumer_secret: 'EpV1XVnyLBiZkbUP8E6UzPoGmek4i48jDxmo77HEUKIvArh2tg',
-    // access_token: '718377211447930880-WFxtj2PVaaPjyqKIBggUgXeOAw5eqdd',
-    // access_token_secret: 'ijMq2HcUoW3DOuxdg01uWrwQXY900oK7vrgomVtHfTGCw',
-    access_token: '1350865466340741120-9aHn3REe4EzC1LrQkIqTfjY2Q3DyEX', //tweepsbookapp
-    access_token_secret: '9T4TlmJmDP1ahaEIo5e0U2EEVqVGd6WWlPtSGv3e0ElpB', //tweepsbookapp
-    timeout_ms: 60 * 1000,
-})
 
 //CONNECTION TO DATABASE
 mongoose.connect("mongodb://localhost/tweepsbookapp", {
@@ -30,13 +20,37 @@ mongoose.connect("mongodb://localhost/tweepsbookapp", {
     console.log("ERROR:", err.message);
 });
 
-//CONNECTION TO MODULES
+//TOKENS
+var T = new twit({
+    consumer_key: 'byiphhH8THY87ADDYvTv8Upl8',
+    consumer_secret: 'EpV1XVnyLBiZkbUP8E6UzPoGmek4i48jDxmo77HEUKIvArh2tg',
+    // access_token: '718377211447930880-WFxtj2PVaaPjyqKIBggUgXeOAw5eqdd',
+    // access_token_secret: 'ijMq2HcUoW3DOuxdg01uWrwQXY900oK7vrgomVtHfTGCw',
+    access_token: '1350865466340741120-9aHn3REe4EzC1LrQkIqTfjY2Q3DyEX', //tweepsbookapp
+    access_token_secret: '9T4TlmJmDP1ahaEIo5e0U2EEVqVGd6WWlPtSGv3e0ElpB', //tweepsbookapp
+    timeout_ms: 60 * 1000,
+})
+
+//MIDDLEWARES
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: 'whatever', resave: true, saveUninitialized: true }))
+app.use(session({
+    secret: 'whatever',
+    resave: true,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: "mongodb://localhost/tweepsbookapp" }),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 14 //14 Days
+    }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next) => {
+    console.log(req.session)
+    console.log(req.user)
+    next();
+})
 
 //MONGOOSE MODEL CONFIF/SCHEMA
 var userSchema = mongoose.Schema({
@@ -57,23 +71,23 @@ var tweetsSchema = mongoose.Schema({
 })
 var Tweet = mongoose.model("Tweet", tweetsSchema);
 
-var params = {
-    status: String,
-    in_reply_to_status_id: String,
-    auto_populate_reply_metadata: Boolean
-}
-
-var tweet = {
+//OBJECTS
+var bmTweet = {
     embed_link: String,
     category: String
 };
 
-
-var user = {
+var newUser = {
     email: String,
     profile: String,
     name: String,
     id: String
+}
+
+var params = {
+    status: String,
+    in_reply_to_status_id: String,
+    auto_populate_reply_metadata: Boolean
 }
 
 //REQUESTS
@@ -84,27 +98,31 @@ passport.use(new Strategy({
     callbackURL: '/twitter/return',
     proxy: true
 }, function (token, tokenSecret, profile, cb) {
-    // console.log(profile);
-    user.id = profile.id;
-    user.email = profile.emails[0].value;
-    user.name = profile.displayName;
-    user.profile = profile.photos[0].value;
-    User.create(user, function (err, user) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(user);
+    newUser.id = profile.id;
+    newUser.email = profile.emails[0].value;
+    newUser.name = profile.displayName;
+    newUser.profile = profile.photos[0].value;
+    User.find({ id: profile.id }, function (err, user) {
+        if (user.length === 0) {
+            User.create(newUser);
+            console.log("User created.");
         }
     })
     return cb(null, profile);
 }));
 
 passport.serializeUser(function (user, cb) {
-    cb(null, user);
+    cb(null, user.id);
 });
 
-passport.deserializeUser(function (obj, cb) {
-    cb(null, obj);
+passport.deserializeUser(function (userID, cb) {
+    User.find({ id: userID })
+        .then(function (user) {
+            // console.log(user)
+            cb(null, user);
+        }).catch(function (err) {
+            cb(err)
+        })
 });
 
 app.get('/login/twitter',
@@ -118,18 +136,16 @@ app.get('/twitter/return',
 );
 
 app.get('/', function (req, res) {
-    // res.redirect('https://offf.to/tweepsbookapp')
-    res.render('index')
+    res.send('<h1>Hi there!</>')
 });
 
 var stream = T.stream('statuses/filter', { track: ['@tweepsbookapp bookmark'] });
 stream.on('tweet', function (tweet) {
     T.get('statuses/oembed', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
-        tweet.embed_link = data.html;
+        bmTweet.embed_link = data.html;
     })
     T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
-        tweet.category = data.text.split(" ")[data.text.split(" ").length - 1];
-        // User.create({ email: 'tweepsbook@gmail.com', name: 'Tweeps Book', id: data.user.id_str })
+        bmTweet.category = data.text.split(" ")[data.text.split(" ").length - 1];
         User.find({ id: data.user.id_str }, function (err, user) {
             if (user.length === 0) {
                 params = {
@@ -138,7 +154,7 @@ stream.on('tweet', function (tweet) {
                     auto_populate_reply_metadata: true
                 }
             } else {
-                Tweet.create({ status: tweet.embed_link, category: tweet.category }, function (err, tweet) {
+                Tweet.create(bmTweet, function (err, tweet) {
                     if (err) {
                         console.log(err);
                     } else {
@@ -153,11 +169,7 @@ stream.on('tweet', function (tweet) {
                 }
             }
         }).then(function () {
-            T.post('statuses/update', params, function (err, data, response) {
-                if (err) {
-                    console.log(err);
-                }
-            })
+            T.post('statuses/update', params)
         })
     })
 })
