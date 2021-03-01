@@ -94,7 +94,8 @@ var params = {
 passport.use(new Strategy({
     consumerKey: 'byiphhH8THY87ADDYvTv8Upl8',
     consumerSecret: 'EpV1XVnyLBiZkbUP8E6UzPoGmek4i48jDxmo77HEUKIvArh2tg',
-    userProfileURL: "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true",
+    // requestTokenURL: 'https://api.twitter.com/oauth/request_token?x_auth_access_type=read',
+    includeEmail: true,
     callbackURL: '/twitter/return',
     proxy: true
 }, function (token, tokenSecret, profile, cb) {
@@ -146,6 +147,7 @@ stream.on('tweet', function (tweet) {
     })
     T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
         bmTweet.category = data.text.split(" ")[data.text.split(" ").length - 1];
+        bmTweet.category = bmTweet.category.toLowerCase();
         User.find({ id: data.user.id_str }, function (err, user) {
             if (user.length === 0) {
                 params = {
@@ -169,7 +171,7 @@ stream.on('tweet', function (tweet) {
                 }
             }
         }).then(function () {
-            T.post('statuses/update', params)
+            T.post('statuses/update', params, function (err, data, response) { })
         })
     })
 })
