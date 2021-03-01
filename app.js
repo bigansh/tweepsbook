@@ -67,14 +67,16 @@ var User = mongoose.model("User", userSchema);
 
 var tweetsSchema = mongoose.Schema({
     status: String,
-    tag: String
+    tag: String,
+    id: String
 })
 var Tweet = mongoose.model("Tweet", tweetsSchema);
 
 //OBJECTS
 var bmTweet = {
     status: String,
-    tag: String
+    tag: String,
+    id: String
 };
 
 var newUser = {
@@ -156,6 +158,7 @@ stream.on('tweet', function (tweet) {
                     auto_populate_reply_metadata: true
                 }
             } else {
+                bmTweet.id = user[0].id;
                 console.log(bmTweet);
                 Tweet.create(bmTweet, function (err, tweet) {
                     if (err) {
