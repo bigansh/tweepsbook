@@ -73,8 +73,8 @@ var Tweet = mongoose.model("Tweet", tweetsSchema);
 
 //OBJECTS
 var bmTweet = {
-    embed_link: String,
-    category: String
+    status: String,
+    tag: String
 };
 
 var newUser = {
@@ -143,11 +143,11 @@ app.get('/', function (req, res) {
 var stream = T.stream('statuses/filter', { track: ['@tweepsbookapp bookmark'] });
 stream.on('tweet', function (tweet) {
     T.get('statuses/oembed', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
-        bmTweet.embed_link = data.html;
+        bmTweet.status = data.html;
     })
     T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
-        bmTweet.category = data.text.split(" ")[data.text.split(" ").length - 1];
-        bmTweet.category = bmTweet.category.toLowerCase();
+        bmTweet.tag = data.text.split(" ")[data.text.split(" ").length - 1];
+        bmTweet.tag = bmTweet.tag.toLowerCase();
         User.find({ id: data.user.id_str }, function (err, user) {
             if (user.length === 0) {
                 params = {
@@ -156,6 +156,7 @@ stream.on('tweet', function (tweet) {
                     auto_populate_reply_metadata: true
                 }
             } else {
+                console.log(bmTweet);
                 Tweet.create(bmTweet, function (err, tweet) {
                     if (err) {
                         console.log(err);
