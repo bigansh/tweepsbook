@@ -175,7 +175,9 @@ stream.on('tweet', function (tweet) {
                 }
             }
         }).then(function () {
-            T.post('statuses/update', params, function (err, data, response) { })
+            T.post('statuses/update', params, function (err, data, response) { 
+                console.log(data);
+            })
         })
     })
 })
