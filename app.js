@@ -139,6 +139,19 @@ app.get('/', function (req, res) {
     res.send('<h1>Hi there!</>')
 });
 
+app.get('/check', function(req, res){
+    if(req.isAuthenticated()){
+        res.send("<h1>You are!</>")
+    } else {
+        res.send("<h1>You arn't</h1>")
+    }
+})
+
+app.get('/logout', function(req, res){
+    req.logOut();
+    res.redirect('/check')
+})
+
 var stream = T.stream('statuses/filter', { track: ['@tweepsbookapp bookmark'] });
 stream.on('tweet', function (tweet) {
     T.get('statuses/oembed', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
