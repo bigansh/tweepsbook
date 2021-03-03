@@ -24,8 +24,6 @@ mongoose.connect("mongodb+srv://bigansh_:bigansh_@tweeples.diemi.mongodb.net/tes
 var T = new twit({
     consumer_key: 'byiphhH8THY87ADDYvTv8Upl8',
     consumer_secret: 'EpV1XVnyLBiZkbUP8E6UzPoGmek4i48jDxmo77HEUKIvArh2tg',
-    // access_token: '718377211447930880-WFxtj2PVaaPjyqKIBggUgXeOAw5eqdd',
-    // access_token_secret: 'ijMq2HcUoW3DOuxdg01uWrwQXY900oK7vrgomVtHfTGCw',
     access_token: '1350865466340741120-9aHn3REe4EzC1LrQkIqTfjY2Q3DyEX', //tweepsbookapp
     access_token_secret: '9T4TlmJmDP1ahaEIo5e0U2EEVqVGd6WWlPtSGv3e0ElpB', //tweepsbookapp
     timeout_ms: 60 * 1000,
@@ -121,7 +119,6 @@ passport.serializeUser(function (user, cb) {
 passport.deserializeUser(function (userID, cb) {
     User.find({ id: userID })
         .then(function (user) {
-            // console.log(user)
             cb(null, user);
         }).catch(function (err) {
             cb(err)
@@ -159,7 +156,6 @@ stream.on('tweet', function (tweet) {
                 }
             } else {
                 bmTweet.id = user[0].id;
-                console.log(bmTweet);
                 Tweet.create(bmTweet, function (err, tweet) {
                     if (err) {
                         console.log(err);
@@ -169,14 +165,16 @@ stream.on('tweet', function (tweet) {
                     }
                 })
                 params = {
-                    status: 'Hey, we have bookmarked the tweet your asked for. You can check the same in your dashboard. Thank you for using our service 🤖.',
+                    status: 'Hey, we have bookmarked the tweet your asked for. You can check the same in your dashboard. Thank you for using our service 🤖. https://twitter.com/' + tweet.in_reply_to_screen_name + '/status/' + tweet.in_reply_to_status_id_str,
                     in_reply_to_status_id: tweet.id_str,
                     auto_populate_reply_metadata: true
                 }
             }
         }).then(function () {
-            T.post('statuses/update', params, function (err, data, response) { 
-                console.log(data);
+            T.post('statuses/update', params, function (err, data, response) {
+                // console.log(response.statusCode);
+                console.log(response.statusMessage)
+                // console.log(data)
             })
         })
     })
