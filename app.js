@@ -159,8 +159,12 @@ stream.on('tweet', function (tweet) {
         bmTweet.status_id = data.id_str;
     })
     T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
-        bmTweet.tag = data.text.split(" ")[data.text.split(" ").length - 1];
+        bmTweet.tag = data.text.match(/(?=[\s*#])[\s*#]\w+/g)
+        if (bmTweet.tag[1] != null) {
+            bmTweet.tag = data.text.match(/(^|\s)#(\w+)/g).map(function (v) { return v.trim().substring(1); })[0]
+        }
         bmTweet.tag = bmTweet.tag.toLowerCase();
+        console.log(bmTweet.tag);
         User.find({ id: data.user.id_str }, function (err, user) {
             if (user.length === 0) {
                 params = {
@@ -170,14 +174,14 @@ stream.on('tweet', function (tweet) {
                 }
             } else {
                 bmTweet.id = user[0].id;
-                Tweet.create(bmTweet, function (err, tweet) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        user[0].tweets.push(tweet);
-                        user[0].save();
-                    }
-                })
+                // Tweet.create(bmTweet, function (err, tweet) {
+                //     if (err) {
+                //         console.log(err);
+                //     } else {
+                //         user[0].tweets.push(tweet);
+                //         user[0].save();
+                //     }
+                // })
                 params = {
                     status: 'Hey, we have bookmarked the tweet your asked for. You can check the same in your dashboard. Thank you for using our service 🤖. https://twitter.com/' + tweet.in_reply_to_screen_name + '/status/' + tweet.in_reply_to_status_id_str,
                     in_reply_to_status_id: tweet.id_str,
