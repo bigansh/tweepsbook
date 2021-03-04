@@ -162,9 +162,8 @@ stream.on('tweet', function (tweet) {
         bmTweet.tag = data.text.match(/(?=[\s*#])[\s*#]\w+/g)
         if (bmTweet.tag[1] != null) {
             bmTweet.tag = data.text.match(/(^|\s)#(\w+)/g).map(function (v) { return v.trim().substring(1); })[0]
+            bmTweet.tag = bmTweet.tag.toLowerCase();
         }
-        bmTweet.tag = bmTweet.tag.toLowerCase();
-        console.log(bmTweet.tag);
         User.find({ id: data.user.id_str }, function (err, user) {
             if (user.length === 0) {
                 params = {
