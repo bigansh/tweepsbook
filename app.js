@@ -163,6 +163,8 @@ stream.on('tweet', function (tweet) {
         if (bmTweet.tag[1] != null) {
             bmTweet.tag = data.text.match(/(^|\s)#(\w+)/g).map(function (v) { return v.trim().substring(1); })[0]
             bmTweet.tag = bmTweet.tag.toLowerCase();
+        } else {
+            bmTweet.tag = null;
         }
         User.find({ id: data.user.id_str }, function (err, user) {
             if (user.length === 0) {
