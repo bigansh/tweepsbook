@@ -174,14 +174,14 @@ stream.on('tweet', function (tweet) {
                 }
             } else {
                 bmTweet.id = user[0].id;
-                // Tweet.create(bmTweet, function (err, tweet) {
-                //     if (err) {
-                //         console.log(err);
-                //     } else {
-                //         user[0].tweets.push(tweet);
-                //         user[0].save();
-                //     }
-                // })
+                Tweet.create(bmTweet, function (err, tweet) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        user[0].tweets.push(tweet);
+                        user[0].save();
+                    }
+                })
                 params = {
                     status: 'Hey, we have bookmarked the tweet your asked for. You can check the same in your dashboard. Thank you for using our service 🤖. https://twitter.com/' + tweet.in_reply_to_screen_name + '/status/' + tweet.in_reply_to_status_id_str,
                     in_reply_to_status_id: tweet.id_str,
