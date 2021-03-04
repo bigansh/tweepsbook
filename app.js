@@ -10,7 +10,7 @@ var express = require("express"),
     app = express();
 
 //CONNECTION TO DATABASE
-mongoose.connect("mongodb+srv://bigansh_:bigansh_@tweeples.diemi.mongodb.net/test_2", {
+mongoose.connect("mongodb+srv://bigansh_:bigansh_@tweeples.diemi.mongodb.net/test", {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true
@@ -37,7 +37,7 @@ app.use(session({
     secret: 'whatever',
     resave: true,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: "mongodb+srv://bigansh_:bigansh_@tweeples.diemi.mongodb.net/test_2" }),
+    store: MongoStore.create({ mongoUrl: "mongodb+srv://bigansh_:bigansh_@tweeples.diemi.mongodb.net/test" }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 14 //14 Days
     }
