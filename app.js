@@ -10,7 +10,7 @@ var express = require("express"),
     app = express();
 
 //CONNECTION TO DATABASE
-mongoose.connect("mongodb+srv://bigansh_:bigansh_@tweeples.diemi.mongodb.net/test", {
+mongoose.connect("mongodb+srv://bigansh_:bigansh_@tweeples.diemi.mongodb.net/test_2", {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true
@@ -27,7 +27,7 @@ var T = new twit({
     access_token: '1350865466340741120-9aHn3REe4EzC1LrQkIqTfjY2Q3DyEX', //tweepsbookapp
     access_token_secret: '9T4TlmJmDP1ahaEIo5e0U2EEVqVGd6WWlPtSGv3e0ElpB', //tweepsbookapp
     timeout_ms: 60 * 1000,
-})
+});
 
 //MIDDLEWARES
 app.set("view engine", "ejs");
@@ -37,18 +37,13 @@ app.use(session({
     secret: 'whatever',
     resave: true,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: "mongodb+srv://bigansh_:bigansh_@tweeples.diemi.mongodb.net/test" }),
+    store: MongoStore.create({ mongoUrl: "mongodb+srv://bigansh_:bigansh_@tweeples.diemi.mongodb.net/test_2" }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 14 //14 Days
     }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use((req, res, next) => {
-    console.log(req.session)
-    console.log(req.user)
-    next();
-})
 
 //MONGOOSE MODEL CONFIF/SCHEMA
 var userSchema = mongoose.Schema({
@@ -64,7 +59,7 @@ var userSchema = mongoose.Schema({
 var User = mongoose.model("User", userSchema);
 
 var tweetsSchema = mongoose.Schema({
-    status: String,
+    status_id: String,
     tag: String,
     id: String
 })
@@ -72,7 +67,7 @@ var Tweet = mongoose.model("Tweet", tweetsSchema);
 
 //OBJECTS
 var bmTweet = {
-    status: String,
+    status_id: String,
     tag: String,
     id: String
 };
@@ -135,27 +130,33 @@ app.get('/twitter/return',
     }
 );
 
+app.get('/dashboard', function (req, res) {
+    User.find({ id: req.user[0].id }).populate("tweets").exec(function (err, user) {
+        res.send(user);
+    })
+})
+
 app.get('/', function (req, res) {
     res.send('<h1>Hi there!</>')
 });
 
-app.get('/check', function(req, res){
-    if(req.isAuthenticated()){
+app.get('/check', function (req, res) {
+    if (req.isAuthenticated()) {
         res.send("<h1>You are!</>")
     } else {
         res.send("<h1>You arn't</h1>")
     }
 })
 
-app.get('/logout', function(req, res){
+app.get('/logout', function (req, res) {
     req.logOut();
     res.redirect('/check')
 })
 
 var stream = T.stream('statuses/filter', { track: ['@tweepsbookapp bookmark'] });
 stream.on('tweet', function (tweet) {
-    T.get('statuses/oembed', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
-        bmTweet.status = data.html;
+    T.get('statuses/show', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
+        bmTweet.status_id = data.id_str;
     })
     T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
         bmTweet.tag = data.text.split(" ")[data.text.split(" ").length - 1];
@@ -185,9 +186,7 @@ stream.on('tweet', function (tweet) {
             }
         }).then(function () {
             T.post('statuses/update', params, function (err, data, response) {
-                // console.log(response.statusCode);
-                console.log(response.statusMessage)
-                // console.log(data)
+                console.log("Stauts: " + response.statusMessage)
             })
         })
     })
