@@ -26,7 +26,7 @@ var T = new twit({
     consumer_secret: 'EpV1XVnyLBiZkbUP8E6UzPoGmek4i48jDxmo77HEUKIvArh2tg',
     access_token: '1350865466340741120-9aHn3REe4EzC1LrQkIqTfjY2Q3DyEX', //tweepsbookapp
     access_token_secret: '9T4TlmJmDP1ahaEIo5e0U2EEVqVGd6WWlPtSGv3e0ElpB', //tweepsbookapp
-    timeout_ms: 60 * 1000,
+    timeout_ms: 60 * 1000
 });
 
 //MIDDLEWARES
@@ -55,14 +55,14 @@ var userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Tweet"
     }]
-})
+});
 var User = mongoose.model("User", userSchema);
 
 var tweetsSchema = mongoose.Schema({
     status_id: String,
     tag: String,
     id: String
-})
+});
 var Tweet = mongoose.model("Tweet", tweetsSchema);
 
 //OBJECTS
@@ -70,7 +70,7 @@ var bmTweet = {
     status_id: String,
     tag: String,
     id: String
-};
+}
 
 var newUser = {
     email: String,
@@ -103,7 +103,7 @@ passport.use(new Strategy({
             User.create(newUser);
             console.log("User created.");
         }
-    })
+    });
     return cb(null, profile);
 }));
 
@@ -116,42 +116,53 @@ passport.deserializeUser(function (userID, cb) {
         .then(function (user) {
             cb(null, user);
         }).catch(function (err) {
-            cb(err)
-        })
+            cb(err);
+        });
 });
 
-app.get('/login/twitter',
-    passport.authenticate('twitter'));
+var isAuth = (req, res, next) => {
+    if(req.isAuthenticated()){
+        next();
+    } else {
+        res.redirect('/check');
+    }
+}
 
-app.get('/twitter/return',
-    passport.authenticate('twitter', { failureRedirect: '/login' }),
+//ROUTES
+app.get('/', function (req, res) {
+    res.send('<h1>Hi there!</>')
+});
+
+app.get('/dashboard', isAuth, function (req, res) {
+    User.find({ id: req.user[0].id }).populate("tweets").exec(function (err, user) {
+        res.send(user);
+    });
+});
+
+app.get('/login', passport.authenticate('twitter'));
+
+app.get('/twitter/return', passport.authenticate('twitter', { failureRedirect: '/login' }),
     function (req, res) {
         res.redirect('/');
     }
 );
 
-app.get('/dashboard', function (req, res) {
-    User.find({ id: req.user[0].id }).populate("tweets").exec(function (err, user) {
-        res.send(user);
-    })
-})
-
-app.get('/', function (req, res) {
-    res.send('<h1>Hi there!</>')
-});
-
 app.get('/check', function (req, res) {
     if (req.isAuthenticated()) {
-        res.send("<h1>You are!</>")
+        res.send("<h1>You are!</>");
     } else {
-        res.send("<h1>You arn't</h1>")
+        res.send("<h1>You arn't</h1>");
     }
-})
+});
 
 app.get('/logout', function (req, res) {
     req.logOut();
-    res.redirect('/check')
+    res.redirect('/');
 })
+
+app.get('/:url', function (req, res) {
+    res.redirect('/');
+});
 
 var stream = T.stream('statuses/filter', { track: ['@tweepsbookapp bookmark'] });
 stream.on('tweet', function (tweet) {
@@ -161,7 +172,7 @@ stream.on('tweet', function (tweet) {
     T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
         bmTweet.tag = data.text.match(/\B\#\w\w+\b/g)
         if (bmTweet.tag != null) {
-            bmTweet.tag = data.text.match(/\B\#\w\w+\b/g)[0]
+            bmTweet.tag = data.text.match(/\B\#\w\w+\b/g)[0];
             bmTweet.tag = bmTweet.tag.toLowerCase();
         } else {
             bmTweet.tag = null;
@@ -191,11 +202,12 @@ stream.on('tweet', function (tweet) {
             }
         }).then(function () {
             T.post('statuses/update', params, function (err, data, response) {
-                console.log("Stauts: " + response.statusMessage)
-            })
-        })
-    })
-})
+                console.log(data);
+                console.log("Stauts: " + response.statusMessage + " & Code: " + response.statusCode)
+            });
+        });
+    });
+});
 
 app.listen(process.env.PORT || 3000, function () {
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
