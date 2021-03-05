@@ -35,7 +35,7 @@ var func = {
                 auto_populate_reply_metadata: true
             }
         }
-        return params;
+        return Promise.resolve({msg:'Worked', data: params});
     }
 }
 

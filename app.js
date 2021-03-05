@@ -133,20 +133,12 @@ stream.on('tweet', function (tweet) {
     T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
         func.addTag(data);
         User.find({ id: data.user.id_str }, function (err, user) {
-            func.main(err, user, tweet)
-            .then(function () {
-                console.log(params)
-                // T.post('statuses/update', params, function (err, data, response) {
-                //     console.log("Stauts: " + response.statusMessage + " & Code: " + response.statusCode)
-                // });
+            func.main(err, user, tweet).then(function () {
+                T.post('statuses/update', params, function (err, data, response) {
+                    console.log("Stauts: " + response.statusMessage + " & Code: " + response.statusCode)
+                });
             })
         })
-        // .then(function () {
-        //     console.log(params)
-        //     // T.post('statuses/update', params, function (err, data, response) {
-        //     //     console.log("Stauts: " + response.statusMessage + " & Code: " + response.statusCode)
-        //     // });
-        // });
     });
 });
 
