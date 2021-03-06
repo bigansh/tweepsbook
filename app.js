@@ -1,8 +1,6 @@
 var express = require("express"),
     mongoose = require("mongoose"),
     twit = require("twit"),
-    session = require("express-session"),
-    MongoStore = require("connect-mongo").default,
     dotenv = require("dotenv"),
     app = express();
 
@@ -11,7 +9,8 @@ var User = require("./models/users"),
     Tweet = require("./models/tweets");
 
 //DEFINING MIDDLWARES
-var pass = require("./middlewares/passMiddlware");
+var pass = require("./middlewares/passMiddlware"),
+    sess = require("./middlewares/sessMiddleware");
 
 //INITIALIZING OBJECTS
 var objects = require("./objects/objects"),
@@ -52,15 +51,7 @@ var T = new twit({
 //INITIALIZING MIDDLEWARES
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-app.use(session({
-    secret: process.env.SECRET,
-    resave: true,
-    saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: process.env.DATABASEURL }),
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 14 //14 Days
-    }
-}));
+app.use(sess.session);
 app.use(pass.initialize);
 app.use(pass.session);
 
