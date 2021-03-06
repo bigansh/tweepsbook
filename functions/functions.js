@@ -1,4 +1,4 @@
-var objects = require("../objects/objects"),
+var objects = require("../models/objects"),
     params = objects.params,
     newUser = objects.newUser,
     bmTweet = objects.bmTweet;

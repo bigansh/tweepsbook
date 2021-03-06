@@ -10,7 +10,7 @@ var pass = require("./middlewares/passMiddlware"),
     sess = require("./middlewares/sessMiddleware");
 
 //INITIALIZING OBJECTS
-var objects = require("./objects/objects"),
+var objects = require("./models/objects"),
     bmTweet = objects.bmTweet;
 
 //INITIALIZING ROUTES
