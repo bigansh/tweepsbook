@@ -5,8 +5,7 @@ var express = require("express"),
     app = express();
 
 //INITIALIZING SCHEMAS
-var User = require("./models/users"),
-    Tweet = require("./models/tweets");
+var User = require("./models/users");
 
 //DEFINING MIDDLWARES
 var pass = require("./middlewares/passMiddlware"),
@@ -14,8 +13,6 @@ var pass = require("./middlewares/passMiddlware"),
 
 //INITIALIZING OBJECTS
 var objects = require("./objects/objects"),
-    params = objects.params,
-    newUser = objects.newUser,
     bmTweet = objects.bmTweet;
 
 //INITIALIZING ROUTES
