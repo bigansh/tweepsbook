@@ -125,6 +125,7 @@ app.get('/:url', function (req, res) {
     res.send('<h1>Page not found!</h1>');
 });
 
+//CAPTURING AND SAVING TWEET
 var stream = T.stream('statuses/filter', { track: ['@tweepsbookapp bookmark'] });
 stream.on('tweet', function (tweet) {
     T.get('statuses/show', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
@@ -133,8 +134,8 @@ stream.on('tweet', function (tweet) {
     T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
         func.addTag(data);
         User.find({ id: data.user.id_str }, function (err, user) {
-            func.main(err, user, tweet).then(function () {
-                T.post('statuses/update', params, function (err, data, response) {
+            func.main(err, user, tweet).then(function (params) {
+                T.post('statuses/update', params.data, function (err, data, response) {
                     console.log("Stauts: " + response.statusMessage + " & Code: " + response.statusCode)
                 });
             })
