@@ -12,6 +12,9 @@ var express = require("express"),
 var User = require("./models/users"),
     Tweet = require("./models/tweets");
 
+//DEFINING MIDDLWARES
+var pass = require("./middlewares/passMiddlware");
+
 //INITIALIZING OBJECTS
 var objects = require("./objects/objects"),
     params = objects.params,
@@ -59,8 +62,8 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 14 //14 Days
     }
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(pass.initialize);
+app.use(pass.session);
 
 
 //REQUESTS
