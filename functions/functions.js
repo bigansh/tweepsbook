@@ -3,7 +3,8 @@ var objects = require("../objects/objects"),
     newUser = objects.newUser,
     bmTweet = objects.bmTweet;
 
-var Tweet = require("../models/tweets");
+var Tweet = require("../models/tweets"),
+    User = require("../models/users");
 
 var func = {
     addTag: function (data) {
@@ -35,7 +36,28 @@ var func = {
                 auto_populate_reply_metadata: true
             }
         }
-        return Promise.resolve({msg:'Worked', data: params});
+        return Promise.resolve({ msg: 'Worked', data: params });
+    },
+    userCreate: function (profile, cb) {
+        newUser.id = profile.id;
+        newUser.email = profile.emails[0].value;
+        newUser.name = profile.displayName;
+        newUser.profile = profile.photos[0].value;
+        User.find({ id: profile.id }, function (err, user) {
+            if (user.length === 0) {
+                User.create(newUser);
+                console.log("User created.");
+            }
+        });
+        return cb(null, profile);
+    },
+    userFind: function (userID, cb) {
+        User.find({ id: userID })
+            .then(function (user) {
+                cb(null, user);
+            }).catch(function (err) {
+                cb(err);
+            });
     }
 }
 

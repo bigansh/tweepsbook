@@ -1,8 +1,6 @@
 var express = require("express"),
     mongoose = require("mongoose"),
     twit = require("twit"),
-    passport = require("passport"),
-    Strategy = require("passport-twitter").Strategy,
     session = require("express-session"),
     MongoStore = require("connect-mongo").default,
     dotenv = require("dotenv"),
@@ -25,12 +23,13 @@ var objects = require("./objects/objects"),
 var dashboarRoutes = require("./routes/dashboard"),
     loginRoutes = require("./routes/login");
 
+//INITIALIZING FUNCTIONS
 var func = require("./functions/functions");
 
 //INITIALIZING .env
 dotenv.config();
 
-//INITIALIZING DATABASE
+//CONNECTING DATABASE
 mongoose.connect(process.env.DATABASEURL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -65,42 +64,10 @@ app.use(session({
 app.use(pass.initialize);
 app.use(pass.session);
 
-
-//REQUESTS
-passport.use(new Strategy({
-    consumerKey: process.env.CONSUMER_KEY,
-    consumerSecret: process.env.CONSUMER_SECRET,
-    // requestTokenURL: 'https://api.twitter.com/oauth/request_token?x_auth_access_type=read',
-    includeEmail: true,
-    callbackURL: '/login/callback',
-    proxy: true
-}, function (token, tokenSecret, profile, cb) {
-    newUser.id = profile.id;
-    newUser.email = profile.emails[0].value;
-    newUser.name = profile.displayName;
-    newUser.profile = profile.photos[0].value;
-    User.find({ id: profile.id }, function (err, user) {
-        if (user.length === 0) {
-            User.create(newUser);
-            console.log("User created.");
-        }
-    });
-    return cb(null, profile);
-}));
-
-passport.serializeUser(function (user, cb) {
-    cb(null, user.id);
-});
-
-passport.deserializeUser(function (userID, cb) {
-    User.find({ id: userID })
-        .then(function (user) {
-            cb(null, user);
-        }).catch(function (err) {
-            cb(err);
-        });
-});
-
+//USING PASSPORT
+pass.login;
+pass.serializeUser;
+pass.deserializeUser;
 
 //ROUTES
 app.get('/', function (req, res) {
