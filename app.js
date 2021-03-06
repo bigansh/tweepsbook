@@ -1,6 +1,4 @@
 var express = require("express"),
-    mongoose = require("mongoose"),
-    twit = require("twit"),
     dotenv = require("dotenv"),
     app = express();
 
@@ -22,28 +20,18 @@ var dashboarRoutes = require("./routes/dashboard"),
 //INITIALIZING FUNCTIONS
 var func = require("./functions/functions");
 
+//INITIALIZING CONNECTS
+var mongo = require("./connections/mongoConnect"),
+    twit = require("./connections/tokenConnect");
+
+//INITIALIZING TOKENS
+var T = twit;
+
 //INITIALIZING .env
 dotenv.config();
 
 //CONNECTING DATABASE
-mongoose.connect(process.env.DATABASEURL, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true
-}).then(function () {
-    console.log("Connected to DB");
-}).catch(function (err) {
-    console.log("ERROR:", err.message);
-});
-
-//INITIALIZING TOKENS
-var T = new twit({
-    consumer_key: process.env.CONSUMER_KEY,
-    consumer_secret: process.env.CONSUMER_SECRET,
-    access_token: process.env.ACCESS_TOKEN, //tweepsbookapp
-    access_token_secret: process.env.ACCESS_TOKEN_SECRET, //tweepsbookapp
-    timeout_ms: 60 * 1000
-});
+mongo.connect;
 
 //INITIALIZING MIDDLEWARES
 app.set("view engine", "ejs");
