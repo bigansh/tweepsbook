@@ -1,9 +1,11 @@
 var objects = require("../models/objects"),
     params = objects.params,
     newUser = objects.newUser,
+    bmtTag = objects.bmtTag,
     bmTweet = objects.bmTweet;
 
 var Tweet = require("../models/tweets"),
+    Tag = require("../models/tags"),
     User = require("../models/users");
 
 var func = {
@@ -25,6 +27,18 @@ var func = {
             }
         } else {
             bmTweet.id = user[0].id;
+            bmtTag.id = bmTweet.id;
+            Tag.find({ tag: bmTweet.tag }, function (err, tag) {
+                if (tag.length === 0) {
+                    bmtTag.tag = bmTweet.tag;
+                    Tag.create(bmtTag, function (err, tag) {
+                        user[0].tags.push(tag);
+                        user[0].save();
+                        console.log("Tag created.");
+                    })
+                }
+                return Promise.resolve({ msg: "Worked" })
+            })
             Tweet.create(bmTweet, function (err, tweet) {
                 user[0].tweets.push(tweet);
                 user[0].save();

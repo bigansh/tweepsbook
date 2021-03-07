@@ -6,7 +6,7 @@ var express = require("express"),
     isAuth = require("../middlewares/authMiddlware");
 
 router.get('/', isAuth, function (req, res) {
-    User.find({ id: req.user[0].id }).populate("tweets").exec(function (err, user) {
+    User.find({ id: req.user[0].id }).populate("tweets").populate("tags").exec(function (err, user) {
         res.send(user);
     });
 });
@@ -15,9 +15,13 @@ router.get('/login', passport.authenticate('twitter'));
 
 router.get('/login/callback', passport.authenticate('twitter', { failureRedirect: '/' }),
     function (req, res) {
-        res.redirect('/dashboard');
+        res.redirect('/dashboard/authenticate');
     }
 );
+
+router.get('/authenticate', function(req, res){
+    res.redirect('/dashboard');
+})
 
 router.get('/logout', function (req, res) {
     req.logOut();

@@ -8,6 +8,10 @@ var userSchema = mongoose.Schema({
     tweets: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Tweet"
+    }],
+    tags: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tag"
     }]
 });
 

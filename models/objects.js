@@ -19,4 +19,9 @@ objects.params = {
     auto_populate_reply_metadata: Boolean
 }
 
+objects.bmtTag = {
+    tag: String,
+    id: String
+}
+
 module.exports = objects;
