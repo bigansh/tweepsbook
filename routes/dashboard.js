@@ -32,4 +32,8 @@ router.get('/check', function (req, res) {
     }
 });
 
+router.get("/:url", function(req, res){
+    res.redirect("/dashboard");
+});
+
 module.exports = router;
