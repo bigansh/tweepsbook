@@ -17,7 +17,7 @@ passObj.login = passport.use(new Strategy({
     consumerSecret: process.env.CONSUMER_SECRET,
     // requestTokenURL: 'https://api.twitter.com/oauth/request_token?x_auth_access_type=read',
     includeEmail: true,
-    callbackURL: '/login/callback',
+    callbackURL: '/dashboard/login/callback',
     proxy: true
 }, function (token, tokenSecret, profile, cb) {
     func.userCreate(profile, cb);

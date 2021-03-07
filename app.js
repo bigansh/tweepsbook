@@ -52,21 +52,6 @@ app.get('/', function (req, res) {
 
 app.use('/dashboard', dashboarRoutes);
 
-app.use('/login', loginRoutes);
-
-app.get('/check', function (req, res) {
-    if (req.isAuthenticated()) {
-        res.send("<h1>You are!</>");
-    } else {
-        res.send("<h1>You arn't</h1>");
-    }
-});
-
-app.get('/logout', function (req, res) {
-    req.logOut();
-    res.redirect('/');
-})
-
 app.get('/:url', function (req, res) {
     res.send('<h1>Page not found!</h1>');
 });

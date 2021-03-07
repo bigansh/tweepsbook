@@ -2,7 +2,7 @@ var isAuth = (req, res, next) => {
     if(req.isAuthenticated()){
         next();
     } else {
-        res.redirect('/check');
+        res.redirect('/dashboard/check');
     }
 }
 
