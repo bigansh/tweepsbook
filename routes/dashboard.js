@@ -15,7 +15,7 @@ router.get('/login', passport.authenticate('twitter'));
 
 router.get('/login/callback', passport.authenticate('twitter', { failureRedirect: '/' }),
     function (req, res) {
-        res.redirect('/');
+        res.redirect('/dashboard');
     }
 );
 
