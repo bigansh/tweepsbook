@@ -14,8 +14,7 @@ var objects = require("./models/objects"),
     bmTweet = objects.bmTweet;
 
 //INITIALIZING ROUTES
-var dashboarRoutes = require("./routes/dashboard"),
-    loginRoutes = require("./routes/login");
+var dashboarRoutes = require("./routes/dashboard");
 
 //INITIALIZING FUNCTIONS
 var func = require("./functions/functions");
