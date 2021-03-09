@@ -28,22 +28,9 @@ var func = {
         } else {
             bmTweet.id = user[0].id;
             bmtTag.id = bmTweet.id;
-            Tag.find({ tag: bmTweet.tag }, function (err, tag) {
-                if (tag.length === 0) {
-                    bmtTag.tag = bmTweet.tag;
-                    Tag.create(bmtTag, function (err, tag) {
-                        user[0].tags.push(tag);
-                        user[0].save();
-                        console.log("Tag created.");
-                    })
-                }
-                return Promise.resolve({ msg: "Worked" })
-            })
-            Tweet.create(bmTweet, function (err, tweet) {
-                user[0].tweets.push(tweet);
-                user[0].save();
-                console.log("Tweet saved.")
-            })
+            func.tweetCreate(bmTweet, user).then(function (msg) {
+                func.tagFindOrCreate(bmTweet, bmtTag, user);
+            });
             params = {
                 status: 'Hey, we have bookmarked the tweet your asked for. You can check the same in your dashboard. Thank you for using our service 🤖. https://twitter.com/' + tweet.in_reply_to_screen_name + '/status/' + tweet.in_reply_to_status_id_str,
                 in_reply_to_status_id: tweet.id_str,
@@ -72,6 +59,33 @@ var func = {
             }).catch(function (err) {
                 cb(err);
             });
+    },
+    tagFindOrCreate: function (tweet, tag, user) {
+        Tag.find({ tag: tweet.tag, id: tweet.id }, function (err, foundTag) {
+            if (foundTag.length === 0) {
+                tag.tag = tweet.tag;
+                func.tagCreate(tag, user);
+            }
+        })
+
+    },
+    tagCreate: function (tag, user) {
+        Tag.create(tag, function (err, tag) {
+            user[0].tags.push(tag);
+            user[0].save();
+            console.log("Tag created.");
+        })
+    },
+    tweetCreate: function (tweet, user) {
+        return new Promise(function (resolve) {
+            Tweet.create(tweet, function (err, tweet) {
+                user[0].tweets.push(tweet);
+                user[0].save();
+                console.log("Tweet saved.")
+                resolve();
+            })
+        })
+
     }
 }
 
