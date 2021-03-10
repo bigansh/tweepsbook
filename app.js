@@ -56,7 +56,7 @@ app.get('/:url', function (req, res) {
 });
 
 //CAPTURING AND SAVING TWEET
-var stream = T.stream('statuses/filter', { track: ['@tweepsbookapp bookmark'] });
+var stream = T.stream('statuses/filter', { track: ['@tweepsbookapp bkm'] });
 stream.on('tweet', function (tweet) {
     T.get('statuses/show', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
         bmTweet.status_id = data.id_str;
@@ -65,11 +65,12 @@ stream.on('tweet', function (tweet) {
         func.addTag(data);
         User.find({ id: data.user.id_str }, function (err, user) {
             func.main(err, user, tweet).then(function (params) {
-                T.post('statuses/update', params.data, function (err, data, response) {
+                T.post('statuses/update', params.data, function (err, Data, response) {
+                    console.log(data.text, data.user.name);
                     console.log("Stauts: " + response.statusMessage + " & Code: " + response.statusCode)
                 });
-            })
-        })
+            });
+        });
     });
 });
 
