@@ -1,5 +1,6 @@
 var express = require("express"),
     dotenv = require("dotenv"),
+    cors = require("cors"),
     app = express();
 
 //INITIALIZING SCHEMAS
@@ -7,6 +8,7 @@ var User = require("./models/users");
 
 //DEFINING MIDDLWARES
 var pass = require("./middlewares/passMiddlware"),
+    corsObj = require("./middlewares/corsMiddleware"),
     sess = require("./middlewares/sessMiddleware");
 
 //INITIALIZING OBJECTS
@@ -38,6 +40,7 @@ app.use(express.static("public"));
 app.use(sess.session);
 app.use(pass.initialize);
 app.use(pass.session);
+app.use(cors(corsObj.option));
 
 //USING PASSPORT
 pass.login;
