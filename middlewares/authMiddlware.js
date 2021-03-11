@@ -1,5 +1,5 @@
-var isAuth = (req, res, next) => {
-    if(req.isAuthenticated()){
+var isAuth = function (req, res, next) {
+    if (req.isAuthenticated()) {
         next();
     } else {
         res.redirect('/dashboard/check');
