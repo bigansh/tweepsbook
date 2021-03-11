@@ -3,7 +3,7 @@ var cors = require("cors");
 var corsObj = {};
 
 corsObj.option = {
-    origin: "localhost:3000"
+    origin: "*"
 }
 
 module.exports = corsObj;
