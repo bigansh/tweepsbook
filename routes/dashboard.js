@@ -2,7 +2,7 @@ var express = require("express"),
     router = express.Router(),
     User = require("../models/users"),
     Tweet = require("../models/tweets"),
-    passport = require("passport");
+    passport = require("passport"),
     isAuth = require("../middlewares/authMiddlware");
 
 router.get('/', isAuth, function (req, res) {

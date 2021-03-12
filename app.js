@@ -16,7 +16,7 @@ var objects = require("./models/objects"),
     bmTweet = objects.bmTweet;
 
 //INITIALIZING ROUTES
-var dashboarRoutes = require("./routes/dashboard");
+var dashboardRoute = require("./routes/dashboard");
 
 //INITIALIZING FUNCTIONS
 var func = require("./functions/functions");
@@ -52,7 +52,7 @@ app.get('/', function (req, res) {
     res.send('<h1>Hi there!</>')
 });
 
-app.use('/dashboard', dashboarRoutes);
+app.use('/dashboard', dashboardRoute);
 
 app.get('/:url', function (req, res) {
     res.send('<h1>Page not found!</h1>');
