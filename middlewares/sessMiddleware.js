@@ -1,5 +1,5 @@
 var session = require("express-session"),
-    MongoStore = require("connect-mongo").default,
+    MongoStore = require("connect-mongo"),
     dotenv = require("dotenv");
 
 dotenv.config();
