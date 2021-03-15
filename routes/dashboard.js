@@ -19,7 +19,7 @@ router.get('/login/callback', passport.authenticate('twitter', { failureRedirect
     }
 );
 
-router.get('/authenticate', function(req, res){
+router.get('/authenticate', function (req, res) {
     res.redirect('/dashboard');
 })
 
@@ -36,7 +36,7 @@ router.get('/check', function (req, res) {
     }
 });
 
-router.get("/:url", function(req, res){
+router.get("/:url", function (req, res) {
     res.redirect("/dashboard");
 });
 
