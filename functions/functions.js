@@ -1,3 +1,5 @@
+var dotenv = require("dotenv");
+
 var objects = require("../models/objects"),
     params = objects.params,
     newUser = objects.newUser,
@@ -8,16 +10,11 @@ var Tweet = require("../models/tweets"),
     Tag = require("../models/tags"),
     User = require("../models/users");
 
+var mailChimp = require("../connections/mailchimpConnect");
+
+dotenv.config();
+
 var func = {
-    addTag: function (data) {
-        bmTweet.tag = data.text.match(/\B\#\w\w+\b/g)
-        if (bmTweet.tag != null) {
-            bmTweet.tag = data.text.match(/\B\#\w\w+\b/g)[0];
-            bmTweet.tag = bmTweet.tag.toLowerCase();
-        } else {
-            bmTweet.tag = null;
-        }
-    },
     main: function (err, user, tweet) {
         if (user.length === 0) {
             params = {
@@ -38,12 +35,33 @@ var func = {
             }
         }
         return Promise.resolve({ msg: 'Worked', data: params });
+    }, addTag: function (data) {
+        bmTweet.tag = data.text.match(/\B\#\w\w+\b/g)
+        if (bmTweet.tag != null) {
+            bmTweet.tag = data.text.match(/\B\#\w\w+\b/g)[0];
+            bmTweet.tag = bmTweet.tag.toLowerCase();
+        } else {
+            bmTweet.tag = null;
+        }
+    },
+    addSubscriber: function (emailAddress, fullName) {
+        mailChimp.post('/lists/' + process.env.MAILCHIMP_LIST_ID + '/members', {
+            update_existing: true,
+            email_address: emailAddress,
+            merge_fields: {
+                'NAME': fullName
+            },
+            status: 'subscribed'
+        }, function (results) {
+            console.log("User added to MailChimp.");
+        })
     },
     userCreate: function (profile, cb) {
         newUser.id = profile.id;
         newUser.email = profile.emails[0].value;
         newUser.name = profile.displayName;
         newUser.profile = profile.photos[0].value;
+        func.addSubscriber(newUser.email, newUser.name);
         User.find({ id: profile.id }, function (err, user) {
             if (user.length === 0) {
                 User.create(newUser);
