@@ -61,11 +61,11 @@ var func = {
         newUser.email = profile.emails[0].value;
         newUser.name = profile.displayName;
         newUser.profile = profile.photos[0].value;
-        func.addSubscriber(newUser.email, newUser.name);
         User.find({ id: profile.id }, function (err, user) {
             if (user.length === 0) {
                 User.create(newUser);
                 console.log("User created.");
+                func.addSubscriber(newUser.email, newUser.name);
             }
         });
         return cb(null, profile);
