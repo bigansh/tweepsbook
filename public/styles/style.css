@@ -203,7 +203,7 @@ body {
   display: block;
   background-color: #353941;
   color: var(--light-blue);
-  margin: 14px 0;
+  margin: 14px 0 0 0;
   padding: 14px;
   border-radius: 12px;
   font-family: var(--mono-font);
