@@ -7,7 +7,7 @@ var express = require("express"),
 
 router.get('/', isAuth, function (req, res) {
     User.find({ id: req.user[0].id }).populate("tweets").populate("tags").exec(function (err, user) {
-        res.send(user);
+        res.render("dashboard", {user: user});
     });
 });
 

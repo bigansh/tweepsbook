@@ -18,7 +18,7 @@ var func = {
     main: function (err, user, tweet) {
         if (user.length === 0) {
             params = {
-                status: 'Hey, you have not registered with us. Hence we are unable to bookmark the tweet you requested. Please register on our website to bookmark better 🤖. https://offf.to/tweepsbookapp',
+                status: 'Hey, you have not registered with us. Hence we are unable to bookmark the tweet you requested. Please register on our website to bookmark better 🤖. https://tweepsbook.com',
                 in_reply_to_status_id: tweet.id_str,
                 auto_populate_reply_metadata: true
             }
