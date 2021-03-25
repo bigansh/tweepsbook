@@ -12,6 +12,10 @@ router.get('/', isAuth, function (req, res) {
     });
 });
 
+router.get('/authenticate', function (req, res) {
+    res.redirect('/dashboard');
+});
+
 router.get('/login', passport.authenticate('twitter'));
 
 router.get('/login/callback', passport.authenticate('twitter', { failureRedirect: '/' }),
@@ -20,21 +24,9 @@ router.get('/login/callback', passport.authenticate('twitter', { failureRedirect
     }
 );
 
-router.get('/authenticate', function (req, res) {
-    res.redirect('/dashboard');
-})
-
 router.get('/logout', function (req, res) {
     req.logOut();
     res.redirect('/');
-})
-
-router.get('/check', function (req, res) {
-    if (req.isAuthenticated()) {
-        res.send("<h1>You are!</>");
-    } else {
-        res.send("<h1>You arn't</h1>");
-    }
 });
 
 router.get("/:url", function (req, res) {
