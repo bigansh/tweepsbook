@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var tweetsSchema = mongoose.Schema({
-    embed: String,
+    status: String,
     tag: String,
     id: String
 });

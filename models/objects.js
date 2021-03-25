@@ -1,7 +1,7 @@
 var objects = {};
 
 objects.bmTweet = {
-    embed: String,
+    status: String,
     tag: String,
     id: String
 }
