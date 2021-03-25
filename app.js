@@ -56,7 +56,7 @@ app.get('/:url', function (req, res) {
 });
 
 //CAPTURING AND SAVING TWEET
-var stream = T.stream('statuses/filter', { track: ['@tweepsbookcom new'] });
+var stream = T.stream('statuses/filter', { track: ['@tweepsbookcom bkm'] });
 stream.on('tweet', function (tweet) {
     T.get('statuses/show', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
         bmTweet.status = data.id_str;
