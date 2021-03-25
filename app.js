@@ -56,10 +56,10 @@ app.get('/:url', function (req, res) {
 });
 
 //CAPTURING AND SAVING TWEET
-var stream = T.stream('statuses/filter', { track: ['@tweepsbookcom bkm'] });
+var stream = T.stream('statuses/filter', { track: ['@tweepsbookcom new'] });
 stream.on('tweet', function (tweet) {
-    T.get('statuses/oembed', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
-        bmTweet.embed = data.html;
+    T.get('statuses/show', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
+        bmTweet.status = data.id_str;
     })
     T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
         func.addTag(data);
