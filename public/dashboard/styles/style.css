@@ -137,7 +137,7 @@ body {
 .main-area .aside-bar {
   border-right: 1px var(--border-color) solid;
   background-color: white;
-  width: 240px;
+  width: 180px;
   flex-grow: 0;
   flex-shrink: 0;
 }
@@ -312,6 +312,17 @@ body {
   .nav-bar .title img:active,
   .nav-bar .user .user-info img:active {
     opacity: 0.5;
+  }
+}
+
+@media (max-width: 800px) {
+  .bookmarks {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grid-item {
+    width: 100%;
   }
 }
 
