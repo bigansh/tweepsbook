@@ -51,6 +51,10 @@ app.get('/', function (req, res) {
 
 app.use('/dashboard', dashboardRoute);
 
+app.get('/privacy', function(req, res){
+    res.render("privacy");
+});
+
 app.get('/:url', function (req, res) {
     res.send('<h1>Page not found!</h1>');
 });
