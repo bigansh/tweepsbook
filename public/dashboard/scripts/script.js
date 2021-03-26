@@ -14,7 +14,7 @@ const bookmarks = document.querySelector('.section-area .board .bookmarks');
 
 // To load embedded content after a page has loaded
 window.twttr = (function (d, s, id) {
-  var js,
+  let js,
     fjs = d.getElementsByTagName(s)[0],
     t = window.twttr || {};
   if (d.getElementById(id)) return t;
@@ -54,13 +54,19 @@ function populateBookmarks(tagName) {
       (value['tag'] === null && tagName === '#default')
     ) {
       const div = document.createElement('div');
-      div.classList.add('bookmark');
-      div.innerHTML = '<blockquote class="twitter-tweet"><a href="https://twitter.com/u/status/' + value['status'] + '</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+      div.classList.add('grid-item');
+      div.innerHTML =
+        '<blockquote class="twitter-tweet"><a href="https://twitter.com/u/status/' +
+        value['status'] +
+        '</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
       bookmarks.append(div);
     }
   });
+  // Loading embedded content after a page has loaded
   twttr.widgets.load(bookmarks).then(
     (value) => {
+      // Initialise masonry layout
+      const masonry = new Masonry(bookmarks, { gutter: 12 });
       // Hide loader
       loadBoard.classList.remove('visible');
     },
