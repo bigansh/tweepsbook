@@ -11,6 +11,7 @@ const initialBoard = document.querySelector('.section-area .initial-board');
 const loadBoard = document.querySelector('.section-area .load-board');
 const boardTitle = document.querySelector('.section-area .board .title');
 const bookmarks = document.querySelector('.section-area .board .bookmarks');
+const tagsList = [];
 
 // To load embedded content after a page has loaded
 window.twttr = (function (d, s, id) {
@@ -33,12 +34,27 @@ window.twttr = (function (d, s, id) {
 
 // ext = user;
 
+// Read tags from fetched user data
+function readTags() {
+  user[0]['tags'].forEach((value) => {
+    const tagValue = value['tag'] === null ? 'default' : value['tag'].slice(1);
+    tagsList.push(tagValue);
+  });
+  // Sort tags in alphabetical order
+  tagsList.sort();
+  // Place default tag at last if it contains in the tagsList
+  if (tagsList.includes('default')) {
+    tagsList.splice(tagsList.indexOf('default'), 1);
+    tagsList.push('default');
+  }
+}
+
 // Populate tags in the UI
 function populateTags() {
-  user[0]['tags'].forEach((value) => {
+  tagsList.forEach((value) => {
     const li = document.createElement('li');
     li.classList.add('tag');
-    li.textContent = value['tag'] === null ? '#default' : value['tag'];
+    li.textContent = `#${value}`;
     tags.append(li);
   });
 }
@@ -65,7 +81,7 @@ function populateBookmarks(tagName) {
   // Loading embedded content after a page has loaded
   twttr.widgets.load(bookmarks).then(
     (value) => {
-      if (screen.width > 600) {
+      if (screen.width > 800) {
         // Initialise masonry layout
         const masonry = new Masonry(bookmarks, { gutter: 12 });
       }
@@ -115,6 +131,7 @@ function toggleAsideBar() {
 }
 
 // On load
+readTags();
 populateTags();
 
 // Event Listeners
