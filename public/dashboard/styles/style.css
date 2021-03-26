@@ -225,12 +225,10 @@ body {
 .main-area .section-area .board .bookmarks {
   padding: 0 14px 14px 14px;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: 14px;
 }
 
-.main-area .section-area .board .bookmarks .bookmark {
+.grid-item {
+  width: 340px;
   height: fit-content;
 }
 
