@@ -239,12 +239,11 @@ body {
   height: 100%;
   top: 0;
   left: 0;
-  display: flex;
   display: none;
 }
 
 .main-area .section-area .load-board.visible {
-  display: flex;
+  display: block;
 }
 
 .main-area .section-area .load-board .loader {
@@ -253,7 +252,7 @@ body {
   border: 4px var(--light-gray) solid;
   border-bottom-color: var(--dark-blue);
   border-radius: 50%;
-  margin: auto;
+  margin: 45vh auto 0;
   animation: load 0.8s linear forwards infinite;
 }
 
@@ -349,8 +348,13 @@ body {
     margin-top: 0;
   }
 
-  .main-area .section-area .board .bookmarks {
-    grid-template-columns: 1fr;
+  .bookmarks {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grid-item {
+    width: 100%;
   }
 }
 
