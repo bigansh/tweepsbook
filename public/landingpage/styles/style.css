@@ -311,14 +311,6 @@ body {
 }
 
 @media (hover: hover) {
-  .nav-bar .container .navs .nav-link {
-    transition: border-color 0.3s ease;
-  }
-
-  .nav-bar .container .navs .nav-link:hover {
-    border-bottom-color: black;
-  }
-
   .main-area .container .btn {
     transition: background 0.2s ease;
   }
