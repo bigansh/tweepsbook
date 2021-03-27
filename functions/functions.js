@@ -35,7 +35,8 @@ var func = {
             }
         }
         return Promise.resolve({ msg: 'Worked', data: params });
-    }, addTag: function (data) {
+    }, 
+    addTag: function (data) {
         bmTweet.tag = data.text.match(/\B\#\w\w+\b/g)
         if (bmTweet.tag != null) {
             bmTweet.tag = data.text.match(/\B\#\w\w+\b/g)[0];

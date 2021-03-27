@@ -51,7 +51,7 @@ app.get('/', function (req, res) {
 
 app.use('/dashboard', dashboardRoute);
 
-app.get('/privacy', function(req, res){
+app.get('/privacy', function (req, res) {
     res.render("privacy");
 });
 
@@ -64,17 +64,17 @@ var stream = T.stream('statuses/filter', { track: ['@tweepsbookcom bkm'] });
 stream.on('tweet', function (tweet) {
     T.get('statuses/show', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
         bmTweet.status = data.id_str;
-    })
-    T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
-        func.addTag(data);
-        User.find({ id: data.user.id_str }, function (err, user) {
-            func.main(err, user, tweet).then(function (params) {
-                T.post('statuses/update', params.data, function (err, Data, response) {
-                    console.log("Stauts: " + response.statusMessage + " & Code: " + response.statusCode)
+        T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
+            func.addTag(data);
+            User.find({ id: data.user.id_str }, function (err, user) {
+                func.main(err, user, tweet).then(function (params) {
+                    T.post('statuses/update', params.data, function (err, Data, response) {
+                        console.log("Stauts: " + response.statusMessage + " & Code: " + response.statusCode)
+                    });
                 });
             });
         });
-    });
+    })
 });
 
 app.listen(process.env.PORT, function () {
