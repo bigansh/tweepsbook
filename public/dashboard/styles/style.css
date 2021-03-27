@@ -228,7 +228,7 @@ body {
 }
 
 .grid-item {
-  width: 340px;
+  width: 30%;
   height: fit-content;
 }
 
@@ -371,15 +371,6 @@ body {
 
   .main-area .aside-bar .title {
     margin-top: 0;
-  }
-
-  .bookmarks {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .grid-item {
-    width: 100%;
   }
 }
 
