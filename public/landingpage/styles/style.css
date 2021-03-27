@@ -17,11 +17,12 @@ body {
   font-family: var(--regular-font);
   background-color: var(--bg-color);
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-bar {
   background-color: white;
-  padding: 20px;
+  padding: 18px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -44,7 +45,7 @@ body {
 
 .nav-bar .container .title img {
   display: block;
-  width: 20px;
+  width: 18px;
   margin-right: 8px;
 }
 
@@ -165,7 +166,7 @@ body {
   width: 100%;
   font-size: 18px;
   line-height: 1.6;
-  text-align: center;
+  text-align: left;
   display: flex;
   align-items: center;
 }
@@ -178,12 +179,25 @@ body {
 }
 
 .section-area .container .bottom {
+  max-width: 700px;
+  width: 100%;
+  margin: auto;
   padding: 14px;
 }
 
-.section-area .container .bottom .content {
+.section-area .container .bottom .title {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 400;
+  margin: 28px 0;
+}
+
+.section-area .container .bottom .tutorial {
+  margin: 24px 0 48px;
+}
+
+.section-area .container .bottom .tutorial .content {
   background-color: white;
-  max-width: 600px;
   width: 100%;
   font-size: 18px;
   padding: 32px;
@@ -193,17 +207,17 @@ body {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
 }
 
-.section-area .container .bottom .content li {
+.section-area .container .bottom .tutorial .content li {
   border-left: 2px black solid;
   padding: 0 0 0 24px;
   position: relative;
 }
 
-.section-area .container .bottom .content li code {
+.section-area .container .bottom .tutorial .content li code {
   display: block;
   background-color: #353941;
   color: var(--light-blue);
-  margin: 14px 0 0 0;
+  margin: 14px 0;
   padding: 14px;
   border-radius: 12px;
   font-family: var(--mono-font);
@@ -211,7 +225,7 @@ body {
   font-weight: 600;
 }
 
-.section-area .container .bottom .content li:first-child::after {
+.section-area .container .bottom .tutorial .content li:first-child::after {
   content: '';
   position: absolute;
   width: 16px;
@@ -222,7 +236,7 @@ body {
   background-color: black;
 }
 
-.section-area .container .bottom .content li:last-child::after {
+.section-area .container .bottom .tutorial .content li:last-child::after {
   content: '';
   position: absolute;
   width: 16px;
@@ -233,7 +247,7 @@ body {
   background-color: black;
 }
 
-.section-area .container .bottom .content li:nth-child(2)::after {
+.section-area .container .bottom .tutorial .content li:nth-child(2)::after {
   content: '';
   position: absolute;
   width: 16px;
@@ -244,31 +258,20 @@ body {
   background-color: black;
 }
 
-.section-area .container .bottom .content li:nth-child(2) {
+.section-area .container .bottom .tutorial .content li:nth-child(2) {
   padding: 24px 0 24px 24px;
 }
 
-.section-area .container .video-block {
-  padding: 14px;
-}
-
-.section-area .container .video-block .title {
-  text-align: center;
-  font-size: 42px;
-  font-weight: 400;
-  margin: 28px 0;
-}
-
-.section-area .container .video-block .info {
+.section-area .container .bottom .info {
+  margin: 24px 0;
   font-size: 18px;
   line-height: 1.6;
   text-align: center;
 }
 
-.section-area .container .video-block img {
+.section-area .container .bottom img {
   border-radius: 12px;
   display: block;
-  max-width: 600px;
   width: 100%;
   margin: 28px auto;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
@@ -278,25 +281,19 @@ body {
   background-color: var(--dark-blue);
   color: white;
   text-align: center;
-  padding: 18px 28px;
-}
-
-.footer-bar .container {
-  max-width: 800px;
+  padding: 18px;
   width: 100%;
-  margin: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
-.footer-bar {
-  display: flex;
-  align-items: center;
+.footer-bar .notice {
+  font-size: 14px;
 }
 
 .footer-bar .icons .icon-box {
-  color: white;
+  color: inherit;
   margin: 0 8px;
   text-decoration: none;
 }
@@ -304,16 +301,6 @@ body {
 .footer-bar .icons .icon-box .icon {
   display: inline-block;
   font-size: 20px;
-}
-
-.footer-bar .link {
-  text-decoration: none;
-  background-color: white;
-  color: var(--dark-blue);
-  font-size: 14px;
-  font-weight: 600;
-  padding: 6px 10px;
-  border-radius: 6px;
 }
 
 @media (hover: hover) {
@@ -333,14 +320,20 @@ body {
     background-color: var(--light-blue);
   }
 
-  .footer-bar .icon-box,
-  .footer-bar .link {
+  .footer-bar .icon-box {
     transition: opacity 0.2s ease;
   }
 
-  .footer-bar .icon-box:hover,
-  .footer-bar .link:hover {
+  .footer-bar .icon-box:hover {
     opacity: 0.65;
+  }
+}
+
+@media (hover: none) {
+  .main-area .container .btn:active,
+  .icons .icon-box .icon:active,
+  .nav-bar .title:active {
+    opacity: 0.5;
   }
 }
 
@@ -369,34 +362,30 @@ body {
   }
 
   .section-area .container .top .title,
-  .section-area .container .video-block .title {
+  .section-area .container .bottom .title {
     font-size: 36px;
   }
 
   .section-area .container .top .content .info,
-  .section-area .container .bottom .content,
-  .section-area .container .video-block .info {
-    font-size: 16px;
+  .section-area .container .bottom .tutorial .content,
+  .section-area .container .bottom .info {
+    font-size: 14px;
   }
 
-  .section-area .container .bottom .content {
+  .section-area .container .bottom .tutorial .content {
     padding: 24px;
   }
 
-  .section-area .container .bottom .content li code {
+  .section-area .container .bottom .tutorial .content li code {
     padding: 10px;
     font-size: 12px;
   }
 
-  .footer-bar .icons .icon-box {
-    margin: 0 6px;
+  .footer-bar {
+    flex-direction: column-reverse;
   }
 
-  .footer-bar .icons .icon-box .icon {
-    font-size: 18px;
-  }
-
-  .footer-bar .link {
-    font-size: 12px;
+  .footer-bar .icons {
+    margin-bottom: 14px;
   }
 }
