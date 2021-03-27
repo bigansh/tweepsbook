@@ -156,19 +156,19 @@ body {
 
 .main-area .aside-bar .title {
   margin: 24px 12px;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 400;
 }
 
 .main-area .aside-bar .tags {
-  margin: 14px 0;
+  margin: 24px 0;
   list-style-type: none;
 }
 
 .main-area .aside-bar .tags .tag {
   border-left: 4px transparent solid;
   padding: 8px 8px;
-  margin: 10px 0;
+  margin: 14px 0;
   cursor: pointer;
 }
 
@@ -213,13 +213,13 @@ body {
 
 .main-area .section-area .board .title {
   margin: 14px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   width: fit-content;
   background-color: var(--dark-blue);
   color: white;
-  padding: 14px 28px;
-  border-radius: 0 50px 50px 0;
+  padding: 10px 20px;
+  border-radius: 50px;
 }
 
 .main-area .section-area .board .bookmarks {
@@ -338,13 +338,27 @@ body {
   }
 
   .main-area .aside-bar {
+    background-color: var(--dark-blue);
+    color: white;
+    text-align: center;
     position: fixed;
+    width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     z-index: 10;
     transform: translateX(-100%);
     transition: transform 400ms ease-in-out;
+  }
+
+  .main-area .aside-bar .title {
+    font-size: 28px;
+  }
+
+  .main-area .aside-bar .tags .tag.selected {
+    border-left-color: transparent;
+    color: white;
+    font-weight: 400;
   }
 
   .main-area .aside-bar.slide {
