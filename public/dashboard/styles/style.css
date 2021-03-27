@@ -280,6 +280,11 @@ body {
   font-size: 14px;
 }
 
+.footer-bar .notice .link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .footer-bar .icons .icon-box {
   color: inherit;
   margin: 0 8px;
@@ -296,11 +301,13 @@ body {
     background-color: #efefef;
   }
 
-  .footer-bar .icon-box {
+  .footer-bar .icon-box,
+  .footer-bar .notice .link {
     transition: opacity 0.2s ease;
   }
 
-  .footer-bar .icon-box:hover {
+  .footer-bar .icon-box:hover,
+  .footer-bar .notice .link:hover {
     opacity: 0.65;
   }
 }
@@ -310,7 +317,8 @@ body {
   .cross:active,
   .icons .icon-box .icon:active,
   .nav-bar .title img:active,
-  .nav-bar .user .user-info img:active {
+  .nav-bar .user .user-info img:active,
+  .footer-bar .notice .link:active {
     opacity: 0.5;
   }
 }

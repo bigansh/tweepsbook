@@ -243,13 +243,19 @@ body {
   background-color: black;
 }
 
+.section-area .container .bottom .tutorial .content li:last-child {
+  border-left: none;
+  /* border: 1px gold solid; */
+  margin-top: -8px;
+}
+
 .section-area .container .bottom .tutorial .content li:last-child::after {
   content: '';
   position: absolute;
   width: 16px;
   height: 16px;
-  bottom: 0;
-  left: -9px;
+  top: 2px;
+  left: -7px;
   border-radius: 50%;
   background-color: black;
 }
@@ -299,6 +305,11 @@ body {
   font-size: 14px;
 }
 
+.footer-bar .notice .link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .footer-bar .icons .icon-box {
   color: inherit;
   margin: 0 8px;
@@ -319,11 +330,13 @@ body {
     background-color: var(--light-blue);
   }
 
-  .footer-bar .icon-box {
+  .footer-bar .icon-box,
+  .footer-bar .notice .link {
     transition: opacity 0.2s ease;
   }
 
-  .footer-bar .icon-box:hover {
+  .footer-bar .icon-box:hover,
+  .footer-bar .notice .link:hover {
     opacity: 0.65;
   }
 }
@@ -331,7 +344,8 @@ body {
 @media (hover: none) {
   .main-area .container .btn:active,
   .icons .icon-box .icon:active,
-  .nav-bar .title:active {
+  .nav-bar .title:active,
+  .footer-bar .notice .link:active {
     opacity: 0.5;
   }
 }
