@@ -122,6 +122,10 @@ function selectTagHandler(ev) {
     ev.target.classList.add('selected');
     boardTitle.textContent = ev.target.textContent;
     populateBookmarks(ev.target.textContent);
+    // Slide asideBar in mobile devices
+    if (screen.width <= 600) {
+      toggleAsideBar();
+    }
   }
 }
 
