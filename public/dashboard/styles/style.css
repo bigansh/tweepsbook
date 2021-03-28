@@ -228,7 +228,7 @@ body {
 }
 
 .grid-item {
-  width: 30%;
+  width: 340px;
   height: fit-content;
 }
 
@@ -323,17 +323,6 @@ body {
   }
 }
 
-@media (max-width: 800px) {
-  .bookmarks {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .grid-item {
-    width: 100%;
-  }
-}
-
 @media (max-width: 600px) {
   .nav-bar .bars-box {
     display: block;
@@ -379,6 +368,15 @@ body {
 
   .main-area .aside-bar .title {
     margin-top: 0;
+  }
+
+  .bookmarks {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grid-item {
+    width: 100%;
   }
 }
 

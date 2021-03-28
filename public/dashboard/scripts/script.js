@@ -81,7 +81,7 @@ function populateBookmarks(tagName) {
   // Loading embedded content after a page has loaded
   twttr.widgets.load(bookmarks).then(
     (value) => {
-      if (window.screen > 800) {
+      if (screen.width > 600) {
         // Initialise masonry layout
         const masonry = new Masonry(bookmarks, { gutter: 12 });
       }
