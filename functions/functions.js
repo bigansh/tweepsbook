@@ -2,7 +2,7 @@ var dotenv = require("dotenv");
 
 var objects = require("../models/objects"),
     params = objects.params,
-    newUser = objects.newUser,
+    usr = objects.usr,
     bmtTag = objects.bmtTag,
     bmTweet = objects.bmTweet;
 
@@ -34,8 +34,8 @@ var func = {
                 auto_populate_reply_metadata: true
             }
         }
-        return Promise.resolve({ msg: 'Worked', data: params });
-    }, 
+        return Promise.resolve({ data: params });
+    },
     addTag: function (data) {
         bmTweet.tag = data.text.match(/\B\#\w\w+\b/g)
         if (bmTweet.tag != null) {
@@ -54,19 +54,23 @@ var func = {
             },
             status: 'subscribed'
         }, function (results) {
-            console.log("User added to MailChimp.");
+            console.log("Status: " + results.title);
         })
     },
-    userCreate: function (profile, cb) {
-        newUser.id = profile.id;
-        newUser.email = profile.emails[0].value;
-        newUser.name = profile.displayName;
-        newUser.profile = profile.photos[0].value;
+    userCreateOrUpdate: function (profile, cb) {
+        usr.id = profile.id;
+        usr.email = profile.emails[0].value;
+        usr.name = profile.displayName;
+        usr.profile = profile.photos[0].value;
         User.find({ id: profile.id }, function (err, user) {
             if (user.length === 0) {
-                User.create(newUser);
-                console.log("User created.");
-                func.addSubscriber(newUser.email, newUser.name);
+                User.create(usr);
+                console.log("User created: " + usr.email);
+                func.addSubscriber(usr.email, usr.name);
+            } else {
+                User.findOneAndUpdate({ id: profile.id }, usr, {
+                    new: true
+                });
             }
         });
         return cb(null, profile);
@@ -92,7 +96,7 @@ var func = {
         Tag.create(tag, function (err, tag) {
             user[0].tags.push(tag);
             user[0].save();
-            console.log("Tag created.");
+            console.log("Tag created: " + tag.tag);
         })
     },
     tweetCreate: function (tweet, user) {
@@ -100,7 +104,7 @@ var func = {
             Tweet.create(tweet, function (err, tweet) {
                 user[0].tweets.push(tweet);
                 user[0].save();
-                console.log("Tweet saved.")
+                console.log("Tweet saved: " + tweet.status)
                 resolve();
             })
         })

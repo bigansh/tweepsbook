@@ -56,7 +56,7 @@ app.get('/privacy', function (req, res) {
 });
 
 app.get('/:url', function (req, res) {
-    res.send('<h1>Page not found!</h1>');
+    res.redirect("/");
 });
 
 //CAPTURING AND SAVING TWEET
@@ -69,7 +69,7 @@ stream.on('tweet', function (tweet) {
             User.find({ id: data.user.id_str }, function (err, user) {
                 func.main(err, user, tweet).then(function (params) {
                     T.post('statuses/update', params.data, function (err, Data, response) {
-                        console.log("Stauts: " + response.statusMessage + " & Code: " + response.statusCode)
+                        console.log("Stauts: " + response.statusMessage)
                     });
                 });
             });

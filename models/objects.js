@@ -6,7 +6,7 @@ objects.bmTweet = {
     id: String
 }
 
-objects.newUser = {
+objects.usr = {
     email: String,
     profile: String,
     name: String,
