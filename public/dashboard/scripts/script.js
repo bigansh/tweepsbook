@@ -81,8 +81,10 @@ function populateBookmarks(tagName) {
   // Loading embedded content after a page has loaded
   twttr.widgets.load(bookmarks).then(
     (value) => {
-      // Initialise masonry layout
-      const masonry = new Masonry(bookmarks, { gutter: 12 });
+      if (window.screen > 800) {
+        // Initialise masonry layout
+        const masonry = new Masonry(bookmarks, { gutter: 12 });
+      }
       // Hide loader
       loadBoard.classList.remove('visible');
     },
