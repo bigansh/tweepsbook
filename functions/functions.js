@@ -70,6 +70,8 @@ var func = {
             } else {
                 User.findOneAndUpdate({ id: profile.id }, usr, {
                     new: true
+                }, function(err, user){
+                    console.log("User updated: " + user.email);
                 });
             }
         });
