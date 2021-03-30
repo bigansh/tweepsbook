@@ -55,6 +55,10 @@ app.get('/privacy', function (req, res) {
     res.render("privacy");
 });
 
+app.get('/sitemap', function(req, res){
+    res.sendFile("sitemap.xml", { root: "views" })
+})
+
 app.get('/:url', function (req, res) {
     res.redirect("/");
 });
