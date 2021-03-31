@@ -8,8 +8,9 @@ var sessObj = {}
 
 sessObj.session = session({
     secret: process.env.SECRET,
-    resave: true,
+    resave: false,
     saveUninitialized: true,
+    autoRemove: 'native',
     store: MongoStore.create({ mongoUrl: process.env.DATABASEURL }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 14 //14 Days
