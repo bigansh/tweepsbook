@@ -146,15 +146,8 @@ body {
 }
 
 @media (max-width: 500px) {
-  body {
-    background-color: transparent;
-  }
   .main-area {
-    padding: 14px 0;
-  }
-
-  .main-area .container {
-    border-radius: 0;
+    padding: 14px;
   }
 
   .footer-bar {
