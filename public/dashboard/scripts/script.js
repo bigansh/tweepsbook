@@ -120,7 +120,7 @@ function populateAllBookmarks() {
   // Show loader
   loadBoard.classList.add('visible');
   bookmarks.innerHTML = '';
-  users[0]['tweets'].forEach((value) => {
+  user[0]['tweets'].forEach((value) => {
     const div = document.createElement('div');
     div.className = 'grid-item';
     div.innerHTML =
