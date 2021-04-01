@@ -7,7 +7,7 @@ const asideBar = document.querySelector('.main-area .aside-bar');
 const bars = document.querySelector('.bars');
 const cross = document.querySelector('.cross');
 const tags = document.querySelector('.main-area .aside-bar .tags');
-const initialBoard = document.querySelector('.section-area .initial-board');
+const emptyBoard = document.querySelector('.section-area .empty-board');
 const loadBoard = document.querySelector('.section-area .load-board');
 const boardTitle = document.querySelector('.section-area .board .title');
 const bookmarks = document.querySelector('.section-area .board .bookmarks');
@@ -40,12 +40,17 @@ function readTags() {
     const tagValue = value['tag'] === null ? 'default' : value['tag'].slice(1);
     tagsList.push(tagValue);
   });
-  // Sort tags in alphabetical order
-  tagsList.sort();
-  // Place default tag at last if it contains in the tagsList
-  if (tagsList.includes('default')) {
-    tagsList.splice(tagsList.indexOf('default'), 1);
-    tagsList.push('default');
+  if (tagsList.length === 0) {
+    return false;
+  } else {
+    // Sort tags in alphabetical order
+    tagsList.sort();
+    // Place default tag at last if it contains in the tagsList
+    if (tagsList.includes('default')) {
+      tagsList.splice(tagsList.indexOf('default'), 1);
+      tagsList.push('default');
+    }
+    return true;
   }
 }
 
@@ -57,6 +62,34 @@ function populateTags() {
     li.textContent = `#${value}`;
     tags.append(li);
   });
+}
+
+// Load embedded tweets and add masonry layout initially on load
+function loadEmbeddedTweetsOnLoad() {
+  twttr.ready(function (twttr) {
+    twttr.events.bind('loaded', function (event) {
+      if (screen.width > 600) {
+        const masonry = new Masonry(bookmarks, { gutter: 12 });
+      }
+      // Hide loader
+      loadBoard.classList.remove('visible');
+    });
+  });
+}
+
+// Load embedded tweets and masonry layout when user selects a tag
+function loadEmbeddedTweetsOnSelect() {
+  twttr.widgets.load(bookmarks).then(
+    (value) => {
+      console.log('hi');
+      if (screen.width > 600) {
+        const masonry = new Masonry(bookmarks, { gutter: 12 });
+      }
+      // Hide loader
+      loadBoard.classList.remove('visible');
+    },
+    (reason) => console.log(reason)
+  );
 }
 
 // Populate bookmarks in the UI
@@ -78,18 +111,26 @@ function populateBookmarks(tagName) {
       bookmarks.append(div);
     }
   });
-  // Loading embedded content after a page has loaded
-  twttr.widgets.load(bookmarks).then(
-    (value) => {
-      if (screen.width > 600) {
-        // Initialise masonry layout
-        const masonry = new Masonry(bookmarks, { gutter: 12 });
-      }
-      // Hide loader
-      loadBoard.classList.remove('visible');
-    },
-    (reason) => console.log(reason)
-  );
+  // Loading embedded content
+  loadEmbeddedTweetsOnSelect();
+}
+
+// Populate all bookmarks in the UI initially
+function populateAllBookmarks() {
+  // Show loader
+  loadBoard.classList.add('visible');
+  bookmarks.innerHTML = '';
+  users[0]['tweets'].forEach((value) => {
+    const div = document.createElement('div');
+    div.className = 'grid-item';
+    div.innerHTML =
+      '<blockquote class="twitter-tweet"><a href="https://twitter.com/u/status/' +
+      value['status'] +
+      '</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+    bookmarks.append(div);
+  });
+  // Loading embedded content
+  loadEmbeddedTweetsOnLoad();
 }
 
 // Toggle user-menu when user clicks user-info
@@ -115,9 +156,6 @@ function clearPreviousSelection() {
 // Select the tag when user clicks a tag
 function selectTagHandler(ev) {
   if (ev.target.classList.contains('tag')) {
-    if (initialBoard.classList.contains('visible')) {
-      initialBoard.classList.remove('visible');
-    }
     clearPreviousSelection();
     ev.target.classList.add('selected');
     boardTitle.textContent = ev.target.textContent;
@@ -134,9 +172,18 @@ function toggleAsideBar() {
   asideBar.classList.toggle('slide');
 }
 
+// Call required functions when loaded
+function run() {
+  if (readTags()) {
+    populateTags();
+    populateAllBookmarks();
+  } else {
+    emptyBoard.classList.add('visible');
+  }
+}
+
 // On load
-readTags();
-populateTags();
+run();
 
 // Event Listeners
 userInfo.addEventListener('click', toggleUserMenuHandler);
