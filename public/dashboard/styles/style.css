@@ -184,7 +184,7 @@ body {
   position: relative;
 }
 
-.main-area .section-area .initial-board {
+.main-area .section-area .empty-board {
   position: absolute;
   background-color: var(--bg-color);
   width: 100%;
@@ -197,11 +197,11 @@ body {
   display: none;
 }
 
-.main-area .section-area .initial-board.visible {
+.main-area .section-area .empty-board.visible {
   display: flex;
 }
 
-.main-area .section-area .initial-board p {
+.main-area .section-area .empty-board p {
   color: var(--light-gray);
   margin: 14px;
 }
