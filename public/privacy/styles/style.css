@@ -112,6 +112,11 @@ body {
   font-size: 14px;
 }
 
+.footer-bar .notice .link {
+  color: white;
+  text-decoration: none;
+}
+
 .footer-bar .icons .icon-box {
   color: inherit;
   margin: 0 8px;
@@ -128,6 +133,10 @@ body {
     border-bottom: 2px var(--dark-blue) dotted;
   }
 
+  .footer-bar .notice .link:hover {
+    text-decoration: underline 1px white solid;
+  }
+
   .footer-bar .icon-box {
     transition: opacity 0.2s ease;
   }
@@ -139,6 +148,7 @@ body {
 
 @media (hover: none) {
   .main-area .container p a:active,
+  .footer-bar .notice .link:active,
   .icons .icon-box .icon:active,
   .nav-bar .title:active {
     opacity: 0.5;
