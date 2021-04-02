@@ -51,6 +51,10 @@ app.get('/', function (req, res) {
 
 app.use('/dashboard', dashboardRoute);
 
+app.get('/signin', function(req, res){
+    res.render("signin");
+});
+
 app.get('/privacy', function (req, res) {
     res.render("privacy");
 });
