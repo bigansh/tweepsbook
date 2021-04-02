@@ -301,13 +301,15 @@ body {
     background-color: #efefef;
   }
 
-  .footer-bar .icon-box,
-  .footer-bar .notice .link {
+  .footer-bar .icon-box {
     transition: opacity 0.2s ease;
   }
 
-  .footer-bar .icon-box:hover,
   .footer-bar .notice .link:hover {
+    text-decoration: underline 1px white solid;
+  }
+
+  .footer-bar .icon-box:hover {
     opacity: 0.65;
   }
 }
