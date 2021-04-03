@@ -61,7 +61,6 @@ body {
 }
 
 .main-area {
-  /* border: 1px black solid; */
   min-height: calc(100vh - 126px);
 }
 
@@ -74,42 +73,32 @@ body {
 }
 
 .main-area .container .top {
-  /* border: 1px green solid; */
   padding: 14px;
-}
-
-.main-area .container .top h1 {
-  font-size: 36px;
-  font-weight: 500;
-  text-align: center;
-}
-
-.main-area .container .middle {
-  /* border: 1px green solid; */
-  padding: 14px;
+  margin-top: 18px;
   display: flex;
 }
 
-.main-area .container .middle .content {
-  /* border: 1px red solid; */
+.main-area .container .top .content {
   width: 50%;
   padding: 0 8px;
 }
 
-.main-area .container .middle .content p {
+.main-area .container .top .content p {
   font-size: 18px;
   margin: 14px 0;
 }
 
-.main-area .container .middle .image {
-  /* border: 1px red solid; */
+.main-area .container .top .content p span {
+  font-weight: 600;
+}
+
+.main-area .container .top .image {
   width: 50%;
   padding: 0 8px;
   display: flex;
 }
 
-.main-area .container .middle .image img {
-  /* border: 1px green solid; */
+.main-area .container .top .image img {
   display: block;
   max-width: 250px;
   width: 100%;
@@ -117,13 +106,13 @@ body {
 }
 
 .main-area .container .bottom {
-  /* border: 1px green solid; */
   padding: 14px;
 }
 
 .main-area .container .bottom a {
-  background-color: #14171a;
+  background-color: white;
   color: #1da1f2;
+  border: 2px #1da1f2 solid;
   border-radius: 50px;
   display: block;
   text-decoration: none;
@@ -173,11 +162,11 @@ body {
 
 @media (hover: hover) {
   .main-area .container .bottom a {
-    transition: opacity 0.2s ease;
+    transition: box-shadow 0.2s ease;
   }
 
   .main-area .container .bottom a:hover {
-    opacity: 0.75;
+    box-shadow: 0 0 10px rgba(29, 161, 242, 0.8);
   }
 
   .footer-bar .notice .link:hover {
@@ -203,7 +192,8 @@ body {
 }
 
 @media (max-width: 600px) {
-  .main-area .container .middle {
+  .main-area .container .top {
+    margin-top: 0px;
     flex-direction: column;
   }
 
@@ -211,18 +201,18 @@ body {
     padding: 14px 14px 0;
   }
 
-  .main-area .container .middle {
+  .main-area .container .top {
     padding: 0;
   }
 
-  .main-area .container .middle .content,
-  .main-area .container .middle .image {
+  .main-area .container .top .content,
+  .main-area .container .top .image {
     width: 100%;
     padding: 0;
     margin-bottom: 18px;
   }
 
-  .main-area .container .middle .image img {
+  .main-area .container .top .image img {
     margin: auto;
   }
 }
