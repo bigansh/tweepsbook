@@ -67,7 +67,7 @@ body {
 
 .main-area .container {
   border-radius: 14px;
-  max-width: 800px;
+  max-width: 700px;
   padding: 18px;
   margin: auto;
   line-height: 1.6;
@@ -113,7 +113,7 @@ body {
   display: block;
   max-width: 250px;
   width: 100%;
-  margin: auto;
+  margin-left: auto;
 }
 
 .main-area .container .bottom {
@@ -211,11 +211,19 @@ body {
     padding: 14px 14px 0;
   }
 
+  .main-area .container .middle {
+    padding: 0;
+  }
+
   .main-area .container .middle .content,
   .main-area .container .middle .image {
     width: 100%;
     padding: 0;
     margin-bottom: 18px;
+  }
+
+  .main-area .container .middle .image img {
+    margin: auto;
   }
 }
 
