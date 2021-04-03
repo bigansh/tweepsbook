@@ -10,7 +10,8 @@ var Tweet = require("../models/tweets"),
     Tag = require("../models/tags"),
     User = require("../models/users");
 
-var mailChimp = require("../connections/mailchimpConnect");
+var mailChimp = require("../connections/mailchimpConnect"),
+    mixpanel = require("../connections/mixpanelConnect");
 
 dotenv.config();
 
@@ -65,12 +66,28 @@ var func = {
         User.find({ id: profile.id }, function (err, user) {
             if (user.length === 0) {
                 User.create(usr);
+                mixpanel.track("Signed Up", {
+                    distinct_id: usr.email,
+                });
+                mixpanel.people.set(usr.email, {
+                    $name: usr.name,
+                    $email: usr.email,
+                    $created: (new Date()).toISOString,
+                    id: usr.id
+                });
                 console.log("User created: " + usr.email);
                 func.addSubscriber(usr.email, usr.name);
             } else {
+                mixpanel.track("Logged In", {
+                    distinct_id: usr.email,
+                    date: (new Date()).toISOString,
+                });
+                mixpanel.people.set(usr.email, {
+                    $name: usr.name,
+                });
                 User.findOneAndUpdate({ id: profile.id }, usr, {
                     new: true
-                }, function(err, user){
+                }, function (err, user) {
                     console.log("User updated: " + user.email);
                 });
             }
@@ -88,11 +105,15 @@ var func = {
     tagFindOrCreate: function (tweet, tag, user) {
         Tag.find({ tag: tweet.tag, id: tweet.id }, function (err, foundTag) {
             if (foundTag.length === 0) {
+                mixpanel.track("Tag Created", {
+                    distinct_id: user.email,
+                    date: (new Date()).toISOString,
+                });
+                mixpanel.people.increment(user.email, 'Tags');
                 tag.tag = tweet.tag;
                 func.tagCreate(tag, user);
             }
         })
-
     },
     tagCreate: function (tag, user) {
         Tag.create(tag, function (err, tag) {
@@ -103,6 +124,11 @@ var func = {
     },
     tweetCreate: function (tweet, user) {
         return new Promise(function (resolve) {
+            mixpanel.track("Tweet Saved", {
+                distinct_id: user.email,
+                date: (new Date()).toISOString,
+            })
+            mixpanel.people.increment(user.email, 'Tweets');
             Tweet.create(tweet, function (err, tweet) {
                 user[0].tweets.push(tweet);
                 user[0].save();
@@ -110,7 +136,6 @@ var func = {
                 resolve();
             })
         })
-
     }
 }
 
