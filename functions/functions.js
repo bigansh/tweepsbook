@@ -19,7 +19,7 @@ var func = {
     main: function (err, user, tweet) {
         if (user.length === 0) {
             params = {
-                status: 'Hey, you have not registered with us. Hence we are unable to bookmark the tweet you requested. Please register on our website to bookmark better 🤖. https://tweepsbook.com',
+                status: "Hey, you haven't registered yet. Hence we can't bookmark the tweet you requested. Please register on our website to bookmark better. 🤖. https://tweepsbook.com",
                 in_reply_to_status_id: tweet.id_str,
                 auto_populate_reply_metadata: true
             }
@@ -30,7 +30,7 @@ var func = {
                 func.tagFindOrCreate(bmTweet, bmtTag, user);
             });
             params = {
-                status: 'Hey, we have bookmarked the tweet your asked for. You can check the same in your dashboard. Thank you for using our service 🤖. https://tweepsbook.com/dashboard/',
+                status: "Hey, the tweet you requested has been bookmarked. Thanks for using our service 🤖. https://tweepsbook.com/dashboard/",
                 in_reply_to_status_id: tweet.id_str,
                 auto_populate_reply_metadata: true
             }
