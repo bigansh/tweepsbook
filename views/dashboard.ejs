@@ -2,48 +2,51 @@
 <html lang="en">
   <head>
     <!-- META & Google Tags -->
-      <%- include("partials/scriptandmeta") %>
+    <%- include("partials/scriptandmeta") %>
     <!-- End META & Google Tags -->
 
     <!-- META Tags -->
-      <meta property="og:image" content="https://i.postimg.cc/jjSgR6Rv/Dashboard-Reverse.jpg" />
-      <meta property="og:title" content="Dashboard / TweepsBook" />
-      <meta property="og:description" content="Dashboard for TweepsBook." />
+    <meta
+      property="og:image"
+      content="https://i.postimg.cc/jjSgR6Rv/Dashboard-Reverse.jpg"
+    />
+    <meta property="og:title" content="Dashboard / TweepsBook" />
+    <meta property="og:description" content="Dashboard for TweepsBook." />
     <!-- End META Tags -->
 
     <!-- Link Tags -->
-      <link
-        rel="shortcut icon"
-        type="image/ico"
-        href="/dashboard/images/favicon/TweepsBook.ico"
-      />
-      <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-        crossorigin="anonymous"
-      />
-      <link rel="stylesheet" href="/dashboard/styles/style.css" />
+    <link
+      rel="shortcut icon"
+      type="image/ico"
+      href="/dashboard/images/favicon/TweepsBook.ico"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/dashboard/styles/style.css" />
     <!-- End Link Tags -->
 
     <title>Dashboard / TweepsBook</title>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-      <%- include("partials/noscript") %>
+    <%- include("partials/noscript") %>
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="container">
@@ -81,7 +84,7 @@
             <p>You haven't bookmarked any tweets yet.</p>
           </div>
           <div class="board">
-            <h2 class="title">all</h2>
+            <h2 class="title">#all</h2>
             <div class="bookmarks"></div>
           </div>
           <div class="load-board">
@@ -89,9 +92,11 @@
           </div>
         </section>
       </main>
+      <div class="backdrop"></div>
       <footer class="footer-bar">
         <p class="notice">
-          &copy; 2021, TweepsBook. <a class="link" href="http://tweepsbook.com/privacy">Privacy</a>.
+          &copy; 2021, TweepsBook.
+          <a class="link" href="http://tweepsbook.com/privacy">Privacy</a>.
           <a class="link" href="http://tweepsbook.com/terms">Terms</a>.
         </p>
         <div class="icons">
@@ -108,7 +113,7 @@
       </footer>
     </div>
     <script>
-      const userObj = "<%= user %>";
+      const userObj = '<%= user %>';
       let user = userObj.replace(/&#34;/gi, '"');
       user = JSON.parse(user);
     </script>

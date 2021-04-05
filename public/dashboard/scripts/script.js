@@ -11,6 +11,7 @@ const emptyBoard = document.querySelector('.section-area .empty-board');
 const loadBoard = document.querySelector('.section-area .load-board');
 const boardTitle = document.querySelector('.section-area .board .title');
 const bookmarks = document.querySelector('.section-area .board .bookmarks');
+const backdrop = document.querySelector('.backdrop');
 const tagsList = [];
 
 // To load embedded content after a page has loaded
@@ -37,7 +38,7 @@ window.twttr = (function (d, s, id) {
 // Read tags from fetched user data
 function readTags() {
   user[0]['tags'].forEach((value) => {
-    const tagValue = value['tag'] === null ? 'default' : value['tag'].slice(1);
+    const tagValue = value['tag'] === null ? 'notag' : value['tag'].slice(1);
     tagsList.push(tagValue);
   });
   if (tagsList.length === 0) {
@@ -45,10 +46,10 @@ function readTags() {
   } else {
     // Sort tags in alphabetical order
     tagsList.sort();
-    // Place default tag at last if it contains in the tagsList
-    if (tagsList.includes('default')) {
-      tagsList.splice(tagsList.indexOf('default'), 1);
-      tagsList.push('default');
+    // Place notag tag at last if it contains in the tagsList
+    if (tagsList.includes('notag')) {
+      tagsList.splice(tagsList.indexOf('notag'), 1);
+      tagsList.push('notag');
     }
     return true;
   }
@@ -58,6 +59,9 @@ function readTags() {
 function populateTags() {
   tagsList.forEach((value) => {
     const li = document.createElement('li');
+    if (value === 'notag') {
+      li.classList.add('special');
+    }
     li.classList.add('tag');
     li.textContent = `#${value}`;
     tags.append(li);
@@ -100,7 +104,7 @@ function populateBookmarks(tagName) {
   user[0]['tweets'].forEach((value) => {
     if (
       value['tag'] === tagName ||
-      (value['tag'] === null && tagName === '#default')
+      (value['tag'] === null && tagName === '#notag')
     ) {
       const div = document.createElement('div');
       div.classList.add('grid-item');
@@ -169,6 +173,7 @@ function selectTagHandler(ev) {
 
 // Slide asideBar
 function toggleAsideBar() {
+  backdrop.classList.toggle('visible');
   asideBar.classList.toggle('slide');
 }
 
