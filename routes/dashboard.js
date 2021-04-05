@@ -11,7 +11,7 @@ router.get('/', isAuth, function (req, res) {
     });
 });
 
-router.get('/signin', function(req, res){
+router.get('/login', function(req, res){
     res.render("signin");
 });
 
