@@ -11,15 +11,19 @@ router.get('/', isAuth, function (req, res) {
     });
 });
 
-router.get('/authenticate', function (req, res) {
+router.get('/signin', function(req, res){
+    res.render("signin");
+});
+
+router.get('/auth', passport.authenticate('twitter'));
+
+router.get('/confirm', function (req, res) {
     res.redirect('/dashboard');
 });
 
-router.get('/login', passport.authenticate('twitter'));
-
-router.get('/login/callback', passport.authenticate('twitter', { failureRedirect: '/' }),
+router.get('/auth/callback', passport.authenticate('twitter', { failureRedirect: '/' }),
     function (req, res) {
-        res.redirect('/dashboard/authenticate');
+        res.redirect('/dashboard/confirm');
     }
 );
 
