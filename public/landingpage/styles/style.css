@@ -343,11 +343,16 @@ body {
 }
 
 @media (hover: none) {
-  .main-area .container .btn:active,
-  .icons .icon-box .icon:active,
-  .nav-bar .title:active,
+  .main-area .container .btn:active {
+    filter: brightness(85%);
+  }
+
   .footer-bar .notice .link:active {
-    opacity: 0.5;
+    text-decoration: underline 1px white solid;
+  }
+
+  .icons .icon-box .icon:active {
+    opacity: 0.65;
   }
 }
 
@@ -380,9 +385,7 @@ body {
     font-size: 36px;
   }
 
-  .section-area .container .top .content .info,
-  .section-area .container .bottom .tutorial .content,
-  .section-area .container .bottom .info {
+  .section-area .container .bottom .tutorial .content {
     font-size: 16px;
   }
 

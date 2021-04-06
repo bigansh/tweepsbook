@@ -147,11 +147,16 @@ body {
 }
 
 @media (hover: none) {
-  .main-area .container p a:active,
-  .footer-bar .notice .link:active,
-  .icons .icon-box .icon:active,
-  .nav-bar .title:active {
-    opacity: 0.5;
+  .main-area .container p a:active {
+    border-bottom: 2px var(--dark-blue) dotted;
+  }
+
+  .footer-bar .notice .link:active {
+    text-decoration: underline 1px white solid;
+  }
+
+  .icons .icon-box .icon:active {
+    opacity: 0.65;
   }
 }
 
