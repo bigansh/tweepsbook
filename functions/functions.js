@@ -11,7 +11,9 @@ var Tweet = require("../models/tweets"),
     User = require("../models/users");
 
 var mailChimp = require("../connections/mailchimpConnect"),
+    segemnt = require("../connections/segmentConnect"),
     mixpanel = require("../connections/mixpanelConnect");
+const analytics = require("../connections/segmentConnect");
 
 dotenv.config();
 
@@ -66,25 +68,45 @@ var func = {
         User.find({ id: profile.id }, function (err, user) {
             if (user.length === 0) {
                 User.create(usr);
-                mixpanel.track("Signed Up", {
-                    distinct_id: usr.email,
-                });
-                mixpanel.people.set(usr.email, {
-                    $name: usr.name,
-                    $email: usr.email,
-                    $created: (new Date()).toISOString,
-                    id: usr.id
-                });
+                // mixpanel.track("Signed Up", {
+                //     distinct_id: usr.email,
+                // });
+                // mixpanel.people.set(usr.email, {
+                //     $name: usr.name,
+                //     $email: usr.email,
+                //     $created: (new Date()).toISOString,
+                //     id: usr.id
+                // });
+                segemnt.track({
+                    userId: usr.email,
+                    event: "Signed Up"
+                })
+                segemnt.identify({
+                    userId: usr.email,
+                    traits: {
+                        name: usr.name,
+                        email: usr.email,
+                        created: (new Date()).toISOString,
+                        id: usr.id,
+                    }
+                })
                 console.log("User created: " + usr.email);
                 func.addSubscriber(usr.email, usr.name);
             } else {
-                mixpanel.track("Logged In", {
-                    distinct_id: usr.email,
-                    date: (new Date()).toISOString,
-                });
-                mixpanel.people.set(usr.email, {
-                    $name: usr.name,
-                });
+                // mixpanel.track("Logged In", {
+                //     distinct_id: usr.email,
+                //     date: (new Date()).toISOString,
+                // });
+                // mixpanel.people.set(usr.email, {
+                //     $name: usr.name,
+                // });
+                segemnt.track({
+                    userId: usr.email,
+                    event: "Logged In",
+                    properties: {
+                        data:  (new Date()).toISOString
+                    }
+                })
                 User.findOneAndUpdate({ id: profile.id }, usr, {
                     new: true
                 }, function (err, user) {
@@ -105,11 +127,18 @@ var func = {
     tagFindOrCreate: function (tweet, tag, user) {
         Tag.find({ tag: tweet.tag, id: tweet.id }, function (err, foundTag) {
             if (foundTag.length === 0) {
-                mixpanel.track("Tag Created", {
-                    distinct_id: user.email,
-                    date: (new Date()).toISOString,
-                });
+                // mixpanel.track("Tag Created", {
+                //     distinct_id: user.email,
+                //     date: (new Date()).toISOString,
+                // });
                 mixpanel.people.increment(user.email, 'Tags');
+                segemnt.track({
+                    userId: usr.email,
+                    event: "Tag Created",
+                    properties: {
+                        data:  (new Date()).toISOString
+                    }
+                })
                 tag.tag = tweet.tag;
                 func.tagCreate(tag, user);
             }
@@ -124,11 +153,18 @@ var func = {
     },
     tweetCreate: function (tweet, user) {
         return new Promise(function (resolve) {
-            mixpanel.track("Tweet Saved", {
-                distinct_id: user.email,
-                date: (new Date()).toISOString,
-            })
+            // mixpanel.track("Tweet Saved", {
+            //     distinct_id: user.email,
+            //     date: (new Date()).toISOString,
+            // })
             mixpanel.people.increment(user.email, 'Tweets');
+            segemnt.track({
+                userId: usr.email,
+                event: "Tweet Saved",
+                properties: {
+                    data:  (new Date()).toISOString
+                }
+            })
             Tweet.create(tweet, function (err, tweet) {
                 user[0].tweets.push(tweet);
                 user[0].save();

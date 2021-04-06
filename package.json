@@ -10,6 +10,7 @@
   "author": "bigansh",
   "license": "ISC",
   "dependencies": {
+    "analytics-node": "^4.0.1",
     "connect-mongo": "^4.2.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
