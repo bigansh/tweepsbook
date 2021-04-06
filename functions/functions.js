@@ -26,8 +26,7 @@ var func = {
                 auto_populate_reply_metadata: true
             }
         } else {
-            bmTweet.id = user[0].id;
-            bmtTag.id = bmTweet.id;
+            bmTag.id = bmTweet.id = user[0].id;
             func.tweetCreate(bmTweet, user).then(function (msg) {
                 func.tagFindOrCreate(bmTweet, bmtTag, user);
             });
