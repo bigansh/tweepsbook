@@ -30,7 +30,7 @@ var func = {
                 func.tagFindOrCreate(bmTweet, bmtTag, user);
             });
             params = {
-                status: "Hey, the tweet you requested has been bookmarked. Thanks for using our service 🤖. https://tweepsbook.com/dashboard/",
+                status: "Hey, the tweet you requested has been bookmarked. You can check the same in your dashboard. Thanks for using our service 🤖. https://tweepsbook.com/dashboard/",
                 in_reply_to_status_id: tweet.id_str,
                 auto_populate_reply_metadata: true
             }
