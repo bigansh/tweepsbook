@@ -33,7 +33,7 @@ window.twttr = (function (d, s, id) {
   return t;
 })(document, 'script', 'twitter-wjs');
 
-// ext = user;
+mixpanel.alias(user[0].email);
 
 // Read tags from fetched user data
 function readTags() {
@@ -85,7 +85,6 @@ function loadEmbeddedTweetsOnLoad() {
 function loadEmbeddedTweetsOnSelect() {
   twttr.widgets.load(bookmarks).then(
     (value) => {
-      console.log('hi');
       if (screen.width > 600) {
         const masonry = new Masonry(bookmarks, { gutter: 12 });
       }

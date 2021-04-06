@@ -8,7 +8,8 @@ var mongoObj = {}
 mongoObj.connect = mongoose.connect(process.env.DATABASEURL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
 }).then(function () {
     console.log("Connected to DB");
 }).catch(function (err) {
