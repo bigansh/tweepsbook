@@ -17,13 +17,13 @@ router.get('/login', function(req, res){
 
 router.get('/auth', passport.authenticate('twitter'));
 
-router.get('/confirm', function (req, res) {
+router.get('/authenticated', function (req, res) {
     res.redirect('/dashboard');
 });
 
 router.get('/auth/callback', passport.authenticate('twitter', { failureRedirect: '/' }),
     function (req, res) {
-        res.redirect('/dashboard/confirm');
+        res.redirect('/dashboard/authenticated');
     }
 );
 
