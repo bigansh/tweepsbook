@@ -83,7 +83,7 @@ var func = {
                         created: (new Date()).toISOString,
                         id: usr.id,
                     },
-                    timestamp: (new Date()).toISOString
+                    timestamp: new Date()
                 })
                 segment.track({
                     userId: usr.email,
@@ -138,7 +138,7 @@ var func = {
                 // });
                 // mixpanel.people.increment(user.email, 'Tags');
                 segment.track({
-                    userId: user.email,
+                    userId: user[0].email,
                     event: "Tag Created",
                     properties: {
                         Date:  (new Date()).toISOString
@@ -164,7 +164,7 @@ var func = {
             // })
             // mixpanel.people.increment(user.email, 'Tweets');
             segment.track({
-                userId: user.email,
+                userId: user[0].email,
                 event: "Tweet Saved",
                 properties: {
                     Date:  (new Date()).toISOString
