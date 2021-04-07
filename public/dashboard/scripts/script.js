@@ -85,7 +85,6 @@ function loadEmbeddedTweetsOnLoad() {
 function loadEmbeddedTweetsOnSelect() {
   twttr.widgets.load(bookmarks).then(
     (value) => {
-      console.log('hi');
       if (screen.width > 600) {
         const masonry = new Masonry(bookmarks, { gutter: 12 });
       }
