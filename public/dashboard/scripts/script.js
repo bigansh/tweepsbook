@@ -33,6 +33,7 @@ window.twttr = (function (d, s, id) {
   return t;
 })(document, 'script', 'twitter-wjs');
 
+//Segment link
 analytics.alias(user[0].email);
 
 // Read tags from fetched user data

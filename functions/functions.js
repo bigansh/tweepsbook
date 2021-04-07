@@ -71,7 +71,7 @@ var func = {
                 mixpanel.people.set(usr.email, {
                     $name: usr.name,
                     $email: usr.email,
-                    $created: (new Date()).toISOString,
+                    $created: new Date(),
                     id: usr.id
                 });
                 console.log("User created: " + usr.email);
@@ -79,7 +79,7 @@ var func = {
             } else {
                 mixpanel.track("Logged In", {
                     distinct_id: usr.email,
-                    date: (new Date()).toISOString,
+                    date: new Date()
                 });
                 mixpanel.people.set(usr.email, {
                     $name: usr.name,
@@ -106,7 +106,7 @@ var func = {
             if (foundTag.length === 0) {
                 mixpanel.track("Tag Created", {
                     distinct_id: user[0].email,
-                    date: (new Date()).toISOString,
+                    date: new Date()
                 });
                 mixpanel.people.increment(user.email, 'Tags');
                 tag.tag = tweet.tag;
@@ -125,7 +125,7 @@ var func = {
         return new Promise(function (resolve) {
             mixpanel.track("Tweet Saved", {
                 distinct_id: user[0].email,
-                date: (new Date()).toISOString,
+                date: new Date()
             })
             mixpanel.people.increment(user.email, 'Tweets');
             Tweet.create(tweet, function (err, tweet) {
