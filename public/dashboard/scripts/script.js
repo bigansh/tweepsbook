@@ -33,7 +33,7 @@ window.twttr = (function (d, s, id) {
   return t;
 })(document, 'script', 'twitter-wjs');
 
-mixpanel.alias(user[0].email);
+analytics.alias(user[0].email);
 
 // Read tags from fetched user data
 function readTags() {
