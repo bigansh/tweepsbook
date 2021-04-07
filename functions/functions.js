@@ -105,7 +105,7 @@ var func = {
         Tag.find({ tag: tweet.tag, id: tweet.id }, function (err, foundTag) {
             if (foundTag.length === 0) {
                 mixpanel.track("Tag Created", {
-                    distinct_id: user.email,
+                    distinct_id: user[0].email,
                     date: (new Date()).toISOString,
                 });
                 mixpanel.people.increment(user.email, 'Tags');
@@ -124,7 +124,7 @@ var func = {
     tweetCreate: function (tweet, user) {
         return new Promise(function (resolve) {
             mixpanel.track("Tweet Saved", {
-                distinct_id: user.email,
+                distinct_id: user[0].email,
                 date: (new Date()).toISOString,
             })
             mixpanel.people.increment(user.email, 'Tweets');
