@@ -109,8 +109,9 @@ body {
   color: white;
   font: inherit;
   font-size: 20px;
-  padding: 15px 24px;
-  margin: 0 8px;
+  height: 54px;
+  width: 250px;
+  margin-right: 20px;
   border-radius: 10px;
   border: none;
   outline: none;
@@ -120,7 +121,6 @@ body {
 
 .main-area .container .btns .ph {
   display: block;
-  margin: 0 8px;
 }
 
 .main-area .container .arrow {
@@ -215,7 +215,7 @@ body {
   padding: 32px;
   margin: 14px auto;
   list-style-type: none;
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
 }
 
@@ -238,7 +238,7 @@ body {
   color: var(--light-blue);
   margin: 14px 0;
   padding: 14px;
-  border-radius: 12px;
+  border-radius: 8px;
   font-family: var(--mono-font);
   font-size: 16px;
   font-weight: 600;
@@ -294,7 +294,7 @@ body {
 }
 
 .section-area .container .bottom img {
-  border-radius: 12px;
+  border-radius: 8px;
   display: block;
   width: 100%;
   margin: 28px auto;
@@ -390,6 +390,10 @@ body {
   .main-area .container .tag-line,
   .main-area .container .btns .btn {
     font-size: 18px;
+  }
+
+  .main-area .container .btns .btn {
+    margin-right: 0;
   }
 
   .main-area .container .btns {
