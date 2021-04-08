@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- META & Google Tags -->
-    <%- include("partials/scriptandmeta") %>
+      <%- include("partials/scriptandmeta") %>
     <!-- End META & Google Tags -->
 
     <!-- META Tags -->
@@ -50,12 +50,12 @@
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <%- include("partials/noscript") %>
+      <%- include("partials/noscript") %>
     <!-- End Google Tag Manager (noscript) -->
 
     <nav class="nav-bar">
       <div class="container">
-        <a class="title" href="#">
+        <a class="title" href="/">
           <img src="/landingpage/images/TweepsBook.png" alt="Logo" />
           <h2>Tweeps<span>Book</span></h2>
         </a>
@@ -73,8 +73,7 @@
         </p>
         <p class="tag-line">Capture. Organize. Learn.</p>
         <div class="btns">
-          <a href="https://forms.gle/pshjQSjnyHAoKzTR7" target="_BLANK"
-            ><button class="btn" type="button">Get Started</button></a
+          <a href="/dashboard/login"><button class="btn" type="button">Lets Get Started</button></a
           >
           <a
             href="https://www.producthunt.com/posts/tweepsbook-capture-organize-learn?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tweepsbook-capture-organize-learn"
@@ -145,8 +144,8 @@
     <footer class="footer-bar">
       <p class="notice">
         &copy; 2021, TweepsBook.
-        <a class="link" href="http://tweepsbook.com/privacy">Privacy</a>.
-        <a class="link" href="http://tweepsbook.com/terms">Terms</a>.
+        <a class="link" href="/privacy">Privacy</a>.
+        <a class="link" href="/terms">Terms</a>.
       </p>
       <div class="icons">
         <a
@@ -161,7 +160,7 @@
           class="icon-box"
           ><i class="icon fa fa-linkedin-square" aria-hidden="true"></i
         ></a>
-        <a href="mailto:tweepsbook@gmail.com" class="icon-box">
+        <a href="mailto:tweepsbook@gmail.com" target="_blank" class="icon-box">
           <i class="icon fa fa-envelope" aria-hidden="true"></i>
         </a>
       </div>

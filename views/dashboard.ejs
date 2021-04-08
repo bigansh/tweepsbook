@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- META & Google Tags -->
-    <%- include("partials/scriptandmeta") %>
+      <%- include("partials/scriptandmeta") %>
     <!-- End META & Google Tags -->
 
     <!-- META Tags -->
@@ -46,7 +46,7 @@
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <%- include("partials/noscript") %>
+      <%- include("partials/noscript") %>
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="container">
@@ -54,7 +54,7 @@
         <div class="bars-box">
           <i class="bars fa fa-bars" aria-hidden="true"></i>
         </div>
-        <a class="title" href="http://tweepsbook.com/dashboard">
+        <a class="title" href="/dashboard">
           <img src="/dashboard/images/TweepsBook.png" alt="Logo" />
           <h2>Tweeps<span>Book</span></h2>
         </a>
@@ -65,7 +65,7 @@
             <i class="arrow fa fa-angle-down" aria-hidden="true"></i>
           </div>
           <div class="user-menu">
-            <a href="http://tweepsbook.com/dashboard/logout"
+            <a href="logout"
               ><i class="icon fa fa-sign-out" aria-hidden="true"></i>Logout</a
             >
           </div>
@@ -88,7 +88,7 @@
             <ul class="items">
               <li class="item">
                 Follow
-                <a href="http://twitter.com/tweepsbookcom" target="_BLANK"
+                <a href="http://twitter.com/tweepsbookcom" target="_blank"
                   >@tweepsbookcom</a
                 >
                 to mention us easily.
@@ -117,17 +117,17 @@
       <footer class="footer-bar">
         <p class="notice">
           &copy; 2021, TweepsBook.
-          <a class="link" href="http://tweepsbook.com/privacy">Privacy</a>.
-          <a class="link" href="http://tweepsbook.com/terms">Terms</a>.
+          <a class="link" href="/privacy">Privacy</a>.
+          <a class="link" href="/terms">Terms</a>.
         </p>
         <div class="icons">
-          <a href="https://twitter.com/tweepsbookcom" class="icon-box"
+          <a href="https://twitter.com/tweepsbookcom" target="_blank" class="icon-box"
             ><i class="icon fa fa-twitter" aria-hidden="true"></i
           ></a>
-          <a href="https://linkedin.com/company/tweepsbookcom" class="icon-box"
+          <a href="https://linkedin.com/company/tweepsbookcom" target="_blank" class="icon-box"
             ><i class="icon fa fa-linkedin-square" aria-hidden="true"></i
           ></a>
-          <a href="mailto:tweepsbook@gmail.com" class="icon-box">
+          <a href="mailto:tweepsbook@gmail.com" target="_blank" class="icon-box">
             <i class="icon fa fa-envelope" aria-hidden="true"></i>
           </a>
         </div>
@@ -139,7 +139,7 @@
       user = JSON.parse(user);
     </script>
     <!-- Masonry JS -->
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+      <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <!-- End Masonry JS -->
     <script src="/dashboard/scripts/script.js"></script>
   </body>
