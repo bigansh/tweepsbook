@@ -21,9 +21,13 @@ router.get('/authenticated', function (req, res) {
     res.redirect('/dashboard');
 });
 
+router.get('/dashboard/callback', function(req, res){
+    res.redirect('/authenticated');
+})
+
 router.get('/auth/callback', passport.authenticate('twitter', { failureRedirect: '/' }),
     function (req, res) {
-        res.redirect('/dashboard/authenticated');
+        res.redirect('/dashboard/callback');
     }
 );
 
