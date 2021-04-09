@@ -59,7 +59,7 @@ app.get('/terms', function (req, res) {
     res.render("terms");
 });
 
-app.get('/sitemap', function(req, res){
+app.get('/sitemap', function (req, res) {
     res.sendFile("sitemap.xml", { root: "views" })
 })
 

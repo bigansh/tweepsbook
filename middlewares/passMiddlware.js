@@ -20,7 +20,7 @@ passObj.login = passport.use(new Strategy({
     callbackURL: '/dashboard/auth/callback',
     proxy: true
 }, function (token, tokenSecret, profile, cb) {
-    func.userCreateOrUpdate(profile, cb);
+        func.userCreateOrUpdate(profile, cb);
 }));
 
 passObj.serializeUser = passport.serializeUser(function (user, cb) {
