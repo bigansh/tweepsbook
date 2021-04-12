@@ -59,9 +59,13 @@ app.get('/terms', function (req, res) {
     res.render("terms");
 });
 
-app.get('/sitemap', function (req, res) {
+app.get('/sitemap.xml', function (req, res) {
     res.sendFile("sitemap.xml", { root: "views" })
-})
+});
+
+app.get('/robots.txt', function (req, res) {
+    res.sendFile("robots.txt", { root: "views" })
+});
 
 app.get('/:url', function (req, res) {
     res.redirect("/");
