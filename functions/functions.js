@@ -59,7 +59,7 @@ var func = {
     },
     userCreateOrUpdate: function (profile, cb) {
         if(!profile.emails){
-            return cb("No email id found, please contact support via email at tweepsbook@gmail.com", profile);
+            return cb(null, null);
         }
         usr.id = profile.id;
         usr.email = profile.emails[0].value;

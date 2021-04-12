@@ -59,6 +59,10 @@ app.get('/terms', function (req, res) {
     res.render("terms");
 });
 
+app.get('/error', function (req, res) {
+    res.send("Some error occured. Please contact support via <a target='_blank' href='mailto:tweepsbook@gmail.com?subject=Support'>email</a>")
+})
+
 app.get('/sitemap.xml', function (req, res) {
     res.sendFile("sitemap.xml", { root: "views" })
 });

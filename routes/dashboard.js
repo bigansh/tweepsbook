@@ -7,11 +7,11 @@ var express = require("express"),
 
 router.get('/', isAuth, function (req, res) {
     User.find({ id: req.user[0].id }).populate("tweets").populate("tags").exec(function (err, user) {
-        res.render("dashboard", {user: JSON.stringify(user), userImage: user[0].profile, userName: user[0].name});
+        res.render("dashboard", { user: JSON.stringify(user), userImage: user[0].profile, userName: user[0].name });
     });
 });
 
-router.get('/login', function(req, res){
+router.get('/login', function (req, res) {
     res.render("signin");
 });
 
@@ -21,7 +21,7 @@ router.get('/authenticated', function (req, res) {
     res.redirect('/dashboard');
 });
 
-router.get('/auth/callback', passport.authenticate('twitter', { failureRedirect: '/' }),
+router.get('/auth/callback', passport.authenticate('twitter', { failureRedirect: '/error' }),
     function (req, res) {
         res.redirect('/dashboard/authenticated');
     }
