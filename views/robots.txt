@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /error
+Disallow: /error/
 
 Sitemap: http://www.tweepsbook.com/sitemap.xml
