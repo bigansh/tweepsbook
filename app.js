@@ -90,7 +90,7 @@ stream.on('tweet', function (tweet) {
                 });
             });
         });
-    })
+    });
 });
 
 app.listen(process.env.PORT, function () {

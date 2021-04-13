@@ -55,7 +55,7 @@ var func = {
             status: 'subscribed'
         }, function (results) {
             console.log("Status: " + results.title);
-        })
+        });
     },
     userCreateOrUpdate: function (profile, cb) {
         if(!profile.emails){
@@ -115,21 +115,21 @@ var func = {
                 tag.tag = tweet.tag;
                 func.tagCreate(tag, user);
             }
-        })
+        });
     },
     tagCreate: function (tag, user) {
         Tag.create(tag, function (err, tag) {
             user[0].tags.push(tag);
             user[0].save();
             console.log("Tag created: " + tag.tag);
-        })
+        });
     },
     tweetCreate: function (tweet, user) {
         return new Promise(function (resolve) {
             mixpanel.track("Tweet Saved", {
                 distinct_id: user[0].email,
                 date: new Date()
-            })
+            });
             mixpanel.people.increment(user.email, 'Tweets');
             Tweet.create(tweet, function (err, tweet) {
                 user[0].tweets.push(tweet);
