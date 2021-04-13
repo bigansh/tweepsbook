@@ -62,6 +62,7 @@ body {
 
 .main-area {
   min-height: calc(100vh - 126px);
+  display: flex;
 }
 
 .main-area .container {
