@@ -366,6 +366,32 @@ body {
   display: none;
 }
 
+.backdrop.fade-in {
+  animation: fade-in 400ms ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.backdrop.fade-out {
+  animation: fade-out 400ms ease-in-out;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .backdrop.visible {
   display: block;
 }
@@ -472,8 +498,8 @@ body {
   }
 
   .main-area .aside-bar .tags .tag.special {
-    border: 1px black solid;
-    border-radius: 4px;
+    border-top: 1px var(--light-gray) solid;
+    padding: 18px 48px;
   }
 
   .main-area .aside-bar .tags .tag.selected:not(.special) {

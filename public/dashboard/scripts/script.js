@@ -173,7 +173,14 @@ function selectTagHandler(ev) {
 
 // Slide asideBar
 function toggleAsideBar() {
-  backdrop.classList.toggle('visible');
+  if (backdrop.classList.contains('visible')) {
+    backdrop.className = 'backdrop visible fade-out';
+    setTimeout(() => {
+      backdrop.className = 'backdrop';
+    }, 380);
+  } else {
+    backdrop.className = 'backdrop visible fade-in';
+  }
   asideBar.classList.toggle('slide');
 }
 
