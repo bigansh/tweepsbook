@@ -5,7 +5,7 @@ var express = require("express"),
 //INITIALIZING SCHEMAS
 var User = require("./models/users");
 
-//DEFINING MIDDLWARES
+//DEFINING MIDDLEWARES
 var pass = require("./middlewares/passMiddlware"),
     sess = require("./middlewares/sessMiddleware");
 
@@ -85,7 +85,7 @@ stream.on('tweet', function (tweet) {
             User.find({ id: data.user.id_str }, function (err, user) {
                 func.main(err, user, tweet).then(function (params) {
                     T.post('statuses/update', params.data, function (err, Data, response) {
-                        console.log("Stauts: " + response.statusMessage)
+                        console.log("Status: " + response.statusMessage)
                     });
                 });
             });
