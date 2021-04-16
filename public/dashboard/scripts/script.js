@@ -34,7 +34,16 @@ window.twttr = (function (d, s, id) {
 })(document, 'script', 'twitter-wjs');
 
 //Segment link
-analytics.alias(user[0].email);
+// analytics.alias(user[0].email);
+
+// TODO Use this to make a live request
+// async function fetchDataJSON() {
+//   const response = await fetch('/dashboard/json/');
+//   const user = await response.json();
+//   return user;
+// }
+
+// fetchDataJSON().then(temp => { console.log(temp); })
 
 // Read tags from fetched user data
 function readTags() {

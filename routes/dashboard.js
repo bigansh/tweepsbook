@@ -11,6 +11,12 @@ router.get('/', isAuth, function (req, res) {
     });
 });
 
+router.get('/json', isAuth, function (req, res) {
+    User.find({ id: req.user[0].id }).populate("tweets").populate("tags").exec(function (err, user) {
+        res.send(user);
+    });
+});
+
 router.get('/login', function (req, res) {
     res.render("signin");
 });
