@@ -3,6 +3,7 @@ var express = require("express"),
     User = require("../models/users"),
     Tweet = require("../models/tweets"),
     passport = require("passport"),
+    isFetch= require("../middlewares/fetchMiddleware"),
     isAuth = require("../middlewares/authMiddlware");
 
 router.get('/', isAuth, function (req, res) {
@@ -11,7 +12,7 @@ router.get('/', isAuth, function (req, res) {
     });
 });
 
-router.get('/json', isAuth, function (req, res) {
+router.get('/json', isAuth, isFetch, function (req, res) {
     User.find({ id: req.user[0].id }).populate("tweets").populate("tags").exec(function (err, user) {
         res.send(user);
     });
@@ -23,15 +24,15 @@ router.get('/login', function (req, res) {
 
 router.get('/auth', passport.authenticate('twitter'));
 
-router.get('/authenticated', function (req, res) {
-    res.redirect('/dashboard');
-});
-
 router.get('/auth/callback', passport.authenticate('twitter', { failureRedirect: '/error' }),
     function (req, res) {
         res.redirect('/dashboard/authenticated');
     }
 );
+
+router.get('/authenticated', function (req, res) {
+    res.redirect('/dashboard');
+});
 
 router.get('/logout', function (req, res) {
     req.logOut();

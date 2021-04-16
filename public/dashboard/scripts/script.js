@@ -38,12 +38,19 @@ window.twttr = (function (d, s, id) {
 
 // TODO Use this to make a live request
 // async function fetchDataJSON() {
-//   const response = await fetch('/dashboard/json/');
-//   const user = await response.json();
-//   return user;
+//   const response = await fetch('/dashboard/json/', {
+//     headers: new Headers({
+//       'Authorization': {
+//         login: 'login',
+//         password: 'password'
+//       }
+//     })
+//   });
+//   const data = await response.json();
+//   return data;
 // }
 
-// fetchDataJSON().then(temp => { console.log(temp); })
+// fetchDataJSON().then(data => { const user = data })
 
 // Read tags from fetched user data
 function readTags() {
