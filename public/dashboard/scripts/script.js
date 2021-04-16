@@ -33,27 +33,8 @@ window.twttr = (function (d, s, id) {
   return t;
 })(document, 'script', 'twitter-wjs');
 
-//Segment link
-// analytics.alias(user[0].email);
-
-// TODO Use this to make a live request
-// async function fetchDataJSON() {
-//   const response = await fetch('/dashboard/json/', {
-//     headers: new Headers({
-//       'Authorization': {
-//         login: 'login',
-//         password: 'password'
-//       }
-//     })
-//   });
-//   const data = await response.json();
-//   return data;
-// }
-
-// fetchDataJSON().then(data => { const user = data })
-
 // Read tags from fetched user data
-function readTags() {
+function readTags(user) {
   user[0]['tags'].forEach((value) => {
     const tagValue = value['tag'] === null ? 'notag' : value['tag'].slice(1);
     tagsList.push(tagValue);
@@ -136,7 +117,7 @@ function populateBookmarks(tagName) {
 }
 
 // Populate all bookmarks in the UI initially
-function populateAllBookmarks() {
+function populateAllBookmarks(user) {
   // Show loader
   loadBoard.classList.add('visible');
   bookmarks.innerHTML = '';
@@ -148,6 +129,8 @@ function populateAllBookmarks() {
       value['status'] +
       '</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
     bookmarks.append(div);
+    // TODO
+    // getEmbedLink(value['status']).then((link)=> {console.log(link)});
   });
   // Loading embedded content
   loadEmbeddedTweetsOnLoad();
@@ -200,14 +183,43 @@ function toggleAsideBar() {
   asideBar.classList.toggle('slide');
 }
 
+// TODO Use this to make a live request
+async function fetchDataJSON() {
+  const response = await fetch('/dashboard/json/', {
+    headers: new Headers({
+      'Authorization': {
+        login: 'login',
+        password: 'password'
+      }
+    })
+  });
+  const data = await response.json();
+  return data;
+}
+
+// async function getEmbedLink(statusID) {
+//   const embedLink = await fetch("https://publish.twitter.com/oembed?\
+//   url=https://twitter.com/u/status/"+ statusID, {
+//     headers: new Headers({
+//       cors: 'Access-Control-Allow-Origin'
+//     })
+//   })
+//   return embedLink;
+// }
+
 // Call required functions when loaded
 function run() {
-  if (readTags()) {
-    populateTags();
-    populateAllBookmarks();
-  } else {
-    emptyBoard.classList.add('visible');
-  }
+  fetchDataJSON().then(data => {
+    const user = data
+    // Segment link
+    analytics.alias(user[0].email);
+    if (readTags(user)) {
+      populateTags();
+      populateAllBookmarks(user);
+    } else {
+      emptyBoard.classList.add('visible');
+    }
+  })
 }
 
 // On load
