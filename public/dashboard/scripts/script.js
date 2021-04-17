@@ -34,7 +34,7 @@ window.twttr = (function (d, s, id) {
 })(document, 'script', 'twitter-wjs');
 
 // Read tags from fetched user data
-function readTags(user) {
+function readTags() {
   user[0]['tags'].forEach((value) => {
     const tagValue = value['tag'] === null ? 'notag' : value['tag'].slice(1);
     tagsList.push(tagValue);
@@ -117,7 +117,7 @@ function populateBookmarks(tagName) {
 }
 
 // Populate all bookmarks in the UI initially
-function populateAllBookmarks(user) {
+function populateAllBookmarks() {
   // Show loader
   loadBoard.classList.add('visible');
   bookmarks.innerHTML = '';
@@ -130,7 +130,7 @@ function populateAllBookmarks(user) {
       '</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
     bookmarks.append(div);
     // TODO
-    // getEmbedLink(value['status']).then((link)=> {console.log(link)});
+    getEmbedLink(value['status']).then((link)=> {console.log(link)});
   });
   // Loading embedded content
   loadEmbeddedTweetsOnLoad();
@@ -187,35 +187,35 @@ function toggleAsideBar() {
 async function fetchDataJSON() {
   const response = await fetch('/dashboard/json/', {
     headers: new Headers({
-      'Authorization': {
-        login: 'login',
-        password: 'password'
-      }
+      'Authorization': 'Basic ' + window.btoa('TBrsfdf1rt:tbfrtpftb')
     })
   });
   const data = await response.json();
   return data;
 }
 
-// async function getEmbedLink(statusID) {
-//   const embedLink = await fetch("https://publish.twitter.com/oembed?\
-//   url=https://twitter.com/u/status/"+ statusID, {
-//     headers: new Headers({
-//       cors: 'Access-Control-Allow-Origin'
-//     })
-//   })
-//   return embedLink;
-// }
+// TODO
+async function getEmbedLink(statusID) {
+  const embedLink = await fetch("https://publish.twitter.com/oembed?\
+  url=https://twitter.com/u/status/"+ statusID, {
+    // headers: new Headers({
+    //   cors: 'Access-Control-Allow-Origin'
+    // })
+    mode: 'cors',
+  })
+  return embedLink;
+}
 
 // Call required functions when loaded
 function run() {
   fetchDataJSON().then(data => {
+    //TODO make this global
     const user = data
     // Segment link
     analytics.alias(user[0].email);
-    if (readTags(user)) {
+    if (readTags()) {
       populateTags();
-      populateAllBookmarks(user);
+      populateAllBookmarks();
     } else {
       emptyBoard.classList.add('visible');
     }
