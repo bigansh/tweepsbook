@@ -130,7 +130,7 @@ function populateAllBookmarks() {
       '</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
     bookmarks.append(div);
     // TODO
-    getEmbedLink(value['status']).then((link)=> {console.log(link)});
+    getEmbedLink(value['status']).then((link) => { console.log(link) });
   });
   // Loading embedded content
   loadEmbeddedTweetsOnLoad();
