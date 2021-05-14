@@ -1,8 +1,8 @@
-var mongoose = require("mongoose");
+var mongoose = require('mongoose')
 
 var tagsSchemma = mongoose.Schema({
-    tag: String,
-    id: String
-});
+	tag: String,
+	id: String,
+})
 
-module.exports = mongoose.model("Tag", tagsSchemma);
+module.exports = mongoose.model('Tag', tagsSchemma)

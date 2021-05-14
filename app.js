@@ -1,98 +1,116 @@
-var express = require("express"),
-    dotenv = require("dotenv"),
-    app = express();
+var express = require('express'),
+	dotenv = require('dotenv'),
+	app = express()
 
 //INITIALIZING SCHEMAS
-var User = require("./models/users");
+var User = require('./models/users')
 
 //DEFINING MIDDLEWARES
-var pass = require("./middlewares/passMiddlware"),
-    sess = require("./middlewares/sessMiddleware");
+var pass = require('./middlewares/passMiddleware'),
+	sess = require('./middlewares/sessMiddleware')
 
 //INITIALIZING OBJECTS
-var objects = require("./models/objects"),
-    bmTweet = objects.bmTweet;
+var objects = require('./models/objects'),
+	bmTweet = objects.bmTweet
 
 //INITIALIZING ROUTES
-var dashboardRoute = require("./routes/dashboard");
+var dashboardRoute = require('./routes/dashboard')
 
 //INITIALIZING FUNCTIONS
-var func = require("./functions/functions");
+var func = require('./functions/functions')
 
 //INITIALIZING CONNECTS
-var mongo = require("./connections/mongoConnect"),
-    twit = require("./connections/tokenConnect");
+var mongo = require('./connections/mongoConnect'),
+	twit = require('./connections/tokenConnect')
 
 //INITIALIZING TOKENS
-var T = twit;
+var T = twit
 
 //INITIALIZING .env
-dotenv.config();
+dotenv.config()
 
 //CONNECTING DATABASE
-mongo.connect;
+mongo.connect
 
 //INITIALIZING MIDDLEWARES
-app.set("view engine", "ejs");
-app.use(express.static("public"));
-app.use(sess.session);
-app.use(pass.initialize);
-app.use(pass.session);
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
+app.use(sess.session)
+app.use(pass.initialize)
+app.use(pass.session)
 
 //USING PASSPORT
-pass.login;
-pass.serializeUser;
-pass.deserializeUser;
+pass.login
+pass.serializeUser
+pass.deserializeUser
 
 //ROUTES
 app.get('/', function (req, res) {
-    res.render("index");
-});
+	res.render('index')
+})
 
-app.use('/dashboard', dashboardRoute);
+app.use('/dashboard', dashboardRoute)
 
 app.get('/privacy', function (req, res) {
-    res.render("privacy");
-});
+	res.render('privacy')
+})
 
 app.get('/terms', function (req, res) {
-    res.render("terms");
-});
+	res.render('terms')
+})
 
 app.get('/error', function (req, res) {
-    res.render("error");
+	res.render('error')
 })
 
 app.get('/sitemap.xml', function (req, res) {
-    res.sendFile("sitemap.xml", { root: "views" })
-});
+	res.sendFile('sitemap.xml', { root: 'views' })
+})
 
 app.get('/robots.txt', function (req, res) {
-    res.sendFile("robots.txt", { root: "views" })
-});
+	res.sendFile('robots.txt', { root: 'views' })
+})
 
 app.get('/:url', function (req, res) {
-    res.redirect("/");
-});
+	res.redirect('/')
+})
 
 //CAPTURING AND SAVING TWEET
-var stream = T.stream('statuses/filter', { track: ['@tweepsbookcom ' + process.env.KEYWORD] });
+var stream = T.stream('statuses/filter', {
+	track: ['@tweepsbookcom ' + process.env.KEYWORD],
+})
 stream.on('tweet', function (tweet) {
-    T.get('statuses/show', { id: tweet.in_reply_to_status_id_str }, function (err, data, response) {
-        bmTweet.status = data.id_str;
-        T.get('statuses/show', { id: tweet.id_str }, function (err, data, response) {
-            func.addTag(data);
-            User.find({ id: data.user.id_str }, function (err, user) {
-                func.main(err, user, tweet).then(function (params) {
-                    T.post('statuses/update', params.data, function (err, Data, response) {
-                        console.log("Status: " + response.statusMessage)
-                    });
-                });
-            });
-        });
-    });
-});
+	T.get(
+		'statuses/show',
+		{ id: tweet.in_reply_to_status_id_str },
+		function (err, data, response) {
+			bmTweet.status = data.id_str
+			T.get(
+				'statuses/show',
+				{ id: tweet.id_str },
+				function (err, data, response) {
+					func.addTag(data)
+					User.find({ id: data.user.id_str }, function (err, user) {
+						func.main(err, user, tweet).then(function (params) {
+							T.post(
+								'statuses/update',
+								params.data,
+								function (err, Data, response) {
+									console.log('Status: ' + response.statusMessage)
+								}
+							)
+						})
+					})
+				}
+			)
+		}
+	)
+})
 
 app.listen(process.env.PORT, function () {
-    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+	console.log(
+		'Express server listening on port %d in %s mode',
+		this.address().port,
+		app.settings.env
+	)
+})

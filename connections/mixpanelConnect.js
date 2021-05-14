@@ -1,8 +1,8 @@
-var Mixpanel = require("mixpanel"),
-    dotenv = require("dotenv");
+var Mixpanel = require('mixpanel'),
+	dotenv = require('dotenv')
 
-dotenv.config();
+dotenv.config()
 
-var mixpanel = Mixpanel.init(process.env.MIXPANEL_TOKEN);
+var mixpanel = Mixpanel.init(process.env.MIXPANEL_TOKEN)
 
-module.exports = mixpanel;
+module.exports = mixpanel

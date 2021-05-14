@@ -1,8 +1,8 @@
 var Mailchimp = require('mailchimp-api-v3'),
-    dotenv = require("dotenv");
+	dotenv = require('dotenv')
 
-dotenv.config();
+dotenv.config()
 
-var mailchimp = new Mailchimp(process.env.MAILCHIMP_API);
+var mailchimp = new Mailchimp(process.env.MAILCHIMP_API)
 
-module.exports = mailchimp;
+module.exports = mailchimp
