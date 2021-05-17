@@ -20,7 +20,7 @@ var func = {
 		if (user.length === 0) {
 			params = {
 				status:
-					"Hey, you haven't registered yet. Hence we can't bookmark the tweet you requested. Please register on our website to bookmark better. 🤖. https://tweepsbook.com",
+					"Hey, you haven't registered yet. Hence we can't bookmark the tweet you requested. Please register on our website to bookmark better 🤖. https://tweepsbook.com",
 				in_reply_to_status_id: tweet.id_str,
 				auto_populate_reply_metadata: true,
 			}
