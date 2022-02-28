@@ -1,0 +1,8 @@
+#Dependencies
+/node_modules
+
+#Vercel
+.vercel
+
+#Configs
+.env
