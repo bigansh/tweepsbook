@@ -9,6 +9,9 @@
   "author": "bigansh",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^3.27.2"
+    "dotenv": "^16.0.0",
+    "fastify": "^3.27.2",
+    "middie": "^6.0.0",
+    "twitter-api-v2": "^1.11.0"
   }
 }
