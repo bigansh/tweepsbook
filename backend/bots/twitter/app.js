@@ -1,5 +1,6 @@
 require('dotenv').config()
 
-const { TwitterApi } = require('twitter-api-v2')
+const twtrClient = require('./utils/twitterConnect')
 
-const twttrClient = new TwitterApi()
+const rwClient = twtrClient.readWrite
+
