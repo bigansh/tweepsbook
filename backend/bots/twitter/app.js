@@ -1,6 +1,7 @@
 require('dotenv').config()
 
-const twtrClient = require('./utils/twitterConnect')
+const streamBot = require('./functions/streamBot')
 
-const rwClient = twtrClient.readWrite
+streamBot()
+
 
