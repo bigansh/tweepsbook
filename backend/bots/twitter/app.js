@@ -1,5 +1,5 @@
 require('dotenv').config()
 
-const streamBot = require('./functions/streamBot')
+const tweetStream = require('./functions/tweetStream')
 
-streamBot()
+tweetStream()

@@ -7,9 +7,13 @@ require('dotenv').config()
 const rules = {
 	add: [
 		{
-			value: `@tweepsbookcom ${process.env.KEYWORD} has:hashtags has:mentions`,
-			tag: 'request',
+			value: `@tweepsbookcom ${process.env.BOOKMARK} has:mentions`,
+			tag: 'bookmark',
 		},
+		{
+			value: `@tweepsbookcom ${process.env.UNROLL} has:mentions`,
+			tag: 'unroll'
+		}
 	],
 }
 
