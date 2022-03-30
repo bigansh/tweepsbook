@@ -7,7 +7,7 @@ const User = require('../utils/schema/User')
  * @param {String} twitter_id
  * 
  */
-const findUser = async (twitter_id) => {
+const userFind = async (twitter_id) => {
 	try {
 		return await User.findOne({ twitter_id: twitter_id }).exec()
 	} catch (error) {
@@ -15,4 +15,4 @@ const findUser = async (twitter_id) => {
 	}
 }
 
-module.exports = findUser
+module.exports = userFind

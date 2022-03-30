@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
 	profile_image: String,
 	name: String,
     profile_id: String,
-	twitter_id: BigInt,
+	twitter_id: String,
 	tweets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tweet' }],
 	tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
 })
