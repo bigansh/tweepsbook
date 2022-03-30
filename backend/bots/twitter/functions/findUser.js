@@ -11,7 +11,7 @@ const findUser = async (twitter_id) => {
 	try {
 		return await User.findOne({ twitter_id: twitter_id }).exec()
 	} catch (error) {
-		console.log('ERROR:', error)
+		console.log('ERROR: ', error)
 	}
 }
 

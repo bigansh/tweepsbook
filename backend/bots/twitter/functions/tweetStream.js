@@ -9,17 +9,17 @@ const twtrClient = require('../utils/auth/oauth2.0')
 const { add } = require('../utils/rules/streamRules')
 
 const findUser = require('./findUser'),
-	tweetReply = require('./tweetReply')
+	tweetReply = require('./tweetReply'),
+	bookmark = require('./bookmark')
 
 /**
  * A function that filters the tweet stream based on a keyword.
- *
  */
 
 const tweetStream = async () => {
 	try {
 		await twtrClient.v2.updateStreamRules({
-			add: add,
+			add,
 		})
 
 		/**
@@ -39,28 +39,29 @@ const tweetStream = async () => {
 		stream.on(
 			ETwitterStreamEvent.Data,
 			async ({ data, includes, matching_rules }) => {
+				// ! Define user type
+				/**
+				 * @type {User}
+				 */
 				const user = await findUser(data.author_id)
 
-				if(user) {
-					// ! Check for the request type
-					// ! Register the bookmark
-					// ! Reply to the request tweet
+				if (user) {
+					if (matching_rules[0].tag.includes('bookmark'))
+						bookmark(user[0], includes.tweets, data.entities.hashtags)
 
-					return
-				} else if(!user) {
-					// ! Reply to the request tweet
+					tweetReply(twtrClient, data.id, true)
+				} else if (!user) tweetReply(twtrClient, data.id, false)
 
-					return
-				}
-				
-				console.log(data.text, 'text')
-				console.log(data.author_id, 'author')
-				console.log(includes.tweets, 'tweet')
-				console.log(data.entities.hashtags, 'tags')
+				// * For reference
+				// console.log(data.text, 'text')
+				// console.log(data.id, 'id')
+				// console.log(data.author_id, 'author')
+				// console.log(includes.tweets, 'tweet')
+				// console.log(data.entities.hashtags, 'tags')
 			}
 		)
 	} catch (error) {
-		console.log('ERROR:', error)
+		console.log('ERROR: ', error)
 	}
 }
 
