@@ -15,7 +15,6 @@ const userFind = require('./userFind'),
 /**
  * A function that filters the tweet stream based on a keyword.
  */
-
 const tweetStream = async () => {
 	try {
 		await twtrClient_o2.v2.updateStreamRules({
@@ -30,7 +29,7 @@ const tweetStream = async () => {
 			expansions: ['author_id', 'referenced_tweets.id'],
 		})
 
-		console.log('Stream online!')
+		console.log('Tweet stream online!')
 
 		stream.autoReconnect = true
 		stream.keepAliveTimeoutMs = Infinity
@@ -46,7 +45,7 @@ const tweetStream = async () => {
 
 				if (user) {
 					if (matching_rules[0].tag.includes('bookmark'))
-						bookmark(user[0], includes.tweets, data.entities.hashtags)
+						bookmark(user[0], includes.tweets[0].id, data.entities.hashtags)
 
 					tweetReply(data.id, true)
 				} else if (!user) tweetReply(data.id, false)

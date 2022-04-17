@@ -6,7 +6,6 @@ const twtrClient_o1 = require('../utils/auth/oauth1.0a')
  * @param {String} replyTo_id
  * @param {Boolean} user
  */
-
 const reply = async (replyTo_id, user = undefined) => {
 	try {
 		if (user)

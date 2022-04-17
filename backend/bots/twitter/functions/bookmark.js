@@ -8,11 +8,10 @@ const tagFindOrCreate = require('./tagFindOrCreate'),
  * A function to bookmark a tweet with the specified tags.
  *
  * @param {String} user
- * @param {TweetV2[]} requestedTweet
+ * @param {String} requestedTweetId
  * @param {TweetEntityHashtagV2[]} tags
  */
-
-const bookmark = async (user, requestedTweet, tags = null) => {
+const bookmark = async (user, requestedTweetId, tags = null) => {
 	try {
 		if (tags) {
 			tags.forEach(async ({ tag }) => {
@@ -27,7 +26,7 @@ const bookmark = async (user, requestedTweet, tags = null) => {
 
 		const savedTweet = await tweetCreate(
 			user.profile_id,
-			requestedTweet[0].id,
+			requestedTweetId,
 			tags.map(({ tag }) => tag)
 		)
 
