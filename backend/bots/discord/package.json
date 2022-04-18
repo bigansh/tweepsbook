@@ -1,0 +1,14 @@
+{
+  "name": "discord",
+  "version": "1.0.0",
+  "description": "The Discord bookmarker bot.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "bigansh",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.6.0"
+  }
+}

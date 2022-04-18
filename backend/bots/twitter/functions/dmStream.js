@@ -8,7 +8,7 @@ const userFind = require('./userFind'),
 	dmReply = require('./dmReply'),
 	bookmark = require('./bookmark')
 
-// ! Create a stream pipe of GET requests. 
+// ! Create a stream pipe of GET requests.
 
 /**
  * A function that streams the DMs received.
@@ -34,10 +34,9 @@ const dmStream = async () => {
 					)
 						bookmark(
 							user[0],
-							// ! Fix regex to exclude nos. in the username.
 							event.message_create.message_data.entities.urls[0].expanded_url.match(
-								/[0-9]+/i
-							),
+								/[0-9]*$/i
+							)[0],
 							event.message_create.message_data.entities.hashtags
 						)
 
