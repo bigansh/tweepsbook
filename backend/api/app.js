@@ -23,9 +23,6 @@ app.register(require('middie')).then(() => {
 app.register(require('./routes/auth'), {
 	prefix: '/auth',
 })
-app.register(require('./routes/fetch'), {
-	prefix: '/fetch',
-})
 app.register(require('./routes/crud'), {
 	prefix: '/crud',
 })
