@@ -4,7 +4,7 @@ const { fastify } = require('fastify')
 
 const app = fastify()
 
-app.register(require('./app'))
+app.register(require('./api/app'))
 
 export default async (req, res) => {
 	await app.ready()
