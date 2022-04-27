@@ -15,10 +15,15 @@ app.register(require('fastify-cors'), {
 	allowedHeaders: [],
 	exposedHeaders: [],
 })
-
-app.register(require('middie')).then(() => {
-	app.use(require('connect-slashes')(false))
+app.register(require('fastify-jwt'), {
+	secret: process.env.SECRET_JWT,
 })
+
+app.register(require('./utils/functions/jwtPlugin'))
+
+// TODO Add onError & onRequest hooks logic.
+app.addHook('onRequest', require('./utils/functions/onRequestHooks'))
+app.addHook('onError', require('./utils/functions/onErrorHook'))
 
 app.register(require('./routes/auth'), {
 	prefix: '/auth',
@@ -26,7 +31,10 @@ app.register(require('./routes/auth'), {
 app.register(require('./routes/crud'), {
 	prefix: '/crud',
 })
+app.register(require('./routes/account'), {
+	prefix: '/account',
+})
 
-app.listen(process.env.PORT, () => {
-	console.log(`Listening on ${process.env.PORT}`)
+app.listen(process.env.PORT || 3000, () => {
+	console.log(`Listening on ${process.env.PORT || 3000}`)
 })

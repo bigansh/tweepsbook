@@ -6,6 +6,10 @@ const userSchema = mongoose.Schema({
 	name: String,
 	profile_id: String,
 	twitter_id: String,
+	twitter_auth_tokens: {
+		accessToken: String,
+		refreshToken: String,
+	},
 	tweets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tweet' }],
 	tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
 })

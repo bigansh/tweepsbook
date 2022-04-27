@@ -14,9 +14,27 @@ const updateBookmark = require('../controllers/updateBookmark'),
  * @param {*} done
  */
 const crud = (fastify, _options, done) => {
-	fastify.get('/read', getBookmarks)
-	fastify.post('/update', updateBookmark)
-	fastify.delete('/delete', deleteBookmark)
+	fastify.get(
+		'/read',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		getBookmarks
+	)
+	fastify.post(
+		'/update',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		updateBookmark
+	)
+	fastify.delete(
+		'/delete',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		deleteBookmark
+	)
 
 	done()
 }
