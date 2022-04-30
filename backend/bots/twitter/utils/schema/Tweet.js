@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
 
-const tweetSchema = mongoose.Schema({
+const tweetSchema = new mongoose.Schema({
 	status_id: String,
 	profile_id: String,
-	tags: [{ tag: String }],
+	read: { type: Boolean, default: false },
+	archived: { type: Boolean, default: false },
+	tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
 })
 
 module.exports = mongoose.model('Tweet', tweetSchema)

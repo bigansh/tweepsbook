@@ -18,7 +18,9 @@ const twitterUserFinder = async (user) => {
 			{ new: true }
 		)
 
-		if (foundUser.length === 0) await userCreate(user)
+		if (foundUser.length === 0) return await userCreate(user)
+
+		return foundUser
 	} catch (error) {}
 }
 

@@ -37,7 +37,7 @@ const twitterCallback = async (token, state, code) => {
 
 		const { data: userObject } = await loggedClient.v2.me()
 
-		await twitterUserFinder(userObject)
+		const user = await twitterUserFinder(userObject)
 
 		User.findOneAndUpdate(
 			{ twitter_id: userObject.id },
@@ -49,7 +49,7 @@ const twitterCallback = async (token, state, code) => {
 			}
 		)
 
-		return true
+		return user
 	} catch (error) {}
 }
 

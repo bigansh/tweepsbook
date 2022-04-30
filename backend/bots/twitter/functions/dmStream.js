@@ -27,20 +27,22 @@ const dmStream = async () => {
 				const user = await userFind(event.message_create.sender_id)
 
 				if (user) {
+					let state
+
 					if (
 						event.message_create.message_data.text.includes(
 							process.env.BOOKMARK
 						)
 					)
-						bookmark(
-							user[0],
+						state = await bookmark(
+							user,
 							event.message_create.message_data.entities.urls[0].expanded_url.match(
 								/[0-9]*$/i
 							)[0],
 							event.message_create.message_data.entities.hashtags
 						)
 
-					dmReply(event.message_create.sender_id, true)
+					dmReply(event.message_create.sender_id, state)
 				} else if (!user) dmReply(event.message_create.sender_id, false)
 			}
 		}

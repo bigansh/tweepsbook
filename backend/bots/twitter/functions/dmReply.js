@@ -16,7 +16,7 @@ const dmReply = async (replyTo_id, user = undefined) => {
 		else if (!user)
 			await twtrClient_o1.v1.sendDm({
 				recipient_id: replyTo_id,
-				text: 'Hey, we are unable to process your request as you are not a registered user. Please create a new account and try again.',
+				text: 'Hey, we are unable to process your request as you are not a registered user or you have reached the unread bookmarks threshold. Please create a new account and try again or read some of your bookmarks.',
 			})
 	} catch (error) {
 		console.log('ERROR:', error)

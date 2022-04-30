@@ -1,4 +1,8 @@
+const { fastify } = require('fastify')
+
 const twitterCallback = require('../functions/twitterCallback')
+
+const app = fastify()
 
 /**
  * A controller to handle the callback requests for authentication.
@@ -11,12 +15,20 @@ const callbackAuth = async (req, res) => {
 		const { twitter } = req.query
 
 		if (twitter) {
-			const { state, code } = req.params
+			const { state, code } = req.query
 
 			const { token } = req.query
 
-			;(await twitterCallback(token, state, code)) &&
-				res.status(302).redirect('/app/dashboard')
+			const { profile_id } = await twitterCallback(token, state, code)
+
+			const sessionToken = app.jwt.sign(profile_id, {
+				expiresIn: 1000 * 60 * 60 * 24 * 14, // * 14 days
+			})
+
+			res
+				.status(302)
+				.header('sessionToken', sessionToken)
+				.redirect('/app/dashboard')
 		}
 	} catch (error) {}
 }

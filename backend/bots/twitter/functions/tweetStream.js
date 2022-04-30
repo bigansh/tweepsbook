@@ -37,25 +37,20 @@ const tweetStream = async () => {
 		stream.on(
 			ETwitterStreamEvent.Data,
 			async ({ data, includes, matching_rules }) => {
-				// TODO Define user type
-				/**
-				 * @type {}
-				 */
 				const user = await userFind(data.author_id)
 
 				if (user) {
+					let state
+
 					if (matching_rules[0].tag.includes('bookmark'))
-						bookmark(user[0], includes.tweets[0].id, data.entities.hashtags)
+						state = await bookmark(
+							user,
+							includes.tweets[0].id,
+							data.entities.hashtags
+						)
 
-					tweetReply(data.id, true)
+					tweetReply(data.id, state)
 				} else if (!user) tweetReply(data.id, false)
-
-				// * For reference
-				// console.log(data.text, 'text')
-				// console.log(data.id, 'id')
-				// console.log(data.author_id, 'author')
-				// console.log(includes.tweets, 'tweet')
-				// console.log(data.entities.hashtags, 'tags')
 			}
 		)
 	} catch (error) {

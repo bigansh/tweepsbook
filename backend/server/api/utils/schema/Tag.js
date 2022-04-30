@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const tagSchema = mongoose.Schema({
+const tagSchema = new mongoose.Schema({
 	tag: String,
 	profile_id: String,
 })
