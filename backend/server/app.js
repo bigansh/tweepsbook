@@ -22,8 +22,8 @@ app.register(require('fastify-jwt'), {
 app.register(require('./utils/controllers/jwtPlugin'))
 
 // TODO Add onError & onRequest hooks logic.
-app.addHook('onRequest', require('./utils/functions/onRequestHooks'))
-app.addHook('onError', require('./utils/functions/onErrorHook'))
+app.addHook('onRequest', require('./utils/controllers/onRequestHooks'))
+app.addHook('onError', require('./utils/controllers/onErrorHook'))
 
 app.register(require('./routes/auth'), {
 	prefix: '/auth',
