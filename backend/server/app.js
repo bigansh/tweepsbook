@@ -19,7 +19,7 @@ app.register(require('fastify-jwt'), {
 	secret: process.env.SECRET_JWT,
 })
 
-app.register(require('./utils/functions/jwtPlugin'))
+app.register(require('./utils/controllers/jwtPlugin'))
 
 // TODO Add onError & onRequest hooks logic.
 app.addHook('onRequest', require('./utils/functions/onRequestHooks'))
