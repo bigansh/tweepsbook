@@ -4,7 +4,7 @@
   "description": "The api provider.",
   "main": "serverless.js",
   "scripts": {
-    "start": "node serverless.js"
+    "start": "node app.js"
   },
   "author": "bigansh",
   "license": "ISC",

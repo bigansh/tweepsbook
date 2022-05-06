@@ -4,8 +4,8 @@
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const getBookmarks = (req, res) => {
+const curdRead = (req, res) => {
 	res.send('hello')
 }
 
-module.exports = getBookmarks
+module.exports = curdRead

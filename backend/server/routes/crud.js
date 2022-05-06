@@ -2,9 +2,10 @@ const { fastify } = require('fastify')
 
 const app = fastify()
 
-const updateBookmark = require('../controllers/updateBookmark'),
-	deleteBookmark = require('../controllers/deleteBookmark'),
-	getBookmarks = require('../controllers/getBookmarks')
+const curdUpdate = require('../controllers/curdUpdate'),
+	curdDelete = require('../controllers/curdDelete'),
+	curdRead = require('../controllers/curdRead'),
+	crudCreate = require('../controllers/curdCreate')
 
 /**
  * A route that handles the CRUD requests for the saved bookmarks.
@@ -14,26 +15,33 @@ const updateBookmark = require('../controllers/updateBookmark'),
  * @param {*} done
  */
 const crud = (fastify, _options, done) => {
+	fastify.post(
+		'/create',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		crudCreate
+	)
 	fastify.get(
 		'/read',
 		{
 			onRequest: [fastify.authenticate],
 		},
-		getBookmarks
+		curdRead
 	)
 	fastify.post(
 		'/update',
 		{
 			onRequest: [fastify.authenticate],
 		},
-		updateBookmark
+		curdUpdate
 	)
 	fastify.delete(
 		'/delete',
 		{
 			onRequest: [fastify.authenticate],
 		},
-		deleteBookmark
+		curdDelete
 	)
 
 	done()
