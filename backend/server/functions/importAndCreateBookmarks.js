@@ -30,7 +30,9 @@ const importAndCreateBookmarks = async (userTwtrClient, profile_id) => {
 				return await user.save()
 			}
 		}
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = importAndCreateBookmarks

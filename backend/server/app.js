@@ -15,9 +15,6 @@ app.register(require('fastify-cors'), {
 	allowedHeaders: [],
 	exposedHeaders: [],
 })
-app.register(require('fastify-jwt'), {
-	secret: process.env.SECRET_JWT,
-})
 
 app.register(require('./utils/controllers/jwtPlugin'))
 
@@ -31,9 +28,9 @@ app.register(require('./routes/auth'), {
 app.register(require('./routes/crud'), {
 	prefix: '/crud',
 })
-app.register(require('./routes/account'), {
-	prefix: '/account',
-})
+// app.register(require('./routes/account'), {
+// 	prefix: '/account',
+// })
 
 app.listen(process.env.PORT || 3000, () => {
 	console.log(`Listening on ${process.env.PORT || 3000}`)

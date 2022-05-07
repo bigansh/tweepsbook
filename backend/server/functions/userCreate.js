@@ -16,7 +16,9 @@ const userCreate = async (twitterUserObject) => {
 			profile_id: uuidV4(),
 			// email: twitterUserObject.email, // ! Need to figure out how to get the user email.
 		})
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = userCreate

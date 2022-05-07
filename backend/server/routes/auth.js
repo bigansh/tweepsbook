@@ -18,9 +18,9 @@ const googleAuth = require('../controllers/googleAuth'),
 const auth = (fastify, _options, done) => {
 	fastify.get('/callback', callbackAuth)
 	fastify.get('/twitter', twitterAuth)
-	fastify.get('google', googleAuth)
-	fastify.post('/login', loginAuth)
-	fastify.post('/sign-up', signUpAuth)
+	// fastify.get('/google', googleAuth)
+	// fastify.post('/login', loginAuth)
+	// fastify.post('/sign-up', signUpAuth)
 
 	done()
 }

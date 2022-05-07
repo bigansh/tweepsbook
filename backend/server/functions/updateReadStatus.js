@@ -14,7 +14,9 @@ const updateReadStatus = async (tweetId = undefined, status) => {
 				{ read: status },
 				{ new: true }
 			).exec()
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = updateReadStatus

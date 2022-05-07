@@ -7,8 +7,14 @@ const {
 
 const rateLimitPlugin = new TwitterApiRateLimitPlugin()
 
-const twtrClient = new TwitterApi(process.env.BEARER_TOKEN_TWITTER_MAIN, {
-	plugins: [rateLimitPlugin],
-})
+const twtrClient = new TwitterApi(
+	{
+		clientId: process.env.CLIENT_ID_TWITTER_MAIN,
+		clientSecret: process.env.CLIENT_SECRET_TWITTER_MAIN,
+	},
+	{
+		plugins: [rateLimitPlugin],
+	}
+)
 
 module.exports = twtrClient

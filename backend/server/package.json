@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "The api provider.",
-  "main": "serverless.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
@@ -20,6 +20,7 @@
     "mercurius": "^9.3.6",
     "mixpanel": "^0.14.0",
     "mongoose": "^6.3.0",
+    "node-cache": "^5.1.2",
     "twitter-api-v2": "^1.11.0",
     "uuid": "^8.3.2"
   }

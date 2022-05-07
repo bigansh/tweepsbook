@@ -8,7 +8,9 @@ const Tweet = require('../utils/schema/Tweet')
 const deleteTweet = async (tweetId) => {
 	try {
 		return await Tweet.findByIdAndDelete(tweetId).exec()
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = deleteTweet

@@ -18,10 +18,12 @@ const twitterUserFinder = async (user) => {
 			{ new: true }
 		)
 
-		if (foundUser.length === 0) return await userCreate(user)
+		if (!foundUser) return await userCreate(user)
 
 		return foundUser
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = twitterUserFinder

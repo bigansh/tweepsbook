@@ -23,8 +23,8 @@ const twtrUserClient = (profile_id, refreshToken) => {
 	const tokenRefreshPlugin = new TwitterApiAutoTokenRefresher({
 		refreshToken: refreshToken,
 		refreshCredentials: {
-			clientId: process.env.CONSUMER_KEY_TWITTER_MAIN,
-			clientSecret: process.env.CONSUMER_SECRET_TWITTER_MAIN,
+			clientId: process.env.CLIENT_ID_TWITTER_MAIN,
+			clientSecret: process.env.CLIENT_SECRET_TWITTER_MAIN,
 		},
 		onTokenUpdate(token) {
 			newToken = token.accessToken

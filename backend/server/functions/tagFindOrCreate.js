@@ -28,7 +28,9 @@ const tagFindOrCreate = async (tags, user) => {
 		}
 
 		return tweetTags
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = tagFindOrCreate

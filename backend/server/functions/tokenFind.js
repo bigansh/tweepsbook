@@ -10,7 +10,9 @@ const tokenFind = async (profile_id) => {
 		return await User.findOne({ profile_id })
 			.select(['twitter_auth_tokens'])
 			.exec()
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = tokenFind

@@ -15,7 +15,6 @@ const tweetFinderAndUpdater = async (
 	tagId = undefined
 ) => {
 	try {
-
 		if (tags.length && tweetId) {
 			const foundTweet = await Tweet.findById(tweetId).exec()
 
@@ -24,8 +23,8 @@ const tweetFinderAndUpdater = async (
 			return await foundTweet.save()
 		}
 
-		if(profile_id && tagId) {
-			const userTweets = await Tweet.find({profile_id: profile_id}).exec()
+		if (profile_id && tagId) {
+			const userTweets = await Tweet.find({ profile_id: profile_id }).exec()
 
 			userTweets.forEach((tweet) => {
 				const tagIndex = tweet.tags.indexOf(tagId)
@@ -35,8 +34,9 @@ const tweetFinderAndUpdater = async (
 
 			userTweets.save()
 		}
-
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = tweetFinderAndUpdater

@@ -21,7 +21,9 @@ const updateTags = async (profile_id, tweetId = undefined, tags) => {
 		const tweetTags = await tagFindOrCreate(tags, user)
 
 		if (tweetId) return await tweetFinderAndUpdater(tweetId, tweetTags)
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = updateTags

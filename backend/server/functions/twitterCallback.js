@@ -1,24 +1,19 @@
-const { fastify } = require('fastify')
-
-const twtrClient_o1 = require('../utils/auth/oauth1.0a')
+const twtrClient_o2 = require('../utils/auth/oauth2.0')
 
 const User = require('../utils/schema/User')
 
 const twitterUserFinder = require('../functions/twitterUserFinder')
 
-const app = fastify()
-
 /**
  * A function that handles callbacks for Twitter.
  *
- * @param {String} token
+ * @param {String} sessionState
+ * @param {String} codeVerifier
  * @param {String} state
  * @param {String} code
  */
-const twitterCallback = async (token, state, code) => {
+const twitterCallback = async (sessionState, codeVerifier, state, code) => {
 	try {
-		const { state: sessionState, codeVerifier } = app.jwt.decode(token)
-
 		// ! Redirect to an error page if any of the tokens are invalid.
 		if (!codeVerifier || !state || !sessionState || !code)
 			throw new Error('You denied the app or your session expired!')
@@ -29,17 +24,17 @@ const twitterCallback = async (token, state, code) => {
 			client: loggedClient,
 			accessToken,
 			refreshToken,
-		} = await twtrClient_o1.loginWithOAuth2({
+		} = await twtrClient_o2.loginWithOAuth2({
 			code,
 			codeVerifier,
-			redirectUri: '/auth/callback',
+			redirectUri: 'http://127.0.0.1:3000/auth/callback?callbackType=twitter',
 		})
 
 		const { data: userObject } = await loggedClient.v2.me()
 
 		const user = await twitterUserFinder(userObject)
 
-		User.findOneAndUpdate(
+		await User.findOneAndUpdate(
 			{ twitter_id: userObject.id },
 			{
 				twitter_auth_tokens: {
@@ -50,7 +45,9 @@ const twitterCallback = async (token, state, code) => {
 		)
 
 		return user
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = twitterCallback

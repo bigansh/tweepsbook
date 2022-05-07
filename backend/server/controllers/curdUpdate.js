@@ -8,7 +8,7 @@ const updateTags = require('../functions/updateTags'),
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const curdUpdate = (req, res) => {
+const curdUpdate = async (req, res) => {
 	try {
 		const { queryType } = req.query
 

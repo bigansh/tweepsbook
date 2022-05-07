@@ -11,7 +11,9 @@ const createTwtrUserClient = async (profile_id) => {
 		const { refreshToken } = await tokenFind(profile_id)
 
 		return twtrUserClient(profile_id, refreshToken)
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = createTwtrUserClient

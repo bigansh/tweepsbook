@@ -14,7 +14,9 @@ const deleteTag = async (tagId, profile_id) => {
 		tweetFinderAndUpdater(undefined, undefined, profile_id, tagId)
 
 		return await Tag.findByIdAndDelete(tagId).exec()
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = deleteTag

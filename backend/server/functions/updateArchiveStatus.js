@@ -14,7 +14,9 @@ const updateArchiveStatus = async (tweetId = undefined, status) => {
 				{ archived: status },
 				{ new: true }
 			).exec()
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = updateArchiveStatus

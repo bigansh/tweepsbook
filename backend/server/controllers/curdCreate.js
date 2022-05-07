@@ -23,7 +23,9 @@ const curdCreate = async (req, res) => {
 		}
 
 		res.status(200).send(data)
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = curdCreate

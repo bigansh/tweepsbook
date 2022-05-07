@@ -1,10 +1,6 @@
-const { fastify } = require('fastify')
+const cache = require('../utils/functions/nodeCache')
 
 const twitterAuthFlow = require('../functions/twitterAuthFlow')
-
-const app = fastify()
-
-// TODO Get JWT auth completed (store JWT token).
 
 /**
  * A controller to handle the requests to to login via Twitter.
@@ -13,11 +9,11 @@ const app = fastify()
  * @param {import('fastify').FastifyReply} res
  */
 const twitterAuth = (req, res) => {
-	const { callbackUrl, state, codeVerifier } = twitterAuthFlow()
+	const { url, state, codeVerifier } = twitterAuthFlow()
 
-	const token = app.jwt.sign({ state, codeVerifier })
+	cache.set('token', { state, codeVerifier }, 10)
 
-	res.redirect(302, `${callbackUrl}&token=${token}`)
+	res.status(302).redirect(url)
 }
 
 module.exports = twitterAuth
