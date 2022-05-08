@@ -1,6 +1,6 @@
 const twtrClient_o2 = require('../utils/auth/oauth2.0')
 
-const User = require('../utils/schema/User')
+const User = require('../utils/schemas/User')
 
 const twitterUserFinder = require('../functions/twitterUserFinder')
 

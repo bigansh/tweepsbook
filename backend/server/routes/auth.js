@@ -2,11 +2,11 @@ const { fastify } = require('fastify')
 
 const app = fastify()
 
-const googleAuth = require('../controllers/googleAuth'),
-	twitterAuth = require('../controllers/twitterAuth'),
-	loginAuth = require('../controllers/loginAuth'),
-	signUpAuth = require('../controllers/signUpAuth'),
-	callbackAuth = require('../controllers/callbackAuth')
+const authGoogle = require('../controllers/authGoogle'),
+	authTwitter = require('../controllers/authTwitter'),
+	authLogin = require('../controllers/authLogin'),
+	authSignup = require('../controllers/authSignup'),
+	authCallback = require('../controllers/authCallback')
 
 /**
  * A route that handles the auth requests for login & sign ups.
@@ -16,11 +16,11 @@ const googleAuth = require('../controllers/googleAuth'),
  * @param {*} done
  */
 const auth = (fastify, _options, done) => {
-	fastify.get('/callback', callbackAuth)
-	fastify.get('/twitter', twitterAuth)
-	// fastify.get('/google', googleAuth)
-	// fastify.post('/login', loginAuth)
-	// fastify.post('/sign-up', signUpAuth)
+	fastify.get('/callback', authCallback)
+	fastify.get('/twitter', authTwitter)
+	// fastify.get('/google', authGoogle)
+	// fastify.post('/login', authLogin)
+	// fastify.post('/sign-up', authSignup)
 
 	done()
 }

@@ -18,11 +18,17 @@ const curdUpdate = async (req, res) => {
 
 		switch (queryType) {
 			case 'tags':
-				data = await updateTags(profile_id, req.body.tweetId, req.body.tags)
+				if (req.body.tweetId && req.body.tags)
+					data = await updateTags(profile_id, req.body.tweetId, req.body.tags)
 			case 'readStatus':
-				data = await updateReadStatus(req.body.tweetId, req.body.readStatus)
+				if (req.body.tweetId && req.body.readStatus)
+					data = await updateReadStatus(req.body.tweetId, req.body.readStatus)
 			case 'archiveStatus':
-				data = await updateArchiveStatus(req.body.tweetId, req.body.archiveStatus)
+				if (req.body.tweetId && req.body.archiveStatus)
+					data = await updateArchiveStatus(
+						req.body.tweetId,
+						req.body.archiveStatus
+					)
 		}
 
 		res.status(200).send(data)

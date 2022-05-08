@@ -17,9 +17,10 @@ const curdDelete = async (req, res) => {
 
 		switch (deleteType) {
 			case 'tweet':
-				data = await deleteTweet(req.body.tweetId)
+				if (req.body.tweetId) data = await deleteTweet(req.body.tweetId)
 			case 'tag':
-				data = await deleteTag(req.body.tagId, profile_id)
+				if (req.body.tweetId && req.body.profile_id)
+					data = await deleteTag(req.body.tagId, profile_id)
 		}
 
 		res.status(200).send(data)

@@ -2,6 +2,10 @@ const { fastify } = require('fastify')
 
 const app = fastify()
 
+const accountUpdate = require('../controllers/accountUpdate'),
+	accountDelete = require('../controllers/accountDelete'),
+	accountGet = require('../controllers/accountGet')
+
 /**
  * A route that handles the requests for account mutations.
  *
@@ -15,21 +19,21 @@ const account = (fastify, _options, done) => {
 		{
 			onRequest: [fastify.authenticate],
 		},
-		getAccount
+		accountGet
 	)
 	fastify.patch(
 		'update',
 		{
 			onRequest: [fastify.authenticate],
 		},
-		updateAccount
+		accountUpdate
 	)
 	fastify.delete(
 		'/delete',
 		{
 			onRequest: [fastify.authenticate],
 		},
-		deleteAccount
+		accountDelete
 	)
 
 	done()

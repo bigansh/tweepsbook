@@ -1,6 +1,6 @@
-const User = require('../utils/schema/User'),
-	Tag = require('../utils/schema/Tag'),
-	Tweet = require('../utils/schema/Tweet')
+const User = require('../utils/schemas/User'),
+	Tag = require('../utils/schemas/Tag'),
+	Tweet = require('../utils/schemas/Tweet')
 
 const tagFindOrCreate = require('./tagFindOrCreate'),
 	tweetFinderAndUpdater = require('./tweetFinderAndUpdater')

@@ -1,4 +1,4 @@
-const cache = require('../utils/functions/nodeCache')
+const cache = require('../utils/classes/nodeCache')
 
 const twitterAuthFlow = require('../functions/twitterAuthFlow')
 
@@ -8,7 +8,7 @@ const twitterAuthFlow = require('../functions/twitterAuthFlow')
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const twitterAuth = (req, res) => {
+const authTwitter = (req, res) => {
 	const { url, state, codeVerifier } = twitterAuthFlow()
 
 	cache.set('token', { state, codeVerifier }, 10)
@@ -16,4 +16,4 @@ const twitterAuth = (req, res) => {
 	res.status(302).redirect(url)
 }
 
-module.exports = twitterAuth
+module.exports = authTwitter

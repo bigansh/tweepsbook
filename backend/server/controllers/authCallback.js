@@ -1,4 +1,4 @@
-const cache = require('../utils/functions/nodeCache')
+const cache = require('../utils/classes/nodeCache')
 
 const twitterCallback = require('../functions/twitterCallback')
 
@@ -8,7 +8,7 @@ const twitterCallback = require('../functions/twitterCallback')
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const callbackAuth = async (req, res) => {
+const authCallback = async (req, res) => {
 	try {
 		const { callbackType } = req.query
 
@@ -42,4 +42,4 @@ const callbackAuth = async (req, res) => {
 	}
 }
 
-module.exports = callbackAuth
+module.exports = authCallback
