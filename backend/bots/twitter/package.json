@@ -1,0 +1,17 @@
+{
+  "name": "twitter",
+  "version": "1.0.0",
+  "description": "The Twitter bookmarker bot.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "bigansh",
+  "license": "ISC",
+  "dependencies": {
+    "@twitter-api-v2/plugin-rate-limit": "^1.1.0",
+    "dotenv": "^16.0.0",
+    "mongoose": "^6.2.9",
+    "twitter-api-v2": "^1.11.0"
+  }
+}
