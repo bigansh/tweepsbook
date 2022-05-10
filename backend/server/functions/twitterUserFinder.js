@@ -1,4 +1,4 @@
-const User = require('../utils/schema/User')
+const User = require('../utils/schemas/User')
 
 const userCreate = require('./userCreate')
 

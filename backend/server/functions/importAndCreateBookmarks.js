@@ -1,5 +1,5 @@
-const User = require('../utils/schema/User'),
-	Tweet = require('../utils/schema/Tweet')
+const User = require('../utils/schemas/User'),
+	Tweet = require('../utils/schemas/Tweet')
 
 /**
  * A function that imports bookmarks from a user's Twitter account & adds it to the DB.

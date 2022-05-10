@@ -1,4 +1,4 @@
-const Tag = require('../utils/schema/Tag')
+const Tag = require('../utils/schemas/Tag')
 
 /**
  * A function that finds if a tag is present in the database & creates one if needed.

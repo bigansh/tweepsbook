@@ -1,6 +1,6 @@
 const { v4: uuidV4 } = require('uuid')
 
-const User = require('../utils/schema/User')
+const User = require('../utils/schemas/User')
 
 /**
  * A function that creates a new user document.

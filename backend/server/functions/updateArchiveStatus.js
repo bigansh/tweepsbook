@@ -1,4 +1,4 @@
-const Tweet = require('../utils/schema/Tweet')
+const Tweet = require('../utils/schemas/Tweet')
 
 /**
  * A function that updates the archive status of a bookmark.

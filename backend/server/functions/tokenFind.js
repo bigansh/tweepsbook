@@ -1,4 +1,4 @@
-const User = require('../utils/schema/User')
+const User = require('../utils/schemas/User')
 
 /**
  * A function that finds the access & the refresh token of a particular user.

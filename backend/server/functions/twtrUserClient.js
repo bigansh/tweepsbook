@@ -6,7 +6,7 @@ const { TwitterApi } = require('twitter-api-v2'),
 		TwitterApiAutoTokenRefresher,
 	} = require('@twitter-api-v2/plugin-token-refresher')
 
-const User = require('../utils/schema/User')
+const User = require('../utils/schemas/User')
 
 /**
  * A function that returns the user client with the latest access tokens.

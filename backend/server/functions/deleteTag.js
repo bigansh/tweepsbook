@@ -1,5 +1,5 @@
-const Tweet = require('../utils/schema/Tweet'),
-	Tag = require('../utils/schema/Tag')
+const Tweet = require('../utils/schemas/Tweet'),
+	Tag = require('../utils/schemas/Tag')
 
 const tweetFinderAndUpdater = require('./tweetFinderAndUpdater')
 
