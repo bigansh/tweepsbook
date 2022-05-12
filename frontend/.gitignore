@@ -1,9 +1,8 @@
 #Dependencies
 /node_modules
-/.next
 
-#Vercel
-.vercel
+#Folders
+/.next
 
 #Configs
 .env
