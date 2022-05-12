@@ -1,11 +1,13 @@
 const Home = () => {
-  return (
-    <>
-      <div>
-        <h1 className="text-3xl font-bold underline text-center">Hello World!</h1>
-      </div>
-    </>
-  );
-};
+    return (
+        <>
+            <div>
+                <h1 className="text-3xl font-bold underline text-center">
+                    Hello World!
+                </h1>
+            </div>
+        </>
+    )
+}
 
-export default Home;
+export default Home
