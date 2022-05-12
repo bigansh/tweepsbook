@@ -1,7 +1,7 @@
 {
-  "name": "frontend",
+  "name": "yamero-client",
   "version": "1.0.0",
-  "description": "The frontend app.",
+  "description": "The Interface of Yamero",
   "private": true,
   "scripts": {
     "dev": "next dev",
