@@ -1,30 +1,33 @@
+/**
+ * @type {import('../utils/schemas/Tag').TagModel}
+ */
 const Tag = require('../utils/schema/Tag')
 
 /**
  * A function to find if a hashtag exists & create a new if needed.
  *
  * @param {String} tag
- * @param {} user
+ * @param {import('../utils/schemas/User').UserDocument} user
  */
 const tagFindOrCreate = async (tag, user) => {
-	try {
-		const foundTag = await Tag.findOne({
-			tag: tag,
-			profile_id: user.profile_id,
-		}).exec()
+    try {
+        const foundTag = await Tag.findOne({
+            tag: tag,
+            profile_id: user.profile_id,
+        }).exec()
 
-		if (!foundTag) {
-			const createdTag = await Tag.create({ tag, profile_id })
+        if (!foundTag) {
+            const createdTag = await Tag.create({ tag, profile_id })
 
-			user.tags.push(createdTag)
+            user.tags.push(createdTag)
 
-			user.save()
+            user.save()
 
-			return createdTag
-		}
+            return createdTag
+        }
 
-		return foundTag
-	} catch (error) {}
+        return foundTag
+    } catch (error) {}
 }
 
 module.exports = tagFindOrCreate

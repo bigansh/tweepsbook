@@ -1,10 +1,13 @@
+/**
+ * @type {import('../utils/schemas/Bookmark').BookmarkModel}
+ */
 const Bookmark = require('../utils/schemas/Bookmark')
 
 /**
  * A function that finds the tweet & updates its meta.
  *
  * @param {String} bookmarkId
- * @param {[]} tags
+ * @param {[import('../utils/schemas/Tag').TagDocument]} tags
  * @param {String} type
  * @param {String} profile_id
  */

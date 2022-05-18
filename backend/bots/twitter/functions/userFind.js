@@ -1,6 +1,8 @@
+/**
+ * @type {import('../utils/schemas/User').UserModel}
+ */
 const User = require('../utils/schema/User')
 
-// TODO Define the type of user in-relate to the schema User.
 /**
  * A function that checks for the existence of a user in the database.
  *

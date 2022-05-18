@@ -1,5 +1,14 @@
+/**
+ * @type {import('../utils/schemas/User').UserModel}
+ */
 const User = require('../utils/schemas/User'),
+    /**
+     * @type {import('../utils/schemas/Bookmark').BookmarkModel}
+     */
     Bookmark = require('../utils/schemas/Bookmark'),
+    /**
+     * @type {import('../utils/schemas/Tag').TagModel}
+     */
     Tag = require('../utils/schemas/Tag')
 
 /**

@@ -1,3 +1,6 @@
+/**
+ * @type {import('../utils/schemas/User').UserModel}
+ */
 const User = require('../utils/schemas/User')
 
 const tagFindOrCreate = require('./tagFindOrCreate'),

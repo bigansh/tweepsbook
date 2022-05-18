@@ -1,4 +1,4 @@
-const { TweetEntityHashtagV2, TweetV2 } = require('twitter-api-v2')
+const { TweetEntityHashtagV2 } = require('twitter-api-v2')
 
 const tagFindOrCreate = require('./tagFindOrCreate'),
     bookmarkCreate = require('./bookmarkCreate')
@@ -6,7 +6,7 @@ const tagFindOrCreate = require('./tagFindOrCreate'),
 /**
  * A function to bookmark a tweet with the specified tags.
  *
- * @param {} user
+ * @param {import('../utils/schemas/User').UserDocument} user
  * @param {String} requestedTweetId
  * @param {TweetEntityHashtagV2[]} tags
  */
@@ -18,6 +18,9 @@ const bookmark = async (user, requestedTweetId, tags = null) => {
         )
             return false
 
+        /**
+         * @type {import('../utils/schemas/Tag').TagDocument}
+         */
         let bookmarkTags = []
 
         if (tags.length)

@@ -1,3 +1,6 @@
+/**
+ * @type {import('../utils/schemas/Bookmark').BookmarkModel}
+ */
 const Bookmark = require('../utils/schema/Bookmark')
 
 /**
@@ -8,15 +11,15 @@ const Bookmark = require('../utils/schema/Bookmark')
  * @param {[]} tags
  */
 const tweetCreate = async (profile_id, status_id, tags = null) => {
-	try {
-		return await Bookmark.create({
-			profile_id: profile_id,
-			twitter_status_id: status_id,
-			tags: tags,
-		})
-	} catch (error) {
-		console.log('ERROR: ', error)
-	}
+    try {
+        return await Bookmark.create({
+            profile_id: profile_id,
+            twitter_status_id: status_id,
+            tags: tags,
+        })
+    } catch (error) {
+        console.log('ERROR: ', error)
+    }
 }
 
 module.exports = tweetCreate

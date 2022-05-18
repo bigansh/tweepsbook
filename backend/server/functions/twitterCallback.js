@@ -1,5 +1,8 @@
 const twtrClient_o2 = require('../utils/auth/oauth2.0')
 
+/**
+ * @type {import('../utils/schemas/User').UserModel}
+ */
 const User = require('../utils/schemas/User')
 
 const twitterUserFinder = require('../functions/twitterUserFinder')

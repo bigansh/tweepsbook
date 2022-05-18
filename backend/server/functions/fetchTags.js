@@ -1,3 +1,6 @@
+/**
+ * @type {import('../utils/schemas/Tag').TagModel}
+ */
 const Tag = require('../utils/schemas/Tag')
 
 /**

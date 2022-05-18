@@ -1,5 +1,8 @@
 const { v4: uuidV4 } = require('uuid')
 
+/**
+ * @type {import('../utils/schemas/User').UserModel}
+ */
 const User = require('../utils/schemas/User')
 
 /**

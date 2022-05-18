@@ -1,6 +1,7 @@
+/**
+ * @type {import('../utils/schemas/User').UserModel}
+ */
 const User = require('../utils/schemas/User')
-
-// const accountDetails = require('../utils/models/accountDetails')
 
 /**
  * A function that updates the account details.

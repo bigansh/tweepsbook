@@ -1,3 +1,6 @@
+/**
+ * @type {import('../utils/schemas/Bookmark').BookmarkModel}
+ */
 const Bookmark = require('../utils/schemas/Bookmark')
 
 /**

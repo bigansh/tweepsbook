@@ -1,3 +1,6 @@
+/**
+ * @type {import('../utils/schemas/Bookmark').BookmarkModel}
+ */
 const Bookmark = require('../utils/schemas/Bookmark')
 
 /**
@@ -7,7 +10,9 @@ const Bookmark = require('../utils/schemas/Bookmark')
  */
 const deleteBookmark = async (bookmarkId) => {
     try {
-        return await Bookmark.findByIdAndDelete(bookmarkId).exec()
+        await Bookmark.findByIdAndDelete(bookmarkId).exec()
+
+        return true
     } catch (error) {
         console.log(error)
     }

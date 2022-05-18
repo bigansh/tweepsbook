@@ -1,36 +1,39 @@
+/**
+ * @type {import('../utils/schemas/Tag').TagModel}
+ */
 const Tag = require('../utils/schemas/Tag')
 
 /**
  * A function that finds if a tag is present in the database & creates one if needed.
  *
  * @param {[String]} tags
- * @param {*} user
+ * @param {import('../utils/schemas/User').UserDocument} user
  */
 const tagFindOrCreate = async (tags, user) => {
-	try {
-		const bookmarkTags = []
+    try {
+        const bookmarkTags = []
 
-		for (const tag of tags) {
-			const foundTag = await Tag.findOne({
-				tag: tag,
-				profile_id: user.profile_id,
-			}).exec()
+        for (const tag of tags) {
+            const foundTag = await Tag.findOne({
+                tag: tag,
+                profile_id: user.profile_id,
+            }).exec()
 
-			if (!foundTag) {
-				const createdTag = await Tag.create({ tag, profile_id })
+            if (!foundTag) {
+                const createdTag = await Tag.create({ tag, profile_id })
 
-				user.tags.push(createdTag)
+                user.tags.push(createdTag)
 
-				await user.save()
+                await user.save()
 
-				bookmarkTags.push(createdTag)
-			} else bookmarkTags.push(foundTag)
-		}
+                bookmarkTags.push(createdTag)
+            } else bookmarkTags.push(foundTag)
+        }
 
-		return bookmarkTags
-	} catch (error) {
-		console.log(error)
-	}
+        return bookmarkTags
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = tagFindOrCreate
