@@ -1,11 +1,31 @@
+const fetchBookmarks = require('../functions/fetchBookmarks'),
+	fetchTags = require('../functions/fetchTags')
+
 /**
- * A controller to handle the requests to fetch the bookmarks.
+ * A controller to handle the requests to fetch the bookmarks, tags, etc..
  *
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const curdRead = (req, res) => {
-	res.send('hello')
+const curdRead = async (req, res) => {
+    try {
+        const { queryType } = req.query
+
+        const { profile_id } = req.user
+
+        let data
+
+        switch (queryType) {
+            case 'bookmarks':
+                data = await fetchBookmarks(profile_id)
+			case 'tags':
+				data = await fetchTags(profile_id)
+        }
+
+        res.status(200).send(data)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = curdRead

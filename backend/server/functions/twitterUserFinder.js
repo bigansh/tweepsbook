@@ -8,22 +8,24 @@ const userCreate = require('./userCreate')
  * @param {import('twitter-api-v2').UserV2} user
  */
 const twitterUserFinder = async (user) => {
-	try {
-		const foundUser = await User.findOneAndUpdate(
-			{ twitter_id: user.id },
-			{
-				profile_image: user.profile_image_url,
-				name: user.name,
-			},
-			{ new: true }
-		)
+    try {
+        const foundUser = await User.findOneAndUpdate(
+            { twitter_id: user.id },
+            {
+                profile_image: user.profile_image_url,
+                name: user.name,
+            },
+            { new: true }
+        )
+            .lean()
+            .exec()
 
-		if (!foundUser) return await userCreate(user)
+        if (!foundUser) return await userCreate(user)
 
-		return foundUser
-	} catch (error) {
-		console.log(error)
-	}
+        return foundUser
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = twitterUserFinder

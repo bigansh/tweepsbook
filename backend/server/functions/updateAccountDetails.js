@@ -9,13 +9,19 @@ const User = require('../utils/schemas/User')
  * @param {import('../utils/models/accountDetails')} accountDetails
  */
 const updateAccountDetails = async (profile_id, accountDetails) => {
-	try {
-		return await User.findOneAndUpdate({ profile_id: profile_id }, accountDetails, {
-			new: true,
-		}).exec()
-	} catch (error) {
-		console.log(error)
-	}
+    try {
+        return await User.findOneAndUpdate(
+            { profile_id: profile_id },
+            accountDetails,
+            {
+                new: true,
+            }
+        )
+            .lean()
+            .exec()
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = updateAccountDetails

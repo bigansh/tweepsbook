@@ -6,13 +6,14 @@ const User = require('../utils/schemas/User')
  * @param {String} profile_id
  */
 const tokenFind = async (profile_id) => {
-	try {
-		return await User.findOne({ profile_id })
-			.select(['twitter_auth_tokens'])
-			.exec()
-	} catch (error) {
-		console.log(error)
-	}
+    try {
+        return await User.findOne({ profile_id })
+            .select(['twitter_auth_tokens'])
+            .lean()
+            .exec()
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = tokenFind

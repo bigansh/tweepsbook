@@ -1,7 +1,7 @@
 const { TweetEntityHashtagV2, TweetV2 } = require('twitter-api-v2')
 
 const tagFindOrCreate = require('./tagFindOrCreate'),
-	tweetCreate = require('./tweetCreate')
+    bookmarkCreate = require('./bookmarkCreate')
 
 /**
  * A function to bookmark a tweet with the specified tags.
@@ -11,36 +11,36 @@ const tagFindOrCreate = require('./tagFindOrCreate'),
  * @param {TweetEntityHashtagV2[]} tags
  */
 const bookmark = async (user, requestedTweetId, tags = null) => {
-	try {
-		if (
-			user.unreadCount >=
-			user.tweets.filter(({ read }) => read === false).length()
-		)
-			return false
+    try {
+        if (
+            user.unreadCount >=
+            user.bookmarks.filter(({ read }) => read === false).length()
+        )
+            return false
 
-		let tweetTags = []
+        let bookmarkTags = []
 
-		if (tags.length)
-			for (const { tag } of tags) {
-				const savedTag = await tagFindOrCreate(tag, user)
+        if (tags.length)
+            for (const { tag } of tags) {
+                const savedTag = await tagFindOrCreate(tag, user)
 
-				tweetTags.push(savedTag)
-			}
+                bookmarkTags.push(savedTag)
+            }
 
-		const savedTweet = await tweetCreate(
-			user.profile_id,
-			requestedTweetId,
-			tweetTags
-		)
+        const savedBookmark = await bookmarkCreate(
+            user.profile_id,
+            requestedTweetId,
+            bookmarkTags
+        )
 
-		user.tweets.push(savedTweet)
+        user.bookmarks.push(savedBookmark)
 
-		user.save()
+        await user.save()
 
-		return true
-	} catch (error) {
-		console.log('ERROR: ', error)
-	}
+        return true
+    } catch (error) {
+        console.log('ERROR: ', error)
+    }
 }
 
 module.exports = bookmark

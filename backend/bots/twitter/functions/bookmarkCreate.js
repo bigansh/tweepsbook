@@ -1,4 +1,4 @@
-const Tweet = require('../utils/schema/Tweet')
+const Bookmark = require('../utils/schema/Bookmark')
 
 /**
  * A function to save the tweet in the database.
@@ -9,9 +9,9 @@ const Tweet = require('../utils/schema/Tweet')
  */
 const tweetCreate = async (profile_id, status_id, tags = null) => {
 	try {
-		return await Tweet.create({
+		return await Bookmark.create({
 			profile_id: profile_id,
-			status_id: status_id,
+			twitter_status_id: status_id,
 			tags: tags,
 		})
 	} catch (error) {

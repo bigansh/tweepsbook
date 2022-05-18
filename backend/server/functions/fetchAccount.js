@@ -7,7 +7,7 @@ const User = require('../utils/schemas/User')
  */
 const fetchAccount = async (profile_id) => {
     try {
-        return await User.findOne({profile_id: profile_id}).exec()
+        return await User.findOne({profile_id: profile_id}).lean().exec()
     } catch (error) {
         console.log(error);
     }

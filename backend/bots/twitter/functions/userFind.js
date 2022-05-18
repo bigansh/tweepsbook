@@ -7,13 +7,11 @@ const User = require('../utils/schema/User')
  * @param {String} twitter_id
  */
 const userFind = async (twitter_id) => {
-	try {
-		return await User.findOne({ twitter_id: twitter_id })
-			.populate('tweets')
-			.exec()
-	} catch (error) {
-		console.log('ERROR: ', error)
-	}
+    try {
+        return await User.findOne({ twitter_id: twitter_id }).exec()
+    } catch (error) {
+        console.log('ERROR: ', error)
+    }
 }
 
 module.exports = userFind

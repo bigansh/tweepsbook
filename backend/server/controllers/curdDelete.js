@@ -1,4 +1,4 @@
-const deleteTweet = require('../functions/deleteTweet'),
+const deleteBookmark = require('../functions/deleteBookmark'),
 	deleteTag = require('../functions/deleteTag')
 
 /**
@@ -16,10 +16,10 @@ const curdDelete = async (req, res) => {
 		let data
 
 		switch (deleteType) {
-			case 'tweet':
-				if (req.body.tweetId) data = await deleteTweet(req.body.tweetId)
+			case 'bookmark':
+				if (req.body.tweetId) data = await deleteBookmark(req.body.bookmarkId)
 			case 'tag':
-				if (req.body.tweetId && req.body.profile_id)
+				if (req.body.tagId)
 					data = await deleteTag(req.body.tagId, profile_id)
 		}
 

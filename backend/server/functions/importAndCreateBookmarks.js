@@ -1,38 +1,57 @@
 const User = require('../utils/schemas/User'),
-	Tweet = require('../utils/schemas/Tweet')
+    Bookmark = require('../utils/schemas/Bookmark'),
+    Tag = require('../utils/schemas/Tag')
 
 /**
- * A function that imports bookmarks from a user's Twitter account & adds it to the DB.
+ * A function that imports bookmarks from a user's account & adds it to the DB.
  *
  * @param {import('twitter-api-v2').TwitterApi} userTwtrClient
  * @param {String} profile_id
  */
-const importAndCreateBookmarks = async (userTwtrClient, profile_id) => {
-	try {
-		const importedBookmarks = await userTwtrClient.v2.bookmarks()
+const importAndCreateBookmarks = async (
+    userTwtrClient = undefined,
+    profile_id
+) => {
+    try {
+        if (twtrUserClient) {
+            const importedBookmarks = await userTwtrClient.v2.bookmarks()
 
-		for await (const tweet of importedBookmarks) {
-			const foundTweet = await Tweet.findOne({
-				profile_id: profile_id,
-				status_id: tweet.id,
-			}).exec()
+            for await (const tweet of importedBookmarks) {
+                const foundBookmark = await Bookmark.findOne({
+                    profile_id: profile_id,
+                    twitter_status_id: tweet.id,
+                }).exec()
 
-			if (!foundTweet) {
-				const createdTweet = await Tweet.create({
-					profile_id: profile_id,
-					status_id: tweet.id,
-				})
+                if (!foundBookmark) {
+                    const createdBookmark = await Bookmark.create({
+                        profile_id: profile_id,
+                        twitter_status_id: tweet.id,
+                    })
 
-				const user = await User.findOne({ profile_id: profile_id }).exec()
+                    const user = await User.findOne({
+                        profile_id: profile_id,
+                    }).exec()
 
-				user.tweets.push(createdTweet)
+                    user.bookmarks.push(createdBookmark)
 
-				return await user.save()
-			}
-		}
-	} catch (error) {
-		console.log(error)
-	}
+                    await user.save()
+                }
+            }
+
+            const userBookmarks = await Bookmark.find({
+                    profile_id: profile_id,
+                })
+                    .lean()
+                    .exec(),
+                userTags = await Tag.find({ profile_id: profile_id })
+                    .lean()
+                    .exec()
+
+            return { userBookmarks, userTags }
+        }
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = importAndCreateBookmarks

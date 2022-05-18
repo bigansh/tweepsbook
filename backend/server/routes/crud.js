@@ -29,7 +29,7 @@ const crud = (fastify, _options, done) => {
 		},
 		curdRead
 	)
-	fastify.post(
+	fastify.patch(
 		'/update',
 		{
 			onRequest: [fastify.authenticate],

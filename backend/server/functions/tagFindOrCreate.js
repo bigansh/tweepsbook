@@ -8,7 +8,7 @@ const Tag = require('../utils/schemas/Tag')
  */
 const tagFindOrCreate = async (tags, user) => {
 	try {
-		const tweetTags = []
+		const bookmarkTags = []
 
 		for (const tag of tags) {
 			const foundTag = await Tag.findOne({
@@ -21,13 +21,13 @@ const tagFindOrCreate = async (tags, user) => {
 
 				user.tags.push(createdTag)
 
-				user.save()
+				await user.save()
 
-				tweetTags.push(createdTag)
-			} else tweetTags.push(foundTag)
+				bookmarkTags.push(createdTag)
+			} else bookmarkTags.push(foundTag)
 		}
 
-		return tweetTags
+		return bookmarkTags
 	} catch (error) {
 		console.log(error)
 	}

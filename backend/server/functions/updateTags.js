@@ -1,29 +1,28 @@
-const User = require('../utils/schemas/User'),
-	Tag = require('../utils/schemas/Tag'),
-	Tweet = require('../utils/schemas/Tweet')
+const User = require('../utils/schemas/User')
 
 const tagFindOrCreate = require('./tagFindOrCreate'),
-	tweetFinderAndUpdater = require('./tweetFinderAndUpdater')
+    bookmarkFinderAndUpdater = require('./bookmarkFinderAndUpdater')
 
 /**
  * A function that finds the user & updates the tags.
  *
  * @param {String} profile_id
- * @param {String} tweet_id
+ * @param {String} bookmarkId
  * @param {[String]} tags
  */
-const updateTags = async (profile_id, tweetId = undefined, tags) => {
-	try {
-		const user = await User.findOne({ profile_id: profile_id })
-			.populate(['tweets', 'tags'])
-			.exec()
+const updateTags = async (profile_id, bookmarkId = undefined, tags) => {
+    try {
+        const user = await User.findOne({ profile_id: profile_id })
+            .populate(['bookmarks', 'tags'])
+            .exec()
 
-		const tweetTags = await tagFindOrCreate(tags, user)
+        const bookmarkTags = await tagFindOrCreate(tags, user)
 
-		if (tweetId) return await tweetFinderAndUpdater(tweetId, tweetTags)
-	} catch (error) {
-		console.log(error)
-	}
+        if (bookmarkId)
+            return await bookmarkFinderAndUpdater(bookmarkId, bookmarkTags)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = updateTags
