@@ -12,7 +12,10 @@ const fetchBookmarks = async (profile_id) => {
     try {
         return await Bookmark.find({ profile_id: profile_id }).lean().exec()
     } catch (error) {
-        console.log(error)
+        throw new Error('Error while fetching bookmarks.', {
+            statusCode: 502,
+            error: error,
+        })
     }
 }
 

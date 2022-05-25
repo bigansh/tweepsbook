@@ -24,7 +24,10 @@ const updateTags = async (profile_id, bookmarkId = undefined, tags) => {
         if (bookmarkId)
             return await bookmarkFinderAndUpdater(bookmarkId, bookmarkTags)
     } catch (error) {
-        console.log(error)
+        throw new Error('Error while updating the tags.', {
+            statusCode: 502,
+            error: error,
+        })
     }
 }
 

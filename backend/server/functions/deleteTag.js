@@ -17,7 +17,10 @@ const deleteTag = async (tagId, profile_id) => {
 
         return await Tag.findByIdAndDelete(tagId).exec()
     } catch (error) {
-        console.log(error)
+        throw new Error('Error while deleting a tag.', {
+            statusCode: 502,
+            error: error,
+        })
     }
 }
 

@@ -14,7 +14,10 @@ const deleteAccount = async (profile_id) => {
 
         return true
     } catch (error) {
-        console.log(error)
+        throw new Error('Error while deleting a user account.', {
+            statusCode: 502,
+            error: error,
+        })
     }
 }
 

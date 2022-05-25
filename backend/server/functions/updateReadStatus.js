@@ -20,7 +20,10 @@ const updateReadStatus = async (bookmarkId = undefined, status) => {
                 .lean()
                 .exec()
     } catch (error) {
-        console.log(error)
+        throw new Error('Error while updating the read status of a bookmark.', {
+            statusCode: 502,
+            error: error,
+        })
     }
 }
 

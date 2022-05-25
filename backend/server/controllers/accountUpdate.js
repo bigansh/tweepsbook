@@ -7,23 +7,26 @@ const updateAccountDetails = require('../functions/updateAccountDetails')
  * @param {import('fastify').FastifyReply} res
  */
 const accountUpdate = async (req, res) => {
-	try {
-		const { queryType } = req.query
+    try {
+        const { queryType } = req.query
 
-		const { profile_id } = req.user
+        const { profile_id } = req.user
 
-		let data
+        let data
 
-		switch (queryType) {
-			case 'accountDetails':
-				if (req.body.accountDetails)
-					data = await updateAccountDetails(profile_id, req.body.accountDetails)
-		}
+        switch (queryType) {
+            case 'accountDetails':
+                if (req.body.accountDetails)
+                    data = await updateAccountDetails(
+                        profile_id,
+                        req.body.accountDetails
+                    )
+        }
 
-		res.status(200).send(data)
-	} catch (error) {
-		console.log(error)
-	}
+        res.status(200).send(data)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = accountUpdate

@@ -59,7 +59,10 @@ const importAndCreateBookmarks = async (
             return { userBookmarks, userTags }
         }
     } catch (error) {
-        console.log(error)
+        throw new Error('Error while importing & creating bookmarks.', {
+            statusCode: 501,
+            error: error,
+        })
     }
 }
 

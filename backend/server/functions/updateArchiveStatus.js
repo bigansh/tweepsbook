@@ -20,7 +20,10 @@ const updateArchiveStatus = async (bookmarkId = undefined, status) => {
                 .lean()
                 .exec()
     } catch (error) {
-        console.log(error)
+        throw new Error('Error while updating the archive status of a bookmark.', {
+            statusCode: 502,
+            error: error,
+        })
     }
 }
 

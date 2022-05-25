@@ -21,7 +21,10 @@ const updateAccountDetails = async (profile_id, accountDetails) => {
             .lean()
             .exec()
     } catch (error) {
-        console.log(error)
+        throw new Error("Error while updating a user's details", {
+            statusCode: 502,
+            error: error,
+        })
     }
 }
 

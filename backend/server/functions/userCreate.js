@@ -21,7 +21,10 @@ const userCreate = async (twitterUserObject = undefined) => {
                 // email: twitterUserObject.email, // ! Need to figure out how to get the user email.
             })
     } catch (error) {
-        console.log(error)
+        throw new Error('Error while creating a new user.', {
+            statusCode: 502,
+            error: error,
+        })
     }
 }
 

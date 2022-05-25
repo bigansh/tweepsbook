@@ -14,7 +14,10 @@ const deleteBookmark = async (bookmarkId) => {
 
         return true
     } catch (error) {
-        console.log(error)
+        throw new Error('Error while deleting a bookmark.', {
+            statusCode: 502,
+            error: error,
+        })
     }
 }
 

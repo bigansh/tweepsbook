@@ -1,5 +1,5 @@
 const fetchBookmarks = require('../functions/fetchBookmarks'),
-	fetchTags = require('../functions/fetchTags')
+    fetchTags = require('../functions/fetchTags')
 
 /**
  * A controller to handle the requests to fetch the bookmarks, tags, etc..
@@ -18,8 +18,8 @@ const curdRead = async (req, res) => {
         switch (queryType) {
             case 'bookmarks':
                 data = await fetchBookmarks(profile_id)
-			case 'tags':
-				data = await fetchTags(profile_id)
+            case 'tags':
+                data = await fetchTags(profile_id)
         }
 
         res.status(200).send(data)
