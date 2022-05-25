@@ -10,10 +10,10 @@ mongoConnect()
 
 // TODO Create an extensive & secure CORS policy.
 app.register(require('fastify-cors'), {
-	origin: ['localhost', '*.tweepsbook.com', 'tweepsbook.com'],
-	credentials: true,
-	allowedHeaders: [],
-	exposedHeaders: [],
+    origin: ['localhost', '*.tweepsbook.com', 'tweepsbook.com'],
+    credentials: true,
+    allowedHeaders: [],
+    exposedHeaders: [],
 })
 
 app.register(require('./utils/controllers/jwtPlugin'))
@@ -22,15 +22,15 @@ app.register(require('./utils/controllers/jwtPlugin'))
 app.addHook('onRequest', require('./utils/controllers/onRequestHooks'))
 
 app.register(require('./routes/auth'), {
-	prefix: '/auth',
+    prefix: '/auth',
 })
 app.register(require('./routes/crud'), {
-	prefix: '/crud',
+    prefix: '/crud',
 })
 app.register(require('./routes/account'), {
-	prefix: '/account',
+    prefix: '/account',
 })
 
-app.listen(process.env.PORT || 3000, () => {
-	console.log(`Listening on ${process.env.PORT || 3000}`)
+app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
+    console.log(`Listening on ${process.env.PORT || 3000}!`)
 })
