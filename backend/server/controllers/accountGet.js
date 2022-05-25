@@ -8,7 +8,7 @@ const fetchAccount = require('../functions/fetchAccount')
  */
 const accountGet = async (req, res) => {
 	try {
-		const { profile_id } = req.profile
+		const { profile_id } = req.user
 
 		let data
 

@@ -22,7 +22,7 @@ const account = (fastify, _options, done) => {
         accountGet
     )
     fastify.patch(
-        'update',
+        '/update',
         {
             onRequest: [fastify.authenticate],
         },

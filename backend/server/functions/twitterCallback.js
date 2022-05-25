@@ -53,11 +53,10 @@ const twitterCallback = async (sessionState, codeVerifier, state, code) => {
 
         return user
     } catch (error) {
-        throw new Error(error)
-        // throw new Error('Error while authenticating a user via Twitter.', {
-        //     statusCode: 500,
-        //     error: error,
-        // })
+        throw new Error('Error while authenticating a user via Twitter.', {
+            statusCode: 500,
+            error: error,
+        })
     }
 }
 
