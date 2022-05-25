@@ -6,7 +6,7 @@ const fetchAccount = require('../functions/fetchAccount')
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const accountGet = (req, res) => {
+const accountGet = async (req, res) => {
 	try {
 		const { profile_id } = req.profile
 
