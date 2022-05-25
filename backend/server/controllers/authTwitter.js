@@ -11,7 +11,7 @@ const twitterAuthFlow = require('../functions/twitterAuthFlow')
 const authTwitter = (req, res) => {
     const { url, state, codeVerifier } = twitterAuthFlow()
 
-    cache.set('token', { state, codeVerifier }, 10)
+    cache.set('token', { state, codeVerifier }, 100)
 
     res.status(302).redirect(url)
 }
