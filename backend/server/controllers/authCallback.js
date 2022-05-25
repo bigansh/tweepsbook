@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const passport = require('passport')
 
 const cache = require('../utils/classes/nodeCache')
@@ -37,7 +39,7 @@ const authCallback = async (req, res) => {
 
                 res.status(302)
                     .header('sessionToken', sessionToken)
-                    .redirect('/app/dashboard')
+                    .redirect(`${process.env.CLIENT}/app/dashboard`)
             case 'reddit':
                 passport.authenticate('reddit', {
                     // ? What to do on failure?
