@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const twtrClient_o2 = require('../utils/auth/oauth2.0')
 
 /**
@@ -5,7 +7,7 @@ const twtrClient_o2 = require('../utils/auth/oauth2.0')
  */
 const twitterAuthFlow = () => {
     const { url, codeVerifier, state } = twtrClient_o2.generateOAuth2AuthLink(
-        'http://127.0.0.1:3000/auth/callback?callbackType=twitter',
+        `${process.env.HOST}/auth/callback?callbackType=twitter`,
         {
             scope: [
                 'users.read',

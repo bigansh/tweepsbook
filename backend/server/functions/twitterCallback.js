@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const twtrClient_o2 = require('../utils/auth/oauth2.0')
 
 /**
@@ -17,7 +19,6 @@ const twitterUserFinder = require('../functions/twitterUserFinder')
  */
 const twitterCallback = async (sessionState, codeVerifier, state, code) => {
     try {
-        // ! Redirect to an error page if any of the tokens are invalid.
         if (!codeVerifier || !state || !sessionState || !code)
             throw new Error('You denied the app or your session expired!')
 
@@ -31,8 +32,7 @@ const twitterCallback = async (sessionState, codeVerifier, state, code) => {
         } = await twtrClient_o2.loginWithOAuth2({
             code,
             codeVerifier,
-            redirectUri:
-                'http://127.0.0.1:3000/auth/callback?callbackType=twitter',
+            redirectUri: `${process.env.HOST}/auth/callback?callbackType=twitter`,
         })
 
         const { data: userObject } = await loggedClient.v2.me()
