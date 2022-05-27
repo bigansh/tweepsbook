@@ -1,5 +1,7 @@
 const updateAccountDetails = require('../functions/updateAccountDetails')
 
+const accountDetailsValidator = require('../utils/validators/accountDetailsValidator')
+
 /**
  * A controller to handle the requests to update the details of the account.
  *
@@ -16,11 +18,19 @@ const accountUpdate = async (req, res) => {
 
         switch (queryType) {
             case 'accountDetails':
-                if (req.body.accountDetails)
-                    data = await updateAccountDetails(
-                        profile_id,
+                if (req.body.accountDetails) {
+                    const validatedDetails = accountDetailsValidator(
                         req.body.accountDetails
                     )
+
+                    if (validatedDetails.error)
+                        throw new Error(validatedDetails.error.message)
+
+                    data = await updateAccountDetails(
+                        profile_id,
+                        validatedDetails.value
+                    )
+                }
         }
 
         res.status(200).send(data)

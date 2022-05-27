@@ -5,12 +5,14 @@ const Joi = require('joi')
  * 
  * @param {import('../models/accountDetails')} body 
  */
-const validateAccountDetails = (body) => {
+const accountDetailsValidator = (body) => {
     const model = Joi.object({
-        email: Joi.string().required(),
-        name: Joi.string().required(),
-        unreadCount: Joi.number().required(),
+        email: Joi.string(),
+        name: Joi.string(),
+        unreadCount: Joi.number(),
     })
 
     return model.validate(body)
 }
+
+module.exports = accountDetailsValidator

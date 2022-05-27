@@ -11,7 +11,7 @@ const Bookmark = require('../utils/schemas/Bookmark')
  */
 const updateReadStatus = async (bookmarkId = undefined, status) => {
     try {
-        if (tweetId)
+        if (bookmarkId)
             return await Bookmark.findByIdAndUpdate(
                 bookmarkId,
                 { read: status },

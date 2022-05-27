@@ -18,6 +18,7 @@ const updateAccountDetails = async (profile_id, accountDetails) => {
                 new: true,
             }
         )
+            .select(['-bookmarks', '-tags', '-twitter_auth_tokens'])
             .lean()
             .exec()
     } catch (error) {
