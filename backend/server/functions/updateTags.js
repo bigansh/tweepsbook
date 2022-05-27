@@ -11,13 +11,11 @@ const tagFindOrCreate = require('./tagFindOrCreate'),
  *
  * @param {String} profile_id
  * @param {String} bookmarkId
- * @param {[String]} tags
+ * @param {String[]} tags
  */
 const updateTags = async (profile_id, bookmarkId = undefined, tags) => {
     try {
-        const user = await User.findOne({ profile_id: profile_id })
-            .populate(['bookmarks', 'tags'])
-            .exec()
+        const user = await User.findOne({ profile_id: profile_id }).exec()
 
         const bookmarkTags = await tagFindOrCreate(tags, user)
 

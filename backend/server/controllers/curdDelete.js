@@ -9,13 +9,13 @@ const deleteBookmark = require('../functions/deleteBookmark'),
  */
 const curdDelete = async (req, res) => {
     try {
-        const { deleteType } = req.params
+        const { queryType } = req.query
 
         const { profile_id } = req.user
 
         let data
 
-        switch (deleteType) {
+        switch (queryType) {
             case 'bookmark':
                 if (req.body.tweetId)
                     data = await deleteBookmark(req.body.bookmarkId)

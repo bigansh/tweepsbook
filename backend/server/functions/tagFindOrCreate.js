@@ -6,7 +6,7 @@ const Tag = require('../utils/schemas/Tag')
 /**
  * A function that finds if a tag is present in the database & creates one if needed.
  *
- * @param {[String]} tags
+ * @param {String[]} tags
  * @param {import('../utils/schemas/User').UserDocument} user
  */
 const tagFindOrCreate = async (tags, user) => {
@@ -20,7 +20,10 @@ const tagFindOrCreate = async (tags, user) => {
             }).exec()
 
             if (!foundTag) {
-                const createdTag = await Tag.create({ tag, profile_id })
+                const createdTag = await Tag.create({
+                    tag: tag,
+                    profile_id: user.profile_id,
+                })
 
                 user.tags.push(createdTag)
 

@@ -18,7 +18,7 @@ app.register(require('fastify-cors'), {
 
 app.register(require('./utils/controllers/jwtPlugin'))
 
-// TODO Add onError & onRequest hooks logic.
+// TODO Add onRequest hooks logic.
 app.addHook('onRequest', require('./utils/controllers/onRequestHooks'))
 
 app.register(require('./routes/auth'), {

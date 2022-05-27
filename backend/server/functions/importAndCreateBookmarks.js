@@ -22,7 +22,7 @@ const importAndCreateBookmarks = async (
     profile_id
 ) => {
     try {
-        if (twtrUserClient) {
+        if (userTwtrClient) {
             const importedBookmarks = await userTwtrClient.v2.bookmarks()
 
             for await (const tweet of importedBookmarks) {
@@ -47,16 +47,7 @@ const importAndCreateBookmarks = async (
                 }
             }
 
-            const userBookmarks = await Bookmark.find({
-                    profile_id: profile_id,
-                })
-                    .lean()
-                    .exec(),
-                userTags = await Tag.find({ profile_id: profile_id })
-                    .lean()
-                    .exec()
-
-            return { userBookmarks, userTags }
+            return true
         }
     } catch (error) {
         throw new Error('Error while importing & creating bookmarks.', {

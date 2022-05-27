@@ -8,9 +8,9 @@ const tokenFind = require('./tokenFind'),
  */
 const createTwtrUserClient = async (profile_id) => {
     try {
-        const { refreshToken } = await tokenFind(profile_id)
+        const { twitter_auth_tokens } = await tokenFind(profile_id)
 
-        return twtrUserClient(profile_id, refreshToken)
+        return twtrUserClient(profile_id, twitter_auth_tokens.refreshToken)
     } catch (error) {
         throw new Error('Error while creating a user client for Twitter.', {
             statusCode: 500,
