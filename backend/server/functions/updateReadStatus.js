@@ -3,9 +3,6 @@
  */
 const Bookmark = require('../utils/schemas/Bookmark')
 
-/**
- * @type {import('mixpanel')}
- */
 const mixpanel = require('../utils/auth/mixpanelConnect')
 
 /**

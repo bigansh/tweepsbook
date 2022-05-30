@@ -3,9 +3,6 @@
  */
 const Tag = require('../utils/schemas/Tag')
 
-/**
- * @type {import('mixpanel')}
- */
 const mixpanel = require('../utils/auth/mixpanelConnect')
 
 const bookmarkFinderAndUpdater = require('./bookmarkFinderAndUpdater')

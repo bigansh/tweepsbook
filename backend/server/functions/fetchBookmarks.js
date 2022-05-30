@@ -3,10 +3,7 @@
  */
 const Bookmark = require('../utils/schemas/Bookmark')
 
-/**
- * @type {import('mixpanel')}
- */
- const mixpanel = require('../utils/auth/mixpanelConnect')
+const mixpanel = require('../utils/auth/mixpanelConnect')
 
 /**
  * A function that fetches bookmarks of a particular user.

@@ -7,9 +7,6 @@ const User = require('../utils/schemas/User'),
      */
     Bookmark = require('../utils/schemas/Bookmark')
 
-/**
- * @type {import('mixpanel')}
- */
 const mixpanel = require('../utils/auth/mixpanelConnect')
 
 const importValidation = require('./importValidation')

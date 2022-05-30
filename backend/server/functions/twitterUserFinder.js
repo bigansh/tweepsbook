@@ -3,9 +3,6 @@
  */
 const User = require('../utils/schemas/User')
 
-/**
- * @type {import('mixpanel')}
- */
 const mixpanel = require('../utils/auth/mixpanelConnect')
 
 const userCreate = require('./userCreate')

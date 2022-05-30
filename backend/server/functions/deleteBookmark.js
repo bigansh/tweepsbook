@@ -3,9 +3,6 @@
  */
 const Bookmark = require('../utils/schemas/Bookmark')
 
-/**
- * @type {import('mixpanel')}
- */
 const mixpanel = require('../utils/auth/mixpanelConnect')
 
 /**
@@ -20,7 +17,7 @@ const deleteBookmark = async (bookmarkId, profile_id) => {
 
         mixpanel.track('Delete bookmark', {
             distinct_id: profile_id,
-            bookmark_id: bookmarkId
+            bookmark_id: bookmarkId,
         })
 
         return true

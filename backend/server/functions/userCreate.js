@@ -5,9 +5,6 @@ const { v4: uuidV4 } = require('uuid')
  */
 const User = require('../utils/schemas/User')
 
-/**
- * @type {import('mixpanel')}
- */
 const mixpanel = require('../utils/auth/mixpanelConnect')
 
 /**
