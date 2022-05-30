@@ -4,6 +4,11 @@
 const User = require('../utils/schemas/User')
 
 /**
+ * @type {import('mixpanel')}
+ */
+const mixpanel = require('../utils/auth/mixpanelConnect')
+
+/**
  * A function that updates the account details.
  *
  * @param {String} profile_id
@@ -11,6 +16,15 @@ const User = require('../utils/schemas/User')
  */
 const updateAccountDetails = async (profile_id, accountDetails) => {
     try {
+        mixpanel.track('Update account details', {
+            distinct_id: profile_id,
+        })
+
+        if (accountDetails.email)
+            mixpanel.people.set(profile_id, {
+                $email: accountDetails.email,
+            })
+
         return await User.findOneAndUpdate(
             { profile_id: profile_id },
             accountDetails,

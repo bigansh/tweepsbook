@@ -3,6 +3,11 @@
  */
 const User = require('../utils/schemas/User')
 
+/**
+ * @type {import('mixpanel')}
+ */
+const mixpanel = require('../utils/auth/mixpanelConnect')
+
 const userCreate = require('./userCreate')
 
 /**
@@ -22,6 +27,18 @@ const twitterUserFinder = async (user) => {
         )
             .lean()
             .exec()
+
+        if (foundUser) {
+            mixpanel.track('Log in', {
+                distinct_id: foundUser.profile_id,
+                date: new Date(),
+            })
+
+            mixpanel.people.set(foundUser.profile_id, {
+                $avatar: user.profile_image_url,
+                $name: user.name,
+            })
+        }
 
         if (!foundUser) return await userCreate(user)
 

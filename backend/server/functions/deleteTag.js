@@ -3,6 +3,11 @@
  */
 const Tag = require('../utils/schemas/Tag')
 
+/**
+ * @type {import('mixpanel')}
+ */
+const mixpanel = require('../utils/auth/mixpanelConnect')
+
 const bookmarkFinderAndUpdater = require('./bookmarkFinderAndUpdater')
 
 /**
@@ -14,6 +19,10 @@ const bookmarkFinderAndUpdater = require('./bookmarkFinderAndUpdater')
 const deleteTag = async (tagId, profile_id) => {
     try {
         await bookmarkFinderAndUpdater(undefined, undefined, profile_id, tagId)
+
+        mixpanel.track('Delete tag', {
+            distinct_id: profile_id,
+        })
 
         return await Tag.findByIdAndDelete(tagId).exec()
     } catch (error) {

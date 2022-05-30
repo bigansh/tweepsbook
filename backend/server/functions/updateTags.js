@@ -15,7 +15,9 @@ const tagFindOrCreate = require('./tagFindOrCreate'),
  */
 const updateTags = async (profile_id, bookmarkId = undefined, tags) => {
     try {
-        const user = await User.findOne({ profile_id: profile_id }).exec()
+        const user = await User.findOne({ profile_id: profile_id })
+            .select(['profile_id'])
+            .exec()
 
         const bookmarkTags = await tagFindOrCreate(tags, user)
 

@@ -45,7 +45,8 @@ const curdUpdate = async (req, res) => {
 
                     data = await updateReadStatus(
                         req.body.bookmarkId,
-                        validatedReadStatus.value
+                        validatedReadStatus.value,
+                        profile_id
                     )
                 }
             case 'archiveStatus':
@@ -58,7 +59,8 @@ const curdUpdate = async (req, res) => {
                         throw new Error(validatedArchiveStatus.error.message)
                     data = await updateArchiveStatus(
                         req.body.bookmarkId,
-                        validatedArchiveStatus.value
+                        validatedArchiveStatus.value,
+                        profile_id
                     )
                 }
         }

@@ -4,6 +4,11 @@
 const Bookmark = require('../utils/schemas/Bookmark')
 
 /**
+ * @type {import('mixpanel')}
+ */
+const mixpanel = require('../utils/auth/mixpanelConnect')
+
+/**
  * A function that finds the tweet & updates its meta.
  *
  * @param {String} bookmarkId
@@ -18,6 +23,11 @@ const bookmarkFinderAndUpdater = async (
     tagId = undefined
 ) => {
     try {
+        mixpanel.track('Update bookmark tags', {
+            distinct_id: profile_id,
+            bookmark_id: bookmarkId,
+        })
+
         if (profile_id && tagId) {
             const userBookmarks = await Bookmark.find({
                 profile_id: profile_id,

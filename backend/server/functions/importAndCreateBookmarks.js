@@ -5,11 +5,14 @@ const User = require('../utils/schemas/User'),
     /**
      * @type {import('../utils/schemas/Bookmark').BookmarkModel}
      */
-    Bookmark = require('../utils/schemas/Bookmark'),
-    /**
-     * @type {import('../utils/schemas/Tag').TagModel}
-     */
-    Tag = require('../utils/schemas/Tag')
+    Bookmark = require('../utils/schemas/Bookmark')
+
+/**
+ * @type {import('mixpanel')}
+ */
+const mixpanel = require('../utils/auth/mixpanelConnect')
+
+const importValidation = require('./importValidation')
 
 /**
  * A function that imports bookmarks from a user's account & adds it to the DB.
@@ -23,6 +26,14 @@ const importAndCreateBookmarks = async (
 ) => {
     try {
         if (userTwtrClient) {
+            const user = await User.findOne({
+                profile_id: profile_id,
+            })
+                .select(['bookmarks', 'importCount'])
+                .exec()
+
+            importValidation('twitter', user)
+
             const importedBookmarks = await userTwtrClient.v2.bookmarks()
 
             for await (const tweet of importedBookmarks) {
@@ -37,15 +48,22 @@ const importAndCreateBookmarks = async (
                         twitter_status_id: tweet.id,
                     })
 
-                    const user = await User.findOne({
-                        profile_id: profile_id,
-                    }).exec()
-
                     user.bookmarks.push(createdBookmark)
 
                     await user.save()
+
+                    mixpanel.track('Create bookmark', {
+                        distinct_id: profile_id,
+                        bookmarkId: createdBookmark._id,
+                        bookmark_type: 'Twitter',
+                    })
                 }
             }
+
+            mixpanel.track('Import bookmarks', {
+                distinct_id: profile_id,
+                import_type: 'Twitter',
+            })
 
             return true
         }

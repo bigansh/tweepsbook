@@ -4,6 +4,11 @@
 const Tag = require('../utils/schemas/Tag')
 
 /**
+ * @type {import('mixpanel')}
+ */
+const mixpanel = require('../utils/auth/mixpanelConnect')
+
+/**
  * A function that finds if a tag is present in the database & creates one if needed.
  *
  * @param {String[]} tags
@@ -30,6 +35,11 @@ const tagFindOrCreate = async (tags, user) => {
                 await user.save()
 
                 bookmarkTags.push(createdTag)
+
+                mixpanel.track('Create tag', {
+                    distinct_id: user.profile_id,
+                    tag_name: tag,
+                })
             } else bookmarkTags.push(foundTag)
         }
 

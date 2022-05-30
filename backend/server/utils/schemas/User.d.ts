@@ -11,6 +11,7 @@ export interface UserSchema {
     twitter_id: string
     twitter_auth_tokens: { accessToken: string; refreshToken: string }
     unreadCount: number
+    importCount: { twitter: number }
     bookmarks: BookmarkDocument[]
     tags: TagDocument[]
 }

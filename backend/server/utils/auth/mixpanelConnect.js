@@ -1,5 +1,9 @@
 require('dotenv').config()
 
-const mixpanel = require('mixpanel')
+const Mixpanel = require('mixpanel')
 
-module.export = mixpanel.init(process.env.TOKEN_MIXPANEL)
+const mixpanel = Mixpanel.init(process.env.TOKEN_MIXPANEL)
+
+mixpanel.set_config({ debug: true })
+
+module.export = mixpanel

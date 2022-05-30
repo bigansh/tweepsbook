@@ -18,7 +18,7 @@ const curdDelete = async (req, res) => {
         switch (queryType) {
             case 'bookmark':
                 if (req.body.tweetId)
-                    data = await deleteBookmark(req.body.bookmarkId)
+                    data = await deleteBookmark(req.body.bookmarkId, profile_id)
             case 'tag':
                 if (req.body.tagId)
                     data = await deleteTag(req.body.tagId, profile_id)
