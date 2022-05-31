@@ -15,7 +15,7 @@ app.register(require('fastify-cors'), {
     allowedHeaders: [],
     exposedHeaders: [],
 })
-app.register(require('fastify/helmet'), {
+app.register(require('@fastify/helmet'), {
     global: true,
 })
 
