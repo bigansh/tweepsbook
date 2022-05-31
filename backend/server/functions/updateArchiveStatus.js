@@ -33,13 +33,9 @@ const updateArchiveStatus = async (
                 .exec()
         }
     } catch (error) {
-        throw new Error(
-            'Error while updating the archive status of a bookmark.',
-            {
-                statusCode: 502,
-                error: error,
-            }
-        )
+        throw new Error(error, {
+            statusCode: 502,
+        })
     }
 }
 

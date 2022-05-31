@@ -41,9 +41,8 @@ const twitterUserFinder = async (user) => {
 
         return foundUser
     } catch (error) {
-        throw new Error('Error while finding or creating a user.', {
+        throw new Error(error, {
             statusCode: 502,
-            error: error,
         })
     }
 }

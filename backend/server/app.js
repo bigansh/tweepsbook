@@ -10,10 +10,13 @@ mongoConnect()
 
 // TODO Create an extensive & secure CORS policy.
 app.register(require('fastify-cors'), {
-    origin: ['localhost', '*.tweepsbook.com', 'tweepsbook.com'],
+    origin: [process.env.HOST, process.env.CLIENT],
     credentials: true,
     allowedHeaders: [],
     exposedHeaders: [],
+})
+app.register(require('fastify/helmet'), {
+    global: true,
 })
 
 app.register(require('./utils/controllers/jwtPlugin'))

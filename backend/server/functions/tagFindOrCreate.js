@@ -42,9 +42,8 @@ const tagFindOrCreate = async (tags, user) => {
 
         return bookmarkTags
     } catch (error) {
-        throw new Error('Error while finding or creating a tag.', {
+        throw new Error(error, {
             statusCode: 501,
-            error: error,
         })
     }
 }

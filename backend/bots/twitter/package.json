@@ -11,6 +11,7 @@
   "dependencies": {
     "@twitter-api-v2/plugin-rate-limit": "^1.1.0",
     "dotenv": "^16.0.0",
+    "mixpanel": "^0.15.0",
     "mongoose": "^6.2.9",
     "twitter-api-v2": "^1.11.0"
   }

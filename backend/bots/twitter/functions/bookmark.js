@@ -12,14 +12,15 @@ const tagFindOrCreate = require('./tagFindOrCreate'),
  */
 const bookmark = async (user, requestedTweetId, tags = null) => {
     try {
-        if (
-            user.unreadCount >=
-            user.bookmarks.filter(({ read }) => read === false).length()
-        )
+        const unreadBookmarks = user.bookmarks.filter(
+            (bookmark) => bookmark.read === false
+        ).length
+
+        if (user.unreadCount >= unreadBookmarks && user.unreadCount != 0)
             return false
 
         /**
-         * @type {import('../utils/schemas/Tag').TagDocument}
+         * @type {import('../utils/schemas/Tag').TagDocument[]}
          */
         let bookmarkTags = []
 

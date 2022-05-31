@@ -39,9 +39,8 @@ const userCreate = async (twitterUserObject = undefined) => {
             })
         }
     } catch (error) {
-        throw new Error('Error while creating a new user.', {
+        throw new Error(error, {
             statusCode: 502,
-            error: error,
         })
     }
 }

@@ -12,9 +12,8 @@ const createTwtrUserClient = async (profile_id) => {
 
         return twtrUserClient(profile_id, twitter_auth_tokens.refreshToken)
     } catch (error) {
-        throw new Error('Error while creating a user client for Twitter.', {
+        throw new Error(error, {
             statusCode: 500,
-            error: error,
         })
     }
 }

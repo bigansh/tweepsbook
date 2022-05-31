@@ -18,9 +18,8 @@ const fetchAccount = async (profile_id) => {
 
         return await User.findOne({ profile_id: profile_id }).lean().exec()
     } catch (error) {
-        throw new Error('Error while fetching a user account.', {
+        throw new Error(error, {
             statusCode: 502,
-            error: error,
         })
     }
 }

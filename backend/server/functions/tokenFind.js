@@ -15,9 +15,8 @@ const tokenFind = async (profile_id) => {
             .lean()
             .exec()
     } catch (error) {
-        throw new Error("Error while fetching a user's tokens.", {
+        throw new Error(error, {
             statusCode: 502,
-            error: error,
         })
     }
 }

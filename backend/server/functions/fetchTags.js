@@ -18,9 +18,8 @@ const fetchTags = async (profile_id) => {
 
         return await Tag.find({ profile_id: profile_id }).lean().exec()
     } catch (error) {
-        throw new Error('Error while fetching tags.', {
+        throw new Error(error, {
             statusCode: 502,
-            error: error,
         })
     }
 }

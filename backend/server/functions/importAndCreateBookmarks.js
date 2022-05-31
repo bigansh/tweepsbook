@@ -33,6 +33,8 @@ const importAndCreateBookmarks = async (
 
             const importedBookmarks = await userTwtrClient.v2.bookmarks()
 
+            let importedBookmarksCount = 0
+
             for await (const tweet of importedBookmarks) {
                 const foundBookmark = await Bookmark.findOne({
                     profile_id: profile_id,
@@ -54,6 +56,8 @@ const importAndCreateBookmarks = async (
                         bookmarkId: createdBookmark._id,
                         bookmark_type: 'Twitter',
                     })
+
+                    importedBookmarksCount++
                 }
             }
 
@@ -62,12 +66,11 @@ const importAndCreateBookmarks = async (
                 import_type: 'Twitter',
             })
 
-            return true
+            return { numberOfImportedBookmarks: importedBookmarksCount }
         }
     } catch (error) {
-        throw new Error('Error while importing & creating bookmarks.', {
+        throw new Error(error, {
             statusCode: 501,
-            error: error,
         })
     }
 }

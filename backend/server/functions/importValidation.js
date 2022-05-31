@@ -22,7 +22,9 @@ const importValidation = async (importType, user) => {
 
         return true
     } catch (error) {
-        throw new Error(error)
+        throw new Error(error, {
+            statusCode: 405,
+        })
     }
 }
 

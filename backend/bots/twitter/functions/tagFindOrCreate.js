@@ -3,6 +3,8 @@
  */
 const Tag = require('../utils/schema/Tag')
 
+const mixpanel = require('../utils/auth/mixpanelConnect')
+
 /**
  * A function to find if a hashtag exists & create a new if needed.
  *
@@ -17,11 +19,19 @@ const tagFindOrCreate = async (tag, user) => {
         }).exec()
 
         if (!foundTag) {
-            const createdTag = await Tag.create({ tag, profile_id })
+            const createdTag = await Tag.create({
+                tag: tag,
+                profile_id: user.profile_id,
+            })
 
             user.tags.push(createdTag)
 
             user.save()
+
+            mixpanel.track('Create tag', {
+                distinct_id: user.profile_id,
+                tag_name: tag,
+            })
 
             return createdTag
         }

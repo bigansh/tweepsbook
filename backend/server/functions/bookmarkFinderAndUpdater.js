@@ -49,9 +49,8 @@ const bookmarkFinderAndUpdater = async (
             return await foundBookmark.save()
         }
     } catch (error) {
-        throw new Error('Error while finding & updating a bookmark.', {
+        throw new Error(error, {
             statusCode: 502,
-            error: error,
         })
     }
 }
