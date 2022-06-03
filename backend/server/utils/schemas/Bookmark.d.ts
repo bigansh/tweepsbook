@@ -8,6 +8,7 @@ export interface BookmarkSchema {
     reddit_post_id: string
     pinterest_post_id: string
     profile_id: string
+    content: string
     read: boolean
     archived: boolean
     tags: TagDocument[]

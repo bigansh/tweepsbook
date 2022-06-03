@@ -11,17 +11,20 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
  * @param {String} profile_id
  */
 const fetchBookmarks = async (profile_id) => {
-    try {
-        mixpanel.track('Fetch bookmarks', {
-            distinct_id: profile_id,
-        })
+	try {
+		mixpanel.track('Fetch bookmarks', {
+			distinct_id: profile_id,
+		})
 
-        return await Bookmark.find({ profile_id: profile_id }).lean().exec()
-    } catch (error) {
-        throw new Error(error, {
-            statusCode: 502,
-        })
-    }
+		return await Bookmark.find({ profile_id: profile_id })
+			.populate('tags')
+			.lean()
+			.exec()
+	} catch (error) {
+		throw new Error(error, {
+			statusCode: 502,
+		})
+	}
 }
 
 module.exports = fetchBookmarks

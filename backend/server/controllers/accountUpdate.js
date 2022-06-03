@@ -9,34 +9,36 @@ const accountDetailsValidator = require('../utils/validators/accountDetailsValid
  * @param {import('fastify').FastifyReply} res
  */
 const accountUpdate = async (req, res) => {
-    try {
-        const { queryType } = req.query
+	try {
+		const { queryType } = req.query
 
-        const { profile_id } = req.user
+		const { profile_id } = req.user
 
-        let data
+		let data
 
-        switch (queryType) {
-            case 'accountDetails':
-                if (req.body.accountDetails) {
-                    const validatedDetails = accountDetailsValidator(
-                        req.body.accountDetails
-                    )
+		switch (queryType) {
+			case 'accountDetails':
+				if (req.body.accountDetails) {
+					const validatedDetails = accountDetailsValidator(
+						req.body.accountDetails
+					)
 
-                    if (validatedDetails.error)
-                        throw new Error(validatedDetails.error.message)
+					if (validatedDetails.error)
+						throw new Error(validatedDetails.error.message)
 
-                    data = await updateAccountDetails(
-                        profile_id,
-                        validatedDetails.value
-                    )
-                }
-        }
+					data = await updateAccountDetails(
+						profile_id,
+						validatedDetails.value
+					)
+				}
 
-        res.status(200).send(data)
-    } catch (error) {
-        console.log(error)
-    }
+				break
+		}
+
+		res.status(200).send(data)
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = accountUpdate

@@ -18,45 +18,45 @@ const twitterUserFinder = require('../functions/twitterUserFinder')
  * @param {String} code
  */
 const twitterCallback = async (sessionState, codeVerifier, state, code) => {
-    try {
-        if (!codeVerifier || !state || !sessionState || !code)
-            throw new Error('You denied the app or your session expired!')
+	try {
+		if (!codeVerifier || !state || !sessionState || !code)
+			throw new Error('You denied the app or your session expired!')
 
-        if (state !== sessionState)
-            throw new Error("Stored tokens didn't match!")
+		if (state !== sessionState)
+			throw new Error("Stored tokens didn't match!")
 
-        const {
-            client: loggedClient,
-            accessToken,
-            refreshToken,
-        } = await twtrClient_o2.loginWithOAuth2({
-            code,
-            codeVerifier,
-            redirectUri: `${process.env.HOST}/auth/callback?callbackType=twitter`,
-        })
+		const {
+			client: loggedClient,
+			accessToken,
+			refreshToken,
+		} = await twtrClient_o2.loginWithOAuth2({
+			code,
+			codeVerifier,
+			redirectUri: `${process.env.HOST}/auth/callback?callbackType=twitter`,
+		})
 
-        const { data: userObject } = await loggedClient.v2.me()
+		const { data: userObject } = await loggedClient.v2.me()
 
-        const user = await twitterUserFinder(userObject)
+		const user = await twitterUserFinder(userObject)
 
-        await User.findOneAndUpdate(
-            { twitter_id: userObject.id },
-            {
-                twitter_auth_tokens: {
-                    accessToken: accessToken,
-                    refreshToken: refreshToken,
-                },
-            }
-        )
-            .lean()
-            .exec()
+		await User.findOneAndUpdate(
+			{ twitter_id: userObject.id },
+			{
+				twitter_auth_tokens: {
+					accessToken: accessToken,
+					refreshToken: refreshToken,
+				},
+			}
+		)
+			.lean()
+			.exec()
 
-        return user
-    } catch (error) {
-        throw new Error(error, {
-            statusCode: 500,
-        })
-    }
+		return user
+	} catch (error) {
+		throw new Error(error, {
+			statusCode: 500,
+		})
+	}
 }
 
 module.exports = twitterCallback

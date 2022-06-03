@@ -24,10 +24,13 @@ const tweetStream = async () => {
 		/**
 		 * @type {TweetStream<TweetV2SingleStreamResult>}
 		 */
-		const stream = await twtrClient_o2.v2.getStream('tweets/search/stream', {
-			'tweet.fields': 'entities',
-			expansions: ['author_id', 'referenced_tweets.id'],
-		})
+		const stream = await twtrClient_o2.v2.getStream(
+			'tweets/search/stream',
+			{
+				'tweet.fields': 'entities',
+				expansions: ['author_id', 'referenced_tweets.id'],
+			}
+		)
 
 		console.log('Tweet stream online!')
 
@@ -46,6 +49,7 @@ const tweetStream = async () => {
 						state = await bookmark(
 							user,
 							includes.tweets[0].id,
+							includes.tweets[0].text,
 							data.entities.hashtags
 						)
 

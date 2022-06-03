@@ -14,19 +14,19 @@ const bookmarkFinderAndUpdater = require('./bookmarkFinderAndUpdater')
  * @param {String} profile_id
  */
 const deleteTag = async (tagId, profile_id) => {
-    try {
-        await bookmarkFinderAndUpdater(undefined, undefined, profile_id, tagId)
+	try {
+		await bookmarkFinderAndUpdater(undefined, undefined, profile_id, tagId)
 
-        mixpanel.track('Delete tag', {
-            distinct_id: profile_id,
-        })
+		mixpanel.track('Delete tag', {
+			distinct_id: profile_id,
+		})
 
-        return await Tag.findByIdAndDelete(tagId).exec()
-    } catch (error) {
-        throw new Error(error, {
-            statusCode: 502,
-        })
-    }
+		return await Tag.findByIdAndDelete(tagId).exec()
+	} catch (error) {
+		throw new Error(error, {
+			statusCode: 502,
+		})
+	}
 }
 
 module.exports = deleteTag

@@ -1,7 +1,7 @@
 /**
  * @type {import('../utils/schemas/Tag').TagModel}
  */
-const Tag = require('../utils/schema/Tag')
+const Tag = require('../utils/schemas/Tag')
 
 const mixpanel = require('../utils/auth/mixpanelConnect')
 
@@ -12,32 +12,32 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
  * @param {import('../utils/schemas/User').UserDocument} user
  */
 const tagFindOrCreate = async (tag, user) => {
-    try {
-        const foundTag = await Tag.findOne({
-            tag: tag,
-            profile_id: user.profile_id,
-        }).exec()
+	try {
+		const foundTag = await Tag.findOne({
+			tag: tag,
+			profile_id: user.profile_id,
+		}).exec()
 
-        if (!foundTag) {
-            const createdTag = await Tag.create({
-                tag: tag,
-                profile_id: user.profile_id,
-            })
+		if (!foundTag) {
+			const createdTag = await Tag.create({
+				tag: tag,
+				profile_id: user.profile_id,
+			})
 
-            user.tags.push(createdTag)
+			user.tags.push(createdTag)
 
-            user.save()
+			user.save()
 
-            mixpanel.track('Create tag', {
-                distinct_id: user.profile_id,
-                tag_name: tag,
-            })
+			mixpanel.track('Create tag', {
+				distinct_id: user.profile_id,
+				tag_name: tag,
+			})
 
-            return createdTag
-        }
+			return createdTag
+		}
 
-        return foundTag
-    } catch (error) {}
+		return foundTag
+	} catch (error) {}
 }
 
 module.exports = tagFindOrCreate

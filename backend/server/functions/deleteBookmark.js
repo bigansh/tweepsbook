@@ -12,20 +12,20 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
  * @param {String} profile_id
  */
 const deleteBookmark = async (bookmarkId, profile_id) => {
-    try {
-        await Bookmark.findByIdAndDelete(bookmarkId).exec()
+	try {
+		await Bookmark.findByIdAndDelete(bookmarkId).exec()
 
-        mixpanel.track('Delete bookmark', {
-            distinct_id: profile_id,
-            bookmark_id: bookmarkId,
-        })
+		mixpanel.track('Delete bookmark', {
+			distinct_id: profile_id,
+			bookmark_id: bookmarkId,
+		})
 
-        return true
-    } catch (error) {
-        throw new Error(error, {
-            statusCode: 502,
-        })
-    }
+		return true
+	} catch (error) {
+		throw new Error(error, {
+			statusCode: 502,
+		})
+	}
 }
 
 module.exports = deleteBookmark

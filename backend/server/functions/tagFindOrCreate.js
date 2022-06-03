@@ -12,40 +12,40 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
  * @param {import('../utils/schemas/User').UserDocument} user
  */
 const tagFindOrCreate = async (tags, user) => {
-    try {
-        const bookmarkTags = []
+	try {
+		const bookmarkTags = []
 
-        for (const tag of tags) {
-            const foundTag = await Tag.findOne({
-                tag: tag,
-                profile_id: user.profile_id,
-            }).exec()
+		for (const tag of tags) {
+			const foundTag = await Tag.findOne({
+				tag: tag,
+				profile_id: user.profile_id,
+			}).exec()
 
-            if (!foundTag) {
-                const createdTag = await Tag.create({
-                    tag: tag,
-                    profile_id: user.profile_id,
-                })
+			if (!foundTag) {
+				const createdTag = await Tag.create({
+					tag: tag,
+					profile_id: user.profile_id,
+				})
 
-                user.tags.push(createdTag)
+				user.tags.push(createdTag)
 
-                await user.save()
+				await user.save()
 
-                bookmarkTags.push(createdTag)
+				bookmarkTags.push(createdTag)
 
-                mixpanel.track('Create tag', {
-                    distinct_id: user.profile_id,
-                    tag_name: tag,
-                })
-            } else bookmarkTags.push(foundTag)
-        }
+				mixpanel.track('Create tag', {
+					distinct_id: user.profile_id,
+					tag_name: tag,
+				})
+			} else bookmarkTags.push(foundTag)
+		}
 
-        return bookmarkTags
-    } catch (error) {
-        throw new Error(error, {
-            statusCode: 501,
-        })
-    }
+		return bookmarkTags
+	} catch (error) {
+		throw new Error(error, {
+			statusCode: 501,
+		})
+	}
 }
 
 module.exports = tagFindOrCreate

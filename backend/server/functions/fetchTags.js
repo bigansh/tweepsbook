@@ -11,17 +11,17 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
  * @param {String} profile_id
  */
 const fetchTags = async (profile_id) => {
-    try {
-        mixpanel.track('Fetch tags', {
-            distinct_id: profile_id,
-        })
+	try {
+		mixpanel.track('Fetch tags', {
+			distinct_id: profile_id,
+		})
 
-        return await Tag.find({ profile_id: profile_id }).lean().exec()
-    } catch (error) {
-        throw new Error(error, {
-            statusCode: 502,
-        })
-    }
+		return await Tag.find({ profile_id: profile_id }).lean().exec()
+	} catch (error) {
+		throw new Error(error, {
+			statusCode: 502,
+		})
+	}
 }
 
 module.exports = fetchTags

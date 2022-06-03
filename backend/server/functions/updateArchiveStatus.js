@@ -13,30 +13,30 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
  * @param {String} profile_id
  */
 const updateArchiveStatus = async (
-    bookmarkId = undefined,
-    status,
-    profile_id
+	bookmarkId = undefined,
+	status,
+	profile_id
 ) => {
-    try {
-        if (bookmarkId) {
-            mixpanel.track('Update archive status', {
-                distinct_id: profile_id,
-                bookmark_id: bookmarkId,
-            })
+	try {
+		if (bookmarkId) {
+			mixpanel.track('Update archive status', {
+				distinct_id: profile_id,
+				bookmark_id: bookmarkId,
+			})
 
-            return await Bookmark.findByIdAndUpdate(
-                bookmarkId,
-                { archived: status },
-                { new: true }
-            )
-                .lean()
-                .exec()
-        }
-    } catch (error) {
-        throw new Error(error, {
-            statusCode: 502,
-        })
-    }
+			return await Bookmark.findByIdAndUpdate(
+				bookmarkId,
+				{ archived: status },
+				{ new: true }
+			)
+				.lean()
+				.exec()
+		}
+	} catch (error) {
+		throw new Error(error, {
+			statusCode: 502,
+		})
+	}
 }
 
 module.exports = updateArchiveStatus

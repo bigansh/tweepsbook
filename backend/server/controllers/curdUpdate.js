@@ -1,10 +1,10 @@
 const tagsValidator = require('../utils/validators/tagsValidator'),
-    readStatusValidator = require('../utils/validators/readStatusValidator'),
-    archiveStatusValidator = require('../utils/validators/archiveStatusValidator')
+	readStatusValidator = require('../utils/validators/readStatusValidator'),
+	archiveStatusValidator = require('../utils/validators/archiveStatusValidator')
 
 const updateTags = require('../functions/updateTags'),
-    updateReadStatus = require('../functions/updateReadStatus'),
-    updateArchiveStatus = require('../functions/updateArchiveStatus')
+	updateReadStatus = require('../functions/updateReadStatus'),
+	updateArchiveStatus = require('../functions/updateArchiveStatus')
 
 /**
  * A controller to handle the requests to update the bookmarks.
@@ -13,60 +13,66 @@ const updateTags = require('../functions/updateTags'),
  * @param {import('fastify').FastifyReply} res
  */
 const curdUpdate = async (req, res) => {
-    try {
-        const { queryType } = req.query
+	try {
+		const { queryType } = req.query
 
-        const { profile_id } = req.user
+		const { profile_id } = req.user
 
-        let data
+		let data
 
-        switch (queryType) {
-            case 'tags':
-                if (req.body.bookmarkId && req.body.tags) {
-                    const validatedTags = tagsValidator(req.body.tags)
+		switch (queryType) {
+			case 'tags':
+				if (req.body.bookmarkId && req.body.tags) {
+					const validatedTags = tagsValidator(req.body.tags)
 
-                    if (validatedTags.error)
-                        throw new Error(validatedTags.error.message)
+					if (validatedTags.error)
+						throw new Error(validatedTags.error.message)
 
-                    data = await updateTags(
-                        profile_id,
-                        req.body.bookmarkId,
-                        validatedTags.value
-                    )
-                }
-            case 'readStatus':
-                if (req.body.bookmarkId && req.body.readStatus) {
-                    const validatedReadStatus = readStatusValidator(
-                        req.body.readStatus
-                    )
+					data = await updateTags(
+						profile_id,
+						req.body.bookmarkId,
+						validatedTags.value
+					)
+				}
+			case 'readStatus':
+				if (req.body.bookmarkId && req.body.readStatus) {
+					const validatedReadStatus = readStatusValidator(
+						req.body.readStatus
+					)
 
-                    if (validatedReadStatus.error)
-                        throw new Error(validatedReadStatus.error.message)
+					if (validatedReadStatus.error)
+						throw new Error(validatedReadStatus.error.message)
 
-                    data = await updateReadStatus(
-                        req.body.bookmarkId,
-                        validatedReadStatus.value,
-                        profile_id
-                    )
-                }
-            case 'archiveStatus':
-                if (req.body.bookmarkId && req.body.archiveStatus) {
-                    const validatedArchiveStatus = archiveStatusValidator(
-                        req.body.archiveStatus
-                    )
+					data = await updateReadStatus(
+						req.body.bookmarkId,
+						validatedReadStatus.value,
+						profile_id
+					)
+				}
 
-                    if (validatedArchiveStatus.error)
-                        throw new Error(validatedArchiveStatus.error.message)
-                    data = await updateArchiveStatus(
-                        req.body.bookmarkId,
-                        validatedArchiveStatus.value,
-                        profile_id
-                    )
-                }
-        }
+				break
+			case 'archiveStatus':
+				if (req.body.bookmarkId && req.body.archiveStatus) {
+					const validatedArchiveStatus = archiveStatusValidator(
+						req.body.archiveStatus
+					)
 
-        res.status(200).send(data)
-    } catch (error) {}
+					if (validatedArchiveStatus.error)
+						throw new Error(validatedArchiveStatus.error.message)
+					data = await updateArchiveStatus(
+						req.body.bookmarkId,
+						validatedArchiveStatus.value,
+						profile_id
+					)
+				}
+
+				break
+		}
+
+		res.status(200).send(data)
+	} catch (error) {
+		throw new Error(error)
+	}
 }
 
 module.exports = curdUpdate

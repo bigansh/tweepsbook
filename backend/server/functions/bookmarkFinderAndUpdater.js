@@ -14,45 +14,45 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
  * @param {String} profile_id
  */
 const bookmarkFinderAndUpdater = async (
-    bookmarkId = undefined,
-    tags = undefined,
-    profile_id = undefined,
-    tagId = undefined
+	bookmarkId = undefined,
+	tags = undefined,
+	profile_id = undefined,
+	tagId = undefined
 ) => {
-    try {
-        mixpanel.track('Update bookmark tags', {
-            distinct_id: profile_id,
-            bookmark_id: bookmarkId,
-        })
+	try {
+		mixpanel.track('Update bookmark tags', {
+			distinct_id: profile_id,
+			bookmark_id: bookmarkId,
+		})
 
-        if (profile_id && tagId) {
-            const userBookmarks = await Bookmark.find({
-                profile_id: profile_id,
-            }).exec()
+		if (profile_id && tagId) {
+			const userBookmarks = await Bookmark.find({
+				profile_id: profile_id,
+			}).exec()
 
-            userBookmarks.forEach(async (bookmark) => {
-                const tagIndex = bookmark.tags.indexOf(tagId)
+			userBookmarks.forEach(async (bookmark) => {
+				const tagIndex = bookmark.tags.indexOf(tagId)
 
-                bookmark.tags.splice(tagIndex, 1)
+				bookmark.tags.splice(tagIndex, 1)
 
-                await bookmark.save()
-            })
+				await bookmark.save()
+			})
 
-            return
-        }
+			return
+		}
 
-        if (tags.length && bookmarkId) {
-            const foundBookmark = await Bookmark.findById(bookmarkId).exec()
+		if (tags.length && bookmarkId) {
+			const foundBookmark = await Bookmark.findById(bookmarkId).exec()
 
-            foundBookmark.tags = tags
+			foundBookmark.tags = tags
 
-            return await foundBookmark.save()
-        }
-    } catch (error) {
-        throw new Error(error, {
-            statusCode: 502,
-        })
-    }
+			return await foundBookmark.save()
+		}
+	} catch (error) {
+		throw new Error(error, {
+			statusCode: 502,
+		})
+	}
 }
 
 module.exports = bookmarkFinderAndUpdater

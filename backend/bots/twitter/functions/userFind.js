@@ -1,7 +1,7 @@
 /**
  * @type {import('../utils/schemas/User').UserModel}
  */
-const User = require('../utils/schema/User')
+const User = require('../utils/schemas/User')
 
 /**
  * A function that checks for the existence of a user in the database.
@@ -9,11 +9,11 @@ const User = require('../utils/schema/User')
  * @param {String} twitter_id
  */
 const userFind = async (twitter_id) => {
-    try {
-        return await User.findOne({ twitter_id: twitter_id }).exec()
-    } catch (error) {
-        console.log('ERROR: ', error)
-    }
+	try {
+		return await User.findOne({ twitter_id: twitter_id }).exec()
+	} catch (error) {
+		console.log('ERROR: ', error)
+	}
 }
 
 module.exports = userFind

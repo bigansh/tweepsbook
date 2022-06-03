@@ -13,26 +13,26 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
  * @param {String} profile_id
  */
 const updateReadStatus = async (bookmarkId = undefined, status, profile_id) => {
-    try {
-        if (bookmarkId) {
-            mixpanel.track('Update read status', {
-                distinct_id: profile_id,
-                bookmark_id: bookmarkId,
-            })
+	try {
+		if (bookmarkId) {
+			mixpanel.track('Update read status', {
+				distinct_id: profile_id,
+				bookmark_id: bookmarkId,
+			})
 
-            return await Bookmark.findByIdAndUpdate(
-                bookmarkId,
-                { read: status },
-                { new: true }
-            )
-                .lean()
-                .exec()
-        }
-    } catch (error) {
-        throw new Error(error, {
-            statusCode: 502,
-        })
-    }
+			return await Bookmark.findByIdAndUpdate(
+				bookmarkId,
+				{ read: status },
+				{ new: true }
+			)
+				.lean()
+				.exec()
+		}
+	} catch (error) {
+		throw new Error(error, {
+			statusCode: 502,
+		})
+	}
 }
 
 module.exports = updateReadStatus

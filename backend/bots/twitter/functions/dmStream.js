@@ -26,6 +26,8 @@ const dmStream = async () => {
 			) {
 				const user = await userFind(event.message_create.sender_id)
 
+				console.log(event.message_create)
+
 				if (user) {
 					let state
 
@@ -39,6 +41,14 @@ const dmStream = async () => {
 							event.message_create.message_data.entities.urls[0].expanded_url.match(
 								/[0-9]*$/i
 							)[0],
+							await twtrClient_o1.v1
+								.singleTweet(
+									event.message_create.message_data.entities.urls[0].expanded_url.match(
+										/[0-9]*$/i
+									)[0]
+								)
+								.then((tweet) => tweet.full_text),
+
 							event.message_create.message_data.entities.hashtags
 						)
 

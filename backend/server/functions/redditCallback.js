@@ -9,11 +9,11 @@ const User = require('../utils/schemas/User')
  * @param {String} profile_id
  */
 const redditCallback = async (profile_id) => {
-    try {
-        const foundUser = await User.findOne({ profile_id: profile_id }).exec()
-    } catch (error) {
-        console.log(error)
-    }
+	try {
+		const foundUser = await User.findOne({ profile_id: profile_id }).exec()
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = redditCallback

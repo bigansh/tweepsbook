@@ -9,16 +9,16 @@ const User = require('../utils/schemas/User')
  * @param {String} profile_id
  */
 const tokenFind = async (profile_id) => {
-    try {
-        return await User.findOne({ profile_id })
-            .select(['twitter_auth_tokens'])
-            .lean()
-            .exec()
-    } catch (error) {
-        throw new Error(error, {
-            statusCode: 502,
-        })
-    }
+	try {
+		return await User.findOne({ profile_id })
+			.select(['twitter_auth_tokens'])
+			.lean()
+			.exec()
+	} catch (error) {
+		throw new Error(error, {
+			statusCode: 502,
+		})
+	}
 }
 
 module.exports = tokenFind
