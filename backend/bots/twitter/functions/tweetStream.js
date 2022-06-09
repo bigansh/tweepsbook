@@ -50,6 +50,7 @@ const tweetStream = async () => {
 							user,
 							includes.tweets[0].id,
 							includes.tweets[0].text,
+							'Reply',
 							data.entities.hashtags
 						)
 

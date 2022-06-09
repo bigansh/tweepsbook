@@ -9,6 +9,7 @@
   "author": "bigansh",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/client": "^7.7.0",
     "@twitter-api-v2/plugin-rate-limit": "^1.1.0",
     "dotenv": "^16.0.0",
     "mixpanel": "^0.15.0",

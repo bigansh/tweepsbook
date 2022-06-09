@@ -48,6 +48,7 @@ const dmStream = async () => {
 									)[0]
 								)
 								.then((tweet) => tweet.full_text),
+							'DM',
 
 							event.message_create.message_data.entities.hashtags
 						)

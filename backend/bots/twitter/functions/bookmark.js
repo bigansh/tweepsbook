@@ -1,7 +1,7 @@
 const { TweetEntityHashtagV2 } = require('twitter-api-v2')
 
 const tagFindOrCreate = require('./tagFindOrCreate'),
-    bookmarkCreate = require('./bookmarkCreate')
+	bookmarkCreate = require('./bookmarkCreate')
 
 /**
  * A function to bookmark a tweet with the specified tags.
@@ -9,44 +9,52 @@ const tagFindOrCreate = require('./tagFindOrCreate'),
  * @param {import('../utils/schemas/User').UserDocument} user
  * @param {String} requestedTweetId
  * @param {String} tweetText
+ * @param {String} bookmarkMethod
  * @param {TweetEntityHashtagV2[]} tags
  */
-const bookmark = async (user, requestedTweetId, tweetText, tags = null) => {
-    try {
-        const unreadBookmarks = user.bookmarks.filter(
-            (bookmark) => bookmark.read === false
-        ).length
+const bookmark = async (
+	user,
+	requestedTweetId,
+	tweetText,
+	bookmarkMethod,
+	tags = null
+) => {
+	try {
+		const unreadBookmarks = user.bookmarks.filter(
+			(bookmark) => bookmark.read === false
+		).length
 
-        if (user.unreadCount >= unreadBookmarks && user.unreadCount != 0)
-            return false
+		if (user.unreadCount >= unreadBookmarks && user.unreadCount != 0)
+			return false
 
-        /**
-         * @type {import('../utils/schemas/Tag').TagDocument[]}
-         */
-        let bookmarkTags = []
+		/**
+		 * @type {import('../utils/schemas/Tag').TagDocument[]}
+		 */
+		let bookmarkTags = []
 
-        if (tags.length)
-            for (const { tag } of tags) {
-                const savedTag = await tagFindOrCreate(tag, user)
+		if (tags.length)
+			for (const { tag } of tags) {
+				const savedTag = await tagFindOrCreate(tag, user)
 
-                bookmarkTags.push(savedTag)
-            }
+				bookmarkTags.push(savedTag)
+			}
 
-        const savedBookmark = await bookmarkCreate(
-            user.profile_id,
-            requestedTweetId,
-            tweetText,
-            bookmarkTags
-        )
+		const savedBookmark = await bookmarkCreate(
+			user.profile_id,
+			requestedTweetId,
+			tweetText,
+			bookmarkMethod,
+			bookmarkTags
+		)
 
-        user.bookmarks.push(savedBookmark)
+		user.bookmarks.push(savedBookmark)
 
-        await user.save()
+		await user.save()
 
-        return true
-    } catch (error) {
-        console.log('ERROR: ', error)
-    }
+		return true
+	} catch (error) {
+		console.log('ERROR: ', error)
+	}
 }
 
 module.exports = bookmark
