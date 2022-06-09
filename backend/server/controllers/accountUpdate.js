@@ -33,6 +33,11 @@ const accountUpdate = async (req, res) => {
 				}
 
 				break
+			case 'emailNotification':
+				if (req.body.emailNotification) {
+				}
+
+				break
 		}
 
 		res.status(200).send(data)

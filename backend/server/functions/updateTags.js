@@ -13,16 +13,15 @@ const tagFindOrCreate = require('./tagFindOrCreate'),
  * @param {String} bookmarkId
  * @param {String[]} tags
  */
-const updateTags = async (profile_id, bookmarkId = undefined, tags) => {
+const updateTags = async (profile_id, bookmarkId, tags) => {
 	try {
 		const user = await User.findOne({ profile_id: profile_id })
-			.select(['profile_id'])
+			.select(['profile_id', 'tags'])
 			.exec()
 
 		const bookmarkTags = await tagFindOrCreate(tags, user)
 
-		if (bookmarkId)
-			return await bookmarkFinderAndUpdater(bookmarkId, bookmarkTags)
+		return await bookmarkFinderAndUpdater(bookmarkId, bookmarkTags)
 	} catch (error) {
 		throw new Error(error, {
 			statusCode: 502,

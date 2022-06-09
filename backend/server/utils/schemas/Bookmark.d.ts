@@ -7,6 +7,7 @@ export interface BookmarkSchema {
     discord_message_id: string
     reddit_post_id: string
     pinterest_post_id: string
+    bookmarkSource: string
     profile_id: string
     content: string
     read: boolean

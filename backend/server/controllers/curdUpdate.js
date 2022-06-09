@@ -34,6 +34,8 @@ const curdUpdate = async (req, res) => {
 						validatedTags.value
 					)
 				}
+
+				break
 			case 'readStatus':
 				if (req.body.bookmarkId && req.body.readStatus) {
 					const validatedReadStatus = readStatusValidator(
