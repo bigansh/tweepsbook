@@ -19,8 +19,6 @@ const importValidation = async (importType, user) => {
 			throw new Error(
 				'Please read some bookmarks before importing new ones.'
 			)
-
-		return true
 	} catch (error) {
 		throw new Error(error, {
 			statusCode: 405,

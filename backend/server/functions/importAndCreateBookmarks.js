@@ -26,10 +26,8 @@ const importAndCreateBookmarks = async (
 			const user = await User.findOne({
 				profile_id: profile_id,
 			})
-				.select(['bookmarks', 'importCount'])
+				.select(['bookmarks', 'importCount', 'unreadCount'])
 				.exec()
-
-			importValidation('twitter', user)
 
 			const importedBookmarks = await userTwtrClient.v2.bookmarks()
 
@@ -50,8 +48,6 @@ const importAndCreateBookmarks = async (
 
 					user.bookmarks.push(createdBookmark)
 
-					await user.save()
-
 					mixpanel.track('Create bookmark', {
 						distinct_id: profile_id,
 						bookmarkId: createdBookmark._id,
@@ -59,8 +55,14 @@ const importAndCreateBookmarks = async (
 					})
 
 					importedBookmarksCount++
+
+					await importValidation('twitter', user)
 				}
 			}
+
+			user.importCount.twitter++
+
+			await user.save()
 
 			mixpanel.track('Import bookmarks', {
 				distinct_id: profile_id,

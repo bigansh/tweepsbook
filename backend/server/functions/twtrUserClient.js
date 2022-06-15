@@ -18,12 +18,13 @@ const User = require('../utils/schemas/User')
  *
  * @param {String} profile_id
  * @param {String} refreshToken
+ * @param {String} accessToken
  * @returns
  */
-const twtrUserClient = (profile_id, refreshToken) => {
+const twtrUserClient = (profile_id, refreshToken, accessToken) => {
 	const rateLimitPlugin = new TwitterApiRateLimitPlugin()
 
-	let newToken
+	let clientToken = accessToken
 
 	const tokenRefreshPlugin = new TwitterApiAutoTokenRefresher({
 		refreshToken: refreshToken,
@@ -31,10 +32,10 @@ const twtrUserClient = (profile_id, refreshToken) => {
 			clientId: process.env.CLIENT_ID_TWITTER_MAIN,
 			clientSecret: process.env.CLIENT_SECRET_TWITTER_MAIN,
 		},
-		onTokenUpdate(token) {
-			newToken = token.accessToken
+		async onTokenUpdate(token) {
+			clientToken = token.accessToken
 
-			User.findOneAndUpdate(
+			await User.findOneAndUpdate(
 				{ profile_id },
 				{
 					twitter_auth_tokens: {
@@ -42,11 +43,11 @@ const twtrUserClient = (profile_id, refreshToken) => {
 						refreshToken: token.refreshToken,
 					},
 				}
-			)
+			).exec()
 		},
 	})
 
-	return new TwitterApi(newToken, {
+	return new TwitterApi(clientToken, {
 		plugins: [rateLimitPlugin, tokenRefreshPlugin],
 	})
 }

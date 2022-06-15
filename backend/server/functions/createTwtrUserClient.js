@@ -10,7 +10,11 @@ const createTwtrUserClient = async (profile_id) => {
 	try {
 		const { twitter_auth_tokens } = await tokenFind(profile_id)
 
-		return twtrUserClient(profile_id, twitter_auth_tokens.refreshToken)
+		return twtrUserClient(
+			profile_id,
+			twitter_auth_tokens.refreshToken,
+			twitter_auth_tokens.accessToken
+		)
 	} catch (error) {
 		throw new Error(error, {
 			statusCode: 500,
