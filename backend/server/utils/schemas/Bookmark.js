@@ -12,6 +12,7 @@ const bookmarkSchema = new mongoose.Schema(
 		read: { type: Boolean, default: false },
 		archived: { type: Boolean, default: false },
 		tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
+		notes: String,
 	},
 	{
 		timestamps: true,

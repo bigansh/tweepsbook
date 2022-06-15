@@ -13,6 +13,7 @@ export interface BookmarkSchema {
 	read: boolean
 	archived: boolean
 	tags: TagDocument[]
+	notes: string
 }
 
 export interface BookmarkDocument extends BookmarkSchema, mongoose.Document {}
