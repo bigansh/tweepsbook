@@ -34,10 +34,15 @@ const importAndCreateBookmarks = async (
 			let importedBookmarksCount = 0
 
 			for await (const tweet of importedBookmarks) {
+				await importValidation('twitter', user)
+
 				const foundBookmark = await Bookmark.findOne({
 					profile_id: profile_id,
 					twitter_status_id: tweet.id,
-				}).exec()
+				})
+					.select(['_id'])
+					.lean()
+					.exec()
 
 				if (!foundBookmark) {
 					const createdBookmark = await Bookmark.create({
@@ -55,8 +60,6 @@ const importAndCreateBookmarks = async (
 					})
 
 					importedBookmarksCount++
-
-					await importValidation('twitter', user)
 				}
 			}
 
