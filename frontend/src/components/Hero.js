@@ -10,7 +10,7 @@ const Hero = () => {
 						<span className='italic'>ma</span>rks
 						<br />
 						Fina<span className='italic'>ll</span>y Ta
-						<span className='italic'>me</span>d
+						<span className='italic' >me</span>d
 					</h2>
 					<p className='text-light-blue-text md:w-5/6 font-medium text-[16px]'>
 						We help you read your bookmarks whilst keeping them
