@@ -20,6 +20,7 @@ const updateAccountDetails = async (profile_id, accountDetails) => {
 		if (accountDetails.email)
 			mixpanel.people.set(profile_id, {
 				$email: accountDetails.email,
+				$name: accountDetails.name,
 			})
 
 		return await User.findOneAndUpdate(

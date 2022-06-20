@@ -19,6 +19,9 @@ const userCreate = async (twitterUserObject = undefined) => {
 
 			mixpanel.track('Sign up', {
 				distinct_id: profile_id,
+			})
+
+			mixpanel.people.set(profile_id, {
 				$name: twitterUserObject.name,
 				$created: new Date(),
 				$avatar: twitterUserObject.profile_image_url,
