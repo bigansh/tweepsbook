@@ -11,7 +11,7 @@ export interface BookmarkSchema {
     profile_id: string
     content: string
     read: boolean
-    archived: boolean
+    share: boolean
     tags: TagDocument[]
     notes: string
 }

@@ -1,7 +1,15 @@
 /**
  * @type {import('../utils/schemas/User').UserModel}
  */
-const User = require('../utils/schemas/User')
+const User = require('../utils/schemas/User'),
+	/**
+	 * @type {import('../utils/schemas/Tag').TagModel}
+	 */
+	Tag = require('../utils/schemas/Tag'),
+	/**
+	 * @type {import('../utils/schemas/Bookmark').BookmarkModel}
+	 */
+	Bookmark = require('../utils/schemas/Bookmark')
 
 const mixpanel = require('../utils/auth/mixpanelConnect')
 
@@ -12,15 +20,18 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
  */
 const deleteAccount = async (profile_id) => {
 	try {
-		await User.findOneAndDelete({ profile_id: profile_id }).exec()
+		await Promise.all([
+			Bookmark.deleteMany({ profile_id: profile_id }).exec(),
+			Tag.deleteMany({ profile_id: profile_id }).exec(),
+
+			User.findOneAndDelete({ profile_id: profile_id }).exec(),
+		])
 
 		mixpanel.people.delete_user(profile_id)
 
-		return true
+		return { deleteStatus: true }
 	} catch (error) {
-		throw new Error(error, {
-			statusCode: 502,
-		})
+		throw new Error(error)
 	}
 }
 

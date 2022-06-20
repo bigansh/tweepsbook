@@ -21,11 +21,11 @@ const deleteTag = async (tagId, profile_id) => {
 			distinct_id: profile_id,
 		})
 
-		return await Tag.findByIdAndDelete(tagId).exec()
+		await Tag.findByIdAndDelete(tagId).exec()
+
+		return { deleteStatus: true }
 	} catch (error) {
-		throw new Error(error, {
-			statusCode: 502,
-		})
+		throw new Error(error)
 	}
 }
 

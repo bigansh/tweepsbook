@@ -13,18 +13,16 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
  */
 const deleteBookmark = async (bookmarkId, profile_id) => {
 	try {
-		const deletedBookmark = await Bookmark.findByIdAndDelete(bookmarkId).exec()
+		await Bookmark.findByIdAndDelete(bookmarkId).exec()
 
 		mixpanel.track('Delete bookmark', {
 			distinct_id: profile_id,
 			bookmark_id: bookmarkId,
 		})
 
-		return deletedBookmark
+		return { deleteStatus: true }
 	} catch (error) {
-		throw new Error(error, {
-			statusCode: 502,
-		})
+		throw new Error(error)
 	}
 }
 

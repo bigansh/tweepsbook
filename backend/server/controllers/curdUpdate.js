@@ -1,10 +1,10 @@
 const tagsValidator = require('../utils/validators/tagsValidator'),
 	readStatusValidator = require('../utils/validators/readStatusValidator'),
-	archiveStatusValidator = require('../utils/validators/archiveStatusValidator')
+	shareStatusValidator = require('../utils/validators/shareStatusValidator')
 
 const updateTags = require('../functions/updateTags'),
 	updateReadStatus = require('../functions/updateReadStatus'),
-	updateArchiveStatus = require('../functions/updateArchiveStatus')
+	updateShareStatus = require('../functions/updateShareStatus')
 
 /**
  * A controller to handle the requests to update the bookmarks.
@@ -53,22 +53,21 @@ const curdUpdate = async (req, res) => {
 				}
 
 				break
-			case 'archiveStatus':
-				if (req.body.bookmarkId && req.body.archiveStatus) {
-					const validatedArchiveStatus = archiveStatusValidator(
-						req.body.archiveStatus
+			case 'shareStatus':
+				if (req.body.bookmarkId && req.body.shareStatus) {
+					const validatedShareStatus = shareStatusValidator(
+						req.body.shareStatus
 					)
 
-					if (validatedArchiveStatus.error)
-						throw new Error(validatedArchiveStatus.error.message)
-					data = await updateArchiveStatus(
+					if (validatedShareStatus.error)
+						throw new Error(validatedShareStatus.error.message)
+
+					data = await updateShareStatus(
 						req.body.bookmarkId,
-						validatedArchiveStatus.value,
+						validatedShareStatus.value,
 						profile_id
 					)
 				}
-
-				break
 		}
 
 		res.status(200).send(data)

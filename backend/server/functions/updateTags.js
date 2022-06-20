@@ -23,9 +23,7 @@ const updateTags = async (profile_id, bookmarkId, tags) => {
 
 		return await bookmarkFinderAndUpdater(bookmarkId, bookmarkTags)
 	} catch (error) {
-		throw new Error(error, {
-			statusCode: 502,
-		})
+		throw new Error(error)
 	}
 }
 

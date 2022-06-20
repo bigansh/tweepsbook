@@ -29,7 +29,7 @@ const curdCreate = async (req, res) => {
 
 		res.status(200).send(data)
 	} catch (error) {
-		console.log(error)
+		throw new Error(error)
 	}
 }
 

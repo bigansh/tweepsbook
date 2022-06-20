@@ -3,10 +3,10 @@ const { fastify } = require('fastify')
 const app = fastify()
 
 const authGoogle = require('../controllers/authGoogle'),
-    authTwitter = require('../controllers/authTwitter'),
-    authLogin = require('../controllers/authLogin'),
-    authSignup = require('../controllers/authSignup'),
-    authCallback = require('../controllers/authCallback')
+	authTwitter = require('../controllers/authTwitter'),
+	authLogin = require('../controllers/authLogin'),
+	authSignup = require('../controllers/authSignup'),
+	authCallback = require('../controllers/authCallback')
 
 /**
  * A route that handles the auth requests for login & sign ups.
@@ -16,13 +16,19 @@ const authGoogle = require('../controllers/authGoogle'),
  * @param {*} done
  */
 const auth = (fastify, _options, done) => {
-    fastify.get('/callback', authCallback)
-    fastify.get('/twitter', authTwitter)
-    // fastify.get('/google', authGoogle)
-    // fastify.post('/login', authLogin)
-    // fastify.post('/sign-up', authSignup)
+	fastify.get('/callback', authCallback)
+	fastify.get(
+		'/twitter',
+		{
+			onRequest: [fastify.verify],
+		},
+		authTwitter
+	)
+	// fastify.get('/google', authGoogle)
+	// fastify.post('/login', authLogin)
+	// fastify.post('/sign-up', authSignup)
 
-    done()
+	done()
 }
 
 module.exports = auth

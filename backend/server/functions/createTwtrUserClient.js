@@ -16,9 +16,7 @@ const createTwtrUserClient = async (profile_id) => {
 			twitter_auth_tokens.accessToken
 		)
 	} catch (error) {
-		throw new Error(error, {
-			statusCode: 500,
-		})
+		throw new Error(error)
 	}
 }
 

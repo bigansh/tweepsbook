@@ -9,11 +9,15 @@ const twitterAuthFlow = require('../functions/twitterAuthFlow')
  * @param {import('fastify').FastifyReply} res
  */
 const authTwitter = (req, res) => {
-    const { url, state, codeVerifier } = twitterAuthFlow()
+	try {
+		const { url, state, codeVerifier } = twitterAuthFlow()
 
-    cache.set('token', { state, codeVerifier }, 100)
+		cache.set('token', { state, codeVerifier }, 100)
 
-    res.status(302).redirect(url)
+		res.status(302).redirect(url)
+	} catch (error) {
+		throw new Error(error)
+	}
 }
 
 module.exports = authTwitter
