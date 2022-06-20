@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import hero1 from '../images/hero_image_1.png'
+import { BsArrowRightShort } from 'react-icons/bs'
 const Hero = () => {
 	return (
 		<div className='md:ml-10 ml-6 my-12 h-5/6'>
@@ -10,7 +11,7 @@ const Hero = () => {
 						<span className='italic'>ma</span>rks
 						<br />
 						Fina<span className='italic'>ll</span>y Ta
-						<span className='italic' >me</span>d
+						<span className='italic'>me</span>d
 					</h2>
 					<p className='text-light-blue-text md:w-5/6 font-medium text-[16px]'>
 						We help you read your bookmarks whilst keeping them
@@ -20,8 +21,9 @@ const Hero = () => {
 						{/* <button className='border-2 border-lg-orange rounded-xl py-3 px-4 text-lg-orange font-bold text-lg hover:bg-lg-orange hover:text-white'>
 							Product Hunt
 						</button> */}
-						<button className='border-2 text-[16px] border-dark-blue bg-dark-blue text-white py-3 px-5 rounded-xl '>
+						<button className='border-2 text-[16px] border-dark-blue bg-dark-blue text-white py-3 px-5 rounded-xl flex items-center content-center'>
 							Let’s Get Started
+							<BsArrowRightShort size={24} />
 						</button>
 					</div>
 				</div>
