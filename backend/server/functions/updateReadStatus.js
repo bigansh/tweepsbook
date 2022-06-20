@@ -29,9 +29,7 @@ const updateReadStatus = async (bookmarkId = undefined, status, profile_id) => {
 				.exec()
 		}
 	} catch (error) {
-		throw new Error(error, {
-			statusCode: 502,
-		})
+		throw new Error(error)
 	}
 }
 

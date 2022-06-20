@@ -18,12 +18,11 @@ const fetchBookmarks = async (profile_id) => {
 
 		return await Bookmark.find({ profile_id: profile_id })
 			.populate('tags')
+			.select('-notes')
 			.lean()
 			.exec()
 	} catch (error) {
-		throw new Error(error, {
-			statusCode: 502,
-		})
+		throw new Error(error)
 	}
 }
 

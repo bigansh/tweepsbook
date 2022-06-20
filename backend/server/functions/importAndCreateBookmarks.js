@@ -75,9 +75,7 @@ const importAndCreateBookmarks = async (
 			return { numberOfImportedBookmarks: importedBookmarksCount }
 		}
 	} catch (error) {
-		throw new Error(error, {
-			statusCode: 501,
-		})
+		throw new Error(error)
 	}
 }
 

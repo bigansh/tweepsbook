@@ -15,9 +15,7 @@ const tokenFind = async (profile_id) => {
 			.lean()
 			.exec()
 	} catch (error) {
-		throw new Error(error, {
-			statusCode: 502,
-		})
+		throw new Error(error)
 	}
 }
 
