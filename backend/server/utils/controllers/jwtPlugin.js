@@ -14,7 +14,7 @@ const jwtAuth = fastifyPlugin(
 	 * @param {*} _options
 	 */
 	async (fastify, _options) => {
-		fastify.register(require('fastify-jwt'), {
+		fastify.register(require('@fastify/jwt'), {
 			secret: process.env.SECRET_JWT,
 		})
 

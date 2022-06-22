@@ -11,6 +11,16 @@ mongoConnect()
 app.register(require('@fastify/helmet'), {
 	global: true,
 })
+app.register(require('@fastify/cors'), {
+	credentials: true,
+	strictPreflight: false,
+	methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+	origin: [
+		'http://localhost:3000',
+		'https://tweepsbook.ml',
+		'https://tweepsbook.com',
+	],
+})
 
 app.register(require('./utils/controllers/jwtPlugin'))
 app.register(require('./utils/controllers/authPlugin'))
