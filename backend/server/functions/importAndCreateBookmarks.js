@@ -49,6 +49,7 @@ const importAndCreateBookmarks = async (
 						profile_id: profile_id,
 						twitter_status_id: tweet.id,
 						content: tweet.text,
+						bookmarkSource: 'twitter',
 					})
 
 					user.bookmarks.push(createdBookmark)
@@ -57,6 +58,7 @@ const importAndCreateBookmarks = async (
 						distinct_id: profile_id,
 						bookmarkId: createdBookmark._id,
 						bookmark_type: 'Twitter',
+						bookmark_method: 'Import',
 					})
 
 					importedBookmarksCount++

@@ -19,9 +19,9 @@ const auth = (fastify, _options, done) => {
 	fastify.get('/callback', authCallback)
 	fastify.get(
 		'/twitter',
-		{
-			onRequest: [fastify.verify],
-		},
+		// {
+		// 	onRequest: [fastify.verify],
+		// },
 		authTwitter
 	)
 	// fastify.get('/google', authGoogle)
