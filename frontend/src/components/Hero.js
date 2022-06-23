@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Navbar from './Navbar';
+import Navbar from './Navbar'
 import hero1 from '../images/hero_image_1.png'
 import { BsArrowRightShort } from 'react-icons/bs'
 
@@ -19,14 +19,15 @@ const Hero = () => {
 						</h2>
 						<p className='text-light-blue-text md:w-5/6 font-medium text-[16px]'>
 							We help you read your bookmarks whilst keeping them
-							perfectly organized, easy to manage & search beneath.
+							perfectly organized, easy to manage & search
+							beneath.
 						</p>
 						<div className='my-12 py-6'>
 							{/* <button className='border-2 border-lg-orange rounded-xl py-3 px-4 text-lg-orange font-bold text-lg hover:bg-lg-orange hover:text-white'>
 							Product Hunt
 						</button> */}
 							<button className='border-2 text-[16px] border-dark-blue bg-dark-blue text-white py-3 px-5 rounded-xl flex items-center content-center'>
-								Let’s Get Started
+								Let's Get Started
 								<BsArrowRightShort size={24} />
 							</button>
 						</div>
