@@ -24,10 +24,15 @@ const authPlugin = fastifyPlugin(
 			 */
 			(req, res, next) => {
 				try {
-					if (!req.headers['authorization'])
+					if (
+						!req.query['authorization'] &&
+						!req.headers['authorization']
+					)
 						throw new Error('Client authentication required.')
 
-					const authToken = req.headers['authorization'].split(' ')[1]
+					const authToken =
+						req.query['authorization'] ||
+						req.headers['authorization'].split(' ')[1]
 
 					if (authToken === process.env.SECRET_AUTH) next()
 					else
