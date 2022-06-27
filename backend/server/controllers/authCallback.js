@@ -37,9 +37,9 @@ const authCallback = async (req, res) => {
 					}
 				)
 
-				res.status(302)
-					.header('sessionToken', sessionToken)
-					.redirect(`${process.env.CLIENT}/app/dashboard`)
+				res.status(302).redirect(
+					`${process.env.CLIENT}/app/callback?sessionToken=${sessionToken}`
+				)
 
 				break
 			case 'reddit':
