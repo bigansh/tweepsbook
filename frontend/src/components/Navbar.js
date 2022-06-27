@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import github from '../../images/github_icon.png'
-import twitter from '../../images/twitter_icon.png'
-import tweeps from '../../images/TweepsBook.png'
+import github from '../images/github_icon.png'
+import twitter from '../images/twitter_icon.png'
+import tweeps from '../images/TweepsBook.png'
 import { AiFillGithub, AiFillTwitterCircle } from 'react-icons/ai'
+
 const Navbar = () => {
 	return (
 		<header className='border-b-2 border-lg-gray shadow-sm'>
