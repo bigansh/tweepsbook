@@ -18,12 +18,26 @@ const fetchBookmark = async (profile_id, bookmarkId) => {
 			.lean()
 			.exec()
 
-		mixpanel.track('Fetch bookmark', {
-			distinct_id: profile_id,
-			bookmarkId: bookmark._id,
-		})
+		if (profile_id === bookmark.profile_id) {
+			mixpanel.track('Fetch bookmark', {
+				distinct_id: profile_id,
+				bookmarkId: bookmark._id,
+			})
 
-		return bookmark
+			return { bookmark: bookmark, ownershipStatus: true }
+		}
+
+		if (profile_id !== bookmark.profile_id) {
+			if (!bookmark.share)
+				throw new Error(`The user has not made the bookmark public.`)
+
+			mixpanel.track('Fetch public bookmark', {
+				distinct_id: bookmark.profile_id,
+				bookmarkId: bookmarkId,
+			})
+
+			return { bookmark: bookmark, ownershipStatus: false }
+		}
 	} catch (error) {
 		throw new Error(error)
 	}

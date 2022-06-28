@@ -30,13 +30,13 @@ const bookmarkFinderAndUpdater = async (
 				profile_id: profile_id,
 			}).exec()
 
-			userBookmarks.forEach(async (bookmark) => {
+			for (const bookmark of userBookmarks) {
 				const tagIndex = bookmark.tags.indexOf(tagId)
 
 				bookmark.tags.splice(tagIndex, 1)
 
 				await bookmark.save()
-			})
+			}
 
 			return
 		}
