@@ -6,3 +6,4 @@
 
 #Configs
 .env
+.env.local
