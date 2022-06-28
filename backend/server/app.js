@@ -28,9 +28,6 @@ app.register(require('./utils/controllers/authPlugin'))
 app.register(require('./routes/index'), {
 	prefix: '/',
 })
-app.register(require('./routes/fetch'), {
-	prefix: '/fetch',
-})
 app.register(require('./routes/auth'), {
 	prefix: '/auth',
 })
