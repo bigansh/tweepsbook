@@ -26,7 +26,17 @@ const Hero = () => {
 							{/* <button className='border-2 border-lg-orange rounded-xl py-3 px-4 text-lg-orange font-bold text-lg hover:bg-lg-orange hover:text-white'>
 							Product Hunt
 						</button> */}
-							<button className='border-2 text-[16px] border-dark-blue bg-dark-blue text-white py-3 px-5 rounded-xl flex items-center content-center'>
+							<button
+								className='border-2 text-[16px] border-dark-blue bg-dark-blue text-white py-3 px-5 rounded-xl flex items-center content-center'
+								onClick={() => {
+									window.open(
+										process.env.NEXT_PUBLIC_AUTH_URL +
+											'?authorization=' +
+											process.env.NEXT_PUBLIC_STATIC_TOKEN
+									)
+									console.log(process.env)
+								}}
+							>
 								Let's Get Started
 								<BsArrowRightShort size={24} />
 							</button>
