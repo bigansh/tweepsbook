@@ -64,6 +64,7 @@ export const up = async (db) => {
 				},
 				$set: {
 					bookmarkSource: 'twitter',
+					bookmarkMethod: 'reply',
 					read: false,
 					share: false,
 					profile_id: profile_id,

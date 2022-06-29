@@ -7,6 +7,7 @@ const bookmarkSchema = new mongoose.Schema(
 		reddit_post_id: String,
 		pinterest_post_id: String,
 		bookmarkSource: String,
+		bookmarkMethod: String,
 		profile_id: String,
 		read: { type: Boolean, default: false },
 		share: { type: Boolean, default: false },

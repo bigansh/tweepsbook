@@ -20,7 +20,8 @@ const bookmarkCreate = async (profile_id, status_id, bookmarkMethod, tags = null
             profile_id: profile_id,
             twitter_status_id: status_id,
             tags: tags,
-            bookmarkSource: 'twitter'
+            bookmarkSource: 'twitter',
+            bookmarkMethod: bookmarkMethod.toLowerCase()
         })
 
         mixpanel.track('Create bookmark', {

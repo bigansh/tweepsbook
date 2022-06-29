@@ -8,6 +8,7 @@ export interface BookmarkSchema {
     reddit_post_id: string
     pinterest_post_id: string
     bookmarkSource: string
+    bookmarkMethod: string
     profile_id: string
     read: boolean
     share: boolean
