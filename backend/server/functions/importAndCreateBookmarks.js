@@ -48,7 +48,6 @@ const importAndCreateBookmarks = async (
 					const createdBookmark = await Bookmark.create({
 						profile_id: profile_id,
 						twitter_status_id: tweet.id,
-						content: tweet.text,
 						bookmarkSource: 'twitter',
 					})
 

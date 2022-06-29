@@ -11,16 +11,14 @@ const mixpanel = require('../utils/auth/mixpanelConnect'),
  *
  * @param {String} profile_id
  * @param {String} status_id
- * @param {String} twitter_text
  * @param {String} bookmarkMethod
  * @param {import('../utils/schemas/Tag').TagDocument[]} tags
  */
-const bookmarkCreate = async (profile_id, status_id, twitter_text, bookmarkMethod, tags = null) => {
+const bookmarkCreate = async (profile_id, status_id, bookmarkMethod, tags = null) => {
     try {
         const createdBookmark = await Bookmark.create({
             profile_id: profile_id,
             twitter_status_id: status_id,
-            content: twitter_text,
             tags: tags,
             bookmarkSource: 'twitter'
         })

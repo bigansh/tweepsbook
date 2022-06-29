@@ -8,7 +8,6 @@ const bookmarkSchema = new mongoose.Schema(
 		pinterest_post_id: String,
 		bookmarkSource: String,
 		profile_id: String,
-		content: String,
 		read: { type: Boolean, default: false },
 		share: { type: Boolean, default: false },
 		tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],

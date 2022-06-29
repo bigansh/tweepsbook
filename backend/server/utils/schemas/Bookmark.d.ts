@@ -9,7 +9,6 @@ export interface BookmarkSchema {
     pinterest_post_id: string
     bookmarkSource: string
     profile_id: string
-    content: string
     read: boolean
     share: boolean
     tags: TagDocument[]

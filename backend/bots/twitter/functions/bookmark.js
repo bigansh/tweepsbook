@@ -8,14 +8,12 @@ const tagFindOrCreate = require('./tagFindOrCreate'),
  *
  * @param {import('../utils/schemas/User').UserDocument} user
  * @param {String} requestedTweetId
- * @param {String} tweetText
  * @param {String} bookmarkMethod
  * @param {TweetEntityHashtagV2[]} tags
  */
 const bookmark = async (
 	user,
 	requestedTweetId,
-	tweetText,
 	bookmarkMethod,
 	tags = null
 ) => {
@@ -42,7 +40,6 @@ const bookmark = async (
 		const savedBookmark = await bookmarkCreate(
 			user.profile_id,
 			requestedTweetId,
-			tweetText,
 			bookmarkMethod,
 			bookmarkTags
 		)
