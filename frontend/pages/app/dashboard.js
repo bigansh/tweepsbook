@@ -63,8 +63,21 @@ export default function dashboard() {
 			const res = await axios.post('/api/utils', {
 				ids: tempBookmarkIds,
 			})
-			console.log(res)
-			setBookmarks(res.data)
+
+			let mergedArr = []
+			bookmarks.data.forEach((i) => {
+				res.data.forEach((j) => {
+					if (j.id === i.twitter_status_id) {
+						mergedArr.push({ backend: i, twitter: j })
+					}
+				})
+			})
+			setBookmarks(mergedArr)
+			console.log(mergedArr)
+			// console.log('mergedBookmarks', mergedBookmarks)
+			console.log('twt', res.data)
+			console.log('be', bookmarks.data)
+			// setBookmarks(res.data)
 		} catch (err) {
 			throw err
 		}
@@ -134,7 +147,10 @@ export default function dashboard() {
 					<div className='flex border-b-1 items-start justify-between p-2 h-1/6'>
 						<h1 className='pl-2 font-bold text-2xl'>#nft</h1>
 					</div>
-					<BookmarkCards bookmarks={bookmarks} />
+					<BookmarkCards
+						bookmarks={bookmarks}
+						deleteBookmark={deleteBookmark}
+					/>
 				</div>
 			</div>
 		</div>
