@@ -10,6 +10,7 @@ module.exports = {
 			'light-blue': '#ADE8FF',
 			'light-blue-text': 'rgba(0, 73, 100, 0.6)',
 			'sh-gray': '#70878F',
+			'hovertagColor': '#003447',
 			'lg-gray': '#F2F2F2',
 			white: '#ffffff',
 			'lg-orange': '#FF4949',

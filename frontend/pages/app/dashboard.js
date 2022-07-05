@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BiLogOut } from 'react-icons/bi'
+import { FiSettings } from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
+import { AiOutlinePlus } from 'react-icons/ai'
 
 import Tags from '../../src/components/Tags'
 import TweepsBookIcon from '../../src/components/Icon'
@@ -109,7 +111,7 @@ export default function dashboard() {
 	}, [])
 
 	return (
-		<div className='overflow-hidden'>
+		<div className='overflow-hidden scroll-smooth'>
 			<div className='flex items-center justify-around h-24 border'>
 				<TweepsBookIcon />
 
@@ -124,13 +126,13 @@ export default function dashboard() {
 						<AiOutlineDown />
 					</button>
 					{menuActive && (
-						<div className='flex flex-col relative top-16 w-32 z-10 bg-white'>
-							<button>
-								<BiLogOut />
+						<div className='flex flex-col drop-shadow-xl rounded-md p-2 relative top-16 w-32 z-10 bg-white'>
+							<button className='flex items-center m-2'>
+								<BiLogOut className='mr-2'/>
 								Logout
 							</button>
-							<button>
-								<BiLogOut />
+							<button className='flex items-center m-2'>
+								<FiSettings className='mr-2'/>
 								Settings
 							</button>
 						</div>
@@ -138,14 +140,18 @@ export default function dashboard() {
 				</div>
 			</div>
 
-			<div className='flex h-screen'>
-				<div className='flex flex-col items-start bg-dark-blue pt-10 w-56'>
+			<div className='flex '>
+				<div className='flex flex-col h-screen items-start bg-dark-blue pt-10 w-56'>
 					<Tags />
 				</div>
 
-				<div className='w-5/6'>
-					<div className='flex border-b-1 items-start justify-between p-2 h-1/6'>
-						<h1 className='pl-2 font-bold text-2xl'>#nft</h1>
+				<div className='w-5/6 '>
+					<div className='flex border-b items-start justify-between p-2 h-20'>
+						<h1 className='pl-2 font-bold text-3xl'>#all</h1>
+						<div className='flex'>
+							<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 ring ring-dark-blue/10  rounded-xl'>Sort By {' '} <AiOutlineDown className='mr-2' /></button>
+							<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 ring ring-dark-blue/10 rounded-xl'><AiOutlinePlus />{' '} Add Filter</button>
+						</div>
 					</div>
 					<BookmarkCards
 						bookmarks={bookmarks}
