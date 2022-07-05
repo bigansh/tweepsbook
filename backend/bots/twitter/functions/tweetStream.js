@@ -40,6 +40,16 @@ const tweetStream = async () => {
 		stream.on(
 			ETwitterStreamEvent.Data,
 			async ({ data, includes, matching_rules }) => {
+				if (
+					includes.tweets[0].text.includes(
+						'Hey, the tweet that you requested has been successfully bookmarked. You can take a look at all your bookmarked tweets on your dashboard.'
+					) ||
+					includes.tweets[0].text.includes(
+						'Hey, we are unable to process your request as you are not a registered user or you have reached the unread bookmarks threshold. Please create a new account and try again or read some of your bookmarks.'
+					)
+				)
+					return
+
 				const user = await userFind(data.author_id)
 
 				if (user) {
