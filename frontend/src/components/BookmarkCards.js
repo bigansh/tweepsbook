@@ -1,5 +1,5 @@
 import React from 'react'
-import { BiDotsVerticalRounded } from 'react-icons/bi'
+import { GrNotes } from "react-icons/gr";
 import { BiTrashAlt } from 'react-icons/bi'
 import { BiArchiveIn } from 'react-icons/bi'
 import { BsTwitter } from 'react-icons/bs'
@@ -9,7 +9,7 @@ const bookmarkCards = ({ bookmarks, deleteBookmark }) => {
 		<div className='flex flex-wrap m-3 justify-start  w-full'>
 			{bookmarks.map((bookmark, index) => {
 				return (
-					<div className='flex flex-col rounded-md border w-96 h-40 p-1 m-2 '>
+					<div className='flex flex-col rounded-md border w-96 h-fit p-1 m-2 '>
 						<div className='w-full flex items-center'>
 							<img
 								src={bookmark.twitter.author.profile_image_url}
@@ -36,7 +36,7 @@ const bookmarkCards = ({ bookmarks, deleteBookmark }) => {
 								}
 								style={{ cursor: 'pointer' }}
 							/>
-							<BiDotsVerticalRounded className='mx-3 w-5 h-5' />
+							<GrNotes className='mx-3 w-5 h-5' />
 						</div>
 					</div>
 				)
