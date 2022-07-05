@@ -14,6 +14,7 @@
     "dotenv": "^16.0.0",
     "mixpanel": "^0.15.0",
     "mongoose": "^6.2.9",
+    "node-cache": "^5.1.2",
     "twitter-api-v2": "^1.11.0"
   }
 }

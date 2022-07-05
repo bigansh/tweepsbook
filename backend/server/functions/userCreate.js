@@ -27,12 +27,6 @@ const userCreate = async (twitterUserObject = undefined) => {
 				$avatar: twitterUserObject.profile_image_url,
 			})
 
-			mixpanel.track('Import Twitter bookmarks', {
-				distinct_id: profile_id,
-			})
-
-			mixpanel.people.increment(profile_id, 'Import Twitter bookmarks', 0)
-
 			return await User.create({
 				twitter_id: twitterUserObject.id,
 				profile_image: twitterUserObject.profile_image_url,
