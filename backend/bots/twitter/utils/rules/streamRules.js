@@ -1,9 +1,5 @@
 require('dotenv').config()
 
-/**
- * A function that exports the rules for the stream.
- */
-
 // TODO To exclude referenced tweets
 const rules = {
 	add: [

@@ -14,19 +14,19 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
 const tagFindOrCreate = async (tag, user) => {
 	try {
 		const foundTag = await Tag.findOne({
-			tag: tag,
+			tag: `#${tag}`,
 			profile_id: user.profile_id,
 		}).exec()
 
 		if (!foundTag) {
 			const createdTag = await Tag.create({
-				tag: tag,
+				tag: `#${tag}`,
 				profile_id: user.profile_id,
 			})
 
 			user.tags.push(createdTag)
 
-			user.save()
+			await user.save()
 
 			mixpanel.track('Create tag', {
 				distinct_id: user.profile_id,
@@ -37,7 +37,9 @@ const tagFindOrCreate = async (tag, user) => {
 		}
 
 		return foundTag
-	} catch (error) {}
+	} catch (error) {
+		console.log(error)
+	}
 }
 
 module.exports = tagFindOrCreate

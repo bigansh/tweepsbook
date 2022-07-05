@@ -19,7 +19,7 @@ const reply = async (replyTo_id, user = undefined) => {
 				replyTo_id
 			)
 	} catch (error) {
-		console.log('ERROR: ', error)
+		console.log(error)
 	}
 }
 

@@ -60,7 +60,7 @@ const dmStream = () => {
 							event.message_create.message_data.text.includes(
 								process.env.BOOKMARK
 							)
-						)
+						) {
 							state = await bookmark(
 								user,
 								event.message_create.message_data.entities.urls[0].expanded_url.match(
@@ -71,7 +71,8 @@ const dmStream = () => {
 									.hashtags
 							)
 
-						dmReply(event.message_create.sender_id, state)
+							dmReply(event.message_create.sender_id, state)
+						}
 					} else if (!user)
 						dmReply(event.message_create.sender_id, false)
 				}

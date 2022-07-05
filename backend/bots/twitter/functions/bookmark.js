@@ -1,7 +1,7 @@
-const { TweetEntityHashtagV2 } = require('twitter-api-v2')
+const { TweetEntityHashtagV2, HashtagEntityV1 } = require('twitter-api-v2')
 
 const tagFindOrCreate = require('./tagFindOrCreate'),
-	bookmarkCreate = require('./bookmarkCreate')
+	bookmarkCheckOrCreate = require('./bookmarkCheckOrCreate')
 
 /**
  * A function to bookmark a tweet with the specified tags.
@@ -9,20 +9,20 @@ const tagFindOrCreate = require('./tagFindOrCreate'),
  * @param {import('../utils/schemas/User').UserDocument} user
  * @param {String} requestedTweetId
  * @param {String} bookmarkMethod
- * @param {TweetEntityHashtagV2[]} tags
+ * @param {TweetEntityHashtagV2[] | HashtagEntityV1[]} tags
  */
 const bookmark = async (
 	user,
 	requestedTweetId,
 	bookmarkMethod,
-	tags = null
+	tags = undefined
 ) => {
 	try {
 		const unreadBookmarks = user.bookmarks.filter(
 			(bookmark) => bookmark.read === false
 		).length
 
-		if (user.unreadCount >= unreadBookmarks && user.unreadCount != 0)
+		if (user.unreadCount >= unreadBookmarks && user.unreadCount !== 0)
 			return false
 
 		/**
@@ -31,13 +31,15 @@ const bookmark = async (
 		let bookmarkTags = []
 
 		if (tags.length)
-			for (const { tag } of tags) {
-				const savedTag = await tagFindOrCreate(tag, user)
+			for await (const { text, tag } of tags) {
+				const tagProvided = text || tag
+
+				const savedTag = await tagFindOrCreate(tagProvided, user)
 
 				bookmarkTags.push(savedTag)
 			}
 
-		const savedBookmark = await bookmarkCreate(
+		const savedBookmark = await bookmarkCheckOrCreate(
 			user.profile_id,
 			requestedTweetId,
 			bookmarkMethod,
@@ -50,7 +52,7 @@ const bookmark = async (
 
 		return true
 	} catch (error) {
-		console.log('ERROR: ', error)
+		console.log(error)
 	}
 }
 

@@ -58,7 +58,7 @@ const tweetStream = async () => {
 			}
 		)
 	} catch (error) {
-		console.log('ERROR: ', error)
+		console.log(error)
 	}
 }
 
