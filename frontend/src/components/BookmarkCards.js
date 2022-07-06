@@ -37,9 +37,9 @@ const bookmarkCards = ({ archive }) => {
 								</div>
 							</div>
 							<p className='m-1 p-1'>{bookmark.twitter.text}</p>
-							<div className='flex items-center opacity-50 p-2 justify-end'>
+							<div className='flex items-center opacity-50 p-2 justify-end '>
 								<BiArchiveIn
-									className='mx-3 w-5 h-5'
+									className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 '
 									onClick={() =>
 										updateReadStatus({
 											id: bookmark.backend._id,
@@ -49,13 +49,12 @@ const bookmarkCards = ({ archive }) => {
 									}
 								/>
 								<BiTrashAlt
-									className='mx-3 w-5 h-5'
+									className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 '
 									onClick={() =>
 										deleteBookmark(bookmark.backend._id)
 									}
-									style={{ cursor: 'pointer' }}
 								/>
-								<GrNotes className='mx-3 w-5 h-5' />
+								<GrNotes className='mx-3 w-5 h-5 cursor-pointer hover:scale-110' />
 							</div>
 						</div>
 					)
