@@ -18,7 +18,24 @@ export default function dashboard() {
 	const menuClick = () => {
 		setMenuActive(!menuActive)
 	}
-
+	const archiveBookmark = async ({ id, currentStatus }) => {
+		try {
+			const res = await axios.patch(
+				process.env.NEXT_PUBLIC_UPDATE_READ_STATUS_URL,
+				{
+					bookmarkId: id,
+					readStatus: !currentStatus,
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+					},
+				}
+			)
+			fetchBookmarks()
+		} catch (err) {}
+	}
 	const getUser = async () => {
 		const res = await axios.get(
 			process.env.NEXT_PUBLIC_FETCH_ACCOUNT_DETAILS,
@@ -128,11 +145,11 @@ export default function dashboard() {
 					{menuActive && (
 						<div className='flex flex-col drop-shadow-xl rounded-md p-2 relative top-16 w-32 z-10 bg-white'>
 							<button className='flex items-center m-2'>
-								<BiLogOut className='mr-2'/>
+								<BiLogOut className='mr-2' />
 								Logout
 							</button>
 							<button className='flex items-center m-2'>
-								<FiSettings className='mr-2'/>
+								<FiSettings className='mr-2' />
 								Settings
 							</button>
 						</div>
@@ -149,13 +166,18 @@ export default function dashboard() {
 					<div className='flex border-b items-start justify-between p-2 h-20'>
 						<h1 className='pl-2 font-bold text-3xl'>#all</h1>
 						<div className='flex'>
-							<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 ring ring-dark-blue/10  rounded-xl'>Sort By {' '} <AiOutlineDown className='mr-2' /></button>
-							<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 ring ring-dark-blue/10 rounded-xl'><AiOutlinePlus />{' '} Add Filter</button>
+							<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 ring ring-dark-blue/10  rounded-xl'>
+								Sort By <AiOutlineDown className='mr-2' />
+							</button>
+							<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 ring ring-dark-blue/10 rounded-xl'>
+								<AiOutlinePlus /> Add Filter
+							</button>
 						</div>
 					</div>
 					<BookmarkCards
 						bookmarks={bookmarks}
 						deleteBookmark={deleteBookmark}
+						archiveBookmark={archiveBookmark}
 					/>
 				</div>
 			</div>
