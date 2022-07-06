@@ -6,13 +6,49 @@ const BookmarksContext = createContext()
 const BookmarksProvider = ({ children }) => {
 	const [bookmarks, setBookmarks] = useState([])
 
-	const archiveBookmark = async ({ id, currentStatus }) => {
+	const updateReadStatus = async ({ id, currentStatus }) => {
 		try {
 			const res = await axios.patch(
 				process.env.NEXT_PUBLIC_UPDATE_READ_STATUS_URL,
 				{
 					bookmarkId: id,
 					readStatus: !currentStatus,
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+					},
+				}
+			)
+			fetchBookmarks()
+		} catch (err) {}
+	}
+	const updateShareStatus = async ({ id, currentStatus }) => {
+		try {
+			const res = await axios.patch(
+				process.env.NEXT_PUBLIC_UPDATE_SHARE_STATUS_URL,
+				{
+					bookmarkId: id,
+					shareStatus: !currentStatus,
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+					},
+				}
+			)
+			fetchBookmarks()
+		} catch (err) {}
+	}
+	const updateTags = async ({ id, tags }) => {
+		try {
+			const res = await axios.patch(
+				process.env.NEXT_PUBLIC_UPDATE_TAGS_URL,
+				{
+					bookmarkId: id,
+					tags: tags,
 				},
 				{
 					headers: {
@@ -77,6 +113,34 @@ const BookmarksProvider = ({ children }) => {
 			throw err
 		}
 	}
+	const fetchBookmark = async ({ id }) => {
+		try {
+			const tags = await axios.get(
+				process.env.NEXT_PUBLIC_FETCH_BOOKMARK_URL + id,
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+					},
+				}
+			)
+		} catch (err) {
+			throw err
+		}
+	}
+	const fetchTags = async () => {
+		try {
+			const tags = await axios.get(
+				process.env.NEXT_PUBLIC_FETCH_TAGS_URL,
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+					},
+				}
+			)
+		} catch (err) {
+			throw err
+		}
+	}
 	const deleteBookmark = async (id) => {
 		try {
 			const res = await axios.delete(
@@ -96,16 +160,40 @@ const BookmarksProvider = ({ children }) => {
 			throw err
 		}
 	}
+	const deleteTag = async (tagId) => {
+		try {
+			const res = await axios.delete(
+				`${process.env.NEXT_PUBLIC_DELETE_BOOKMARK_URL}`,
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+					},
+					data: {
+						tagId: tagId,
+					},
+				}
+			)
+			console.log(res)
+			fetchBookmarks()
+		} catch (err) {
+			throw err
+		}
+	}
 
 	return (
 		<BookmarksContext.Provider
 			value={{
 				bookmarks,
 				setBookmarks,
-				archiveBookmark,
+				updateReadStatus,
 				importBookmarks,
 				deleteBookmark,
 				fetchBookmarks,
+				updateShareStatus,
+				updateTags,
+				fetchTags,
+				deleteTag,
+				fetchBookmark,
 			}}
 		>
 			{children}

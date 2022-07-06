@@ -4,14 +4,14 @@ import BookmarkCards from '../../../src/components/BookmarkCards'
 import { BookmarksContext } from '../../../contexts/BookmarksContext'
 
 const archive = () => {
-	const { bookmarks, archiveBookmark, deleteBookmark } =
+	const { bookmarks, updateReadStatus, deleteBookmark } =
 		React.useContext(BookmarksContext)
 	return (
 		<Dashboard>
 			<BookmarkCards
 				bookmarks={bookmarks}
 				deleteBookmark={deleteBookmark}
-				archiveBookmark={archiveBookmark}
+				updateReadStatus={updateReadStatus}
 				archive={true}
 			/>
 		</Dashboard>

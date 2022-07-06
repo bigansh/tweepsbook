@@ -6,7 +6,7 @@ import { BsTwitter } from 'react-icons/bs'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 
 const bookmarkCards = ({ archive }) => {
-	const { bookmarks, archiveBookmark, deleteBookmark } =
+	const { bookmarks, updateReadStatus, deleteBookmark } =
 		React.useContext(BookmarksContext)
 	return (
 		<div className='flex flex-wrap m-3 justify-start  w-full'>
@@ -41,7 +41,7 @@ const bookmarkCards = ({ archive }) => {
 								<BiArchiveIn
 									className='mx-3 w-5 h-5'
 									onClick={() =>
-										archiveBookmark({
+										updateReadStatus({
 											id: bookmark.backend._id,
 											currentStatus:
 												bookmark.backend.read,
