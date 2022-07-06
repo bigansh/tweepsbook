@@ -37,7 +37,7 @@ const curdUpdate = async (req, res) => {
 
 				break
 			case 'readStatus':
-				if (req.body.bookmarkId && req.body.readStatus) {
+				if (req.body.bookmarkId && req.body.readStatus !== undefined) {
 					const validatedReadStatus = readStatusValidator(
 						req.body.readStatus
 					)
@@ -54,7 +54,7 @@ const curdUpdate = async (req, res) => {
 
 				break
 			case 'shareStatus':
-				if (req.body.bookmarkId && req.body.shareStatus) {
+				if (req.body.bookmarkId && req.body.shareStatus !== undefined) {
 					const validatedShareStatus = shareStatusValidator(
 						req.body.shareStatus
 					)
