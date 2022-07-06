@@ -11,12 +11,10 @@ const tags = () => {
   }
 
   return (
-    <div className="flex flex-col items-start h-screen w-full mt-2 text-white">
+    <div className="flex flex-col items-start min-h-eigthy w-full mt-2 text-white">
       <h1 className='text-xl mb-10 font-bold pl-5'>TAGS</h1>
       <div className='flex text-md justify-between h-full w-full flex-col items-center'>
         <div className='flex flex-col'>
-          <button onClick={handleClick} className={"m-1 px-8 py-1 " + (activeTag ? "bg-hovertagColor" : "")}>#all</button>
-          <button onClick={handleClick} className={"m-1 px-8 py-1 " + (activeTag ? "bg-hovertagColor" : "")}>#all</button>
           <button onClick={handleClick} className={"m-1 px-8 py-1 " + (activeTag ? "bg-hovertagColor" : "")}>#all</button>
         </div>
 

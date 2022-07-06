@@ -18,6 +18,9 @@ module.exports = {
 		fontFamily: {
 			serif: ['ui-serif', 'Merriweather', 'serif'],
 		},
+		minHeight: {
+			'eigthy' : '78vh',
+		}
 	},
 	plugins: [],
 }
