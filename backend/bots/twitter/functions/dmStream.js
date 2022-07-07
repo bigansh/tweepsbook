@@ -20,6 +20,8 @@ const dmStream = () => {
 		try {
 			let dmEvents = await twtrClient_o1.v1.listDmEvents()
 
+			if (!dmEvents.events.length) return
+
 			const cache = nodeCache.take('lastMessageId')
 
 			if (!cache) {
