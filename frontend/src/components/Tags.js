@@ -56,7 +56,7 @@ const tags = () => {
 					<button
 						className='flex items-center px-4 m-2 h-8'
 						onClick={() =>
-							(window.location.href = 'dashboard/archive')
+							(window.location.href = '/app/dashboard/archive')
 						}
 					>
 						<BiArchiveIn className='mr-2' />

@@ -6,7 +6,7 @@ const BookmarksContext = createContext()
 const BookmarksProvider = ({ children }) => {
 	const [bookmarks, setBookmarks] = useState([])
 	const [activeTag, setActiveTag] = useState()
-
+	const [searchTerm, setSearchTerm] = useState('')
 	const updateReadStatus = async ({ id, currentStatus }) => {
 		try {
 			const res = await axios.patch(
@@ -197,6 +197,8 @@ const BookmarksProvider = ({ children }) => {
 				fetchBookmark,
 				activeTag,
 				setActiveTag,
+				searchTerm,
+				setSearchTerm,
 			}}
 		>
 			{children}

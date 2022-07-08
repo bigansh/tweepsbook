@@ -6,10 +6,16 @@ import { BookmarksContext } from '../../contexts/BookmarksContext'
 import TagPill from './TagPill'
 import { MdOutlineStickyNote2 } from 'react-icons/md'
 const bookmarkCards = ({ archive }) => {
-	const { bookmarks, updateReadStatus, deleteBookmark, activeTag } =
-		React.useContext(BookmarksContext)
+	const {
+		bookmarks,
+		updateReadStatus,
+		deleteBookmark,
+		activeTag,
+		searchTerm,
+	} = React.useContext(BookmarksContext)
 	const [bookmarksToShow, setBookmarksToShow] = React.useState([])
-	useEffect(() => {
+
+	const filterByTag = () => {
 		let tempBookmarksToShow = []
 		bookmarks.map((bookmark) => {
 			const matchedBookmarks = bookmark.backend.tags.map((tag) => {
@@ -22,9 +28,39 @@ const bookmarkCards = ({ archive }) => {
 				}
 			})
 		})
+		return tempBookmarksToShow
+	}
+	const filterBySearchTerm = () => {
+		let tempBookmarksToShow = []
+		let bookmarksFilteredByTag = filterByTag()
+		bookmarksFilteredByTag.map((bookmark) => {
+			if (
+				bookmark.twitter.text
+					.toLowerCase()
+					.includes(searchTerm.toLowerCase())
+			) {
+				tempBookmarksToShow.push(bookmark)
+			}
+		})
+		return tempBookmarksToShow
+	}
+
+	useEffect(() => {
+		const tempBookmarksToShow = filterByTag()
 		console.log({ tempBookmarksToShow })
-		setBookmarksToShow(tempBookmarksToShow)
+		setBookmarksToShow([...tempBookmarksToShow])
 	}, [bookmarks, activeTag])
+
+	useEffect(() => {
+		console.log('bookmarksToShow', bookmarksToShow)
+	}, [bookmarksToShow])
+
+	useEffect(() => {
+		const tempBookmarksToShow = filterBySearchTerm()
+		setBookmarksToShow([...tempBookmarksToShow])
+		console.log(tempBookmarksToShow)
+	}, [searchTerm, activeTag])
+
 	return (
 		<div className='flex flex-wrap p-3 overflow-auto h-full '>
 			{bookmarksToShow?.map((bookmark, index) => {
