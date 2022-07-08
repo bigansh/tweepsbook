@@ -4,6 +4,7 @@ import { BiTrashAlt } from 'react-icons/bi'
 import { BiArchiveIn } from 'react-icons/bi'
 import { BsTwitter } from 'react-icons/bs'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
+import TagPill from './TagPill'
 
 const bookmarkCards = ({ archive }) => {
 	const { bookmarks, updateReadStatus, deleteBookmark } =
@@ -37,24 +38,27 @@ const bookmarkCards = ({ archive }) => {
 								</div>
 							</div>
 							<p className='m-1 p-1'>{bookmark.twitter.text}</p>
-							<div className='flex items-center opacity-50 p-2 justify-end '>
-								<BiArchiveIn
-									className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 '
-									onClick={() =>
-										updateReadStatus({
-											id: bookmark.backend._id,
-											currentStatus:
-												bookmark.backend.read,
-										})
-									}
-								/>
-								<BiTrashAlt
-									className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 '
-									onClick={() =>
-										deleteBookmark(bookmark.backend._id)
-									}
-								/>
-								<GrNotes className='mx-3 w-5 h-5 cursor-pointer hover:scale-110' />
+							<div className='flex items-center opacity-50 p-2 justify-between '>
+								<TagPill bookmark={bookmark} />
+								<div className='flex'>
+									<BiArchiveIn
+										className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 '
+										onClick={() =>
+											updateReadStatus({
+												id: bookmark.backend._id,
+												currentStatus:
+													bookmark.backend.read,
+											})
+										}
+									/>
+									<BiTrashAlt
+										className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 '
+										onClick={() =>
+											deleteBookmark(bookmark.backend._id)
+										}
+									/>
+									<GrNotes className='mx-3 w-5 h-5 cursor-pointer hover:scale-110' />
+								</div>
 							</div>
 						</div>
 					)
