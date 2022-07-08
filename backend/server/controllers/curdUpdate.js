@@ -22,7 +22,7 @@ const curdUpdate = async (req, res) => {
 
 		switch (queryType) {
 			case 'tags':
-				if (req.body.bookmarkId && req.body.tags) {
+				if (req.body.bookmarkId && req.body.tags !== null) {
 					const validatedTags = tagsValidator(req.body.tags)
 
 					if (validatedTags.error)
