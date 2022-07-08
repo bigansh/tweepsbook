@@ -34,7 +34,7 @@ export default function dashboard({ children }) {
 	}, [])
 
 	return (
-		<div className='overflow-hidden scroll-smooth fixed'>
+		<div className='overflow-hidden scroll-smooth fixed w-full'>
 			<DashNavbar />
 
 			<div className='flex overflow-hidden'>

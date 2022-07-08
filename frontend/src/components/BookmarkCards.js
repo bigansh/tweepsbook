@@ -9,7 +9,7 @@ const bookmarkCards = ({ archive }) => {
 	const { bookmarks, updateReadStatus, deleteBookmark } =
 		React.useContext(BookmarksContext)
 	return (
-		<div className='flex flex-wrap m-3 overflow-auto h-full'>
+		<div className='flex flex-wrap p-3 overflow-auto h-full '>
 			{bookmarks?.map((bookmark, index) => {
 				return (
 					bookmark.backend.read === (archive || false) && (

@@ -34,7 +34,12 @@ const tags = () => {
 						<BiImport className='mr-2' />
 						Import
 					</button>
-					<button className='flex items-center px-4 m-2 h-8'>
+					<button
+						className='flex items-center px-4 m-2 h-8'
+						onClick={() =>
+							(window.location.href = 'dashboard/archive')
+						}
+					>
 						<BiArchiveIn className='mr-2' />
 						Archive
 					</button>
