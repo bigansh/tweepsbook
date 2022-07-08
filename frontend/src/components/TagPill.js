@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { BsPlus } from 'react-icons/bs'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
+import { IoIosClose } from 'react-icons/io'
 
 const TagPill = ({ bookmark }) => {
 	const { updateTags } = useContext(BookmarksContext)
@@ -65,21 +66,40 @@ const TagPill = ({ bookmark }) => {
 		const tempTags = [...tags, newTag]
 		setTags(tempTags)
 	}
+	const deleteTag = (tag) => {
+		const tempTags = tags.filter((t) => t._id !== tag._id)
+		setTags(tempTags)
+		try {
+			updateTags({
+				id: bookmark.backend._id,
+				tags: tempTags.map((t) => t.tag),
+			})
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
 	return (
 		<div className='flex flex-wrap items-center'>
 			{tags?.map((tag) => {
 				return (
-					<div
-						className='mx-1'
-						key={tag.id}
-						onClick={() => editTag(tag)}
-					>
-						{!tag.showEdit && '#' + tag.tag}
+					<div className='mx-1' key={tag.id}>
+						{!tag.showEdit && (
+							<div className='border-solid border flex items-center border-dark-bluee px-2 py-1 rounded-full my-1 text-sm text-[#004965] font-semibold'>
+								<span onClick={() => editTag(tag)}>
+									#{tag.tag}
+								</span>
+								<IoIosClose
+									className='ml-1 w-5 h-5 cursor-pointer'
+									onClick={() => deleteTag(tag)}
+								/>
+							</div>
+						)}
 						{tag.showEdit && (
 							<form onSubmit={(e) => handleTagUpdate({ e, tag })}>
 								<input
 									type='text'
-									className='border-2'
+									className='border p-1 rounded text-sm '
 									name='tagName'
 									defaultValue={tag.tag}
 								/>
