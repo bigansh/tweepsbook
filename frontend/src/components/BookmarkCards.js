@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BiTrashAlt } from 'react-icons/bi'
 import { BiArchiveIn } from 'react-icons/bi'
 import { BsTwitter } from 'react-icons/bs'
@@ -6,11 +6,28 @@ import { BookmarksContext } from '../../contexts/BookmarksContext'
 import TagPill from './TagPill'
 import { MdOutlineStickyNote2 } from 'react-icons/md'
 const bookmarkCards = ({ archive }) => {
-	const { bookmarks, updateReadStatus, deleteBookmark } =
+	const { bookmarks, updateReadStatus, deleteBookmark, activeTag } =
 		React.useContext(BookmarksContext)
+	const [bookmarksToShow, setBookmarksToShow] = React.useState([])
+	useEffect(() => {
+		let tempBookmarksToShow = []
+		bookmarks.map((bookmark) => {
+			const matchedBookmarks = bookmark.backend.tags.map((tag) => {
+				if (activeTag.tag === 'all') {
+					tempBookmarksToShow = bookmarks
+					return
+				}
+				if (tag.tag === activeTag.tag) {
+					tempBookmarksToShow.push(bookmark)
+				}
+			})
+		})
+		console.log({ tempBookmarksToShow })
+		setBookmarksToShow(tempBookmarksToShow)
+	}, [bookmarks, activeTag])
 	return (
 		<div className='flex flex-wrap p-3 overflow-auto h-full '>
-			{bookmarks?.map((bookmark, index) => {
+			{bookmarksToShow?.map((bookmark, index) => {
 				return (
 					bookmark.backend.read === (archive || false) && (
 						<div

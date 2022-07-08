@@ -1,13 +1,25 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BiArchiveIn } from 'react-icons/bi'
 import { BiImport } from 'react-icons/bi'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 
 const tags = () => {
-	const [activeTag, setActiveTag] = useState(true)
+	const { fetchTags, activeTag, setActiveTag } = useContext(BookmarksContext)
+	const [tags, setTags] = useState([])
 
-	const handleClick = () => {
-		setActiveTag(!activeTag)
+	useEffect(() => {
+		importTags()
+		console.log(activeTag)
+	}, [])
+
+	const importTags = async () => {
+		const tempTags = await fetchTags()
+		setTags([{ tag: 'all', _id: 'all' }, ...tempTags])
+		setActiveTag({ tag: 'all', _id: 'all' })
+	}
+
+	const handleClick = (tag) => {
+		setActiveTag(tag)
 	}
 	const { importBookmarks } = useContext(BookmarksContext)
 	return (
@@ -15,15 +27,22 @@ const tags = () => {
 			<h1 className='text-xl mb-10 font-bold pl-5'>TAGS</h1>
 			<div className='flex text-md justify-between h-full w-full flex-col items-center'>
 				<div className='flex flex-col'>
-					<button
-						onClick={handleClick}
-						className={
-							'm-1 px-8 py-1 ' +
-							(activeTag ? 'bg-hovertagColor' : '')
-						}
-					>
-						#all
-					</button>
+					{tags?.map((tag, index) => {
+						return (
+							<button
+								key={tag._id}
+								onClick={() => handleClick(tag)}
+								className={
+									'm-1 px-8 py-1 ' +
+									(activeTag?._id === tag?._id
+										? 'bg-hovertagColor'
+										: '')
+								}
+							>
+								#{tag.tag}
+							</button>
+						)
+					})}
 				</div>
 
 				<div className='flex text-md border-t w-full flex-col items-center'>

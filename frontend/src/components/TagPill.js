@@ -83,7 +83,7 @@ const TagPill = ({ bookmark }) => {
 		<div className='flex flex-wrap items-center'>
 			{tags?.map((tag) => {
 				return (
-					<div className='mx-1' key={tag.id}>
+					<div className='mx-1' key={tag._id}>
 						{!tag.showEdit && (
 							<div className='border-solid border flex items-center border-dark-bluee px-2 py-1 rounded-full my-1 text-sm text-[#004965] font-semibold'>
 								<span onClick={() => editTag(tag)}>
