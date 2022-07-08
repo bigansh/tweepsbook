@@ -41,7 +41,7 @@ const bookmarkFinderAndUpdater = async (
 			return
 		}
 
-		if (tags.length && bookmarkId) {
+		if (tags !== null && bookmarkId) {
 			const foundBookmark = await Bookmark.findById(bookmarkId).exec()
 
 			foundBookmark.tags = tags
