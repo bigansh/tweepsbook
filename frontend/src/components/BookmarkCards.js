@@ -1,16 +1,33 @@
-import React from 'react'
-import { GrNotes } from 'react-icons/gr'
+import React, { useEffect } from 'react'
 import { BiTrashAlt } from 'react-icons/bi'
 import { BiArchiveIn } from 'react-icons/bi'
 import { BsTwitter } from 'react-icons/bs'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
-
+import TagPill from './TagPill'
+import { MdOutlineStickyNote2 } from 'react-icons/md'
 const bookmarkCards = ({ archive }) => {
-	const { bookmarks, updateReadStatus, deleteBookmark } =
+	const { bookmarks, updateReadStatus, deleteBookmark, activeTag } =
 		React.useContext(BookmarksContext)
+	const [bookmarksToShow, setBookmarksToShow] = React.useState([])
+	useEffect(() => {
+		let tempBookmarksToShow = []
+		bookmarks.map((bookmark) => {
+			const matchedBookmarks = bookmark.backend.tags.map((tag) => {
+				if (activeTag.tag === 'all') {
+					tempBookmarksToShow = bookmarks
+					return
+				}
+				if (tag.tag === activeTag.tag) {
+					tempBookmarksToShow.push(bookmark)
+				}
+			})
+		})
+		console.log({ tempBookmarksToShow })
+		setBookmarksToShow(tempBookmarksToShow)
+	}, [bookmarks, activeTag])
 	return (
-		<div className='flex flex-wrap m-3 justify-start  w-full'>
-			{bookmarks?.map((bookmark, index) => {
+		<div className='flex flex-wrap p-3 overflow-auto h-full '>
+			{bookmarksToShow?.map((bookmark, index) => {
 				return (
 					bookmark.backend.read === (archive || false) && (
 						<div
@@ -37,24 +54,27 @@ const bookmarkCards = ({ archive }) => {
 								</div>
 							</div>
 							<p className='m-1 p-1'>{bookmark.twitter.text}</p>
-							<div className='flex items-center opacity-50 p-2 justify-end '>
-								<BiArchiveIn
-									className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 '
-									onClick={() =>
-										updateReadStatus({
-											id: bookmark.backend._id,
-											currentStatus:
-												bookmark.backend.read,
-										})
-									}
-								/>
-								<BiTrashAlt
-									className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 '
-									onClick={() =>
-										deleteBookmark(bookmark.backend._id)
-									}
-								/>
-								<GrNotes className='mx-3 w-5 h-5 cursor-pointer hover:scale-110' />
+							<div className='flex items-start  p-2 justify-between '>
+								<TagPill bookmark={bookmark} />
+								<div className='flex items-start'>
+									<BiArchiveIn
+										className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
+										onClick={() =>
+											updateReadStatus({
+												id: bookmark.backend._id,
+												currentStatus:
+													bookmark.backend.read,
+											})
+										}
+									/>
+									<BiTrashAlt
+										className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
+										onClick={() =>
+											deleteBookmark(bookmark.backend._id)
+										}
+									/>
+									<MdOutlineStickyNote2 className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey' />
+								</div>
 							</div>
 						</div>
 					)

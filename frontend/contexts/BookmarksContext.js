@@ -5,6 +5,7 @@ const BookmarksContext = createContext()
 
 const BookmarksProvider = ({ children }) => {
 	const [bookmarks, setBookmarks] = useState([])
+	const [activeTag, setActiveTag] = useState()
 
 	const updateReadStatus = async ({ id, currentStatus }) => {
 		try {
@@ -67,8 +68,7 @@ const BookmarksProvider = ({ children }) => {
 				{},
 				{
 					headers: {
-						Authorization:
-							process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN,
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
 					},
 				}
 			)
@@ -129,7 +129,7 @@ const BookmarksProvider = ({ children }) => {
 	}
 	const fetchTags = async () => {
 		try {
-			const tags = await axios.get(
+			const res = await axios.get(
 				process.env.NEXT_PUBLIC_FETCH_TAGS_URL,
 				{
 					headers: {
@@ -137,6 +137,7 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
+			return res.data
 		} catch (err) {
 			throw err
 		}
@@ -194,6 +195,8 @@ const BookmarksProvider = ({ children }) => {
 				fetchTags,
 				deleteTag,
 				fetchBookmark,
+				activeTag,
+				setActiveTag,
 			}}
 		>
 			{children}

@@ -3,6 +3,15 @@
 @tailwind utilities;
 html,
 body {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
+}
+.sidebar {
+	height: calc(100vh - 96px);
+}
+.my-content {
+	padding-left: 224px;
+}
+.icon-grey {
+	color: rgb(95, 95, 95);
 }
