@@ -67,8 +67,7 @@ const BookmarksProvider = ({ children }) => {
 				{},
 				{
 					headers: {
-						Authorization:
-							process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN,
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
 					},
 				}
 			)

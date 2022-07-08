@@ -29,22 +29,21 @@ export default function dashboard({ children }) {
 	}
 
 	useEffect(() => {
-		// importBookmarks()
 		fetchBookmarks()
 		getUser()
 	}, [])
 
 	return (
-		<div className='overflow-hidden scroll-smooth'>
+		<div className='overflow-hidden scroll-smooth fixed'>
 			<DashNavbar />
 
-			<div className='flex '>
-				<div className='flex flex-col items-start bg-dark-blue pt-10 w-56'>
+			<div className='flex overflow-hidden'>
+				<div className='flex flex-col items-start bg-dark-blue pt-10 w-56 sidebar fixed'>
 					<Tags />
 				</div>
 
-				<div className='w-5/6 '>
-					<div className='flex border-b items-center justify-between p-2 h-20'>
+				<div className='w-full flex flex-col sidebar my-content'>
+					<div className='flex border-b items-center justify-between p-2 h-20 '>
 						<h1 className='pl-2 font-bold text-3xl'>#all</h1>
 						<div className='flex items-center'>
 							<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 border  rounded-xl'>
