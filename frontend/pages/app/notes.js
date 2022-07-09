@@ -29,7 +29,7 @@ const notes = () => {
                 <div className='flex flex-col p-1 w-1/3 justify-between'>
 
                     {/* Selected Tweet goes here */}
-                    <div className='flex flex-col rounded-md border-2 w-96 h-fit p-1 m-4 '>
+                    <div className='flex flex-col rounded-md border w-96 h-fit p-1 m-4 '>
                         <div className='w-full flex items-center'>
                             <img
                                 src='https://pbs.twimg.com/profile_images/1209898984/twitter_normal.jpg'
