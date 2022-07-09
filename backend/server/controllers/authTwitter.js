@@ -12,7 +12,9 @@ const authTwitter = (req, res) => {
 	try {
 		const { url, state, codeVerifier } = twitterAuthFlow()
 
-		cache.set('token', { state, codeVerifier }, 100)
+		const authObjects = { state, codeVerifier } || {}
+
+		cache.set('token', authObjects, 100)
 
 		res.status(302).redirect(url)
 	} catch (error) {

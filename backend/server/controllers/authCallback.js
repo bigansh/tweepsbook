@@ -23,8 +23,6 @@ const authCallback = async (req, res) => {
 				const { state: sessionState, codeVerifier } =
 					cache.take('token')
 
-				console.log(sessionState)
-
 				const { profile_id } = await twitterCallback(
 					sessionState,
 					codeVerifier,
