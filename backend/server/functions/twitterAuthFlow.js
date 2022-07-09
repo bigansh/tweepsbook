@@ -21,6 +21,8 @@ const twitterAuthFlow = () => {
 				}
 			)
 
+		console.log(state)
+
 		return { url, codeVerifier, state }
 	} catch (error) {
 		throw new Error(error)
