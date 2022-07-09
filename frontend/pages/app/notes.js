@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-
 import dynamic from "next/dynamic";
+import { IconContext } from "react-icons";
 
 import { GrNotes } from "react-icons/gr";
 import { BiTrashAlt } from 'react-icons/bi'
 import { AiOutlineEye } from 'react-icons/ai'
+import { AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BiArchiveIn } from 'react-icons/bi'
 import { BsTwitter } from 'react-icons/bs'
 
@@ -17,14 +18,18 @@ const MDEditor = dynamic(
 
 const notes = () => {
     const [value, setValue] = useState("**Start taking your Notes Here...**");
+    const [eye, setEye] = useState(true);
 
     return (
-        <div>
+        <div className='h-screen'>
             <DashNavbar search={false} />
 
+
             <div className='flex justify-around'>
-                <div className='min-h-eigthy flex flex-col p-1 w-1/3 justify-evenly'>
-                    <div className='flex flex-col rounded-md border w-96 h-fit p-1 m-4 '>
+                <div className='flex flex-col p-1 w-1/3 justify-between'>
+
+                    {/* Selected Tweet goes here */}
+                    <div className='flex flex-col rounded-md border-2 w-96 h-fit p-1 m-4 '>
                         <div className='w-full flex items-center'>
                             <img
                                 src='https://pbs.twimg.com/profile_images/1209898984/twitter_normal.jpg'
@@ -42,6 +47,7 @@ const notes = () => {
                             </div>
                         </div>
                         <p className='m-1 p-1'>vkmdfkvmdkcmkldmckldmckldmckldmcklmc ckdmc ckmckld ckldmc</p>
+
                         <div className='flex items-center opacity-50 p-2 justify-end'>
                             <BiArchiveIn className='mx-3 w-5 h-5' />
                             <BiTrashAlt
@@ -55,10 +61,13 @@ const notes = () => {
                         </div>
                     </div>
 
+                    {/* Tweet Menu Functions */}
                     <div className='flex justify-around items-center w-full'>
-                        <button className='flex items-center rounded justify-around m-1 border w-10 h-10 hover:opacity-80'><BiArchiveIn className='w-6 h-6' /></button>
-                        <button className='flex items-center rounded justify-around m-1 border w-10 h-10 hover:opacity-80'><AiOutlineEye className='w-6 h-6' /></button>
-                        <button className='flex items-center rounded justify-around m-1 border w-10 h-10 hover:opacity-80'><BiTrashAlt className='w-6 h-6' /></button>
+                        <IconContext.Provider value={{ color: "darkBlue", className: "hover:opacity-70" }} ><button className='flex items-center rounded-sm justify-around m-1 border w-10 h-10 '><BiArchiveIn className='w-6 h-6' /></button></IconContext.Provider >
+
+                        <IconContext.Provider value={{ color: "darkBlue", className: "hover:opacity-70" }} ><button onClick={() => setEye(!eye)} className='flex items-center rounded-sm justify-around m-1 border w-10 h-10 '>{eye ? <AiOutlineEye className='w-6 h-6' /> : <AiOutlineEyeInvisible className='w-6 h-6' />}</button></IconContext.Provider >
+
+                        <IconContext.Provider value={{ color: "darkBlue", className: "hover:opacity-70" }} ><button className='flex items-center rounded-sm justify-around m-1 border w-10 h-10 '><BiTrashAlt className='w-6 h-6' /></button></IconContext.Provider >
                     </div>
                 </div>
 
