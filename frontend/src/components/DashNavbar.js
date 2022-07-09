@@ -30,7 +30,7 @@ const DashNavbar = () => {
 					{menuActive ? <AiOutlineUp /> : <AiOutlineDown />}
 				</button>
 				{menuActive ? (
-					<div className='relative drop-shadow-xl rounded-md p-2 mt-10 w-32 z-10 bg-white'>
+					<div className='absolute top-12 drop-shadow-xl rounded-md p-2 mt-10 w-32 z-10 bg-white'>
 						<button className='flex items-center m-2'>
 							<BiLogOut className='mr-2' />
 							Logout
@@ -41,7 +41,7 @@ const DashNavbar = () => {
 						</button>
 					</div>
 				) : (
-					<div className='hidden relative flex-col drop-shadow-xl rounded-md p-2 mt-10 w-32 z-10 bg-white'>
+					<div className='hidden absolute flex-col drop-shadow-xl rounded-md p-2 mt-10 w-32 z-10 bg-white'>
 						<button className='flex items-center m-2'>
 							<BiLogOut className='mr-2' />
 							Logout
