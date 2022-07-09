@@ -1,18 +1,29 @@
-import React from 'react'
-import DashNavbar from '../../src/components/DashNavbar'
+import React, { useState } from 'react'
+
+import dynamic from "next/dynamic";
+
 import { GrNotes } from "react-icons/gr";
 import { BiTrashAlt } from 'react-icons/bi'
 import { AiOutlineEye } from 'react-icons/ai'
 import { BiArchiveIn } from 'react-icons/bi'
 import { BsTwitter } from 'react-icons/bs'
 
+import DashNavbar from '../../src/components/DashNavbar'
+
+const MDEditor = dynamic(
+    () => import("@uiw/react-md-editor"),
+    { ssr: false }
+);
+
 const notes = () => {
+    const [value, setValue] = useState("**Start taking your Notes Here...**");
+
     return (
         <div>
             <DashNavbar search={false} />
 
             <div className='flex justify-around'>
-                <div className='min-h-eigthy flex flex-col p-1 w-1/3 items-start justify-evenly'>
+                <div className='min-h-eigthy flex flex-col p-1 w-1/3 justify-evenly'>
                     <div className='flex flex-col rounded-md border w-96 h-fit p-1 m-4 '>
                         <div className='w-full flex items-center'>
                             <img
@@ -44,15 +55,15 @@ const notes = () => {
                         </div>
                     </div>
 
-                    <div className='flex justify-center items-center w-full'>
-                        <button className='flex items-center justify-center m-1 p-1 border w-20 h-10'><BiArchiveIn className='w-6 h-6 ' /></button>
-                        <button className='flex items-center justify-center m-1 p-1 border w-20 h-10'><AiOutlineEye className='w-6 h-6 ' /></button>
-                        <button className='flex items-center justify-center m-1 p-1 border w-20 h-10'><BiTrashAlt className='w-6 h-6 ' /></button>
+                    <div className='flex justify-around items-center w-full'>
+                        <button className='flex items-center rounded justify-around m-1 border w-10 h-10 hover:opacity-80'><BiArchiveIn className='w-6 h-6' /></button>
+                        <button className='flex items-center rounded justify-around m-1 border w-10 h-10 hover:opacity-80'><AiOutlineEye className='w-6 h-6' /></button>
+                        <button className='flex items-center rounded justify-around m-1 border w-10 h-10 hover:opacity-80'><BiTrashAlt className='w-6 h-6' /></button>
                     </div>
                 </div>
 
-                <div className='flex w-1/2 border min-h-4/6'>
-                    <input type="text" className='p-2 w-full h-2/3' placeholder="Your Notes here..." />
+                <div className='flex m-4 w-1/2' data-color-mode="light">
+                    <MDEditor value={value} onChange={setValue} height="350" preview="edit" visibleDragbar="false" className='borde rounded w-full' />
                 </div>
             </div>
         </div>
