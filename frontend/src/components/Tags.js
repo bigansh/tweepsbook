@@ -4,13 +4,14 @@ import { BiImport } from 'react-icons/bi'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 
 const tags = () => {
-	const { fetchTags, activeTag, setActiveTag } = useContext(BookmarksContext)
+	const { fetchTags, activeTag, setActiveTag, bookmarks } =
+		useContext(BookmarksContext)
 	const [tags, setTags] = useState([])
 
 	useEffect(() => {
 		importTags()
 		console.log(activeTag)
-	}, [])
+	}, [bookmarks])
 
 	const importTags = async () => {
 		const tempTags = await fetchTags()

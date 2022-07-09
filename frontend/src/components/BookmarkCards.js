@@ -16,9 +16,15 @@ const bookmarkCards = ({ archive }) => {
 	const [bookmarksToShow, setBookmarksToShow] = React.useState([])
 
 	const filterByTag = () => {
+		console.log('called')
 		let tempBookmarksToShow = []
 		bookmarks.map((bookmark) => {
-			const matchedBookmarks = bookmark.backend.tags.map((tag) => {
+			if (bookmark.backend.tags.length < 1) {
+				tempBookmarksToShow.push(bookmark)
+				return
+			}
+			bookmark.backend.tags.map((tag) => {
+				console.log('bookmark', bookmark)
 				if (activeTag.tag === 'all') {
 					tempBookmarksToShow = bookmarks
 					return

@@ -35,7 +35,13 @@ const DashNavbar = () => {
 							<BiLogOut className='mr-2' />
 							Logout
 						</button>
-						<button className='flex items-center m-2' onClick={()=>window.location.href="/app/dashboard?settings=true"}>
+						<button
+							className='flex items-center m-2'
+							onClick={() =>
+								(window.location.href =
+									'/app/dashboard?settings=true')
+							}
+						>
 							<FiSettings className='mr-2' />
 							Settings
 						</button>
