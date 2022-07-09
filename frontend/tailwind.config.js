@@ -19,7 +19,7 @@ module.exports = {
 			serif: ['ui-serif', 'Merriweather', 'serif'],
 		},
 		minHeight: {
-			eigthy: '78vh',
+			eighty: '78vh',
 		},
 		extend: {
 			keyframes: {
