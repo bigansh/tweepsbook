@@ -10,7 +10,9 @@ const UserProvider = ({ children }) => {
 			process.env.NEXT_PUBLIC_FETCH_ACCOUNT_DETAILS,
 			{
 				headers: {
-					Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+					Authorization: `Bearer ${localStorage.getItem(
+						'sessionToken'
+					)}`,
 				},
 			}
 		)
@@ -23,7 +25,9 @@ const UserProvider = ({ children }) => {
 			user,
 			{
 				headers: {
-					Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+					Authorization: `Bearer ${localStorage.getItem(
+						'sessionToken'
+					)}`,
 				},
 			}
 		)
@@ -33,7 +37,7 @@ const UserProvider = ({ children }) => {
 	const deleteUser = async () => {
 		const res = await axios.delete(process.env.NEXT_PUBLIC_DELETE_ACCOUNT, {
 			headers: {
-				Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+				Authorization: `Bearer ${localStorage.getItem('sessionToken')}`,
 			},
 			data: {
 				confirmation: true,

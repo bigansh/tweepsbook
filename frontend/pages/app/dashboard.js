@@ -11,6 +11,7 @@ import { Router, useRouter } from 'next/router'
 import Settings from '../../src/components/Settings'
 import { UserContext } from '../../contexts/UserContext'
 export default function dashboard({ children }) {
+	const router = useRouter()
 	const { user, setUser, getUser } = useContext(UserContext)
 	const [menuActive, setMenuActive] = useState(false)
 	const {
@@ -25,10 +26,16 @@ export default function dashboard({ children }) {
 	}
 
 	useEffect(() => {
+		const verifyUser = async () => {
+			try {
+				await getUser()
+			} catch (err) {
+				router.push('/')
+			}
+		}
+		verifyUser()
 		fetchBookmarks()
-		getUser()
 	}, [])
-	const router = useRouter()
 	return (
 		<>
 			{router.query.settings === 'true' && <Settings />}

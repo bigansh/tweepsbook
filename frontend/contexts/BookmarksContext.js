@@ -18,7 +18,9 @@ const BookmarksProvider = ({ children }) => {
 				{
 					headers: {
 						'Content-Type': 'application/json',
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+						Authorization: `Bearer ${localStorage.getItem(
+							'sessionToken'
+						)}`,
 					},
 				}
 			)
@@ -36,7 +38,9 @@ const BookmarksProvider = ({ children }) => {
 				{
 					headers: {
 						'Content-Type': 'application/json',
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+						Authorization: `Bearer ${localStorage.getItem(
+							'sessionToken'
+						)}`,
 					},
 				}
 			)
@@ -54,7 +58,9 @@ const BookmarksProvider = ({ children }) => {
 				{
 					headers: {
 						'Content-Type': 'application/json',
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+						Authorization: `Bearer ${localStorage.getItem(
+							'sessionToken'
+						)}`,
 					},
 				}
 			)
@@ -68,7 +74,9 @@ const BookmarksProvider = ({ children }) => {
 				{},
 				{
 					headers: {
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+						Authorization: `Bearer ${localStorage.getItem(
+							'sessionToken'
+						)}`,
 					},
 				}
 			)
@@ -84,7 +92,9 @@ const BookmarksProvider = ({ children }) => {
 				process.env.NEXT_PUBLIC_FETCH_BOOKMARKS_URL,
 				{
 					headers: {
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+						Authorization: `Bearer ${localStorage.getItem(
+							'sessionToken'
+						)}`,
 					},
 				}
 			)
@@ -119,7 +129,9 @@ const BookmarksProvider = ({ children }) => {
 				process.env.NEXT_PUBLIC_FETCH_BOOKMARK_URL + id,
 				{
 					headers: {
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+						Authorization: `Bearer ${localStorage.getItem(
+							'sessionToken'
+						)}`,
 					},
 				}
 			)
@@ -133,7 +145,9 @@ const BookmarksProvider = ({ children }) => {
 				process.env.NEXT_PUBLIC_FETCH_TAGS_URL,
 				{
 					headers: {
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+						Authorization: `Bearer ${localStorage.getItem(
+							'sessionToken'
+						)}`,
 					},
 				}
 			)
@@ -148,7 +162,9 @@ const BookmarksProvider = ({ children }) => {
 				`${process.env.NEXT_PUBLIC_DELETE_BOOKMARK_URL}`,
 				{
 					headers: {
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+						Authorization: `Bearer ${localStorage.getItem(
+							'sessionToken'
+						)}`,
 					},
 					data: {
 						bookmarkId: id,
@@ -167,7 +183,9 @@ const BookmarksProvider = ({ children }) => {
 				`${process.env.NEXT_PUBLIC_DELETE_BOOKMARK_URL}`,
 				{
 					headers: {
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEMP_SESSION_TOKEN}`,
+						Authorization: `Bearer ${localStorage.getItem(
+							'sessionToken'
+						)}`,
 					},
 					data: {
 						tagId: tagId,
