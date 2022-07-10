@@ -20,7 +20,10 @@ const bookmarkCards = ({ archive }) => {
 		let tempBookmarksToShow = []
 		bookmarks.map((bookmark) => {
 			if (bookmark.backend.tags.length < 1) {
-				tempBookmarksToShow.push(bookmark)
+				activeTag.tag === 'all'
+					? tempBookmarksToShow.push(bookmark)
+					: null
+				// tempBookmarksToShow = bookmarks
 				return
 			}
 			bookmark.backend.tags.map((tag) => {
