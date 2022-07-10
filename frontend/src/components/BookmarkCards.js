@@ -18,20 +18,17 @@ const bookmarkCards = ({ archive }) => {
 	const filterByTag = () => {
 		console.log('called')
 		let tempBookmarksToShow = []
-		bookmarks.map((bookmark) => {
+		bookmarks.forEach((bookmark) => {
+			if (activeTag.tag === 'all') {
+				tempBookmarksToShow = bookmarks
+				return
+			}
 			if (bookmark.backend.tags.length < 1) {
-				activeTag.tag === 'all'
-					? tempBookmarksToShow.push(bookmark)
-					: null
-				// tempBookmarksToShow = bookmarks
 				return
 			}
 			bookmark.backend.tags.map((tag) => {
 				console.log('bookmark', bookmark)
-				if (activeTag.tag === 'all') {
-					tempBookmarksToShow = bookmarks
-					return
-				}
+
 				if (tag.tag === activeTag.tag) {
 					tempBookmarksToShow.push(bookmark)
 				}
