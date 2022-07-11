@@ -26,21 +26,21 @@ const tags = () => {
 	return (
 		<div className='flex flex-col justify-between items-start min-h-eigthy h-full w-full mt-2 text-white'>
 			<h1 className='text-xl mb-10 font-bold pl-5'>TAGS</h1>
-			<div className='flex text-md justify-between h-full w-full flex-col items-center'>
-				<div className='flex flex-col'>
+			<div className='flex text-md justify-between h-full w-full flex-col items-start'>
+				<div className='flex mx-8 flex-col items-start w-full'>
 					{tags?.map((tag, index) => {
 						return (
 							<button
 								key={tag._id}
 								onClick={() => handleClick(tag)}
 								className={
-									'm-1 px-8 py-1 ' +
+									'm-1 pr-6 px-2 py-1 ' +
 									(activeTag?._id === tag?._id
 										? 'bg-hovertagColor'
 										: '')
 								}
 							>
-								#{tag.tag}
+								{tag.tag[0]=="#" ? tag.tag : <>#{tag.tag}</>}
 							</button>
 						)
 					})}
@@ -48,14 +48,14 @@ const tags = () => {
 
 				<div className='flex text-md border-t w-full flex-col items-center'>
 					<button
-						className='flex items-center px-4 h-8 m-2'
+						className='flex items-start justify-center px-4 h-8 m-2 border-b w-full'
 						onClick={importBookmarks}
 					>
 						<BiImport className='mr-2' />
 						Import
 					</button>
 					<button
-						className='flex items-center px-4 m-2 h-8'
+						className='flex items-start px-4 m-2 h-8'
 						onClick={() =>
 							(window.location.href = '/app/dashboard/archive')
 						}

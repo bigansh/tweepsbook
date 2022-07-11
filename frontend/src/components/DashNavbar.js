@@ -9,7 +9,7 @@ import SearchBar from './SearchBar'
 import BookmarkCards from './BookmarkCards'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 
-const DashNavbar = () => {
+const DashNavbar = ({ search }) => {
 	const [menuActive, setMenuActive] = useState(false)
 	const menuClick = () => {
 		setMenuActive(!menuActive)
@@ -19,7 +19,7 @@ const DashNavbar = () => {
 		<div className='flex items-center px-5 justify-between h-24 border'>
 			<TweepsBookIcon />
 
-			{<SearchBar />}
+			{search && <SearchBar />}
 
 			<div className='flex items-center justify-center'>
 				<img
@@ -38,8 +38,8 @@ const DashNavbar = () => {
 						<button
 							className='flex items-center m-2'
 							onClick={() =>
-								(window.location.href =
-									'/app/dashboard?settings=true')
+							(window.location.href =
+								'/app/dashboard?settings=true')
 							}
 						>
 							<FiSettings className='mr-2' />

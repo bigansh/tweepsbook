@@ -85,7 +85,7 @@ const TagPill = ({ bookmark }) => {
 				return (
 					<div className='mx-1' key={tag._id}>
 						{!tag.showEdit && (
-							<div className='border-solid border flex items-center border-dark-bluee px-2 py-1 rounded-full my-1 text-sm text-[#004965] font-semibold'>
+							<div className='border-solid border flex items-center border-dark-blue px-2 py-1 rounded-full my-1 text-sm text-[#004965] font-semibold'>
 								<span onClick={() => editTag(tag)}>
 									#{tag.tag}
 								</span>
@@ -99,9 +99,9 @@ const TagPill = ({ bookmark }) => {
 							<form onSubmit={(e) => handleTagUpdate({ e, tag })}>
 								<input
 									type='text'
-									className='border p-1 rounded text-sm '
+									className='border p-1 rounded-full text-sm '
 									name='tagName'
-									defaultValue={tag.tag}
+									placeholder={tag.tag}
 								/>
 							</form>
 						)}

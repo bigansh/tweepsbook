@@ -5,6 +5,7 @@ import { BsTwitter } from 'react-icons/bs'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 import TagPill from './TagPill'
 import { MdOutlineStickyNote2 } from 'react-icons/md'
+
 const bookmarkCards = ({ archive }) => {
 	const {
 		bookmarks,
@@ -73,7 +74,7 @@ const bookmarkCards = ({ archive }) => {
 				return (
 					bookmark.backend.read === (archive || false) && (
 						<div
-							className='flex flex-col rounded-md border w-96 h-fit p-1 m-2 animate-[scale_.2s]'
+							className='flex flex-col rounded-md border w-5/12 p-1 m-2 animate-[scale_.2s]'
 							key={index}
 						>
 							<div className='w-full flex items-center'>
@@ -89,10 +90,10 @@ const bookmarkCards = ({ archive }) => {
 								</span>
 								<span className='mx-1 font-thin text-xs'>
 									@{bookmark.twitter.author.username} •{' '}
-									{bookmark.twitter.created_at}
+									{bookmark.twitter.created_at.split('T')[0]}
 								</span>
 								<div className='flex items-center p-2 justify-end'>
-									<BsTwitter className='mx-3' />
+									<BsTwitter className='mx-3' style={{ color: '#1DA1F2' }} />
 								</div>
 							</div>
 							<p className='m-1 p-1'>{bookmark.twitter.text}</p>
