@@ -74,7 +74,7 @@ const bookmarkCards = ({ archive }) => {
 				return (
 					bookmark.backend.read === (archive || false) && (
 						<div
-							className='flex flex-col rounded-md border w-5/12 p-1 m-2 animate-[scale_.2s]'
+							className='flex flex-col rounded-md justify-between border w-5/12 p-1 m-2 animate-[scale_.2s]'
 							key={index}
 						>
 							<div className='w-full flex items-center'>
@@ -92,12 +92,12 @@ const bookmarkCards = ({ archive }) => {
 									@{bookmark.twitter.author.username} •{' '}
 									{bookmark.twitter.created_at.split('T')[0]}
 								</span>
-								<div className='flex items-center p-2 justify-end'>
+								<div className='flex items-end w-full p-2 justify-end'>
 									<BsTwitter className='mx-3' style={{ color: '#1DA1F2' }} />
 								</div>
 							</div>
 							<p className='m-1 p-1'>{bookmark.twitter.text}</p>
-							<div className='flex items-start  p-2 justify-between '>
+							<div className='flex items-start p-2 justify-between '>
 								<TagPill bookmark={bookmark} />
 								<div className='flex items-start'>
 									<BiArchiveIn
