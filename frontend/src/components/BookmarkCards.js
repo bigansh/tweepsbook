@@ -69,12 +69,12 @@ const bookmarkCards = ({ archive }) => {
 	}, [searchTerm, activeTag])
 
 	return (
-		<div className='flex flex-wrap p-3 overflow-auto h-full '>
+		<div className='flex flex-wrap p-3 overflow-auto'>
 			{bookmarksToShow?.map((bookmark, index) => {
 				return (
 					bookmark.backend.read === (archive || false) && (
 						<div
-							className='flex flex-col rounded-md justify-between border w-5/12 p-1 m-2 animate-[scale_.2s]'
+							className='flex flex-col rounded-md justify-between border w-[30rem] p-1 m-3 animate-[scale_.2s]'
 							key={index}
 						>
 							<div className='w-full flex items-center'>
@@ -85,14 +85,14 @@ const bookmarkCards = ({ archive }) => {
 									}
 									className='w-10 h-10 rounded-full m-1 p-1'
 								/>
-								<span className='mx-1'>
+								<span className='mx-1 px-2'>
 									{bookmark.twitter.author.name}
 								</span>
-								<span className='mx-1 font-thin text-xs'>
+								<span className='font-thin text-xs w-32 px-2 '>
 									@{bookmark.twitter.author.username} •{' '}
 									{bookmark.twitter.created_at.split('T')[0]}
 								</span>
-								<div className='flex items-end w-full p-2 justify-end'>
+								<div className='flex items-end p-2 justify-end'>
 									<BsTwitter className='mx-3' style={{ color: '#1DA1F2' }} />
 								</div>
 							</div>

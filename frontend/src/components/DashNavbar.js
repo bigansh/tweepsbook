@@ -23,7 +23,7 @@ const DashNavbar = ({ search }) => {
 
 			<div className='flex items-center justify-center'>
 				<img
-					src='https://pbs.twimg.com/profile_images/1541300431623598080/QNrH1wh1_400x400.jpg'
+					src='https://i.imgur.com/XqQXQZb.png'
 					className='w-12 h-12 m-1 rounded-full'
 				/>
 				<button className='m-1 p-1' onClick={menuClick}>
