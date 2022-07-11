@@ -10,7 +10,8 @@ const BookmarksProvider = ({ children }) => {
 	const updateReadStatus = async ({ id, currentStatus }) => {
 		try {
 			const res = await axios.patch(
-				process.env.NEXT_PUBLIC_UPDATE_READ_STATUS_URL,
+				process.env.NEXT_PUBLIC_HOST +
+					`/crud/update?queryType=readStatus`,
 				{
 					bookmarkId: id,
 					readStatus: !currentStatus,
@@ -30,7 +31,8 @@ const BookmarksProvider = ({ children }) => {
 	const updateShareStatus = async ({ id, currentStatus }) => {
 		try {
 			const res = await axios.patch(
-				process.env.NEXT_PUBLIC_UPDATE_SHARE_STATUS_URL,
+				process.env.NEXT_PUBLIC_HOST +
+					`/crud/update?queryType=shareStatus`,
 				{
 					bookmarkId: id,
 					shareStatus: !currentStatus,
@@ -50,7 +52,7 @@ const BookmarksProvider = ({ children }) => {
 	const updateTags = async ({ id, tags }) => {
 		try {
 			const res = await axios.patch(
-				process.env.NEXT_PUBLIC_UPDATE_TAGS_URL,
+				process.env.NEXT_PUBLIC_HOST + `/crud/update?queryType=tags`,
 				{
 					bookmarkId: id,
 					tags: tags,
@@ -70,7 +72,7 @@ const BookmarksProvider = ({ children }) => {
 	const importBookmarks = async () => {
 		try {
 			const bookmarks = await axios.post(
-				process.env.NEXT_PUBLIC_IMPORT_BOOKMARKS_URL,
+				process.env.NEXT_PUBLIC_HOST + `/crud/create?queryType=twitter`,
 				{},
 				{
 					headers: {
@@ -89,7 +91,7 @@ const BookmarksProvider = ({ children }) => {
 	const fetchBookmarks = async () => {
 		try {
 			const bookmarks = await axios.get(
-				process.env.NEXT_PUBLIC_FETCH_BOOKMARKS_URL,
+				process.env.NEXT_PUBLIC_HOST + `/crud/read?queryType=bookmarks`,
 				{
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem(
@@ -126,7 +128,9 @@ const BookmarksProvider = ({ children }) => {
 	const fetchBookmark = async ({ id }) => {
 		try {
 			const tags = await axios.get(
-				process.env.NEXT_PUBLIC_FETCH_BOOKMARK_URL + id,
+				process.env.NEXT_PUBLIC_HOST +
+					`/crud/read?queryType=bookmark&bookmarkId=` +
+					id,
 				{
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem(
@@ -142,7 +146,7 @@ const BookmarksProvider = ({ children }) => {
 	const fetchTags = async () => {
 		try {
 			const res = await axios.get(
-				process.env.NEXT_PUBLIC_FETCH_TAGS_URL,
+				process.env.NEXT_PUBLIC_HOST + `/crud/read?queryType=tags`,
 				{
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem(
@@ -159,7 +163,8 @@ const BookmarksProvider = ({ children }) => {
 	const deleteBookmark = async (id) => {
 		try {
 			const res = await axios.delete(
-				`${process.env.NEXT_PUBLIC_DELETE_BOOKMARK_URL}`,
+				process.env.NEXT_PUBLIC_HOST +
+					`/crud/delete?queryType=bookmark`,
 				{
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem(
@@ -180,7 +185,7 @@ const BookmarksProvider = ({ children }) => {
 	const deleteTag = async (tagId) => {
 		try {
 			const res = await axios.delete(
-				`${process.env.NEXT_PUBLIC_DELETE_BOOKMARK_URL}`,
+				process.env.NEXT_PUBLIC_HOST + `/crud/delete?queryType=tag`,
 				{
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem(
