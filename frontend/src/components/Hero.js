@@ -30,7 +30,8 @@ const Hero = () => {
 								className='border-2 text-[16px] border-dark-blue bg-dark-blue text-white py-3 px-5 rounded-xl flex items-center content-center'
 								onClick={() => {
 									window.open(
-										process.env.NEXT_PUBLIC_AUTH_URL +
+										process.env.NEXT_PUBLIC_HOST +
+											`/auth/twitter` +
 											'?authorization=' +
 											process.env.NEXT_PUBLIC_STATIC_TOKEN
 									)
