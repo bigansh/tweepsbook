@@ -7,8 +7,11 @@ const BookmarksProvider = ({ children }) => {
 	const [bookmarks, setBookmarks] = useState([])
 	const [activeTag, setActiveTag] = useState()
 	const [searchTerm, setSearchTerm] = useState('')
+	const [showLoader, setShowLoader] = useState(false)
+
 	const updateReadStatus = async ({ id, currentStatus }) => {
 		try {
+			setShowLoader(true)
 			const res = await axios.patch(
 				process.env.NEXT_PUBLIC_HOST +
 					`/crud/update?queryType=readStatus`,
@@ -26,10 +29,15 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			fetchBookmarks()
-		} catch (err) {}
+			setShowLoader(false)
+		} catch (err) {
+			setShowLoader(false)
+			throw err
+		}
 	}
 	const updateShareStatus = async ({ id, currentStatus }) => {
 		try {
+			setShowLoader(true)
 			const res = await axios.patch(
 				process.env.NEXT_PUBLIC_HOST +
 					`/crud/update?queryType=shareStatus`,
@@ -47,10 +55,15 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			fetchBookmarks()
-		} catch (err) {}
+			setShowLoader(false)
+		} catch (err) {
+			setShowLoader(false)
+			throw err
+		}
 	}
 	const updateTags = async ({ id, tags }) => {
 		try {
+			setShowLoader(true)
 			const res = await axios.patch(
 				process.env.NEXT_PUBLIC_HOST + `/crud/update?queryType=tags`,
 				{
@@ -67,10 +80,16 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			fetchBookmarks()
-		} catch (err) {}
+			fetchTags()
+			setShowLoader(false)
+		} catch (err) {
+			setShowLoader(false)
+			throw err
+		}
 	}
 	const importBookmarks = async () => {
 		try {
+			setShowLoader(true)
 			const bookmarks = await axios.post(
 				process.env.NEXT_PUBLIC_HOST + `/crud/create?queryType=twitter`,
 				{},
@@ -83,13 +102,17 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			console.log(bookmarks)
+			fetchBookmarks()
+			setShowLoader(false)
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
 
 	const fetchBookmarks = async () => {
 		try {
+			setShowLoader(true)
 			const bookmarks = await axios.get(
 				process.env.NEXT_PUBLIC_HOST + `/crud/read?queryType=bookmarks`,
 				{
@@ -121,12 +144,15 @@ const BookmarksProvider = ({ children }) => {
 			console.log('twt', res.data)
 			console.log('be', bookmarks.data)
 			// setBookmarks(res.data)
+			setShowLoader(false)
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
 	const fetchBookmark = async ({ id }) => {
 		try {
+			setShowLoader(true)
 			const tags = await axios.get(
 				process.env.NEXT_PUBLIC_HOST +
 					`/crud/read?queryType=bookmark&bookmarkId=` +
@@ -139,12 +165,15 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
+			setShowLoader(false)
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
 	const fetchTags = async () => {
 		try {
+			setShowLoader(true)
 			const res = await axios.get(
 				process.env.NEXT_PUBLIC_HOST + `/crud/read?queryType=tags`,
 				{
@@ -155,13 +184,16 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
+			setShowLoader(false)
 			return res.data
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
 	const deleteBookmark = async (id) => {
 		try {
+			setShowLoader(true)
 			const res = await axios.delete(
 				process.env.NEXT_PUBLIC_HOST +
 					`/crud/delete?queryType=bookmark`,
@@ -178,12 +210,15 @@ const BookmarksProvider = ({ children }) => {
 			)
 			console.log(res)
 			fetchBookmarks()
+			setShowLoader(false)
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
 	const deleteTag = async (tagId) => {
 		try {
+			setShowLoader(true)
 			const res = await axios.delete(
 				process.env.NEXT_PUBLIC_HOST + `/crud/delete?queryType=tag`,
 				{
@@ -199,7 +234,9 @@ const BookmarksProvider = ({ children }) => {
 			)
 			console.log(res)
 			fetchBookmarks()
+			setShowLoader(false)
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
@@ -222,6 +259,8 @@ const BookmarksProvider = ({ children }) => {
 				setActiveTag,
 				searchTerm,
 				setSearchTerm,
+				showLoader,
+				setShowLoader,
 			}}
 		>
 			{children}

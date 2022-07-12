@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiTrashAlt } from 'react-icons/bi'
 import { BiArchiveIn } from 'react-icons/bi'
 import { BsTwitter } from 'react-icons/bs'
@@ -6,6 +6,7 @@ import { BookmarksContext } from '../../contexts/BookmarksContext'
 import TagPill from './TagPill'
 import { MdOutlineStickyNote2 } from 'react-icons/md'
 import Masonry from 'react-masonry-css'
+import Loader from './Loader'
 
 const bookmarkCards = ({ archive }) => {
 	const {
@@ -14,10 +15,13 @@ const bookmarkCards = ({ archive }) => {
 		deleteBookmark,
 		activeTag,
 		searchTerm,
+		showLoader,
+		setShowLoader,
 	} = React.useContext(BookmarksContext)
 	const [bookmarksToShow, setBookmarksToShow] = React.useState([])
 
 	const filterByTag = () => {
+		setShowLoader(true)
 		console.log('called')
 		let tempBookmarksToShow = []
 		bookmarks.forEach((bookmark) => {
@@ -36,9 +40,11 @@ const bookmarkCards = ({ archive }) => {
 				}
 			})
 		})
+		setShowLoader(false)
 		return tempBookmarksToShow
 	}
 	const filterBySearchTerm = () => {
+		setShowLoader(true)
 		let tempBookmarksToShow = []
 		let bookmarksFilteredByTag = filterByTag()
 		bookmarksFilteredByTag.map((bookmark) => {
@@ -50,6 +56,8 @@ const bookmarkCards = ({ archive }) => {
 				tempBookmarksToShow.push(bookmark)
 			}
 		})
+		console.log('off hogA')
+		setShowLoader(false)
 		return tempBookmarksToShow
 	}
 
@@ -68,11 +76,10 @@ const bookmarkCards = ({ archive }) => {
 		setBookmarksToShow([...tempBookmarksToShow])
 		console.log(tempBookmarksToShow)
 	}, [searchTerm, activeTag])
-	var msnry = new Masonry('.grid', {
-		columnWidth: 200,
-	})
+
 	return (
 		<div className='flex flex-wrap p-3 overflow-auto'>
+			{showLoader && <Loader />}
 			<Masonry
 				breakpointCols={3}
 				className='my-masonry-grid'
