@@ -5,6 +5,7 @@ import { BsTwitter } from 'react-icons/bs'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 import TagPill from './TagPill'
 import { MdOutlineStickyNote2 } from 'react-icons/md'
+import Masonry from 'react-masonry-css'
 
 const bookmarkCards = ({ archive }) => {
 	const {
@@ -67,62 +68,82 @@ const bookmarkCards = ({ archive }) => {
 		setBookmarksToShow([...tempBookmarksToShow])
 		console.log(tempBookmarksToShow)
 	}, [searchTerm, activeTag])
-
+	var msnry = new Masonry('.grid', {
+		columnWidth: 200,
+	})
 	return (
 		<div className='flex flex-wrap p-3 overflow-auto'>
-			{bookmarksToShow?.map((bookmark, index) => {
-				return (
-					bookmark.backend.read === (archive || false) && (
-						<div
-							className='flex flex-col rounded-md justify-between border w-[30rem] p-1 m-3 animate-[scale_.2s]'
-							key={index}
-						>
-							<div className='w-full flex items-center'>
-								<img
-									src={
-										bookmark.twitter.author
-											.profile_image_url
-									}
-									className='w-10 h-10 rounded-full m-1 p-1'
-								/>
-								<span className='mx-1 px-2'>
-									{bookmark.twitter.author.name}
-								</span>
-								<span className='font-thin text-xs w-32 px-2 '>
-									@{bookmark.twitter.author.username} •{' '}
-									{bookmark.twitter.created_at.split('T')[0]}
-								</span>
-								<div className='flex items-end p-2 justify-end'>
-									<BsTwitter className='mx-3' style={{ color: '#1DA1F2' }} />
+			<Masonry
+				breakpointCols={3}
+				className='my-masonry-grid'
+				columnClassName='my-masonry-grid_column'
+			>
+				{/* array of JSX items */}
+				{bookmarksToShow?.map((bookmark, index) => {
+					return (
+						bookmark.backend.read === (archive || false) && (
+							<div
+								className='flex flex-col rounded-md justify-between border  p-1 m-3 animate-[scale_.2s]'
+								key={index}
+							>
+								<div className='w-full flex items-center'>
+									<img
+										src={
+											bookmark.twitter.author
+												.profile_image_url
+										}
+										className='w-10 h-10 rounded-full m-1 p-1'
+									/>
+									<span className='mx-1 px-2'>
+										{bookmark.twitter.author.name}
+									</span>
+									<span className='font-thin text-xs w-32 px-2 '>
+										@{bookmark.twitter.author.username} •{' '}
+										{
+											bookmark.twitter.created_at.split(
+												'T'
+											)[0]
+										}
+									</span>
+									<div className='flex items-end p-2 justify-end'>
+										<BsTwitter
+											className='mx-3'
+											style={{ color: '#1DA1F2' }}
+										/>
+									</div>
+								</div>
+								<p className='m-1 p-1'>
+									{bookmark.twitter.text}
+								</p>
+								<div className='flex items-start p-2 justify-between '>
+									<TagPill bookmark={bookmark} />
+									<div className='flex items-start'>
+										<BiArchiveIn
+											className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
+											onClick={() =>
+												updateReadStatus({
+													id: bookmark.backend._id,
+													currentStatus:
+														bookmark.backend.read,
+												})
+											}
+										/>
+										<BiTrashAlt
+											className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
+											onClick={() =>
+												deleteBookmark(
+													bookmark.backend._id
+												)
+											}
+										/>
+										<MdOutlineStickyNote2 className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey' />
+									</div>
 								</div>
 							</div>
-							<p className='m-1 p-1'>{bookmark.twitter.text}</p>
-							<div className='flex items-start p-2 justify-between '>
-								<TagPill bookmark={bookmark} />
-								<div className='flex items-start'>
-									<BiArchiveIn
-										className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
-										onClick={() =>
-											updateReadStatus({
-												id: bookmark.backend._id,
-												currentStatus:
-													bookmark.backend.read,
-											})
-										}
-									/>
-									<BiTrashAlt
-										className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
-										onClick={() =>
-											deleteBookmark(bookmark.backend._id)
-										}
-									/>
-									<MdOutlineStickyNote2 className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey' />
-								</div>
-							</div>
-						</div>
+						)
 					)
-				)
-			})}
+				})}
+			</Masonry>
 		</div>
 	)
 }
