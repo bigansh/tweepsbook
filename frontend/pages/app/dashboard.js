@@ -1,6 +1,9 @@
 import { useEffect, useState, useContext } from 'react'
 import { AiOutlineDown } from 'react-icons/ai'
 import { AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlineAppstore } from 'react-icons/ai'
+import { AiOutlineCalendar } from 'react-icons/ai'
+import { MdOutlineSource } from 'react-icons/md'
 import Tags from '../../src/components/Tags'
 import BookmarkCards from '../../src/components/BookmarkCards'
 import DashNavbar from '../../src/components/DashNavbar'
@@ -14,8 +17,12 @@ import Loader from '../../src/components/loader.json';
 
 export default function dashboard({ children }) {
 	const router = useRouter()
+
 	const { user, setUser, getUser } = useContext(UserContext)
-	const [menuActive, setMenuActive] = useState(false)
+
+	const [sortMenu, setSortMenu] = useState(false)
+	const [filterMenu, setFilterMenu] = useState(false)
+
 	const {
 		bookmarks,
 		setBookmarks,
@@ -23,9 +30,6 @@ export default function dashboard({ children }) {
 		fetchBookmarks,
 		activeTag,
 	} = useContext(BookmarksContext)
-	const menuClick = () => {
-		setMenuActive(!menuActive)
-	}
 
 	useEffect(() => {
 		const verifyUser = async () => {
@@ -58,12 +62,27 @@ export default function dashboard({ children }) {
 									className='w-10 h-10 mx-auto' /></>)}
 							</h1>
 							<div className='flex items-center'>
-								<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 border  rounded-xl'>
-									Sort By <AiOutlineDown className='ml-2' />
-								</button>
-								<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 border rounded-xl'>
-									Add Filter <AiOutlinePlus className='ml-2' />
-								</button>
+								<div className='flex flex-col'>
+									<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 border rounded-full hover:opacity-60' onClick={() => setSortMenu(!sortMenu)}>
+										Sort By <AiOutlineDown className='ml-2' />
+									</button>
+									{sortMenu && (
+										<div className='absolute text-sm flex flex-col top-32 drop-shadow-xl rounded-md p-2 z-10 bg-white'>
+											<button className='flex p-1 items-center'><AiOutlineCalendar className='mr-1'/>Date</button>
+											<button className='flex p-1 items-center'><MdOutlineSource className='mr-1'/>Source</button>
+										</div>
+									)}
+								</div>
+								<div className='flex flex-col'>
+									<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 border rounded-full hover:opacity-60' onClick={() => setFilterMenu(!filterMenu)}>
+										Add Filter <AiOutlinePlus className='ml-2' />
+									</button>
+									{filterMenu && (
+										<div className='absolute text-sm flex flex-col top-32 drop-shadow-xl rounded-md p-2 z-10 bg-white'>
+											<button className='flex p-1 items-center'><AiOutlineAppstore className='mr-1'/>Apps</button>
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
 						<div className='overflow-y-scroll'>

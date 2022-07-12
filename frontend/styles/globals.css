@@ -24,12 +24,12 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #004965;
+	background: #708790;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #708790;
+	background: #004965;
 }
 .my-content {
 	padding-left: 224px;

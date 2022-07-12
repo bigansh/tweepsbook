@@ -99,7 +99,7 @@ const TagPill = ({ bookmark }) => {
 							<form onSubmit={(e) => handleTagUpdate({ e, tag })}>
 								<input
 									type='text'
-									className='border p-1 rounded-full text-sm '
+									className='border px-4 p-1 rounded-full text-sm '
 									name='tagName'
 									placeholder={tag.tag}
 								/>

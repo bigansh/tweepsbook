@@ -101,7 +101,7 @@ const bookmarkCards = ({ archive }) => {
 					return (
 						bookmark.backend.read === (archive || false) && (
 							<div
-								className='flex flex-col rounded-md border justify-between p-2 m-2 animate-[scale_.2s]'
+								className='flex border-mid-blue flex-col rounded-md border justify-between p-2 m-2 animate-[scale_.2s]'
 								key={index}
 							>
 								<div className='w-full flex items-center justify-between'>

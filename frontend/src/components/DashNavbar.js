@@ -27,30 +27,19 @@ const DashNavbar = ({ search }) => {
 				<button className='m-1 p-1' onClick={menuClick}>
 					{menuActive ? <AiOutlineUp /> : <AiOutlineDown />}
 				</button>
-				{menuActive ? (
-					<div className='absolute top-12 drop-shadow-xl rounded-md p-2 mt-10 w-32 z-10 bg-white'>
-						<button className='flex items-center m-2'>
+				{menuActive && (
+					<div className='absolute top-12 drop-shadow-xl rounded-md p-2 mt-5 w-24 z-10 bg-white'>
+						<button className='flex items-center m-1 text-sm'>
 							<BiLogOut className='mr-2' />
 							Logout
 						</button>
 						<button
-							className='flex items-center m-2'
+							className='flex items-center m-1 text-sm'
 							onClick={() =>
 							(window.location.href =
 								'/app/settings')
 							}
 						>
-							<FiSettings className='mr-2' />
-							Settings
-						</button>
-					</div>
-				) : (
-					<div className='hidden absolute flex-col drop-shadow-xl rounded-md p-2 mt-10 w-32 z-10 bg-white'>
-						<button className='flex items-center m-2'>
-							<BiLogOut className='mr-2' />
-							Logout
-						</button>
-						<button className='flex items-center m-2'>
 							<FiSettings className='mr-2' />
 							Settings
 						</button>
