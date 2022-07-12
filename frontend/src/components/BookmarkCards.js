@@ -10,7 +10,7 @@ import Lottie from 'react-lottie-player'
 import Loader from './loader.json'
 
 import Masonry from 'react-masonry-css'
-import Loader from './Loader'
+// import Loader from './Loader'
 
 const bookmarkCards = ({ archive }) => {
 	const {
@@ -83,7 +83,6 @@ const bookmarkCards = ({ archive }) => {
 
 	return (
 		<div className='flex flex-wrap p-3 overflow-auto'>
-			{showLoader && <Loader />}
 			<Masonry
 				breakpointCols={2}
 				className='my-masonry-grid'
