@@ -6,8 +6,6 @@ import { AiOutlineUp } from 'react-icons/ai'
 
 import TweepsBookIcon from './Icon'
 import SearchBar from './SearchBar'
-import BookmarkCards from './BookmarkCards'
-import { BookmarksContext } from '../../contexts/BookmarksContext'
 
 const DashNavbar = ({ search }) => {
 	const [menuActive, setMenuActive] = useState(false)
@@ -39,7 +37,7 @@ const DashNavbar = ({ search }) => {
 							className='flex items-center m-2'
 							onClick={() =>
 							(window.location.href =
-								'/app/dashboard?settings=true')
+								'/app/settings')
 							}
 						>
 							<FiSettings className='mr-2' />

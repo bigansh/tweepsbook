@@ -28,13 +28,13 @@ const tags = () => {
 			<h1 className='text-xl mb-10 font-bold pl-5'>TAGS</h1>
 			<div className='flex text-md justify-between overflow-y-auto overflow-x-hidden w-full flex-col items-start'>
 				<div className='flex mx-8 flex-col items-start w-full'>
-					{tags?.map((tag, index) => {
+					{tags ? (tags.map((tag, index) => {
 						return (
 							<button
 								key={tag._id}
 								onClick={() => handleClick(tag)}
 								className={
-									'm-1 pr-6 px-2 py-1 ' +
+									'm-1 pr-6 px-2 py-1 hover:opacity-80 ' +
 									(activeTag?._id === tag?._id
 										? 'bg-hovertagColor'
 										: '')
@@ -43,10 +43,10 @@ const tags = () => {
 								{tag.tag[0]=="#" ? tag.tag : <>#{tag.tag}</>}
 							</button>
 						)
-					})}
+					})) : <h1 className='text-2xl text-white'>Loading..</h1>}
 				</div>
 
-				<div className='flex text-md border-t w-full flex-col items-center'>
+				<div className='flex text-md border-t w-full mt-2 flex-col items-center'>
 					<button
 						className='flex items-start justify-center px-4 h-8 m-2 border-b w-full'
 						onClick={importBookmarks}
