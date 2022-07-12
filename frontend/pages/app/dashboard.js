@@ -44,12 +44,12 @@ export default function dashboard({ children }) {
 			<div className='overflow-hidden scroll-smooth fixed w-full'>
 				<DashNavbar search={true} />
 
-				<div className='flex overflow-hidden'>
-					<div className='flex flex-col items-start bg-dark-blue pt-10 w-44 sidebar fixed'>
+				<div className='flex overflow-hidden h-[88vh]'>
+					<div className='flex flex-col h-[88vh] items-start bg-dark-blue pt-10 w-44 fixed'>
 						<Tags />
 					</div>
 
-					<div className='w-full flex flex-col sidebar my-content'>
+					<div className='flex flex-col my-content w-full'>
 						<div className='flex border-b items-center justify-between p-2 '>
 							<h1 className='pl-2 font-bold text-3xl font-header'>
 								{activeTag ? (activeTag.tag[0] == "#" ? <>{activeTag.tag}</> : <>#{activeTag.tag}</>) : (<><Lottie loop
