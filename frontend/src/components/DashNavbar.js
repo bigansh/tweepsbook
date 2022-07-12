@@ -14,7 +14,7 @@ const DashNavbar = ({ search }) => {
 	}
 
 	return (
-		<div className='flex items-center px-5 justify-between h-24 border'>
+		<div className='flex items-center px-5 justify-between h-[12vh] border'>
 			<TweepsBookIcon />
 
 			{search && <SearchBar />}

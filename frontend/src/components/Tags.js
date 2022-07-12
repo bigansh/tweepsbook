@@ -26,7 +26,7 @@ const tags = () => {
 	return (
 		<div className='flex flex-col justify-between items-start min-h-eigthy overflow-hidden w-full mt-2 text-white'>
 			<h1 className='text-xl mb-10 font-bold pl-5'>TAGS</h1>
-			<div className='flex text-md justify-between overflow-y-auto overflow-x-hidden w-full flex-col items-start'>
+			<div className='flex text-md justify-between overflow-y-auto overflow-x-hidden min-h-[65vh] w-full flex-col items-start'>
 				<div className='flex mx-8 flex-col items-start w-full'>
 					{tags ? (tags.map((tag, index) => {
 						return (
