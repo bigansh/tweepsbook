@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import dynamic from "next/dynamic";
 import { IconContext } from "react-icons";
-
+import { useRouter } from 'next/router';
 import { GrNotes } from "react-icons/gr";
 import { BiTrashAlt } from 'react-icons/bi'
 import { AiOutlineEye } from 'react-icons/ai'
@@ -9,7 +9,7 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BiArchiveIn } from 'react-icons/bi'
 import { BsTwitter } from 'react-icons/bs'
 
-import DashNavbar from '../../src/components/DashNavbar'
+import DashNavbar from '../../../src/components/DashNavbar'
 
 const MDEditor = dynamic(
     () => import("@uiw/react-md-editor"),
@@ -17,6 +17,9 @@ const MDEditor = dynamic(
 );
 
 const notes = () => {
+    const router = useRouter();
+    const {bookmarkId} = router.query;
+    
     const [value, setValue] = useState("**Start taking your Notes Here...**");
     const [eye, setEye] = useState(true);
 

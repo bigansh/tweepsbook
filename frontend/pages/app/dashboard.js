@@ -7,8 +7,10 @@ import DashNavbar from '../../src/components/DashNavbar'
 import { BookmarksProvider } from '../../contexts/BookmarksContext'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 import { Router, useRouter } from 'next/router'
-import Settings from '../../src/components/Settings'
+import Settings from './settings'
 import { UserContext } from '../../contexts/UserContext'
+import Lottie from 'react-lottie-player'
+import Loader from '../../src/components/loader.json';
 
 export default function dashboard({ children }) {
 	const router = useRouter()
@@ -48,9 +50,12 @@ export default function dashboard({ children }) {
 					</div>
 
 					<div className='w-full flex flex-col sidebar my-content'>
-						<div className='flex border-b items-center justify-between p-2 h-20 '>
+						<div className='flex border-b items-center justify-between p-2 '>
 							<h1 className='pl-2 font-bold text-3xl font-header'>
-								{activeTag && (activeTag.tag[0]=="#" ? activeTag.tag : <>#{activeTag.tag}</>) }
+								{activeTag ? (activeTag.tag[0] == "#" ? <>{activeTag.tag}</> : <>#{activeTag.tag}</>) : (<><Lottie loop
+									animationData={Loader}
+									play
+									className='w-10 h-10 mx-auto' /></>)}
 							</h1>
 							<div className='flex items-center'>
 								<button className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 border  rounded-xl'>
@@ -61,7 +66,9 @@ export default function dashboard({ children }) {
 								</button>
 							</div>
 						</div>
-						{children || <BookmarkCards />}
+						<div className='overflow-y-scroll'>
+							{children || <BookmarkCards />}
+						</div>
 					</div>
 				</div>
 			</div>
