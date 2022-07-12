@@ -108,7 +108,7 @@ const TagPill = ({ bookmark }) => {
 					</div>
 				)
 			})}
-			<BsPlus onClick={addTag} />
+			<BsPlus onClick={addTag} className="bg-lg-gray p-1 w-5 h-5 rounded-full hover:cursor-pointer hover:scale-125" />
 		</div>
 	)
 }

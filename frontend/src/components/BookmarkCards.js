@@ -83,7 +83,7 @@ const bookmarkCards = ({ archive }) => {
 	})
 	return (
 		<div className='flex flex-wrap p-3 overflow-auto'>
-{showLoader && (
+			{showLoader && (
 				<Lottie
 					loop
 					animationData={Loader}
@@ -98,6 +98,9 @@ const bookmarkCards = ({ archive }) => {
 			>
 				{/* array of JSX items */}
 				{bookmarksToShow?.map((bookmark, index) => {
+					const createdTime = new Date(bookmark.twitter.created_at)
+					console.log(createdTime)
+
 					return (
 						bookmark.backend.read === (archive || false) && (
 							<div
@@ -131,9 +134,11 @@ const bookmarkCards = ({ archive }) => {
 										<span className='font-thin text-xs px-2'>
 											@{bookmark.twitter.author.username} •{' '}
 											{
-												bookmark.twitter.created_at.split(
-													'T'
-												)[0]
+												<time
+
+												>
+													{format(createdTime, 'h:mm a - MMM d, y')}
+												</time>
 											}
 										</span>
 									</div>
@@ -144,7 +149,7 @@ const bookmarkCards = ({ archive }) => {
 										/>
 									</div>
 								</div>
-								<div className='mt-4 mb-1 leading-normal whitespace-pre-wrap  !text-gray-700'>{bookmark.twitter.text.replace(/https:\/\/[\n\S]+/g, '')
+								<div className='mt-4 mb-1 pl-2 whitespace-pre-wrap '>{bookmark.twitter.text.replace(/https:\/\/[\n\S]+/g, '')
 									.replace('&amp;', '&')}
 								</div>
 								{bookmark.twitter.media && bookmark.twitter.media.length ? (
