@@ -10,6 +10,7 @@ module.exports = {
 		extend: {
 			colors: {
 				'dark-blue': '#004965',
+				'hover-blue': '#006287',
 				'mid-blue': '#29C3FE',
 				'light-blue': '#ADE8FF',
 				'light-blue-text': 'rgba(0, 73, 100, 0.6)',
