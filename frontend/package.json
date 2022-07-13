@@ -4,7 +4,7 @@
   "description": "The Interface of Yamero",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next -p 8080",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

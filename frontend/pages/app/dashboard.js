@@ -54,22 +54,23 @@ export default function dashboard({ children }) {
 					</div>
 
 					<div className='flex flex-col my-content w-full bg-[#FBFAFA] pt-12 pl-8'>
+						{/* Sorting and filtering buttons */}
 						<div className='flex border-b border-[#0000001e] items-center justify-between p-2 mr-8'>
 							<h1 className='pl-2 font-bold text-3xl font-header'>
 								{activeTag && <>#{activeTag.tag}</>}
 							</h1>
-							<div className='flex items-center'>
+							<div className='flex items-center gap-x-4'>
 								<div className='flex flex-col'>
 									<button
-										className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 border rounded-full hover:opacity-60'
+										className='flex text-xs h-8 items-center px-4 py-2 justify-around opacity-100 border rounded-full hover:bg-gray-100'
 										onClick={() => setSortMenu(!sortMenu)}
 									>
 										Sort By{' '}
 										<AiOutlineDown className='ml-2' />
 									</button>
 									{sortMenu && (
-										<div className='absolute text-sm flex flex-col top-32 drop-shadow-xl rounded-md p-2 z-10 bg-white'>
-											<button className='flex p-1 items-center'>
+										<div className='absolute text-sm flex flex-col top-[170px] drop-shadow-xl rounded-md p-1 z-10 bg-white'>
+											<button className='flex p-1 items-center bg-gray-100 rounded'>
 												<AiOutlineCalendar className='mr-1' />
 												Date
 											</button>
@@ -82,7 +83,7 @@ export default function dashboard({ children }) {
 								</div>
 								<div className='flex flex-col'>
 									<button
-										className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 border rounded-full hover:opacity-60'
+										className='flex text-xs h-8 items-center px-4 py-2 justify-around border rounded-full hover:bg-gray-100'
 										onClick={() =>
 											setFilterMenu(!filterMenu)
 										}
@@ -91,7 +92,7 @@ export default function dashboard({ children }) {
 										<AiOutlinePlus className='ml-2' />
 									</button>
 									{filterMenu && (
-										<div className='absolute text-sm flex flex-col top-32 drop-shadow-xl rounded-md p-2 z-10 bg-white'>
+										<div className='absolute text-sm flex flex-col top-[170px] drop-shadow-xl rounded-md p-2 z-10 bg-white'>
 											<button className='flex p-1 items-center'>
 												<AiOutlineAppstore className='mr-1' />
 												Apps
@@ -101,6 +102,8 @@ export default function dashboard({ children }) {
 								</div>
 							</div>
 						</div>
+
+						{/* Bookmarks */}
 						<div className='overflow-y-scroll'>
 							{children || <BookmarkCards />}
 						</div>

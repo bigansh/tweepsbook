@@ -23,9 +23,6 @@ const Hero = () => {
 							beneath.
 						</p>
 						<div className='my-12 py-6 flex'>
-							{/* <button className='border-2 border-lg-orange rounded-xl py-3 px-4 text-lg-orange font-bold text-lg hover:bg-lg-orange hover:text-white'>
-							Product Hunt
-						</button> */}
 							<a
 								href='https://www.producthunt.com/posts/tweepsbook?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tweepsbook'
 								target='_blank'
@@ -33,13 +30,15 @@ const Hero = () => {
 								<img
 									src='https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=290169&theme=light'
 									alt='TweepsBook - Bookmark&#0032;&#0038;&#0032;organize&#0032;your&#0032;favorite&#0032;tweets&#0032;with&#0032;different&#0032;tags | Product Hunt'
-									style={{ width: '250px', height: '54px' }}
+									className="w-[250px] h-[54px]"
 									width='250'
 									height='54'
 								/>
 							</a>
+
+							{/* CTA */}
 							<button
-								className='border-2 text-[16px] border-dark-blue bg-dark-blue ml-4 text-white py-3 px-5 rounded-xl flex items-center content-center'
+								className='text-[16px] bg-dark-blue hover:bg-hover-blue active:bg-dark-blue ml-4 shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-100 text-white py-3 px-5 rounded-xl flex items-center content-center'
 								onClick={() => {
 									window.open(
 										process.env.NEXT_PUBLIC_HOST +

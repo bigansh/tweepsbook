@@ -16,7 +16,7 @@ app.register(require('@fastify/cors'), {
 	strictPreflight: false,
 	methods: ['GET', 'POST', 'PATCH', 'DELETE'],
 	origin: [
-		'http://localhost:3000',
+		'http://localhost:8080',
 		'https://tweepsbook.ml',
 		'https://tweepsbook.com',
 	],
