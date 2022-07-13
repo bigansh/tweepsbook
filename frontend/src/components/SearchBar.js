@@ -6,10 +6,10 @@ const searchBar = () => {
 	const { searchTerm, setSearchTerm } = useContext(BookmarksContext)
 
 	return (
-		<div className='px-4 py-2 flex items-center justify-between w-1/2  rounded-full border-[#9D9FA0] border max-w-3xl'>
+		<div className='px-4 py-1 flex items-center justify-between w-1/2 rounded-full border-mid-gray focus-within:opacity-70 border max-w-3xl'>
 			<input
 				type='text'
-				className='focus:outline-none p-2 flex-grow'
+				className='focus:outline-none p-2 flex-grow text-base font-medium tracking-wider'
 				placeholder='Which bookmark are you looking for?'
 				onChange={(e) => {
 					setSearchTerm(e.target.value)
