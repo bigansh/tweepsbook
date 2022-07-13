@@ -9,6 +9,7 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: 'Inter', sans-serif;
+	-webkit-tap-highlight-color: transparent;
 }
 .font-header {
 	font-family: 'Merriweather', sans-serif;
@@ -43,7 +44,7 @@ body {
 .tweet a {
 	text-decoration: inherit;
 	font-weight: inherit;
-  }
+}
 .my-masonry-grid {
 	display: -webkit-box; /* Not needed if autoprefixing */
 	display: -ms-flexbox; /* Not needed if autoprefixing */
