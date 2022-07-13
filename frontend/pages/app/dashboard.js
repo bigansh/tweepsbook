@@ -68,8 +68,8 @@ export default function dashboard({ children }) {
 										<AiOutlineDown className='ml-2' />
 									</button>
 									{sortMenu && (
-										<div className='absolute text-sm flex flex-col top-32 drop-shadow-xl rounded-md p-2 z-10 bg-white'>
-											<button className='flex p-1 items-center'>
+										<div className='absolute text-sm flex flex-col top-[170px] drop-shadow-xl rounded-md p-1 z-10 bg-white'>
+											<button className='flex p-1 items-center bg-gray-100 rounded'>
 												<AiOutlineCalendar className='mr-1' />
 												Date
 											</button>
@@ -91,7 +91,7 @@ export default function dashboard({ children }) {
 										<AiOutlinePlus className='ml-2' />
 									</button>
 									{filterMenu && (
-										<div className='absolute text-sm flex flex-col top-32 drop-shadow-xl rounded-md p-2 z-10 bg-white'>
+										<div className='absolute text-sm flex flex-col top-[170px] drop-shadow-xl rounded-md p-2 z-10 bg-white'>
 											<button className='flex p-1 items-center'>
 												<AiOutlineAppstore className='mr-1' />
 												Apps
