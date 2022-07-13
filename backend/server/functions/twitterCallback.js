@@ -35,7 +35,9 @@ const twitterCallback = async (sessionState, codeVerifier, state, code) => {
 			redirectUri: `${process.env.HOST}/auth/callback?callbackType=twitter`,
 		})
 
-		const { data: userObject } = await loggedClient.v2.me()
+		const { data: userObject } = await loggedClient.v2.me({
+			'user.fields': ['profile_image_url'],
+		})
 
 		const user = await twitterUserFinder(userObject)
 
