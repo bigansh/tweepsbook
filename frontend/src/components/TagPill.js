@@ -90,7 +90,7 @@ const TagPill = ({ bookmark }) => {
 									#{tag.tag}
 								</span>
 								<IoIosClose
-									className='w-5 h-5 cursor-pointer rounded-full hover:bg-dark-blue opacity-50 hover:bg-opacity-5 hover:opacity-100 transition-all duration-100'
+									className='w-5 h-5 ml-0.5 cursor-pointer rounded-full hover:bg-dark-blue opacity-50 hover:bg-opacity-5 hover:opacity-100 transition-all duration-100'
 									onClick={() => deleteTag(tag)}
 								/>
 							</div>
@@ -108,7 +108,7 @@ const TagPill = ({ bookmark }) => {
 					</div>
 				)
 			})}
-			<BsPlus onClick={addTag} className="bg-lg-gray p-1 w-5 h-5 rounded-full hover:cursor-pointer hover:scale-125" />
+			<BsPlus onClick={addTag} className="bg-lg-gray p-1 w-6 h-6 ml-2 rounded-full hover:cursor-pointer hover:scale-125 transition-all duration-100" />
 		</div>
 	)
 }

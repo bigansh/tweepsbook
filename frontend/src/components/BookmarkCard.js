@@ -88,13 +88,13 @@ const BookmarkCard = ({ bookmark }) => {
 					</div>
 					<div className="p-1 rounded-full">
 						<BiTrashAlt
-							className='w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
+							className='w-5 h-5 cursor-pointer hover:scale-110 transition-all duration-100 text-dark-gray'
 							onClick={() => deleteBookmark(bookmark.backend._id)}
 						/>
 					</div>
 					<div className="p-1 rounded-full">
 						<MdOutlineStickyNote2
-							className='w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
+							className='w-5 h-5 cursor-pointer hover:scale-110 transition-all duration-100 text-dark-gray'
 							onClick={() =>
 								(window.location.href =
 									'/app/notes/' + bookmark.backend._id)
