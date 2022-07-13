@@ -58,10 +58,10 @@ export default function dashboard({ children }) {
 							<h1 className='pl-2 font-bold text-3xl font-header'>
 								{activeTag && <>#{activeTag.tag}</>}
 							</h1>
-							<div className='flex items-center'>
+							<div className='flex items-center gap-x-4'>
 								<div className='flex flex-col'>
 									<button
-										className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 border rounded-full hover:opacity-60'
+										className='flex text-xs h-8 items-center px-4 py-2 justify-around opacity-100 border rounded-full hover:bg-gray-100'
 										onClick={() => setSortMenu(!sortMenu)}
 									>
 										Sort By{' '}
@@ -82,7 +82,7 @@ export default function dashboard({ children }) {
 								</div>
 								<div className='flex flex-col'>
 									<button
-										className='flex text-xs h-8 items-center p-2 mx-3 justify-around opacity-80 border rounded-full hover:opacity-60'
+										className='flex text-xs h-8 items-center px-4 py-2 justify-around border rounded-full hover:bg-gray-100'
 										onClick={() =>
 											setFilterMenu(!filterMenu)
 										}
