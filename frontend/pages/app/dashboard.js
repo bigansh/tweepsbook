@@ -62,19 +62,19 @@ export default function dashboard({ children }) {
 							<div className='flex items-center gap-x-4'>
 								<div className='flex flex-col'>
 									<button
-										className='flex text-xs h-8 items-center px-4 py-2 justify-around opacity-100 border rounded-full hover:bg-gray-100'
+										className='flex text-xs h-8 items-center px-4 py-2 justify-around opacity-100 border border-hover-blue rounded-full hover:bg-white'
 										onClick={() => setSortMenu(!sortMenu)}
 									>
 										Sort By{' '}
 										<AiOutlineDown className='ml-2' />
 									</button>
 									{sortMenu && (
-										<div className='absolute text-sm flex flex-col top-[170px] drop-shadow-xl rounded-md p-1 z-10 bg-white'>
-											<button className='flex p-1 items-center bg-gray-100 rounded'>
+										<div className='absolute text-sm flex flex-col top-[180px] drop-shadow-xl rounded-md p-1 z-10 bg-white'>
+											<button className='flex p-2 w-[100px] items-center bg-gray-100 rounded'>
 												<AiOutlineCalendar className='mr-1' />
 												Date
 											</button>
-											<button className='flex p-1 items-center'>
+											<button className='flex p-1 items-center hover:bg-gray-50'>
 												<MdOutlineSource className='mr-1' />
 												Source
 											</button>
@@ -83,7 +83,7 @@ export default function dashboard({ children }) {
 								</div>
 								<div className='flex flex-col'>
 									<button
-										className='flex text-xs h-8 items-center px-4 py-2 justify-around border rounded-full hover:bg-gray-100'
+										className='flex text-xs h-8 items-center px-4 py-2 justify-around border border-hover-blue rounded-full hover:bg-white'
 										onClick={() =>
 											setFilterMenu(!filterMenu)
 										}

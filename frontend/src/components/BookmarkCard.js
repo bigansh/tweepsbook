@@ -72,7 +72,7 @@ const BookmarkCard = ({ bookmark }) => {
 				<time>{format(createdTime, 'hh:mm a · MMM	 d, y')}</time>
 			</div>
 
-			<div className='flex p-2 items-center justify-between'>
+			<div className='flex py-2 items-center justify-between'>
 				<TagPill bookmark={bookmark} />
 				<div className='flex gap-x-1 items-start text-dark-gray'>
 					<div className='p-1 rounded-full'>
