@@ -68,33 +68,39 @@ const BookmarkCard = ({ bookmark }) => {
 			) : null}
 
 			{/* Time and Date */}
-			<div className="text-sm text-mid-gray">
+			<div className='text-sm text-mid-gray'>
 				<time>{format(createdTime, 'hh:mm a · MMM	 d, y')}</time>
 			</div>
 
-			<div className='flex items-start p-2 justify-between border '>
+			<div className='flex p-2 items-center justify-between'>
 				<TagPill bookmark={bookmark} />
-				<div className='flex items-start'>
-					<BiArchiveIn
-						className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
-						onClick={() =>
-							updateReadStatus({
-								id: bookmark.backend._id,
-								currentStatus: bookmark.backend.read,
-							})
-						}
-					/>
-					<BiTrashAlt
-						className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
-						onClick={() => deleteBookmark(bookmark.backend._id)}
-					/>
-					<MdOutlineStickyNote2
-						className='mx-3 w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
-						onClick={() =>
-							(window.location.href =
-								'/app/notes/' + bookmark.backend._id)
-						}
-					/>
+				<div className='flex gap-x-1 items-start text-dark-gray'>
+					<div className='p-1 rounded-full'>
+						<BiArchiveIn
+							className='w-5 h-5 cursor-pointer hover:scale-110'
+							onClick={() =>
+								updateReadStatus({
+									id: bookmark.backend._id,
+									currentStatus: bookmark.backend.read,
+								})
+							}
+						/>
+					</div>
+					<div className="p-1 rounded-full">
+						<BiTrashAlt
+							className='w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
+							onClick={() => deleteBookmark(bookmark.backend._id)}
+						/>
+					</div>
+					<div className="p-1 rounded-full">
+						<MdOutlineStickyNote2
+							className='w-5 h-5 cursor-pointer hover:scale-110 icon-grey'
+							onClick={() =>
+								(window.location.href =
+									'/app/notes/' + bookmark.backend._id)
+							}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

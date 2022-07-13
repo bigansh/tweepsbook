@@ -19,6 +19,7 @@ module.exports = {
 				white: '#ffffff',
 				'lg-orange': '#FF4949',
 				'mid-gray': '#919199',
+				'dark-gray': '#666666',
 			},
 			fontFamily: {
 				serif: ['ui-serif', 'Merriweather', 'serif'],
