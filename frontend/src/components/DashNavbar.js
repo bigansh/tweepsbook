@@ -12,14 +12,19 @@ const DashNavbar = ({ search }) => {
 	const menuClick = () => {
 		setMenuActive(!menuActive)
 	}
-
+	const Logout = () => {
+		localStorage.removeItem('sessionToken')
+		window.location.reload()
+	}
 	return (
-		<div className='flex items-center px-5 justify-between min-h-[80px] border'>
-			<TweepsBookIcon />
+		<div className='flex items-center px-5 justify-between min-h-[80px] shadow-lg '>
+			<a href='/app/dashboard'>
+				<TweepsBookIcon />
+			</a>
 
 			{search && <SearchBar />}
 
-			<div className='flex items-center justify-center relative text-[#3A3A3D]'>
+			<div className='flex items-center justify-center relative text-[#3A3A3D] '>
 				<img
 					src='https://i.imgur.com/XqQXQZb.png'
 					className='w-12 h-12 m-1 rounded-full'
@@ -29,7 +34,10 @@ const DashNavbar = ({ search }) => {
 				</button>
 				{menuActive && (
 					<div className='absolute top-[100%] right-4 drop-shadow-xl rounded-md p-4 z-10 bg-white w-36'>
-						<button className='flex items-center mb-4 text-sm'>
+						<button
+							className='flex items-center mb-4 text-sm '
+							onClick={Logout}
+						>
 							<IoMdExit className='text-xl mr-4' />
 							Logout
 						</button>

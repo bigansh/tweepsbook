@@ -49,29 +49,14 @@ export default function dashboard({ children }) {
 				<DashNavbar search={true} />
 
 				<div className='flex overflow-hidden  flex-grow'>
-					<div className='flex flex-col items-start bg-dark-blue w-44 fixed content'>
+					<div className='flex flex-col items-start bg-dark-blue w-[180px] fixed content'>
 						<Tags />
 					</div>
 
-					<div className='flex flex-col my-content w-full'>
-						<div className='flex border-b items-center justify-between p-2 '>
+					<div className='flex flex-col my-content w-full bg-[#FBFAFA] pt-12 pl-8'>
+						<div className='flex border-b border-[#0000001e] items-center justify-between p-2 mr-8'>
 							<h1 className='pl-2 font-bold text-3xl font-header'>
-								{activeTag ? (
-									activeTag.tag[0] == '#' ? (
-										<>{activeTag.tag}</>
-									) : (
-										<>#{activeTag.tag}</>
-									)
-								) : (
-									<>
-										<Lottie
-											loop
-											animationData={Loader}
-											play
-											className='w-10 h-10 mx-auto'
-										/>
-									</>
-								)}
+								{activeTag && <>#{activeTag.tag}</>}
 							</h1>
 							<div className='flex items-center'>
 								<div className='flex flex-col'>
