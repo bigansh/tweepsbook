@@ -14,6 +14,7 @@ const searchBar = () => {
 				onChange={(e) => {
 					setSearchTerm(e.target.value)
 				}}
+				value={searchTerm}
 			/>
 			<button>
 				<AiOutlineSearch className='text-2xl text-[#848484]' />

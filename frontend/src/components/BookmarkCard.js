@@ -11,7 +11,7 @@ const BookmarkCard = ({ bookmark }) => {
 	const { updateReadStatus, deleteBookmark } = useContext(BookmarksContext)
 	return (
 		<div
-			className='flex border border-light-blue flex-col bg-white rounded-md justify-between p-2 m-2 animate-[scale_.2s]'
+			className='flex border border-light-blue flex-col bg-white rounded-md justify-between p-4 m-2 animate-[scale_.2s]'
 			key={bookmark.backend._id}
 		>
 			<div className='w-full flex items-center justify-between'>
@@ -20,7 +20,7 @@ const BookmarkCard = ({ bookmark }) => {
 						src={bookmark.twitter.author.profile_image_url}
 						className='w-10 h-10 rounded-full p-1'
 					/>
-					<span className='font-medium text-sm'>
+					<span className='font-semibold text-[15px]'>
 						{bookmark.twitter.author.name}
 						{bookmark.twitter.author.verified ? (
 							<svg
@@ -35,7 +35,7 @@ const BookmarkCard = ({ bookmark }) => {
 						) : null}
 					</span>
 
-					<span className='font-medium text-sm text-mid-gray'>
+					<span className='font-medium text-[15px] text-mid-gray'>
 						@{bookmark.twitter.author.username}
 					</span>
 				</div>
@@ -43,7 +43,7 @@ const BookmarkCard = ({ bookmark }) => {
 					<BsTwitter className='mx-3 text-[#1DA1F2]' />
 				</div>
 			</div>
-			<div className='mt-2 mb-1 pl-2 whitespace-pre-wrap '>
+			<div className='my-1 whitespace-pre-wrap'>
 				{bookmark.twitter.text
 					.replace(/https:\/\/[\n\S]+/g, '')
 					.replace('&amp;', '&')}
