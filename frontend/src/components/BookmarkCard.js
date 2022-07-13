@@ -11,21 +11,21 @@ const BookmarkCard = ({ bookmark }) => {
 	const { updateReadStatus, deleteBookmark } = useContext(BookmarksContext)
 	return (
 		<div
-			className='flex border-mid-blue flex-col bg-white rounded-md border justify-between p-2 m-2 animate-[scale_.2s]'
+			className='flex border border-light-blue flex-col bg-white rounded-md justify-between p-2 m-2 animate-[scale_.2s]'
 			key={bookmark.backend._id}
 		>
 			<div className='w-full flex items-center justify-between'>
-				<div className='flex w-5/6 items-center'>
+				<div className='flex flex-row gap-x-2 w-5/6 items-center'>
 					<img
 						src={bookmark.twitter.author.profile_image_url}
-						className='w-10 h-10 rounded-full m-1'
+						className='w-10 h-10 rounded-full p-1'
 					/>
-					<span className='px-2'>
+					<span className='font-medium text-sm'>
 						{bookmark.twitter.author.name}
 						{bookmark.twitter.author.verified ? (
 							<svg
 								aria-label='Verified Account'
-								className='text-blue-500 inline h-4 w-4'
+								className='text-blue-500 inline h-4 w-4 ml-0.5'
 								viewBox='0 0 24 24'
 							>
 								<g fill='currentColor'>
@@ -35,20 +35,15 @@ const BookmarkCard = ({ bookmark }) => {
 						) : null}
 					</span>
 
-					<span className='font-thin text-xs px-2'>
-						@{bookmark.twitter.author.username} •{' '}
-						{
-							<time>
-								{format(createdTime, 'h:mm a - MMM d, y')}
-							</time>
-						}
+					<span className='font-medium text-sm text-mid-gray'>
+						@{bookmark.twitter.author.username}
 					</span>
 				</div>
 				<div className='flex items-end p-2 justify-end'>
-					<BsTwitter className='mx-3' style={{ color: '#1DA1F2' }} />
+					<BsTwitter className='mx-3 text-[#1DA1F2]' />
 				</div>
 			</div>
-			<div className='mt-4 mb-1 pl-2 whitespace-pre-wrap '>
+			<div className='mt-2 mb-1 pl-2 whitespace-pre-wrap '>
 				{bookmark.twitter.text
 					.replace(/https:\/\/[\n\S]+/g, '')
 					.replace('&amp;', '&')}
@@ -65,8 +60,6 @@ const BookmarkCard = ({ bookmark }) => {
 						<img
 							key={m.media_key}
 							alt=''
-							// height={m.height}
-							// width={m.width}
 							src={m.url}
 							className='rounded max-h-60'
 						/>
@@ -74,7 +67,12 @@ const BookmarkCard = ({ bookmark }) => {
 				</div>
 			) : null}
 
-			<div className='flex items-start p-2 justify-between '>
+			{/* Time and Date */}
+			<div className="text-sm text-mid-gray">
+				<time>{format(createdTime, 'hh:mm a · MMM	 d, y')}</time>
+			</div>
+
+			<div className='flex items-start p-2 justify-between border '>
 				<TagPill bookmark={bookmark} />
 				<div className='flex items-start'>
 					<BiArchiveIn

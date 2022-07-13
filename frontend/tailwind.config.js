@@ -18,6 +18,7 @@ module.exports = {
 				'lg-gray': '#F2F2F2',
 				white: '#ffffff',
 				'lg-orange': '#FF4949',
+				'mid-gray': '#919199',
 			},
 			fontFamily: {
 				serif: ['ui-serif', 'Merriweather', 'serif'],
