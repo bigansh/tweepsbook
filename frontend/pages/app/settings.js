@@ -1,8 +1,7 @@
 import { useContext, useState } from 'react'
 import { BiPencil } from 'react-icons/bi'
 import { UserContext } from '../../contexts/UserContext'
-import profileImage from '../images/profile.png'
-import twitterIcon from '../images/twitter_icon_blue.png'
+// import twitterIcon from '../images/twitter_icon_blue.png'
 const Settings = () => {
 	const { user, setUser, getUser, updateUser, deleteUser } =
 		useContext(UserContext)
@@ -30,14 +29,14 @@ const Settings = () => {
 			},
 		}
 		await updateUser(newUserDetails)
-		window.location.href = '/app/dashboard'
+		window.location.href = '/app/settings'
 	}
 	return (
 		<div className='w-full h-full absolute top-0 left-0 bg-sh-gray bg-opacity-80 z-50 flex items-center justify-center'>
 			<div className='bg-[#F5F5F5] rounded flex flex-col py-10 px-10'>
 				<div className='grid grid-cols-3 gap-x-8 auto-rows-auto'>
 					<div className='bg-white p-4 flex flex-col items-center justify-center rounded-lg'>
-						<img src={profileImage.src} alt='' />
+						{/* <img src={profileImage.src} alt='' /> */}
 						<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center'>
 							<input
 								type='text'
@@ -113,7 +112,7 @@ const Settings = () => {
 								Tweepsbook integration
 							</p>
 							<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 w-1/2 justify-start items-center'>
-								<img src={twitterIcon.src} alt='' />
+								{/* <img src={twitterIcon.src} alt='' /> */}
 								Twitter
 							</div>
 						</div>

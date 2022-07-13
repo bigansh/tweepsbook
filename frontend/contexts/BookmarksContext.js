@@ -7,10 +7,14 @@ const BookmarksProvider = ({ children }) => {
 	const [bookmarks, setBookmarks] = useState([])
 	const [activeTag, setActiveTag] = useState()
 	const [searchTerm, setSearchTerm] = useState('')
+	const [showLoader, setShowLoader] = useState(false)
+
 	const updateReadStatus = async ({ id, currentStatus }) => {
 		try {
+			setShowLoader(true)
 			const res = await axios.patch(
-				process.env.NEXT_PUBLIC_UPDATE_READ_STATUS_URL,
+				process.env.NEXT_PUBLIC_HOST +
+					`/crud/update?queryType=readStatus`,
 				{
 					bookmarkId: id,
 					readStatus: !currentStatus,
@@ -25,12 +29,18 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			fetchBookmarks()
-		} catch (err) {}
+			setShowLoader(false)
+		} catch (err) {
+			setShowLoader(false)
+			throw err
+		}
 	}
 	const updateShareStatus = async ({ id, currentStatus }) => {
 		try {
+			setShowLoader(true)
 			const res = await axios.patch(
-				process.env.NEXT_PUBLIC_UPDATE_SHARE_STATUS_URL,
+				process.env.NEXT_PUBLIC_HOST +
+					`/crud/update?queryType=shareStatus`,
 				{
 					bookmarkId: id,
 					shareStatus: !currentStatus,
@@ -45,12 +55,17 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			fetchBookmarks()
-		} catch (err) {}
+			setShowLoader(false)
+		} catch (err) {
+			setShowLoader(false)
+			throw err
+		}
 	}
 	const updateTags = async ({ id, tags }) => {
 		try {
+			setShowLoader(true)
 			const res = await axios.patch(
-				process.env.NEXT_PUBLIC_UPDATE_TAGS_URL,
+				process.env.NEXT_PUBLIC_HOST + `/crud/update?queryType=tags`,
 				{
 					bookmarkId: id,
 					tags: tags,
@@ -65,12 +80,18 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			fetchBookmarks()
-		} catch (err) {}
+			fetchTags()
+			setShowLoader(false)
+		} catch (err) {
+			setShowLoader(false)
+			throw err
+		}
 	}
 	const importBookmarks = async () => {
 		try {
+			setShowLoader(true)
 			const bookmarks = await axios.post(
-				process.env.NEXT_PUBLIC_IMPORT_BOOKMARKS_URL,
+				process.env.NEXT_PUBLIC_HOST + `/crud/create?queryType=twitter`,
 				{},
 				{
 					headers: {
@@ -81,15 +102,19 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			console.log(bookmarks)
+			fetchBookmarks()
+			setShowLoader(false)
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
 
 	const fetchBookmarks = async () => {
 		try {
+			setShowLoader(true)
 			const bookmarks = await axios.get(
-				process.env.NEXT_PUBLIC_FETCH_BOOKMARKS_URL,
+				process.env.NEXT_PUBLIC_HOST + `/crud/read?queryType=bookmarks`,
 				{
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem(
@@ -119,14 +144,19 @@ const BookmarksProvider = ({ children }) => {
 			console.log('twt', res.data)
 			console.log('be', bookmarks.data)
 			// setBookmarks(res.data)
+			setShowLoader(false)
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
 	const fetchBookmark = async ({ id }) => {
 		try {
+			setShowLoader(true)
 			const tags = await axios.get(
-				process.env.NEXT_PUBLIC_FETCH_BOOKMARK_URL + id,
+				process.env.NEXT_PUBLIC_HOST +
+					`/crud/read?queryType=bookmark&bookmarkId=` +
+					id,
 				{
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem(
@@ -135,14 +165,17 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
+			setShowLoader(false)
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
 	const fetchTags = async () => {
 		try {
+			setShowLoader(true)
 			const res = await axios.get(
-				process.env.NEXT_PUBLIC_FETCH_TAGS_URL,
+				process.env.NEXT_PUBLIC_HOST + `/crud/read?queryType=tags`,
 				{
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem(
@@ -151,15 +184,19 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
+			setShowLoader(false)
 			return res.data
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
 	const deleteBookmark = async (id) => {
 		try {
+			setShowLoader(true)
 			const res = await axios.delete(
-				`${process.env.NEXT_PUBLIC_DELETE_BOOKMARK_URL}`,
+				process.env.NEXT_PUBLIC_HOST +
+					`/crud/delete?queryType=bookmark`,
 				{
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem(
@@ -173,14 +210,17 @@ const BookmarksProvider = ({ children }) => {
 			)
 			console.log(res)
 			fetchBookmarks()
+			setShowLoader(false)
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
 	const deleteTag = async (tagId) => {
 		try {
+			setShowLoader(true)
 			const res = await axios.delete(
-				`${process.env.NEXT_PUBLIC_DELETE_BOOKMARK_URL}`,
+				process.env.NEXT_PUBLIC_HOST + `/crud/delete?queryType=tag`,
 				{
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem(
@@ -194,7 +234,9 @@ const BookmarksProvider = ({ children }) => {
 			)
 			console.log(res)
 			fetchBookmarks()
+			setShowLoader(false)
 		} catch (err) {
+			setShowLoader(false)
 			throw err
 		}
 	}
@@ -217,6 +259,8 @@ const BookmarksProvider = ({ children }) => {
 				setActiveTag,
 				searchTerm,
 				setSearchTerm,
+				showLoader,
+				setShowLoader,
 			}}
 		>
 			{children}

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { BiArchiveIn } from 'react-icons/bi'
-import { BiImport } from 'react-icons/bi'
+import { IoMdArchive } from 'react-icons/io'
+import { MdSystemUpdateAlt } from 'react-icons/md'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 
 const tags = () => {
@@ -24,43 +24,44 @@ const tags = () => {
 	}
 	const { importBookmarks } = useContext(BookmarksContext)
 	return (
-		<div className='flex flex-col justify-between items-start min-h-eigthy h-full w-full mt-2 text-white'>
-			<h1 className='text-xl mb-10 font-bold pl-5'>TAGS</h1>
-			<div className='flex text-md justify-between h-full w-full flex-col items-center'>
-				<div className='flex flex-col'>
-					{tags?.map((tag, index) => {
-						return (
-							<button
-								key={tag._id}
-								onClick={() => handleClick(tag)}
-								className={
-									'm-1 px-8 py-1 ' +
-									(activeTag?._id === tag?._id
-										? 'bg-hovertagColor'
-										: '')
-								}
-							>
-								#{tag.tag}
-							</button>
-						)
-					})}
+		<div className='flex flex-col justify-between items-start min-h-eigthy overflow-hidden w-full mt-2 text-white flex-grow '>
+			<h1 className='text-xl mb-8 font-semibold px-5'>TAGS</h1>
+			<div className='flex text-md justify-between overflow-y-auto overflow-x-hidden w-full flex-col items-start flex-grow'>
+				<div className='flex flex-col items-start w-full px-5'>
+					{tags &&
+						tags.map((tag) => {
+							return (
+								<button
+									key={tag._id}
+									onClick={() => handleClick(tag)}
+									className={
+										'my-1 pl-5 py-1 hover:opacity-80 w-full flex justify-start ' +
+										(activeTag?._id === tag?._id
+											? 'bg-hovertagColor'
+											: 'bg-transparent')
+									}
+								>
+									#{tag.tag}
+								</button>
+							)
+						})}
 				</div>
 
-				<div className='flex text-md border-t w-full flex-col items-center'>
+				<div className='flex text-md w-full mt-2 flex-col items-center'>
 					<button
-						className='flex items-center px-4 h-8 m-2'
+						className='flex items-center justify-center py-4  border-t border-[#d8d8d840] w-full'
 						onClick={importBookmarks}
 					>
-						<BiImport className='mr-2' />
+						<MdSystemUpdateAlt className='mr-2 text-xl' />
 						Import
 					</button>
 					<button
-						className='flex items-center px-4 m-2 h-8'
+						className='flex items-center justify-center py-4  border-t border-[#d8d8d840] w-full'
 						onClick={() =>
 							(window.location.href = '/app/dashboard/archive')
 						}
 					>
-						<BiArchiveIn className='mr-2' />
+						<IoMdArchive className='mr-2 text-xl' />
 						Archive
 					</button>
 				</div>
