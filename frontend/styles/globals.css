@@ -35,6 +35,9 @@ body {
 .my-content {
 	padding-left: 224px;
 }
+.content {
+	height: calc(100vh - 80px);
+}
 .icon-grey {
 	color: rgb(95, 95, 95);
 }
