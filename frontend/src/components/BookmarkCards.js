@@ -33,7 +33,7 @@ const bookmarkCards = ({ archive }) => {
 		// console.log('called')
 		let tempBookmarksToShow = []
 		bookmarks.forEach((bookmark) => {
-			if (activeTag.tag === 'all') {
+			if (activeTag?.tag === 'all') {
 				tempBookmarksToShow = bookmarks
 				return
 			}

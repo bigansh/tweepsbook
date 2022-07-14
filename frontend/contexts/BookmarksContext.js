@@ -110,7 +110,31 @@ const BookmarksProvider = ({ children }) => {
 			throw err
 		}
 	}
-
+	const updateNotes = async ({ id, notes }) => {
+		try {
+			setShowLoader(true)
+			const res = await axios.patch(
+				process.env.NEXT_PUBLIC_HOST + `/crud/update?queryType=notes`,
+				{
+					bookmarkId: id,
+					notes: notes,
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${localStorage.getItem(
+							'sessionToken'
+						)}`,
+					},
+				}
+			)
+			fetchBookmarks()
+			setShowLoader(false)
+		} catch (err) {
+			setShowLoader(false)
+			throw err
+		}
+	}
 	const fetchBookmarks = async () => {
 		try {
 			setShowLoader(true)
@@ -154,7 +178,7 @@ const BookmarksProvider = ({ children }) => {
 	const fetchBookmark = async ({ id }) => {
 		try {
 			setShowLoader(true)
-			const tags = await axios.get(
+			const bookmark = await axios.get(
 				process.env.NEXT_PUBLIC_HOST +
 					`/crud/read?queryType=bookmark&bookmarkId=` +
 					id,
@@ -166,7 +190,12 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
+			const res = await axios.post('/api/utils', {
+				ids: [bookmark?.data?.bookmark?.twitter_status_id],
+			})
+
 			setShowLoader(false)
+			return { backend: bookmark?.data?.bookmark, twitter: res.data[0] }
 		} catch (err) {
 			setShowLoader(false)
 			throw err
@@ -266,6 +295,7 @@ const BookmarksProvider = ({ children }) => {
 				sortByDate,
 				setSortBySource,
 				sortBySource,
+				updateNotes,
 			}}
 		>
 			{children}

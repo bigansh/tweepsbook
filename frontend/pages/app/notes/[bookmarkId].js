@@ -16,36 +16,30 @@ import BookmarkCard from '../../../src/components/BookmarkCard'
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
 const notes = () => {
-	const { bookmarks, fetchBookmarks } = useContext(BookmarksContext)
+	const { fetchBookmark, updateNotes } = useContext(BookmarksContext)
 	const router = useRouter()
 	const { bookmarkId } = router.query
 
-	const [value, setValue] = useState('**Start taking your Notes Here...**')
-	const [eye, setEye] = useState(true)
 	const [selectedBookmark, setSelectedBookmark] = useState(null)
+	const [value, setValue] = useState('**Start taking your Notes Here...**')
 
 	useEffect(() => {
-		fetchBookmarks()
-	}, [])
+		const getBookmark = async () => {
+			setSelectedBookmark(await fetchBookmark({ id: bookmarkId }))
+		}
+		bookmarkId && getBookmark()
+	}, [bookmarkId])
 	useEffect(() => {
-		// console.log(bookmarkId)
-		// console.log(bookmarks)
-		bookmarks.map((bookmark) => {
-			// console.log('hello')
-			// console.log(bookmark.backend._id)
-			if (bookmark.backend._id === bookmarkId) {
-				// console.log(bookmark)
-				setSelectedBookmark(bookmark)
-			}
-		})
-		// console.log(temp)
-		// setSelectedBookmark()
-	}, [bookmarks, bookmarkId])
+		setValue(
+			selectedBookmark?.backend?.notes ??
+				'**Start taking your Notes Here...**'
+		)
+	}, [selectedBookmark])
 	return (
-		<div className='min-h-[100vh] bg-[#FBFAFA] '>
+		<div className='min-h-[100vh] bg-[#FBFAFA] flex flex-col'>
 			<DashNavbar search={false} />
 
-			<div className='flex justify-around '>
+			<div className='flex justify-around flex-grow'>
 				<div className='flex flex-col p-1 w-1/3 justify-between'>
 					{selectedBookmark && (
 						<BookmarkCard bookmark={selectedBookmark} />
@@ -55,15 +49,29 @@ const notes = () => {
 					<div className='flex justify-center items-center w-full'></div>
 				</div>
 
-				<div className='flex m-4 w-1/2' data-color-mode='light'>
+				<div
+					className='flex flex-col m-4 w-1/2 '
+					data-color-mode='light'
+				>
 					<MDEditor
 						value={value}
 						onChange={setValue}
-						height='350'
+						height='80vh'
 						preview='live'
 						visibleDragbar='false'
-						className='borde rounded w-full'
+						className='border rounded w-full '
 					/>
+					<button
+						className='text-white text-sm py-2 ml-auto my-2 px-4 rounded-lg border-dark-blue border-2 bg-dark-blue font-semibold'
+						onClick={() => {
+							updateNotes({
+								id: selectedBookmark?.backend._id,
+								notes: value,
+							})
+						}}
+					>
+						Save Notes
+					</button>
 				</div>
 			</div>
 		</div>
