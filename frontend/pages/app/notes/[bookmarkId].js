@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { IconContext } from 'react-icons'
 import { useRouter } from 'next/router'
-import { GrNotes } from 'react-icons/gr'
+import { GrNotes, GrToast } from 'react-icons/gr'
 import { BiTrashAlt } from 'react-icons/bi'
 import { AiOutlineEye } from 'react-icons/ai'
 import { AiOutlineEyeInvisible } from 'react-icons/ai'
@@ -15,6 +15,8 @@ import { BookmarksContext } from '../../../contexts/BookmarksContext'
 import BookmarkCard from '../../../src/components/BookmarkCard'
 import Toggle from '../../../src/components/Toggle'
 import { UserContext } from '../../../contexts/UserContext'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
@@ -47,6 +49,7 @@ const notes = () => {
 				'**Start taking your Notes Here...**'
 		)
 		setShareChecked(selectedBookmark?.backend?.share ?? false)
+		console.log(selectedBookmark)
 	}, [selectedBookmark])
 
 	const copyLink = () => {
@@ -55,6 +58,7 @@ const notes = () => {
 			navigator?.clipboard?.writeText(window?.location?.href)
 			setShowLoader(false)
 			setCopyButtonText('Copied!')
+			toast.success('URL Copiured to clipboard!')
 		}, [200])
 		setTimeout(() => {
 			setCopyButtonText('Copy URL')
@@ -79,20 +83,25 @@ const notes = () => {
 			<div className='flex justify-around flex-grow'>
 				<div className='flex flex-col p-1 w-1/3'>
 					{selectedBookmark && (
-						<BookmarkCard bookmark={selectedBookmark} />
+						<BookmarkCard
+							bookmark={selectedBookmark}
+							ownershipStatus={selectedBookmark?.ownershipStatus}
+						/>
 					)}
 
 					{/* Tweet Menu Functions */}
-					<div className='flex items-center w-full justify-between p-2'>
-						Share bookmark to web
-						<Toggle
-							checked={shareChecked}
-							onChange={() => {
-								shareBookmark()
-							}}
-						/>
-					</div>
-					{shareChecked && (
+					{selectedBookmark?.ownershipStatus && (
+						<div className='flex items-center w-full justify-between p-2'>
+							Share bookmark to web
+							<Toggle
+								checked={shareChecked}
+								onChange={() => {
+									shareBookmark()
+								}}
+							/>
+						</div>
+					)}
+					{selectedBookmark?.ownershipStatus && shareChecked && (
 						<div className='flex items-center w-full justify-between p-2 border rounded '>
 							{window?.location?.href}
 							<button
@@ -123,21 +132,27 @@ const notes = () => {
 						value={value}
 						onChange={setValue}
 						height='80vh'
-						preview='live'
+						preview={
+							selectedBookmark?.ownershipStatus
+								? 'live'
+								: 'preview'
+						}
 						visibleDragbar='false'
 						className='border rounded w-full '
 					/>
-					<button
-						className='text-white text-sm py-2 ml-auto my-2 px-4 rounded-lg border-dark-blue border-2 bg-dark-blue font-semibold'
-						onClick={() => {
-							updateNotes({
-								id: selectedBookmark?.backend._id,
-								notes: value,
-							})
-						}}
-					>
-						Save Notes
-					</button>
+					{selectedBookmark?.ownershipStatus && (
+						<button
+							className='text-white text-sm py-2 ml-auto my-2 px-4 rounded-lg border-dark-blue border-2 bg-dark-blue font-semibold'
+							onClick={() => {
+								updateNotes({
+									id: selectedBookmark?.backend._id,
+									notes: value,
+								})
+							}}
+						>
+							Save Notes
+						</button>
+					)}
 				</div>
 			</div>
 		</div>

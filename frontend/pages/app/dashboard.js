@@ -15,6 +15,7 @@ import { UserContext } from '../../contexts/UserContext'
 import Lottie from 'react-lottie-player'
 import Loader from '../../src/components/loader.json'
 import { BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs'
+import { ToastContainer, toast } from 'react-toastify'
 
 export default function dashboard({ children }) {
 	const router = useRouter()
@@ -66,6 +67,7 @@ export default function dashboard({ children }) {
 	return (
 		<div onClick={(e) => handleClickOutside(e)}>
 			{router.query.settings === 'true' && <Settings />}
+
 			<div className='overflow-hidden scroll-smooth fixed w-full h-full flex flex-col'>
 				<DashNavbar search={true} />
 

@@ -4,7 +4,8 @@ import '../styles/globals.css'
 import Head from 'next/head'
 import { BookmarksProvider } from '../contexts/BookmarksContext'
 import { UserProvider } from '../contexts/UserContext'
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 const MyApp = ({ Component, pageProps }) => {
 	return (
 		<BookmarksProvider>
@@ -24,7 +25,18 @@ const MyApp = ({ Component, pageProps }) => {
 						rel='stylesheet'
 					/>
 				</Head>
-
+				<ToastContainer
+					position='bottom-center'
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme='dark'
+				/>
 				<Component {...pageProps} />
 			</UserProvider>
 		</BookmarksProvider>

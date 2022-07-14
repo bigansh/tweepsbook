@@ -25,6 +25,7 @@ const UserProvider = ({ children }) => {
 			setShowLoader(false)
 		} catch (err) {
 			setShowLoader(false)
+			window.location.href = '/'
 			throw err
 		}
 	}
