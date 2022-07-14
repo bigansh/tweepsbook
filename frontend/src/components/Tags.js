@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { IoMdArchive } from 'react-icons/io'
+import { IoIosClose, IoMdArchive } from 'react-icons/io'
 import { MdSystemUpdateAlt } from 'react-icons/md'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 
 const tags = () => {
-	const { fetchTags, activeTag, setActiveTag, bookmarks } =
+	const { fetchTags, activeTag, setActiveTag, bookmarks,deleteTag } =
 		useContext(BookmarksContext)
 	const [tags, setTags] = useState([])
 
@@ -12,7 +12,17 @@ const tags = () => {
 		importTags()
 		// console.log(activeTag)
 	}, [bookmarks])
+const removeTag = async (tag) => {
+try{
 
+	await deleteTag(tag._id)
+	localStorage.removeItem("activeTag")
+	// setActiveTag({ tag: 'all', _id: 'all' })
+
+}catch(err){
+console.log(err)
+}
+}
 	const importTags = async () => {
 		const tempTags = await fetchTags()
 		setTags([{ tag: 'all', _id: 'all' }, ...tempTags])
@@ -43,13 +53,17 @@ const tags = () => {
 									key={tag._id}
 									onClick={() => handleClick(tag)}
 									className={
-										'my-1 pl-5 py-2 rounded-md w-full flex justify-start ' +
+										'my-1 pl-5 py-2 rounded-md w-full flex justify-between items-center ' +
 										(activeTag?._id === tag?._id
 											? 'bg-hovertagColor'
 											: 'bg-transparent hover:bg-hovertagColor hover:bg-opacity-50')
 									}
 								>
 									#{tag.tag}
+									{tag?._id === activeTag?._id && tag?._id !== "all" && <IoIosClose
+									className='w-5 h-5 ml-0.5 cursor-pointer rounded-full hover:bg-dark-blue opacity-50 hover:bg-opacity-5 hover:opacity-100 transition-all duration-100'
+									onClick={() => removeTag(tag)}
+								/>}
 								</button>
 							)
 						})}

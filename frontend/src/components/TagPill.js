@@ -70,7 +70,7 @@ const TagPill = ({ bookmark }) => {
 		const tempTags = [...tags, newTag]
 		setTags(tempTags)
 	}
-	const deleteTag = (tag) => {
+	const removeTag = (tag) => {
 		const tempTags = tags.filter((t) => t._id !== tag._id)
 		setTags(tempTags)
 		try {
@@ -95,7 +95,7 @@ const TagPill = ({ bookmark }) => {
 								</span>
 								<IoIosClose
 									className='w-5 h-5 ml-0.5 cursor-pointer rounded-full hover:bg-dark-blue opacity-50 hover:bg-opacity-5 hover:opacity-100 transition-all duration-100'
-									onClick={() => deleteTag(tag)}
+									onClick={() => removeTag(tag)}
 								/>
 							</div>
 						)}
