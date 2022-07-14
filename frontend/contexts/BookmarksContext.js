@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createContext, useState } from 'react'
-
+import { toast } from 'react-toastify'
 const BookmarksContext = createContext()
 
 const BookmarksProvider = ({ children }) => {
@@ -31,6 +31,7 @@ const BookmarksProvider = ({ children }) => {
 			)
 			fetchBookmarks()
 			setShowLoader(false)
+			toast.success('Read status updated successfully')
 		} catch (err) {
 			setShowLoader(false)
 			throw err
@@ -57,6 +58,7 @@ const BookmarksProvider = ({ children }) => {
 			)
 			fetchBookmarks()
 			setShowLoader(false)
+			toast.success('Share status updated successfully')
 		} catch (err) {
 			setShowLoader(false)
 			throw err
@@ -83,6 +85,7 @@ const BookmarksProvider = ({ children }) => {
 			fetchBookmarks()
 			fetchTags()
 			setShowLoader(false)
+			toast.success('Tags updated successfully')
 		} catch (err) {
 			setShowLoader(false)
 			throw err
@@ -105,6 +108,7 @@ const BookmarksProvider = ({ children }) => {
 			// console.log(bookmarks)
 			fetchBookmarks()
 			setShowLoader(false)
+			toast.success('Bookmarks imported successfully')
 		} catch (err) {
 			setShowLoader(false)
 			throw err
@@ -130,6 +134,7 @@ const BookmarksProvider = ({ children }) => {
 			)
 			fetchBookmarks()
 			setShowLoader(false)
+			toast.success('Notes updated successfully')
 		} catch (err) {
 			setShowLoader(false)
 			throw err
@@ -210,6 +215,7 @@ const BookmarksProvider = ({ children }) => {
 			}
 		} catch (err) {
 			setShowLoader(false)
+			toast.error('Error fetching bookmarks')
 			throw err
 		}
 	}
@@ -227,9 +233,11 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			setShowLoader(false)
+			// toast.success('Tags fetched successfully')
 			return res.data
 		} catch (err) {
 			setShowLoader(false)
+			toast.error('Error fetching tags')
 			throw err
 		}
 	}
@@ -253,6 +261,7 @@ const BookmarksProvider = ({ children }) => {
 			console.log(res)
 			fetchBookmarks()
 			setShowLoader(false)
+			toast.success('Bookmark deleted successfully')
 		} catch (err) {
 			setShowLoader(false)
 			throw err
@@ -277,6 +286,7 @@ const BookmarksProvider = ({ children }) => {
 			console.log(res)
 			fetchBookmarks()
 			setShowLoader(false)
+			toast.success('Tag deleted successfully')
 		} catch (err) {
 			setShowLoader(false)
 			throw err
