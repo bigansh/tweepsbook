@@ -68,12 +68,11 @@ const BookmarkCard = ({ bookmark }) => {
 			) : null}
 
 			{/* Time and Date */}
-			<div className='text-sm text-mid-gray'>
-				<time>{format(createdTime, 'hh:mm a · MMM	 d, y')}</time>
-			</div>
 
 			<div className='flex py-2 items-center justify-between'>
-				<TagPill bookmark={bookmark} />
+				<div className='text-sm text-mid-gray'>
+					<time>{format(createdTime, 'hh:mm a · MMM	 d, y')}</time>
+				</div>
 				<div className='flex gap-x-1 items-start text-dark-gray'>
 					<div className='p-1 rounded-full'>
 						<BiArchiveIn
@@ -86,13 +85,13 @@ const BookmarkCard = ({ bookmark }) => {
 							}
 						/>
 					</div>
-					<div className="p-1 rounded-full">
+					<div className='p-1 rounded-full'>
 						<BiTrashAlt
 							className='w-5 h-5 cursor-pointer hover:scale-110 transition-all duration-100 text-dark-gray'
 							onClick={() => deleteBookmark(bookmark.backend._id)}
 						/>
 					</div>
-					<div className="p-1 rounded-full">
+					<div className='p-1 rounded-full'>
 						<MdOutlineStickyNote2
 							className='w-5 h-5 cursor-pointer hover:scale-110 transition-all duration-100 text-dark-gray'
 							onClick={() =>
@@ -103,6 +102,7 @@ const BookmarkCard = ({ bookmark }) => {
 					</div>
 				</div>
 			</div>
+			<TagPill bookmark={bookmark} />
 		</div>
 	)
 }

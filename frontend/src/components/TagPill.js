@@ -14,7 +14,10 @@ const TagPill = ({ bookmark }) => {
 		})
 		setTags(tempTags)
 	}, [bookmark])
-
+	useEffect(() => {
+		const editTagsList = document.getElementsByName('tagName')
+		editTagsList[editTagsList.length - 1]?.focus()
+	}, [tags])
 	const editTag = (tag) => {
 		console.log(tag)
 		const tempTags = tags.map((t) => {
@@ -29,7 +32,8 @@ const TagPill = ({ bookmark }) => {
 	const handleTagUpdate = ({ e, tag }) => {
 		e.preventDefault()
 		const data = new FormData(e.target)
-		const tagName = data.get('tagName')
+		let tagName = data.get('tagName')
+		tagName = tagName.replace('#', '')
 		if (tagName === '') {
 			alert('Tag name cannot be empty')
 			returns
@@ -108,7 +112,10 @@ const TagPill = ({ bookmark }) => {
 					</div>
 				)
 			})}
-			<BsPlus onClick={addTag} className="bg-lg-gray p-1 w-6 h-6 ml-2 rounded-full hover:cursor-pointer hover:scale-125 transition-all duration-100" />
+			<BsPlus
+				onClick={addTag}
+				className='bg-lg-gray p-1 w-6 h-6 ml-2 rounded-full hover:cursor-pointer hover:scale-125 transition-all duration-100'
+			/>
 		</div>
 	)
 }

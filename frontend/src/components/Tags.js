@@ -25,13 +25,11 @@ const tags = () => {
 	const { importBookmarks } = useContext(BookmarksContext)
 	return (
 		<div className='flex flex-col justify-between items-start min-h-eigthy overflow-hidden w-full text-white flex-grow '>
-			<div className="text-xl px-8 py-10">
-				<h1 className='text-xl font-semibold tracking-wider'>
-					TAGS
-				</h1>
+			<div className='text-xl px-8 py-10'>
+				<h1 className='text-xl font-semibold tracking-wider'>TAGS</h1>
 			</div>
-			<div className='flex text-md justify-between overflow-y-auto overflow-x-hidden w-full flex-col items-start flex-grow'>
-				<div className='flex flex-col items-start w-full px-4'>
+			<div className='flex text-md justify-between  w-full flex-col items-start flex-grow overflow-hidden'>
+				<div className='flex flex-col items-start w-full px-4 overflow-y-scroll overflow-x-hidden'>
 					{tags &&
 						tags.map((tag) => {
 							console.log('tag', tag.tag)
