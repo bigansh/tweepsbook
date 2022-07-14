@@ -103,7 +103,7 @@ const BookmarkCard = ({ bookmark, ownershipStatus }) => {
 				<div className='text-sm text-mid-gray'>
 					<time>{format(createdTime, 'hh:mm a · MMM	 d, y')}</time>
 				</div>
-				{ownershipStatus && (
+				{ownershipStatus !== false && (
 					<div className='flex gap-x-1 items-start text-dark-gray'>
 						<div className='p-1 rounded-full'>
 							<BiArchiveIn
@@ -136,7 +136,7 @@ const BookmarkCard = ({ bookmark, ownershipStatus }) => {
 					</div>
 				)}
 			</div>
-			{ownershipStatus && <TagPill bookmark={bookmark} />}
+			{ownershipStatus !== false && <TagPill bookmark={bookmark} />}
 		</div>
 	)
 }
