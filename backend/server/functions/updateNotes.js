@@ -15,7 +15,7 @@ const mixpanel = require('../utils/auth/mixpanelConnect')
 const updateNotes = async (bookmarkId = undefined, notes, profile_id) => {
 	try {
 		if (bookmarkId) {
-			mixpanel.track('Update read status', {
+			mixpanel.track('Update notes', {
 				distinct_id: profile_id,
 				bookmark_id: bookmarkId,
 			})
