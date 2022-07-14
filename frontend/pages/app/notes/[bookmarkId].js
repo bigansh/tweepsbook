@@ -14,6 +14,7 @@ import DashNavbar from '../../../src/components/DashNavbar'
 import { BookmarksContext } from '../../../contexts/BookmarksContext'
 import BookmarkCard from '../../../src/components/BookmarkCard'
 import Toggle from '../../../src/components/Toggle'
+import { UserContext } from '../../../contexts/UserContext'
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
@@ -28,6 +29,7 @@ const notes = () => {
 
 	const [selectedBookmark, setSelectedBookmark] = useState(null)
 	const [value, setValue] = useState('**Start taking your Notes Here...**')
+	const { getUser } = useContext(UserContext)
 
 	const getBookmark = async () => {
 		setShowLoader(true)
