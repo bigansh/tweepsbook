@@ -151,13 +151,20 @@ const BookmarksProvider = ({ children }) => {
 			const tempBookmarkIds = bookmarks.data.map(
 				(bookmark) => bookmark.twitter_status_id
 			)
-			const res = await axios.post('/api/utils', {
-				ids: tempBookmarkIds,
-			})
+			let twitterData = []
+			const chunkSize = 100
+			for (let i = 0; i < tempBookmarkIds.length; i += chunkSize) {
+				const chunk = tempBookmarkIds.slice(i, i + chunkSize)
+				const res = await axios.post('/api/utils', {
+					ids: chunk,
+				})
+				twitterData = [...twitterData, ...res.data]
+				// do whatever
+			}
 
 			let mergedArr = []
 			bookmarks.data.forEach((i) => {
-				res.data.forEach((j) => {
+				twitterData.forEach((j) => {
 					if (j.id === i.twitter_status_id) {
 						mergedArr.push({ backend: i, twitter: j })
 					}
