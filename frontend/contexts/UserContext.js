@@ -73,6 +73,7 @@ const UserProvider = ({ children }) => {
 			window?.location?.href = '/'
 		} catch (err) {
 			setShowLoader(false)
+			
 			throw err
 		}
 	}
