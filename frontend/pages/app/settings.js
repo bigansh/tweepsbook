@@ -1,10 +1,14 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { BiPencil } from 'react-icons/bi'
 import { UserContext } from '../../contexts/UserContext'
-// import twitterIcon from '../images/twitter_icon_blue.png'
+import twitterIcon from '../../src/images/twitter_icon_blue.png'
 const Settings = () => {
 	const { user, setUser, getUser, updateUser, deleteUser } =
 		useContext(UserContext)
+	useEffect(() => {
+		getUser()
+	}, [])
+	console.log('user', user)
 	const [showDeleteAccountConfirmation, setShowDeleteAccountConfirmation] =
 		useState(false)
 	const enableInput = (id) => {
@@ -36,7 +40,13 @@ const Settings = () => {
 			<div className='bg-[#F5F5F5] rounded flex flex-col py-10 px-10'>
 				<div className='grid grid-cols-3 gap-x-8 auto-rows-auto'>
 					<div className='bg-white p-4 flex flex-col items-center justify-center rounded-lg'>
-						{/* <img src={profileImage.src} alt='' /> */}
+						<div className='w-32 h-32 '>
+							<img
+								src={user?.profile_image}
+								alt='User Profile Image'
+								className='w-full h-full rounded-full'
+							/>
+						</div>
 						<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center'>
 							<input
 								type='text'
@@ -112,7 +122,7 @@ const Settings = () => {
 								Tweepsbook integration
 							</p>
 							<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 w-1/2 justify-start items-center'>
-								{/* <img src={twitterIcon.src} alt='' /> */}
+								<img src={twitterIcon.src} alt='' />
 								Twitter
 							</div>
 						</div>
