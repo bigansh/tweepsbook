@@ -15,12 +15,26 @@ const BookmarkCard = ({ bookmark }) => {
 			key={bookmark.backend._id}
 		>
 			<div className='w-full flex items-center justify-between'>
-				<div className='flex flex-row gap-x-2 w-5/6 items-center'>
+				<div className='flex flex-row gap-x-2 w-5/6 items-center '>
 					<img
 						src={bookmark.twitter.author.profile_image_url}
-						className='w-10 h-10 rounded-full p-1'
+						className='w-10 h-10 rounded-full p-1 cursor-pointer'
+						onClick={() =>
+							window.open(
+								`https://twitter.com/${bookmark.twitter.author.username}/`,
+								'_blank'
+							)
+						}
 					/>
-					<span className='font-semibold text-[15px]'>
+					<span
+						className='font-semibold text-[15px] cursor-pointer'
+						onClick={() =>
+							window.open(
+								`https://twitter.com/${bookmark.twitter.author.username}/`,
+								'_blank'
+							)
+						}
+					>
 						{bookmark.twitter.author.name}
 						{bookmark.twitter.author.verified ? (
 							<svg
@@ -35,11 +49,27 @@ const BookmarkCard = ({ bookmark }) => {
 						) : null}
 					</span>
 
-					<span className='font-medium text-[15px] text-mid-gray'>
+					<span
+						className='font-medium text-[15px] text-mid-gray cursor-pointer'
+						onClick={() =>
+							window.open(
+								`https://twitter.com/${bookmark.twitter.author.username}/`,
+								'_blank'
+							)
+						}
+					>
 						@{bookmark.twitter.author.username}
 					</span>
 				</div>
-				<div className='flex items-end p-2 justify-end'>
+				<div
+					className='flex items-end p-2 justify-end cursor-pointer'
+					onClick={() =>
+						window.open(
+							`https://twitter.com/${bookmark.twitter.author.username}/status/${bookmark.twitter.id}`,
+							'_blank'
+						)
+					}
+				>
 					<BsTwitter className='mx-3 text-[#1DA1F2]' />
 				</div>
 			</div>
