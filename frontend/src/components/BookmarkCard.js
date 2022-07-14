@@ -6,7 +6,7 @@ import { BiArchiveIn, BiTrashAlt } from 'react-icons/bi'
 import { MdOutlineStickyNote2 } from 'react-icons/md'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 
-const BookmarkCard = ({ bookmark }) => {
+const BookmarkCard = ({ bookmark, ownershipStatus }) => {
 	const createdTime = new Date(bookmark.twitter.created_at)
 	const { updateReadStatus, deleteBookmark } = useContext(BookmarksContext)
 	return (
@@ -103,36 +103,40 @@ const BookmarkCard = ({ bookmark }) => {
 				<div className='text-sm text-mid-gray'>
 					<time>{format(createdTime, 'hh:mm a · MMM	 d, y')}</time>
 				</div>
-				<div className='flex gap-x-1 items-start text-dark-gray'>
-					<div className='p-1 rounded-full'>
-						<BiArchiveIn
-							className='w-5 h-5 cursor-pointer hover:scale-110'
-							onClick={() =>
-								updateReadStatus({
-									id: bookmark.backend._id,
-									currentStatus: bookmark.backend.read,
-								})
-							}
-						/>
+				{ownershipStatus && (
+					<div className='flex gap-x-1 items-start text-dark-gray'>
+						<div className='p-1 rounded-full'>
+							<BiArchiveIn
+								className='w-5 h-5 cursor-pointer hover:scale-110'
+								onClick={() =>
+									updateReadStatus({
+										id: bookmark.backend._id,
+										currentStatus: bookmark.backend.read,
+									})
+								}
+							/>
+						</div>
+						<div className='p-1 rounded-full'>
+							<BiTrashAlt
+								className='w-5 h-5 cursor-pointer hover:scale-110 transition-all duration-100 text-dark-gray'
+								onClick={() =>
+									deleteBookmark(bookmark.backend._id)
+								}
+							/>
+						</div>
+						<div className='p-1 rounded-full'>
+							<MdOutlineStickyNote2
+								className='w-5 h-5 cursor-pointer hover:scale-110 transition-all duration-100 text-dark-gray'
+								onClick={() =>
+									(window.location.href =
+										'/app/notes/' + bookmark.backend._id)
+								}
+							/>
+						</div>
 					</div>
-					<div className='p-1 rounded-full'>
-						<BiTrashAlt
-							className='w-5 h-5 cursor-pointer hover:scale-110 transition-all duration-100 text-dark-gray'
-							onClick={() => deleteBookmark(bookmark.backend._id)}
-						/>
-					</div>
-					<div className='p-1 rounded-full'>
-						<MdOutlineStickyNote2
-							className='w-5 h-5 cursor-pointer hover:scale-110 transition-all duration-100 text-dark-gray'
-							onClick={() =>
-								(window.location.href =
-									'/app/notes/' + bookmark.backend._id)
-							}
-						/>
-					</div>
-				</div>
+				)}
 			</div>
-			<TagPill bookmark={bookmark} />
+			{ownershipStatus && <TagPill bookmark={bookmark} />}
 		</div>
 	)
 }

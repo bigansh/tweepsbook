@@ -203,7 +203,11 @@ const BookmarksProvider = ({ children }) => {
 			})
 
 			setShowLoader(false)
-			return { backend: bookmark?.data?.bookmark, twitter: res.data[0] }
+			return {
+				backend: bookmark?.data?.bookmark,
+				twitter: res.data[0],
+				ownershipStatus: bookmark?.data?.ownershipStatus,
+			}
 		} catch (err) {
 			setShowLoader(false)
 			throw err
