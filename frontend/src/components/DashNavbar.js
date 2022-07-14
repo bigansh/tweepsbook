@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { IoMdExit } from 'react-icons/io'
 import { FiSettings } from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
@@ -13,7 +13,11 @@ const DashNavbar = ({ search }) => {
 	const menuClick = () => {
 		setMenuActive(!menuActive)
 	}
-	const { user } = useContext(UserContext)
+	useEffect(() => {
+		getUser()
+		console.log(user)
+	}, [])
+	const { user, getUser } = useContext(UserContext)
 	const Logout = () => {
 		localStorage.removeItem('sessionToken')
 		window.location.reload()

@@ -3,10 +3,12 @@ import axios from 'axios'
 export default async function fetchTweets(req, res) {
 	const resp = await getTweets(req.body.ids)
 	res.send(resp)
+
 	// console.log(req.body)
 }
 
 const getTweets = async (ids) => {
+	console.log(ids)
 	if (ids.length === 0) {
 		return []
 	}
@@ -55,7 +57,7 @@ const getTweets = async (ids) => {
 	}
 
 	return (
-		tweets.data.reduce((allTweets, tweet) => {
+		tweets?.data?.reduce((allTweets, tweet) => {
 			const tweetWithAuthor = {
 				...tweet,
 				media:

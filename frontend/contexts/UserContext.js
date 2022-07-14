@@ -69,6 +69,8 @@ const UserProvider = ({ children }) => {
 			)
 			console.log(res.data)
 			setShowLoader(false)
+			localStorage.removeItem('sessionToken')
+			window?.location?.href = '/'
 		} catch (err) {
 			setShowLoader(false)
 			throw err
