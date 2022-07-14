@@ -8,7 +8,8 @@ const BookmarksProvider = ({ children }) => {
 	const [activeTag, setActiveTag] = useState()
 	const [searchTerm, setSearchTerm] = useState('')
 	const [showLoader, setShowLoader] = useState(false)
-
+	const [sortByDate, setSortByDate] = useState(false)
+	const [sortBySource, setSortBySource] = useState(false)
 	const updateReadStatus = async ({ id, currentStatus }) => {
 		try {
 			setShowLoader(true)
@@ -261,6 +262,10 @@ const BookmarksProvider = ({ children }) => {
 				setSearchTerm,
 				showLoader,
 				setShowLoader,
+				setSortByDate,
+				sortByDate,
+				setSortBySource,
+				sortBySource,
 			}}
 		>
 			{children}

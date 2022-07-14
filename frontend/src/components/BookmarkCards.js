@@ -8,14 +8,25 @@ import BookmarkCard from './BookmarkCard'
 const bookmarkCards = ({ archive }) => {
 	const {
 		bookmarks,
-		updateReadStatus,
-		deleteBookmark,
+		sortByDate,
 		activeTag,
 		searchTerm,
 		showLoader,
 		setShowLoader,
 	} = useContext(BookmarksContext)
 	const [bookmarksToShow, setBookmarksToShow] = useState([])
+	const sortBookmarksByDate = () => {
+		return bookmarks.sort((a, b) => {
+			return sortByDate
+				? new Date(b.backend.createdAt) - new Date(a.backend.createdAt)
+				: new Date(a.backend.createdAt) - new Date(b.backend.createdAt)
+		})
+	}
+	useEffect(() => {
+		console.log('sorting by date')
+		setBookmarksToShow([...sortBookmarksByDate()])
+		console.log(sortBookmarksByDate())
+	}, [sortByDate])
 
 	const filterByTag = () => {
 		setShowLoader(true)

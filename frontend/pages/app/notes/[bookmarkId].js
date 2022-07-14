@@ -42,7 +42,7 @@ const notes = () => {
 		// setSelectedBookmark()
 	}, [bookmarks, bookmarkId])
 	return (
-		<div className='h-screen bg-[#FBFAFA] '>
+		<div className='min-h-[100vh] bg-[#FBFAFA] '>
 			<DashNavbar search={false} />
 
 			<div className='flex justify-around '>
@@ -50,81 +50,9 @@ const notes = () => {
 					{selectedBookmark && (
 						<BookmarkCard bookmark={selectedBookmark} />
 					)}
-					{/* Selected Tweet goes here */}
-					{/* <div className='flex flex-col rounded-md border w-96 h-fit p-1 m-4 '>
-                        <div className='w-full flex items-center'>
-                            <img
-                                src='https://pbs.twimg.com/profile_images/1209898984/twitter_normal.jpg'
-                                className='w-10 h-10 rounded-full m-1 p-1'
-                            />
-                            <span className='mx-1'>
-                                opdmcv
-                            </span>
-                            <span className='mx-1 font-thin text-xs'>
-                                @dkjncv •{' '}
-                                kodnmcv
-                            </span>
-                            <div className='flex items-center p-2 justify-end'>
-                                <BsTwitter className='mx-3' />
-                            </div>
-                        </div>
-                        <p className='m-1 p-1'>vkmdfkvmdkcmkldmckldmckldmckldmcklmc ckdmc ckmckld ckldmc</p>
-
-                        <div className='flex items-center opacity-50 p-2 justify-end'>
-                            <BiArchiveIn className='mx-3 w-5 h-5' />
-                            <BiTrashAlt
-                                className='mx-3 w-5 h-5'
-                                // onClick={() =>
-                                // 	delete(.backend._id)
-                                // }
-                                style={{ cursor: 'pointer' }}
-                            />
-                            <GrNotes className='mx-3 w-5 h-5' />
-                        </div>
-                    </div> */}
 
 					{/* Tweet Menu Functions */}
-					<div className='flex justify-center items-center w-full'>
-						<IconContext.Provider
-							value={{
-								color: 'darkBlue',
-								className: 'hover:opacity-70',
-							}}
-						>
-							<button className='flex items-center rounded-sm justify-around m-1 border w-10 h-10 '>
-								<BiArchiveIn className='w-6 h-6' />
-							</button>
-						</IconContext.Provider>
-
-						<IconContext.Provider
-							value={{
-								color: 'darkBlue',
-								className: 'hover:opacity-70',
-							}}
-						>
-							<button
-								onClick={() => setEye(!eye)}
-								className='flex items-center rounded-sm justify-around m-1 border w-10 h-10 '
-							>
-								{eye ? (
-									<AiOutlineEye className='w-6 h-6' />
-								) : (
-									<AiOutlineEyeInvisible className='w-6 h-6' />
-								)}
-							</button>
-						</IconContext.Provider>
-
-						<IconContext.Provider
-							value={{
-								color: 'darkBlue',
-								className: 'hover:opacity-70',
-							}}
-						>
-							<button className='flex items-center rounded-sm justify-around m-1 border w-10 h-10 '>
-								<BiTrashAlt className='w-6 h-6' />
-							</button>
-						</IconContext.Provider>
-					</div>
+					<div className='flex justify-center items-center w-full'></div>
 				</div>
 
 				<div className='flex m-4 w-1/2' data-color-mode='light'>
