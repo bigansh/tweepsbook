@@ -46,7 +46,7 @@ const Hero = () => {
 											'?authorization=' +
 											process.env.NEXT_PUBLIC_STATIC_TOKEN
 									)
-									console.log(process.env)
+									// console.log(process.env)
 								}}
 							>
 								Let's Get Started

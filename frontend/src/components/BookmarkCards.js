@@ -19,7 +19,7 @@ const bookmarkCards = ({ archive }) => {
 
 	const filterByTag = () => {
 		setShowLoader(true)
-		console.log('called')
+		// console.log('called')
 		let tempBookmarksToShow = []
 		bookmarks.forEach((bookmark) => {
 			if (activeTag.tag === 'all') {
@@ -30,7 +30,7 @@ const bookmarkCards = ({ archive }) => {
 				return
 			}
 			bookmark.backend.tags.map((tag) => {
-				console.log('bookmark', bookmark)
+				// console.log('bookmark', bookmark)
 
 				if (tag.tag === activeTag.tag) {
 					tempBookmarksToShow.push(bookmark)
@@ -59,24 +59,19 @@ const bookmarkCards = ({ archive }) => {
 
 	useEffect(() => {
 		const tempBookmarksToShow = filterByTag()
-		console.log({ tempBookmarksToShow })
 		setBookmarksToShow([...tempBookmarksToShow])
 	}, [bookmarks, activeTag])
 
 	useEffect(() => {
-		console.log('bookmarksToShow', bookmarksToShow)
-	}, [bookmarksToShow])
-
-	useEffect(() => {
 		const tempBookmarksToShow = filterBySearchTerm()
 		setBookmarksToShow([...tempBookmarksToShow])
-		console.log(tempBookmarksToShow)
+		// console.log(activeTag)
 	}, [searchTerm, activeTag])
 
 	let msnry = new Masonry('.grid', {
 		columnWidth: 200,
 	})
-	
+
 	return (
 		<div className='flex flex-wrap p-3 overflow-auto w-full'>
 			{showLoader && (
@@ -96,7 +91,10 @@ const bookmarkCards = ({ archive }) => {
 				{bookmarksToShow?.map((bookmark, index) => {
 					return (
 						bookmark.backend.read === (archive || false) && (
-							<BookmarkCard bookmark={bookmark} />
+							<BookmarkCard
+								bookmark={bookmark}
+								key={bookmark.backend._id}
+							/>
 						)
 					)
 				})}
