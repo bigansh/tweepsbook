@@ -5,10 +5,10 @@ const Joi = require('joi')
  *
  * @param {import('../models/shareStatus')} body
  */
-const archiveStatus = (body) => {
+const shareStatus = (body) => {
 	const shareStatus = Joi.boolean().required()
 
 	return shareStatus.validate(body)
 }
 
-module.exports = archiveStatus
+module.exports = shareStatus
