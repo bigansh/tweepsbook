@@ -1,3 +1,3 @@
 const notes = String
 
-module.exports = readStatus
+module.exports = notes
