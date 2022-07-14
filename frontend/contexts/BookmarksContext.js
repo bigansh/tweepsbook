@@ -135,6 +135,7 @@ const BookmarksProvider = ({ children }) => {
 			throw err
 		}
 	}
+
 	const fetchBookmarks = async () => {
 		try {
 			setShowLoader(true)
