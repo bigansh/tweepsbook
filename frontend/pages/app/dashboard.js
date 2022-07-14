@@ -29,6 +29,7 @@ export default function dashboard({ children }) {
 		importBookmarks,
 		fetchBookmarks,
 		activeTag,
+		setActiveTag,
 	} = useContext(BookmarksContext)
 
 	useEffect(() => {
@@ -41,6 +42,7 @@ export default function dashboard({ children }) {
 		}
 		verifyUser()
 		fetchBookmarks()
+		setActiveTag(JSON.parse(localStorage.getItem('activeTag')))
 	}, [])
 	return (
 		<div>
@@ -57,7 +59,11 @@ export default function dashboard({ children }) {
 						{/* Sorting and filtering buttons */}
 						<div className='flex border-b border-[#0000001e] items-center justify-between p-2 mr-8'>
 							<h1 className='pl-2 font-bold text-3xl font-header'>
-								{activeTag && <>#{activeTag.tag}</>}
+								{children ? (
+									<>#Archive</>
+								) : (
+									activeTag && <>#{activeTag.tag}</>
+								)}
 							</h1>
 							<div className='flex items-center gap-x-4'>
 								<div className='flex flex-col'>

@@ -10,17 +10,23 @@ const tags = () => {
 
 	useEffect(() => {
 		importTags()
-		console.log(activeTag)
+		// console.log(activeTag)
 	}, [bookmarks])
 
 	const importTags = async () => {
 		const tempTags = await fetchTags()
 		setTags([{ tag: 'all', _id: 'all' }, ...tempTags])
-		setActiveTag({ tag: 'all', _id: 'all' })
+		if(window.location.pathname === '/app/dashboard/archive') {
+			setActiveTag({ tag: 'all', _id: 'all' })
+			return
+		}
+		localStorage.getItem('activeTag') ? setActiveTag(JSON.parse(localStorage.getItem('activeTag'))) : setActiveTag({ tag: 'all', _id: 'all' })
 	}
 
-	const handleClick = (tag) => {
+	const handleClick = async (tag) => {
 		setActiveTag(tag)
+		localStorage.setItem('activeTag', JSON.stringify(tag))
+		 window?.location.pathname !== '/app/dashboard' && (window?.location.href = '/app/dashboard' )
 	}
 	const { importBookmarks } = useContext(BookmarksContext)
 	return (
@@ -32,7 +38,6 @@ const tags = () => {
 				<div className='flex flex-col items-start w-full px-4 overflow-y-scroll overflow-x-hidden'>
 					{tags &&
 						tags.map((tag) => {
-							console.log('tag', tag.tag)
 							return (
 								<button
 									key={tag._id}

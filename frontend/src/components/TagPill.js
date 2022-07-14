@@ -19,14 +19,14 @@ const TagPill = ({ bookmark }) => {
 		editTagsList[editTagsList.length - 1]?.focus()
 	}, [tags])
 	const editTag = (tag) => {
-		console.log(tag)
+		// console.log(tag)
 		const tempTags = tags.map((t) => {
 			if (tag._id === t._id) {
 				t.showEdit = true
 			}
 			return t
 		})
-		console.log('first', tempTags)
+		// console.log('first', tempTags)
 		setTags(tempTags)
 	}
 	const handleTagUpdate = ({ e, tag }) => {
@@ -41,9 +41,9 @@ const TagPill = ({ bookmark }) => {
 
 		const tempTags = tags.map((t) => {
 			if (tag._id === t._id) {
-				console.log('found')
-				console.log(t.tag)
-				console.log(tagName)
+				// console.log('found')
+				// console.log(t.tag)
+				// console.log(tagName)
 				t.tag = tagName
 				t.showEdit = false
 			}
@@ -56,7 +56,7 @@ const TagPill = ({ bookmark }) => {
 				tags: tempTags.map((t) => t.tag),
 			})
 		} catch (err) {
-			console.log(err)
+			// console.log(err)
 		}
 	}
 	const addTag = () => {

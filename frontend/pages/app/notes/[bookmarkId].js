@@ -28,13 +28,13 @@ const notes = () => {
 		fetchBookmarks()
 	}, [])
 	useEffect(() => {
-		console.log(bookmarkId)
+		// console.log(bookmarkId)
 		// console.log(bookmarks)
 		bookmarks.map((bookmark) => {
 			// console.log('hello')
 			// console.log(bookmark.backend._id)
 			if (bookmark.backend._id === bookmarkId) {
-				console.log(bookmark)
+				// console.log(bookmark)
 				setSelectedBookmark(bookmark)
 			}
 		})

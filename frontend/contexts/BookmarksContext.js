@@ -101,7 +101,7 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
-			console.log(bookmarks)
+			// console.log(bookmarks)
 			fetchBookmarks()
 			setShowLoader(false)
 		} catch (err) {
@@ -139,10 +139,10 @@ const BookmarksProvider = ({ children }) => {
 				})
 			})
 			setBookmarks(mergedArr)
-			console.log(mergedArr)
+			// console.log(mergedArr)
 			// console.log('mergedBookmarks', mergedBookmarks)
-			console.log('twt', res.data)
-			console.log('be', bookmarks.data)
+			// console.log('twt', res.data)
+			// console.log('be', bookmarks.data)
 			// setBookmarks(res.data)
 			setShowLoader(false)
 		} catch (err) {
