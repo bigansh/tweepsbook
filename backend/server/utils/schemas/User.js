@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
 		profile_id: String,
 		twitter_id: String,
 		twitter_auth_tokens: { accessToken: String, refreshToken: String },
-		unreadCount: { type: Number, default: 10 },
+		unreadCount: { type: Number, default: 0 },
 		importCount: {
 			twitter: { type: Number, default: 0 },
 		},
