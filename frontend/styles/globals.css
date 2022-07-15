@@ -59,8 +59,8 @@ body {
 }
 @media only screen and (max-width: 768px) {
 	.my-masonry-grid {
-		margin:0;
-		width:auto;
+		margin: 0;
+		width: auto;
 	}
 }
 

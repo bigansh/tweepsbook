@@ -22,12 +22,12 @@ const Navbar = () => {
 					<div className='mx-8 self-center hidden font-medium text-[16px] lg:block'>
 						<Link href='/'>Public Pages</Link>
 					</div>
-					<div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
+					{/* <div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
 						<Link href='/'>Wall of Love</Link>
-					</div>
-					<div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
+					</div> */}
+					{/* <div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
 						<Link href='/'>Usage Guide</Link>
-					</div>
+					</div> */}
 					<div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
 						<Link href='/'>Privacy Policy</Link>
 					</div>
