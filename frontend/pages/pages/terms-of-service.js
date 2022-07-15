@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import { AiOutlineClose } from 'react-icons/ai'
+import Script from 'next/script'
 
 const TOS = () => {
 	return (
