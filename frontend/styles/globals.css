@@ -32,11 +32,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
 	background: #004965;
 }
-.my-content {
-	margin-left: 180px;
-}
 .content {
 	height: calc(100vh - 80px);
+}
+@media only screen and (min-width: 768px) {
+	.my-content {
+		margin-left: 180px;
+	}
 }
 .icon-grey {
 	color: rgb(95, 95, 95);
@@ -53,8 +55,15 @@ body {
 	display: -ms-flexbox; /* Not needed if autoprefixing */
 	display: flex;
 	margin-left: -30px; /* gutter size offset */
-	width: auto;
+	width: 80vw;
 }
+@media only screen and (max-width: 768px) {
+	.my-masonry-grid {
+		margin: 0;
+		width: auto;
+	}
+}
+
 .my-masonry-grid_column {
 	padding-left: 10px; /* gutter size */
 	background-clip: padding-box;

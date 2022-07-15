@@ -94,8 +94,8 @@ const bookmarkCards = ({ archive }) => {
 				/>
 			)}
 			<Masonry
-				breakpointCols={3}
-				className='my-masonry-grid min-w-full'
+				breakpointCols={{default: 3, 768: 1}}
+				className='my-masonry-grid'
 				columnClassName='my-masonry-grid_column'
 			>
 				{/* array of JSX items */}

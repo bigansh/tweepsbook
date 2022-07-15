@@ -1,21 +1,17 @@
 import { useEffect, useState, useContext, useRef } from 'react'
 import { AiOutlineDown } from 'react-icons/ai'
-import { AiOutlinePlus } from 'react-icons/ai'
-import { AiOutlineAppstore } from 'react-icons/ai'
 import { AiOutlineCalendar } from 'react-icons/ai'
-import { MdOutlineSource } from 'react-icons/md'
 import Tags from '../../src/components/Tags'
 import BookmarkCards from '../../src/components/BookmarkCards'
 import DashNavbar from '../../src/components/DashNavbar'
-import { BookmarksProvider } from '../../contexts/BookmarksContext'
+import MobileBar from '../../src/components/MobileBar'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 import { Router, useRouter } from 'next/router'
 import Settings from './settings'
 import { UserContext } from '../../contexts/UserContext'
-import Lottie from 'react-lottie-player'
-import Loader from '../../src/components/loader.json'
 import { BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs'
-import { ToastContainer, toast } from 'react-toastify'
+import Head from 'next/head'
+import Script from 'next/script'
 
 export default function dashboard({ children }) {
 	const router = useRouter()
@@ -64,19 +60,57 @@ export default function dashboard({ children }) {
 		fetchBookmarks()
 		setActiveTag(JSON.parse(localStorage.getItem('activeTag')))
 	}, [])
+
+	const [width, setWidth] = useState(1200); // default width, detect on server.
+	const handleResize = () => setWidth(window.innerWidth);
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+	});
+
+
 	return (
 		<div onClick={(e) => handleClickOutside(e)}>
+			<Head>
+				<title>Dashboard / TweepsBook</title>
+				<link rel="icon" href="/Logo.ico" />
+				<meta property="og:title" content="If Notion & Pocket Had a Baby" key="title" />
+				<meta name="description" content="We’d call it TweepsBook. A notebook for storing, organizing, taking & sharing notes for all your favorite bookmarks." />
+				<meta property="og:description" content="What Twitter could not do with Twitter Blue, we did it for free. TweepsBook is a better bookmarking tool that allows you to import, organize, take, & share notes on all your “gyan-worthy” bookmarks." />
+				<meta property="og:image" content="https://i.postimg.cc/Qd2WknqK/Message-Header.png" />
+				<Script async src="https://www.googletagmanager.com/gtag/js?id=G-J0QPJQF85V"></Script>
+				<Script strategy="afterInteractive"
+					dangerouslySetInnerHTML={{
+						__html: `
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+				  
+					gtag('config', 'G-J0QPJQF85V'); `,
+					}} />
+				<Script strategy="afterInteractive"
+					dangerouslySetInnerHTML={{
+						__html: `
+					!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="1t7Yw2EonU8mBWTA6X0FQNphh5fhN6Ah";;analytics.SNIPPET_VERSION="4.15.3";
+					analytics.load("1t7Yw2EonU8mBWTA6X0FQNphh5fhN6Ah");
+					analytics.page();
+					}}();`,
+					}} />
+			</Head>
 			{router.query.settings === 'true' && <Settings />}
 
 			<div className='overflow-hidden scroll-smooth fixed w-full h-full flex flex-col'>
 				<DashNavbar search={true} />
+				<MobileBar className="invisible" search={true} />
 
-				<div className='flex overflow-hidden  flex-grow'>
-					<div className='flex flex-col items-start bg-dark-blue w-[180px] fixed content'>
+				<div className='flex overflow-hidden flex-grow'>
+
+					<div className='flex invisible sm:visible flex-col items-start bg-dark-blue w-[180px] fixed content'>
 						<Tags />
 					</div>
 
-					<div className='flex flex-col my-content w-full bg-[#FBFAFA] pt-12 pl-8'>
+
+					<div className='flex flex-col my-content w-screen bg-[#FBFAFA] pt-12 pl-8'>
 						{/* Sorting and filtering buttons */}
 						<div className='flex border-b border-[#0000001e] items-center justify-between p-2 mr-8'>
 							<h1 className='pl-2 font-bold text-3xl font-header'>
