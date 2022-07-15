@@ -62,7 +62,7 @@ const importAndCreateBookmarks = async (
 					})
 
 					importedBookmarksCount++
-				}
+				} else if(foundBookmark) break
 			}
 
 			user.importCount.twitter++
