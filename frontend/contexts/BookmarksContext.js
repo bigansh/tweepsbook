@@ -110,6 +110,10 @@ const BookmarksProvider = ({ children }) => {
 			setShowLoader(false)
 			toast.success('Bookmarks imported successfully')
 		} catch (err) {
+			// console.log('err', err)
+			toast.error(
+				err?.response?.data?.message ?? 'Error importing bookmarks'
+			)
 			setShowLoader(false)
 			throw err
 		}

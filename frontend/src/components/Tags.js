@@ -7,7 +7,7 @@ const tags = () => {
 	const { fetchTags, activeTag, setActiveTag, bookmarks, deleteTag } =
 		useContext(BookmarksContext)
 	const [tags, setTags] = useState([])
-
+const [importDisabled, setImportDisabled] = useState(false)
 	useEffect(() => {
 		importTags()
 		// console.log(activeTag)
@@ -39,6 +39,15 @@ const tags = () => {
 		window?.location.pathname !== '/app/dashboard' && (window?.location.href = '/app/dashboard')
 	}
 	const { importBookmarks } = useContext(BookmarksContext)
+	const handleImport = async () => {
+		try{setImportDisabled(true)
+		await importBookmarks()
+		setImportDisabled(false)}
+		catch(err){
+			setImportDisabled(false)
+			console.log(err)
+		}
+	}
 	return (
 		<div className='flex flex-col justify-between items-start min-h-eigthy overflow-hidden w-full text-white flex-grow '>
 			<div className='text-xl px-8 py-10'>
@@ -76,8 +85,9 @@ const tags = () => {
 
 				<div className='flex text-md w-full mt-2 flex-col items-center'>
 					<button
-						className='flex items-center justify-center py-4 border-t border-[#d8d8d840] hover:bg-gray-900 hover:bg-opacity-10 w-full'
-						onClick={importBookmarks}
+						className={'flex items-center justify-center py-4 border-t border-[#d8d8d840] hover:bg-gray-900 hover:bg-opacity-10 w-full '+ (importDisabled ? 'cursor-not-allowed' : 'cursor-pointer')}
+						onClick={handleImport}
+						disabled={importDisabled}
 					>
 						<MdSystemUpdateAlt className='mr-2 text-xl' />
 						Import
