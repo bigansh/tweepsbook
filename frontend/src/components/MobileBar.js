@@ -64,18 +64,18 @@ const DashNavbar = ({ search }) => {
     const { importBookmarks } = useContext(BookmarksContext)
 
     return (
-        <div className='flex sm:hidden items-center px-5 border-2 justify-between py-4 shadow-lg bg-gray'>
+        <div className='flex sm:hidden items-center px-5 justify-between py-4 shadow-lg bg-gray'>
 
             <button onClick={menuClick}><GiHamburgerMenu /></button>
-            <div className='flex items-center absolute top-44 justify-center text-[#3A3A3D] bg-dark-blue '>
+            <div className='flex items-center absolute float-left top-[24vh] justify-center text-[#3A3A3D] bg-dark-blue '>
                 {menuActive && (
-                    <div className='flex flex-col border justify-between items-start overflow-x-scroll w-1/2 text-white flex-grow '>
-                        <div className='text-sm px-8 py-10'>
+                    <div className='flex flex-col justify-between h-[70vh] items-start w-1/2 text-white flex-grow '>
+                        <div className='text-sm px-8 py-8'>
                             <h1 className='text-sm font-semibold tracking-wider'>TAGS</h1>
                         </div>
-                        <div className='flex text-sm justify-between w-full flex-col items-start flex-grow overflow-y-scroll'>
+                        <div className='flex text-xs justify-between overflow-y-scroll w-full flex-col items-start flex-grow'>
 
-                            <div className='flex flex-col items-start w-full px-4 overflow-y-scroll overflow-x-hidden'>
+                            <div className='flex overflow-y-scroll flex-col items-start w-full px-4'>
                                 {tags &&
                                     tags.map((tag) => {
                                         return (
@@ -83,7 +83,7 @@ const DashNavbar = ({ search }) => {
                                                 key={tag._id}
                                                 onClick={() => handleClick(tag)}
                                                 className={
-                                                    'my-1 pl-4 py-1 min-h-[2rem] rounded-md w-full flex text-ellipsis justify-between overflow-hidden whitespace-nowrap items-start ' +
+                                                    'my-1 pl-4 py-1 min-h-[1.5rem] rounded-md w-full flex text-ellipsis justify-between overflow-hidden whitespace-nowrap items-start ' +
                                                     (activeTag?._id === tag?._id
                                                         ? 'bg-hovertagColor'
                                                         : 'bg-transparent hover:bg-hovertagColor hover:bg-opacity-50')
@@ -104,7 +104,7 @@ const DashNavbar = ({ search }) => {
                                     className='flex items-center justify-center py-4 border-t border-[#d8d8d840] hover:bg-gray-900 hover:bg-opacity-10 w-full'
                                     onClick={importBookmarks}
                                 >
-                                    <MdSystemUpdateAlt className='mr-2 text-xl' />
+                                    <MdSystemUpdateAlt className='mr-2 text-sm' />
                                     Import
                                 </button>
                                 <button
@@ -113,7 +113,7 @@ const DashNavbar = ({ search }) => {
                                         (window.location.href = '/app/dashboard/archive')
                                     }
                                 >
-                                    <IoMdArchive className='mr-2 text-xl' />
+                                    <IoMdArchive className='mr-2 text-sm' />
                                     Archive
                                 </button>
                             </div>
