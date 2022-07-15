@@ -70,7 +70,7 @@ const [importDisabled, setImportDisabled] = useState(false)
 									}
 								>
 									<div className=' overflow-hidden w-[80%] text-ellipsis text-left'>
-									#{tag.tag}
+									{tag.tag === 'all' ? '#all' : tag.tag}
 									</div>
 									<div>
 									{tag?._id === activeTag?._id && tag?._id !== "all" && <IoIosClose
