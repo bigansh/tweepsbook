@@ -1,10 +1,33 @@
-import Image from 'next/image'
 import Navbar from './Navbar'
-import hero1 from '../images/hero_image_1.png'
 import { BsArrowRightShort } from 'react-icons/bs'
 import Lottie from 'react-lottie-player'
 import LandingAnimation from './landing_animation.json'
+import { useContext } from 'react'
+import { UserContext } from '../../contexts/UserContext'
 const Hero = () => {
+	const { user, getUser } = useContext(UserContext)
+	const handleAuth = () => {
+		const token = localStorage.getItem('sessionToken')
+		if (token) {
+			try {
+				getUser()
+				window.location.href = '/app/dashboard'
+			} catch (err) {
+				console.log(err)
+				window.location.href =
+					process.env.NEXT_PUBLIC_HOST +
+					`/auth/twitter` +
+					'?authorization=' +
+					process.env.NEXT_PUBLIC_STATIC_TOKEN
+			}
+		} else {
+			window.location.href =
+				process.env.NEXT_PUBLIC_HOST +
+				`/auth/twitter` +
+				'?authorization=' +
+				process.env.NEXT_PUBLIC_STATIC_TOKEN
+		}
+	}
 	return (
 		<div className='max-h-[100vh]'>
 			<Navbar />
@@ -43,13 +66,7 @@ const Hero = () => {
 							<button
 								className='text-[16px] bg-dark-blue hover:bg-hover-blue active:bg-dark-blue ml-4 shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-100 text-white py-3 px-5 rounded-xl flex items-center content-center'
 								onClick={() => {
-									window.open(
-										process.env.NEXT_PUBLIC_HOST +
-											`/auth/twitter` +
-											'?authorization=' +
-											process.env.NEXT_PUBLIC_STATIC_TOKEN
-									)
-									// console.log(process.env)
+									handleAuth()
 								}}
 							>
 								Let's Get Started
