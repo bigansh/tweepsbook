@@ -1,9 +1,9 @@
+import { useRouter } from 'next/router'
 import Hero from '../src/components/Hero'
 import Head from 'next/head'
 import Script from 'next/script'
 
 const Home = () => {
-
 	return (
 		<>
 			<Head>
