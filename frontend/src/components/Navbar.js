@@ -20,7 +20,9 @@ const Navbar = () => {
 				</div>
 				<div className='flex font-semibold text-center text-dark-blue text-base flex-auto justify-center'>
 					<div className='mx-8 self-center hidden font-medium text-[16px] lg:block'>
-						<Link href='/'>Public Pages</Link>
+						<Link href='https://public.tweepsbook.com'>
+							Public Pages
+						</Link>
 					</div>
 					{/* <div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
 						<Link href='/'>Wall of Love</Link>
