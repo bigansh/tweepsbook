@@ -4,7 +4,7 @@ import { MdSystemUpdateAlt } from 'react-icons/md'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 
 const tags = () => {
-	const { fetchTags, activeTag, setActiveTag, bookmarks,deleteTag } =
+	const { fetchTags, activeTag, setActiveTag, bookmarks, deleteTag } =
 		useContext(BookmarksContext)
 	const [tags, setTags] = useState([])
 
@@ -12,21 +12,21 @@ const tags = () => {
 		importTags()
 		// console.log(activeTag)
 	}, [bookmarks])
-const removeTag = async (tag) => {
-try{
+	const removeTag = async (tag) => {
+		try {
 
-	await deleteTag(tag._id)
-	localStorage.removeItem("activeTag")
-	// setActiveTag({ tag: 'all', _id: 'all' })
+			await deleteTag(tag._id)
+			localStorage.removeItem("activeTag")
+			// setActiveTag({ tag: 'all', _id: 'all' })
 
-}catch(err){
-console.log(err)
-}
-}
+		} catch (err) {
+			console.log(err)
+		}
+	}
 	const importTags = async () => {
 		const tempTags = await fetchTags()
 		setTags([{ tag: 'all', _id: 'all' }, ...tempTags])
-		if(window.location.pathname === '/app/dashboard/archive') {
+		if (window.location.pathname === '/app/dashboard/archive') {
 			setActiveTag({ tag: 'all', _id: 'all' })
 			return
 		}
@@ -36,7 +36,7 @@ console.log(err)
 	const handleClick = async (tag) => {
 		setActiveTag(tag)
 		localStorage.setItem('activeTag', JSON.stringify(tag))
-		 window?.location.pathname !== '/app/dashboard' && (window?.location.href = '/app/dashboard' )
+		window?.location.pathname !== '/app/dashboard' && (window?.location.href = '/app/dashboard')
 	}
 	const { importBookmarks } = useContext(BookmarksContext)
 	return (
@@ -45,6 +45,7 @@ console.log(err)
 				<h1 className='text-xl font-semibold tracking-wider'>TAGS</h1>
 			</div>
 			<div className='flex text-md justify-between  w-full flex-col items-start flex-grow overflow-hidden'>
+
 				<div className='flex flex-col items-start w-full px-4 overflow-y-scroll overflow-x-hidden'>
 					{tags &&
 						tags.map((tag) => {
