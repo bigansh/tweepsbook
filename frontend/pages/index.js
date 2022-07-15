@@ -13,6 +13,7 @@ const Home = () => {
 				<meta name="description" content="We’d call it TweepsBook. A notebook for storing, organizing, taking & sharing notes for all your favorite bookmarks." />
 				<meta property="og:description" content="What Twitter could not do with Twitter Blue, we did it for free. TweepsBook is a better bookmarking tool that allows you to import, organize, take, & share notes on all your “gyan-worthy” bookmarks." />
 				<meta property="og:image" content="https://i.postimg.cc/Qd2WknqK/Message-Header.png" />
+				<meta name="twitter:card" content="summary_large_image" />
 				<Script async src="https://www.googletagmanager.com/gtag/js?id=G-J0QPJQF85V"></Script>
 				<Script strategy="afterInteractive"
 					dangerouslySetInnerHTML={{

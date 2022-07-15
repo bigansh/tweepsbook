@@ -48,6 +48,7 @@ const MyApp = ({ Component, pageProps }) => {
 						property='og:image'
 						content='https://i.postimg.cc/Qd2WknqK/Message-Header.png'
 					/>
+					<meta name="twitter:card" content="summary_large_image" />
 					<Script
 						async
 						src='https://www.googletagmanager.com/gtag/js?id=G-J0QPJQF85V'

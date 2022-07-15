@@ -19,7 +19,7 @@ const Navbar = () => {
 					/>
 				</div>
 				<div className='flex font-semibold text-center text-dark-blue text-base flex-auto justify-center'>
-					<div className='mx-8 self-center hidden font-medium text-[16px] lg:block'>
+					<div className='mx-8 self-center hidden hover:text-light-blue-text font-medium text-[16px] lg:block'>
 						<Link href='https://public.tweepsbook.com'>
 							Public Pages
 						</Link>
@@ -30,10 +30,10 @@ const Navbar = () => {
 					{/* <div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
 						<Link href='/'>Usage Guide</Link>
 					</div> */}
-					<div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
+					<div className='mx-8 hover:text-light-blue-text self-center font-medium text-[16px] hidden lg:block'>
 						<Link href='/pages/privacy-policy'>Privacy Policy</Link>
 					</div>
-					<div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
+					<div className='mx-8 hover:text-light-blue-text self-center font-medium text-[16px] hidden lg:block'>
 						<Link href='/pages/terms-of-service'>Terms of Service</Link>
 					</div>
 				</div>
