@@ -15,7 +15,7 @@ const BookmarkCard = ({ bookmark, ownershipStatus }) => {
 			key={bookmark.backend._id}
 		>
 			<div className='w-full flex items-center justify-between'>
-				<div className='flex flex-row gap-x-2 w-5/6 items-center '>
+				<div className='flex gap-x-2 w-5/6 items-center '>
 					<img
 						src={bookmark.twitter.author.profile_image_url}
 						className='w-10 h-10 rounded-full p-1 cursor-pointer'

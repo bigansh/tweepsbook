@@ -32,8 +32,10 @@ body {
 ::-webkit-scrollbar-thumb:hover {
 	background: #004965;
 }
-.my-content {
-	margin-left: 180px;
+@media only screen and (min-width: 768px) {
+	.my-content {
+		margin-left: 180px;
+	}
 }
 .content {
 	height: calc(100vh - 80px);
@@ -55,6 +57,7 @@ body {
 	margin-left: -30px; /* gutter size offset */
 	width: auto;
 }
+
 .my-masonry-grid_column {
 	padding-left: 10px; /* gutter size */
 	background-clip: padding-box;
