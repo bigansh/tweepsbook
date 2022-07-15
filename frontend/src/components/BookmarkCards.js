@@ -80,7 +80,7 @@ const bookmarkCards = ({ archive }) => {
 	}, [searchTerm, activeTag])
 
 	let msnry = new Masonry('.grid', {
-		columnWidth: 100,
+		columnWidth: 200,
 	})
 
 	return (
