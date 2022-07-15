@@ -11,6 +11,7 @@ import { UserContext } from '../../../contexts/UserContext'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Head from 'next/head'
+import Script from 'next/script'
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
