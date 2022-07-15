@@ -54,21 +54,21 @@ const tags = () => {
 									key={tag._id}
 									onClick={() => handleClick(tag)}
 									className={
-										'my-1 pl-5 py-2 rounded-md w-[calc(100%)] flex text-ellipsis justify-between overflow-hidden whitespace-nowrap items-center ' +
+										'my-1 pl-4 py-1 min-h-[2rem] rounded-md w-full flex text-ellipsis justify-between overflow-hidden whitespace-nowrap items-start ' +
 										(activeTag?._id === tag?._id
 											? 'bg-hovertagColor'
 											: 'bg-transparent hover:bg-hovertagColor hover:bg-opacity-50')
 									}
 								>
-									<div className='overflow-hidden w-[80%] text-ellipsis'>
+									<div className='flex overflow-hidden w-[80%] text-ellipsis'>
 									#{tag.tag}
 									</div>
-									<>
+									<div>
 									{tag?._id === activeTag?._id && tag?._id !== "all" && <IoIosClose
 									className='w-5 h-5 ml-0.5 cursor-pointer rounded-full hover:bg-dark-blue opacity-50 hover:bg-opacity-5 hover:opacity-100 transition-all duration-100'
 									onClick={() => removeTag(tag)}
 									/>}
-									</>
+									</div>
 								</button>
 							)
 						})}

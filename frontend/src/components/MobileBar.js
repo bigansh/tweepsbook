@@ -69,11 +69,11 @@ const DashNavbar = ({ search }) => {
             <button onClick={menuClick}><GiHamburgerMenu /></button>
             <div className='flex items-center absolute top-44 justify-center text-[#3A3A3D] bg-dark-blue '>
                 {menuActive && (
-                    <div className='flex flex-col border justify-between items-start overflow-hidden w-1/2 text-white flex-grow '>
+                    <div className='flex flex-col border justify-between items-start overflow-x-scroll w-1/2 text-white flex-grow '>
                         <div className='text-sm px-8 py-10'>
                             <h1 className='text-sm font-semibold tracking-wider'>TAGS</h1>
                         </div>
-                        <div className='flex text-sm justify-between w-full flex-col items-start flex-grow overflow-hidden'>
+                        <div className='flex text-sm justify-between w-full flex-col items-start flex-grow overflow-y-scroll'>
 
                             <div className='flex flex-col items-start w-full px-4 overflow-y-scroll overflow-x-hidden'>
                                 {tags &&
@@ -83,7 +83,7 @@ const DashNavbar = ({ search }) => {
                                                 key={tag._id}
                                                 onClick={() => handleClick(tag)}
                                                 className={
-                                                    'my-1 pl-5 py-2 rounded-md w-full flex justify-between items-center ' +
+                                                    'my-1 pl-4 py-1 min-h-[2rem] rounded-md w-full flex text-ellipsis justify-between overflow-hidden whitespace-nowrap items-start ' +
                                                     (activeTag?._id === tag?._id
                                                         ? 'bg-hovertagColor'
                                                         : 'bg-transparent hover:bg-hovertagColor hover:bg-opacity-50')
@@ -125,7 +125,7 @@ const DashNavbar = ({ search }) => {
             {search && (<div className='px-4 py-1 border w-5/6 flex sm:hidden items-center justify-between rounded-full border-mid-gray focus-within:opacity-70'>
                 <input
                     type='text'
-                    className='focus:outline-none p-2 flex-grow text-sm sm:text-base font-medium tracking-wider'
+                    className='focus:outline-none p-2 flex-grow text-[10px] sm:text-base font-medium tracking-wider'
                     placeholder='Which bookmark are you looking for?'
                     onChange={(e) => {
                         setSearchTerm(e.target.value)
