@@ -34,7 +34,7 @@ const Hero = () => {
 			<div className='md:ml-10 ml-6 mt-12 '>
 				<div className='md:mx-12 my-4 flex flex-col lg:flex-row align-middle'>
 					<div className=' my-12 w-2/3'>
-						<h2 className='text-dark-blue font-black font-serif text-[48px] tracking-wide my-4'>
+						<h2 className='text-dark-blue font-black font-header text-[48px] tracking-wide my-4 leading-tight'>
 							If Notion &amp; Pocket <br /> Had a Baby
 							{/* Unr
 							<span className='italic'>ea</span>d Book
@@ -43,7 +43,7 @@ const Hero = () => {
 							Fina<span className='italic'>ll</span>y Ta
 							<span className='italic'>me</span>d */}
 						</h2>
-						<p className='text-light-blue-text md:w-5/6 font-medium text-[16px]'>
+						<p className='text-light-blue-text md:w-5/6 font-medium text-[16px] max-w-md'>
 							We’d call it TweepsBook. A notebook for storing,
 							organizing, taking &amp; sharing notes for all your
 							favorite bookmarks.

@@ -12,7 +12,7 @@ body {
 	-webkit-tap-highlight-color: transparent;
 }
 .font-header {
-	font-family: 'Merriweather', sans-serif;
+	font-family: 'Merriweather', serif;
 }
 ::-webkit-scrollbar {
 	width: 8px;

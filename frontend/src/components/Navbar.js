@@ -8,7 +8,7 @@ import { AiFillGithub, AiFillTwitterCircle } from 'react-icons/ai'
 const Navbar = () => {
 	return (
 		<header className='border-b-2 border-lg-gray shadow-sm'>
-			<div className='md:mx-12 my-4 flex align-middle items-center'>
+			<div className='md:mx-12 my-2 flex align-middle items-center'>
 				<div className='self-center md:ml-10 ml-6'>
 					<Image
 						src={tweeps}
