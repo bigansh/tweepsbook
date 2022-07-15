@@ -53,17 +53,21 @@ console.log(err)
 									key={tag._id}
 									onClick={() => handleClick(tag)}
 									className={
-										'my-1 pl-5 py-2 rounded-md w-full flex justify-between items-center ' +
+										'my-1 pl-5 py-2 rounded-md w-[calc(100%)] flex text-ellipsis justify-between overflow-hidden whitespace-nowrap items-center ' +
 										(activeTag?._id === tag?._id
 											? 'bg-hovertagColor'
 											: 'bg-transparent hover:bg-hovertagColor hover:bg-opacity-50')
 									}
 								>
+									<div className='overflow-hidden w-[80%] text-ellipsis'>
 									#{tag.tag}
+									</div>
+									<>
 									{tag?._id === activeTag?._id && tag?._id !== "all" && <IoIosClose
 									className='w-5 h-5 ml-0.5 cursor-pointer rounded-full hover:bg-dark-blue opacity-50 hover:bg-opacity-5 hover:opacity-100 transition-all duration-100'
 									onClick={() => removeTag(tag)}
-								/>}
+									/>}
+									</>
 								</button>
 							)
 						})}
