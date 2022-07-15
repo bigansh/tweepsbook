@@ -43,7 +43,7 @@ const Navbar = () => {
 							href='https://twitter.com/tweepsbookcom'
 							target='_blank'
 						>
-							<AiFillTwitterCircle size={32} />
+							<AiFillTwitterCircle size={32} style={{color:'#1DA1F2'}} />
 						</a>
 					</div>
 					<div>
