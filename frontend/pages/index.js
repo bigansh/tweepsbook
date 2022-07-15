@@ -1,7 +1,7 @@
+import { useRouter } from 'next/router'
 import Hero from '../src/components/Hero'
 
 const Home = () => {
-
 	return (
 		<>
 			<Hero />

@@ -1,0 +1,192 @@
+import React from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
+
+const privacy = () => {
+	return (
+		<div className='w-full h-full absolute top-0 left-0 bg-sh-gray bg-opacity-80 z-50 flex items-center justify-center overflow-hidden'>
+			<div className=' bg-white shadow-md w-4/5 rounded p-32 overflow-y-scroll h-4/5'>
+				<h1 className='text-5xl text-[#004964] font-bold text-center mb-11 flex justify-between'>
+					<span className='opacity-0'>.</span>
+					Privacy Policy
+					<AiOutlineClose
+						className='icon-grey cursor-pointer '
+						size={30}
+						onClick={() => {
+							window.location.href = '/'
+						}}
+					/>
+				</h1>
+				<p className='text-xl text-gray-600 leading-8'>
+					At TweepsBook, accessible from https://tweepsbook.com, one
+					of our main priorities is the privacy of our visitors. This
+					Privacy Policy document contains types of information
+					collected and recorded by TweepsBook and how we use it.
+					<br /> If you have additional questions or require more
+					information about our Privacy Policy, do not hesitate to
+					contact us. <br />
+					This Privacy Policy applies only to our online activities
+					and is valid for visitors to our website regarding the
+					information they shared and/or collected in TweepsBook. This
+					policy does not apply to any information collected offline
+					or via channels other than this website.
+					<br /> <br />
+					<h2 className='text-2xl font-semibold'>Consent</h2> You
+					hereby consent to our Privacy Policy and agree to its terms
+					by using our website. <br /> <br />
+					<h2 className='text-2xl font-semibold'>
+						Information we collect
+					</h2>
+					The personal information you are asked to provide, and the
+					reasons why you are asked to provide it, will be clear to
+					you at the point we ask you to provide your personal
+					information. <br /> If you contact us directly, we may
+					receive additional information about you, such as your name,
+					email address, phone number, the contents of the message
+					and/or attachments you may send us, and any other
+					information you may provide. <br /> When you register for an
+					Account, we may ask for your contact information, including
+					items such as name, company name, address, email address,
+					and telephone number. <br /> <br />
+					<h2 className='text-2xl font-semibold'>
+						How we use your information
+					</h2>{' '}
+					We use the information we collect in various ways,
+					including:
+					<li>
+						Provide, operate, and maintain our website - Improve,
+						personalize, and expand our website
+					</li>
+					<li>Improve, personalize, and expand our website </li>
+					<li>Understand and analyze how you use our website</li>
+					<li>
+						Develop new products, services, features, and
+						functionality
+					</li>
+					<li>
+						Communicate with you, either directly or through one of
+						our partners, including for customer service, to provide
+						you with updates and other information relating to the
+						website and for marketing and promotional purposes
+					</li>
+					<li>Send you emails - Find and prevent fraud</li>
+					<br />
+					<h2 className='text-2xl font-semibold'>Log Files</h2>
+					TweepsBook follows a standard procedure of using log files.
+					These files log visitors when they visit websites. All
+					hosting companies do this and are a part of hosting
+					services' analytics. The information collected by log files
+					includes internet protocol (IP) addresses, browser type,
+					Internet Service Provider (ISP), date and time stamp,
+					referring/exit pages, and possibly the number of clicks.
+					These are not linked to any personally identifiable
+					information. The information aims to analyze trends,
+					administer the site, track users' movement on the website,
+					and gather demographic information.
+					<br /> <br />
+					<h2 className='text-2xl font-semibold'>Cookies and Web</h2>
+					Beacons Like any other website, TweepsBook uses ‘cookies.’
+					These cookies store information, including visitors'
+					preferences and the pages on the website that the visitor
+					accessed or visited. The information is used to optimize the
+					users' experience by customizing our web page content based
+					on visitors' browser type and/or other information.
+					<br /> <br />
+					<h2 className='text-2xl font-semibold'>
+						Advertising Partners Privacy Policies
+					</h2>
+					You may consult this list to find the Privacy Policy for
+					each of the advertising partners of TweepsBook. <br />
+					Third-party ad servers or ad networks uses technologies like
+					cookies, JavaScript, or Web Beacons that are used in their
+					respective advertisements and links that appear on
+					TweepsBook, which are sent directly to users' browser. They
+					automatically receive your IP address when this occurs.
+					These technologies are used to measure the effectiveness of
+					their advertising campaigns and/or personalize the
+					advertising content you see on websites you visit. <br />
+					Note that TweepsBook has no access to or control over these
+					cookies that are used by third-party advertisers.
+					<br />
+					<br />
+					<h2 className='text-2xl font-semibold'>
+						Third Party Privacy Policies
+					</h2>
+					TweepsBook's Privacy Policy does not apply to other
+					advertisers or websites. Thus, we are advising you to
+					consult the respective Privacy Policies of these third-party
+					ad servers for more detailed information. It may include
+					their practices and instructions about how to opt out of
+					certain options. <br /> You can choose to disable cookies
+					through your browser options. It can be found on the
+					browsers' respective websites to know more detailed
+					information about cookie management with specific web
+					browsers. <br />
+					<br />
+					<h2 className='text-2xl font-semibold'>
+						CCPA Privacy Rights (Do Not Sell My Personal
+						Information)
+					</h2>{' '}
+					Under the CCPA, among other rights, California consumers
+					have the right to:
+					<li>
+						Request that a business that collects a consumer's data
+						disclose the categories and specific pieces of personal
+						data that a business has collected about consumers.
+					</li>
+					<li>
+						Request that a business deletes any personal data about
+						the consumer a business has collected.
+					</li>
+					<li>
+						Request that a business that sells a consumer's data not
+						sell the consumer's data.
+					</li>
+					<li>
+						If you make a request, we have one month to respond to
+						you. Please contact us if you would like to exercise any
+						of these rights.
+					</li>
+					<br />
+					<h2 className='text-2xl font-semibold'>
+						GDPR Data Protection Rights
+					</h2>{' '}
+					We would like to make sure you are fully aware of all of
+					your data protection rights. Every user is entitled to the
+					following: <br /> The right to access – You have the right
+					to request copies of your data. We may charge you a small
+					fee for this service. <br /> The right to rectification –
+					You have the right to request that we correct any
+					information you believe is inaccurate. You also have the
+					right to request that we complete the information you
+					believe is incomplete. <br /> The right to erasure – You
+					have the right to request that we erase your data under
+					certain conditions. <br /> The right to restrict processing
+					– You have the right to request that we restrict the
+					processing of your data under certain conditions. <br /> The
+					right to object to processing – Under certain conditions,
+					you have the right to object to our processing of your data.
+					<br /> The right to data portability – You have the right to
+					request that we transfer the data that we have collected to
+					another organization or directly to you under certain
+					conditions. <br /> If you make a request, we have one month
+					to respond to you. Please contact us if you would like to
+					exercise any of these rights. <br /> <br />
+					<h2 className='text-2xl font-semibold'>
+						Children's Information
+					</h2>
+					Another part of our priority is adding protection for
+					children while using the internet. We encourage parents and
+					guardians to observe, participate in, and/or monitor and
+					guide their online activity. <br /> TweepsBook does not
+					knowingly collect any Personal Identifiable Information from
+					children under 13. If you think that your child provided
+					this kind of information on our website, we strongly
+					encourage you to contact us immediately, and we will do our
+					best to promptly remove such information from our records.
+				</p>
+			</div>
+		</div>
+	)
+}
+
+export default privacy
