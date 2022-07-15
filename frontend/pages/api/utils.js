@@ -49,7 +49,7 @@ const getTweets = async (ids) => {
 
 				return {
 					type: referencedTweet.type,
-					author: getAuthorInfo(fullReferencedTweet.author_id),
+					author: getAuthorInfo(fullReferencedTweet?.author_id),
 					...fullReferencedTweet,
 				}
 			}) || []
