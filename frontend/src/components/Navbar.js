@@ -32,7 +32,7 @@ const Navbar = () => {
 						<Link href='/privacy'>Privacy Policy</Link>
 					</div>
 					<div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
-						<Link href='/'>Terms of Service</Link>
+						<Link href='/TOS'>Terms of Service</Link>
 					</div>
 				</div>
 				<div className='flex md:mr-10 mr-6'>
