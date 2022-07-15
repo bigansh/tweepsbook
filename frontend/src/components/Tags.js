@@ -54,13 +54,13 @@ const tags = () => {
 									key={tag._id}
 									onClick={() => handleClick(tag)}
 									className={
-										'my-1 pl-4 py-1 min-h-[2rem] rounded-md w-full flex text-ellipsis justify-between overflow-hidden whitespace-nowrap items-start ' +
+										'my-1 pl-4 py-1 min-h-[2rem] rounded-md w-full flex text-ellipsis justify-between overflow-hidden whitespace-nowrap items-center ' +
 										(activeTag?._id === tag?._id
 											? 'bg-hovertagColor'
 											: 'bg-transparent hover:bg-hovertagColor hover:bg-opacity-50')
 									}
 								>
-									<div className='flex overflow-hidden w-[80%] text-ellipsis'>
+									<div className=' overflow-hidden w-[80%] text-ellipsis text-left'>
 									#{tag.tag}
 									</div>
 									<div>
