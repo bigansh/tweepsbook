@@ -86,12 +86,14 @@ const bookmarkCards = ({ archive }) => {
 	return (
 		<div className='flex flex-wrap p-3 overflow-auto w-full'>
 			{showLoader && (
+				<div className='w-[80vw] h-[10vh] flex items-center'>
 				<Lottie
 					loop
 					animationData={Loader}
 					play
 					className='w-10 h-10 mx-auto'
 				/>
+				</div>
 			)}
 			<Masonry
 				breakpointCols={{default: 3, 768: 1}}

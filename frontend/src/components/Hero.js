@@ -31,24 +31,25 @@ const Hero = () => {
 	return (
 		<div className='max-h-[100vh]'>
 			<Navbar />
-			<div className='md:ml-10 ml-6 mt-12 '>
+			<div className='md:ml-10 ml-6 mt-4 sm:mt-12 '>
 				<div className='md:mx-12 my-4 flex flex-col lg:flex-row align-middle'>
-					<div className=' my-12 w-2/3'>
-						<h2 className='text-dark-blue font-black font-header text-[48px] tracking-wide my-4 leading-tight'>
-							If Notion &amp; Pocket <br /> Had a Baby
+					<div className='flex flex-col items-center sm:items-start my-12 w-full sm:w-2/3'>
+						<div className='flex items-center justify-center border sm:items-start m-1 p-1 text-dark-blue font-black font-header text-[48px] tracking-wide my-4 leading-tight'>
+							<h2>If Notion &amp; Pocket <br /> Had a Baby
 							{/* Unr
 							<span className='italic'>ea</span>d Book
 							<span className='italic'>ma</span>rks
+							<span className='italic'>ma</span>rks
 							<br />
 							Fina<span className='italic'>ll</span>y Ta
-							<span className='italic'>me</span>d */}
-						</h2>
-						<p className='text-light-blue-text md:w-5/6 font-medium text-[16px] max-w-md'>
-							We’d call it TweepsBook. A notebook for storing,
+							<span className='italic'>me</span>d */}</h2>
+						</div>
+						<div className=' text-light-blue-text md:w-5/6 font-medium text-[16px] max-w-md'>
+							<p>We’d call it <strong>TweepsBook</strong>. A notebook for storing,
 							organizing, taking &amp; sharing notes for all your
-							favorite bookmarks.
-						</p>
-						<div className='my-12 py-6 flex'>
+							favorite bookmarks.</p>
+						</div>
+						<div className='my-8 border sm:my-12 flex flex-col items-center justify-center sm:justify-start sm:flex-row w-[60vw] sm:w-full'>
 							<a
 								href='https://www.producthunt.com/posts/tweepsbook-mark-organize-note?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tweepsbook&#0045;mark&#0045;organize&#0045;note'
 								target='_blank'
@@ -56,15 +57,13 @@ const Hero = () => {
 								<img
 									src='https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352538&theme=neutral'
 									alt='TweepsBook&#0032;&#0045;&#0032;Mark&#0046;&#0032;Organize&#0046;&#0032;Note&#0046; - If&#0032;Notion&#0032;&#0038;&#0032;Pocket&#0032;Had&#0032;A&#0032;Baby | Product Hunt'
-									style={{ width: '250px', height: ' 54px' }}
-									width='250'
-									height='54'
+									style={{ height: ' 4rem' }}
 								/>
 							</a>
 
 							{/* CTA */}
 							<button
-								className='text-[16px] bg-dark-blue hover:bg-hover-blue active:bg-dark-blue ml-4 shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-100 text-white py-3 px-5 rounded-xl flex items-center content-center'
+								className='text-[16px] flex m-2 bg-dark-blue hover:bg-hover-blue active:bg-dark-blue shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-100 text-white py-3 px-5 rounded-xl items-center w-[97%] sm:w-full sm:h-[4rem] justify-center'
 								onClick={() => {
 									handleAuth()
 								}}
