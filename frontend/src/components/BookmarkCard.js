@@ -63,7 +63,7 @@ const BookmarkCard = ({ bookmark, ownershipStatus }) => {
 					</span>
 				</div>
 				<div
-					className='flex items-end p-2 justify-end cursor-pointer'
+					className='flex items-end p-1 justify-end cursor-pointer'
 					onClick={() =>
 						window.open(
 							`https://twitter.com/${bookmark.twitter.author.username}/status/${bookmark.twitter.id}`,
@@ -71,7 +71,7 @@ const BookmarkCard = ({ bookmark, ownershipStatus }) => {
 						)
 					}
 				>
-					<FiExternalLink className='mx-3 text-[#1DA1F2] hover:text-mid-blue' />
+					<FiExternalLink className='text-[#1DA1F2] hover:text-mid-blue' />
 				</div>
 			</div>
 			<div className='my-1 whitespace-pre-wrap'>
@@ -129,8 +129,8 @@ const BookmarkCard = ({ bookmark, ownershipStatus }) => {
 							<MdOutlineStickyNote2
 								className='w-5 h-5 cursor-pointer hover:scale-110 transition-all duration-100 text-dark-gray'
 								onClick={() =>
-									(window.location.href =
-										'/app/notes/' + bookmark.backend._id)
+								(window.location.href =
+									'/app/notes/' + bookmark.backend._id)
 								}
 							/>
 						</div>
