@@ -4,6 +4,7 @@ import { BsTwitter } from 'react-icons/bs'
 import TagPill from './TagPill'
 import { BiArchiveIn, BiTrashAlt } from 'react-icons/bi'
 import { MdOutlineStickyNote2 } from 'react-icons/md'
+import { FiExternalLink } from 'react-icons/fi'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 
 const BookmarkCard = ({ bookmark, ownershipStatus }) => {
@@ -70,7 +71,7 @@ const BookmarkCard = ({ bookmark, ownershipStatus }) => {
 						)
 					}
 				>
-					<BsTwitter className='mx-3 text-[#1DA1F2]' />
+					<FiExternalLink className='mx-3 text-[#1DA1F2] hover:text-mid-blue' />
 				</div>
 			</div>
 			<div className='my-1 whitespace-pre-wrap'>
