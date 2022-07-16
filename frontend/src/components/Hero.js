@@ -34,7 +34,7 @@ const Hero = () => {
 			<div className='md:ml-10 ml-6 mt-4 sm:mt-12 '>
 				<div className='md:mx-12 my-4 flex flex-col lg:flex-row align-middle'>
 					<div className='flex flex-col items-center sm:items-start my-12 w-full sm:w-2/3'>
-						<div className='flex items-center justify-center border sm:items-start m-1 p-1 text-dark-blue font-black font-header text-[48px] tracking-wide my-4 leading-tight'>
+						<div className='flex items-center justify-center sm:items-start m-1 p-1 text-dark-blue font-black font-header text-[48px] tracking-wide my-4 leading-tight'>
 							<h2>If Notion &amp; Pocket <br /> Had a Baby
 							{/* Unr
 							<span className='italic'>ea</span>d Book
@@ -49,7 +49,7 @@ const Hero = () => {
 							organizing, taking &amp; sharing notes for all your
 							favorite bookmarks.</p>
 						</div>
-						<div className='my-8 border sm:my-12 flex flex-col items-center justify-center sm:justify-start sm:flex-row w-[60vw] sm:w-full'>
+						<div className='my-8 sm:my-12 flex flex-col items-center justify-center sm:justify-start sm:flex-row w-[60vw] sm:w-full'>
 							<a
 								href='https://www.producthunt.com/posts/tweepsbook-mark-organize-note?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tweepsbook&#0045;mark&#0045;organize&#0045;note'
 								target='_blank'
@@ -63,7 +63,7 @@ const Hero = () => {
 
 							{/* CTA */}
 							<button
-								className='text-[16px] flex m-2 bg-dark-blue hover:bg-hover-blue active:bg-dark-blue shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-100 text-white py-3 px-5 rounded-xl items-center w-[97%] sm:w-full sm:h-[4rem] justify-center'
+								className='text-[16px] flex m-2 bg-dark-blue hover:bg-hover-blue active:bg-dark-blue shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-100 text-white py-3 px-5 rounded-xl items-center w-[97%] sm:w-[65%] sm:h-[3rem] justify-center'
 								onClick={() => {
 									handleAuth()
 								}}
