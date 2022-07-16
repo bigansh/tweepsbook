@@ -57,13 +57,13 @@ const Hero = () => {
 								<img
 									src='https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=352538&theme=neutral'
 									alt='TweepsBook&#0032;&#0045;&#0032;Mark&#0046;&#0032;Organize&#0046;&#0032;Note&#0046; - If&#0032;Notion&#0032;&#0038;&#0032;Pocket&#0032;Had&#0032;A&#0032;Baby | Product Hunt'
-									style={{ height: ' 4rem' }}
+									style={{ height: ' 3rem' }}
 								/>
 							</a>
 
 							{/* CTA */}
 							<button
-								className='text-[16px] flex m-2 bg-dark-blue hover:bg-hover-blue active:bg-dark-blue shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-100 text-white py-3 px-5 rounded-xl items-center w-[97%] sm:w-[65%] sm:h-[3rem] justify-center'
+								className='text-[16px] flex m-2 mx-4 bg-dark-blue hover:bg-hover-blue active:bg-dark-blue shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-100 text-white py-3 px-5 rounded-xl items-center w-[14rem] sm:w-[40%] sm:h-[3rem] justify-center'
 								onClick={() => {
 									handleAuth()
 								}}

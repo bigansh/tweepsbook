@@ -3,13 +3,14 @@ import Link from 'next/link'
 import github from '../images/github_icon.png'
 import twitter from '../images/twitter_icon.png'
 import tweeps from '../images/TweepsBook.png'
+import TweepsBookIcon from './Icon'
 import { AiFillGithub, AiFillTwitterCircle } from 'react-icons/ai'
 
 const Navbar = () => {
 	return (
 		<header className='border-b-2 border-lg-gray shadow-sm'>
 			<div className='md:mx-12 my-2 flex align-middle items-center'>
-				<div className='self-center md:ml-10 ml-6'>
+				<div className='flex items-center self-center md:ml-10 ml-6'>
 					<Image
 						src={tweeps}
 						alt='Picture of the author'
@@ -17,6 +18,7 @@ const Navbar = () => {
 						height={60}
 						layout='fixed'
 					/>
+					{/* <TweepsBookIcon className="" /> */}
 				</div>
 				<div className='flex font-semibold text-center text-dark-blue text-base flex-auto justify-center'>
 					<div className='mx-8 self-center hidden hover:text-light-blue-text font-medium text-[16px] lg:block'>
