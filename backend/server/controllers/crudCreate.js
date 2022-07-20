@@ -7,7 +7,7 @@ const createTwtrUserClient = require('../functions/createTwtrUserClient'),
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const curdCreate = async (req, res) => {
+const crudCreate = async (req, res) => {
 	try {
 		const { queryType } = req.query
 
@@ -29,8 +29,8 @@ const curdCreate = async (req, res) => {
 
 		res.status(200).send(data)
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 
-module.exports = curdCreate
+module.exports = crudCreate

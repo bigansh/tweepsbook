@@ -34,7 +34,7 @@ const updateAccountDetails = async (profile_id, accountDetails) => {
 			.lean()
 			.exec()
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

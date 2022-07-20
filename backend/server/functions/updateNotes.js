@@ -38,7 +38,7 @@ const updateNotes = async (bookmarkId = undefined, notes, profile_id) => {
 				.exec()
 		}
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

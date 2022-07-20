@@ -42,7 +42,7 @@ const tagFindOrCreate = async (tags, user) => {
 
 		return bookmarkTags
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

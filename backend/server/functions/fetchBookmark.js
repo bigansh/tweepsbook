@@ -39,7 +39,7 @@ const fetchBookmark = async (profile_id, bookmarkId) => {
 			return { bookmark: bookmark, ownershipStatus: false }
 		}
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

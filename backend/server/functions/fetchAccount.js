@@ -18,7 +18,7 @@ const fetchAccount = async (profile_id) => {
 
 		return await User.findOne({ profile_id: profile_id }).lean().exec()
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

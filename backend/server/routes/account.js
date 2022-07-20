@@ -3,8 +3,8 @@ const { fastify } = require('fastify')
 const app = fastify()
 
 const accountUpdate = require('../controllers/accountUpdate'),
-    accountDelete = require('../controllers/accountDelete'),
-    accountGet = require('../controllers/accountGet')
+	accountDelete = require('../controllers/accountDelete'),
+	accountGet = require('../controllers/accountGet')
 
 /**
  * A route that handles the requests for account mutations.
@@ -14,29 +14,29 @@ const accountUpdate = require('../controllers/accountUpdate'),
  * @param {*} done
  */
 const account = (fastify, _options, done) => {
-    fastify.get(
-        '/read',
-        {
-            onRequest: [fastify.authenticate],
-        },
-        accountGet
-    )
-    fastify.patch(
-        '/update',
-        {
-            onRequest: [fastify.authenticate],
-        },
-        accountUpdate
-    )
-    fastify.delete(
-        '/delete',
-        {
-            onRequest: [fastify.authenticate],
-        },
-        accountDelete
-    )
+	fastify.get(
+		'/read',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		accountGet
+	)
+	fastify.patch(
+		'/update',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		accountUpdate
+	)
+	fastify.delete(
+		'/delete',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		accountDelete
+	)
 
-    done()
+	done()
 }
 
 module.exports = account

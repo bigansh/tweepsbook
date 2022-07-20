@@ -25,7 +25,7 @@ const updateEmailNotifications = async (
 			}
 		}
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

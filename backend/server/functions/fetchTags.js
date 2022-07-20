@@ -18,7 +18,7 @@ const fetchTags = async (profile_id) => {
 
 		return await Tag.find({ profile_id: profile_id }).lean().exec()
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

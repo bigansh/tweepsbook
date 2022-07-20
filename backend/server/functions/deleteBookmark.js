@@ -22,7 +22,7 @@ const deleteBookmark = async (bookmarkId, profile_id) => {
 
 		return { deleteStatus: true }
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

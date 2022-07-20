@@ -18,7 +18,7 @@ const authTwitter = (req, res) => {
 
 		res.status(302).redirect(url)
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

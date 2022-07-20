@@ -49,7 +49,7 @@ const bookmarkFinderAndUpdater = async (
 			return await foundBookmark.save()
 		}
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

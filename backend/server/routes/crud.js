@@ -2,10 +2,10 @@ const { fastify } = require('fastify')
 
 const app = fastify()
 
-const curdUpdate = require('../controllers/curdUpdate'),
-    curdDelete = require('../controllers/curdDelete'),
-    curdRead = require('../controllers/curdRead'),
-    crudCreate = require('../controllers/curdCreate')
+const crudUpdate = require('../controllers/crudUpdate'),
+	crudDelete = require('../controllers/crudDelete'),
+	crudRead = require('../controllers/crudRead'),
+	crudCreate = require('../controllers/crudCreate')
 
 /**
  * A route that handles the CRUD requests for the saved bookmarks.
@@ -15,36 +15,36 @@ const curdUpdate = require('../controllers/curdUpdate'),
  * @param {*} done
  */
 const crud = (fastify, _options, done) => {
-    fastify.post(
-        '/create',
-        {
-            onRequest: [fastify.authenticate],
-        },
-        crudCreate
-    )
-    fastify.get(
-        '/read',
-        {
-            onRequest: [fastify.authenticate],
-        },
-        curdRead
-    )
-    fastify.patch(
-        '/update',
-        {
-            onRequest: [fastify.authenticate],
-        },
-        curdUpdate
-    )
-    fastify.delete(
-        '/delete',
-        {
-            onRequest: [fastify.authenticate],
-        },
-        curdDelete
-    )
+	fastify.post(
+		'/create',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		crudCreate
+	)
+	fastify.get(
+		'/read',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		crudRead
+	)
+	fastify.patch(
+		'/update',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		crudUpdate
+	)
+	fastify.delete(
+		'/delete',
+		{
+			onRequest: [fastify.authenticate],
+		},
+		crudDelete
+	)
 
-    done()
+	done()
 }
 
 module.exports = crud

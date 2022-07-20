@@ -17,7 +17,7 @@ const findBookmarkOwner = async (bookmarkId) => {
 
 		return foundBookmark.profile_id
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

@@ -38,7 +38,7 @@ const updateReadStatus = async (bookmarkId = undefined, status, profile_id) => {
 				.exec()
 		}
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

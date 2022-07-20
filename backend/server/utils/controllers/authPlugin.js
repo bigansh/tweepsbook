@@ -40,7 +40,7 @@ const authPlugin = fastifyPlugin(
 							'Client not authorized to access this route.'
 						)
 				} catch (error) {
-					throw new Error(error)
+					throw error
 				}
 			}
 		)

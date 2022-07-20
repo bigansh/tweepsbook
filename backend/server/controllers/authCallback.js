@@ -56,7 +56,7 @@ const authCallback = async (req, res) => {
 				break
 		}
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

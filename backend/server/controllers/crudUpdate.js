@@ -14,7 +14,7 @@ const updateTags = require('../functions/updateTags'),
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const curdUpdate = async (req, res) => {
+const crudUpdate = async (req, res) => {
 	try {
 		const { queryType } = req.query
 
@@ -89,8 +89,8 @@ const curdUpdate = async (req, res) => {
 
 		res.status(200).send(data)
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 
-module.exports = curdUpdate
+module.exports = crudUpdate

@@ -36,7 +36,7 @@ const userCreate = async (twitterUserObject = undefined) => {
 			})
 		}
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

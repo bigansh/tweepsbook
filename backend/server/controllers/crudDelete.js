@@ -7,7 +7,7 @@ const deleteBookmark = require('../functions/deleteBookmark'),
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const curdDelete = async (req, res) => {
+const crudDelete = async (req, res) => {
 	try {
 		const { queryType } = req.query
 
@@ -30,8 +30,8 @@ const curdDelete = async (req, res) => {
 
 		res.status(200).send(data)
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 
-module.exports = curdDelete
+module.exports = crudDelete

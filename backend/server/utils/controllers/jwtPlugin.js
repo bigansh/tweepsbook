@@ -28,7 +28,7 @@ const jwtAuth = fastifyPlugin(
 				try {
 					await req.jwtVerify()
 				} catch (error) {
-					throw new Error(error)
+					throw error
 				}
 			}
 		)

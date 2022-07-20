@@ -14,7 +14,7 @@ const indexRead = (req, res) => {
 
 		res.status(200).send(data)
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

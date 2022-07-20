@@ -31,7 +31,7 @@ const updateTags = async (profile_id, bookmarkId, tags) => {
 
 		return await bookmarkFinderAndUpdater(bookmarkId, bookmarkTags)
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 

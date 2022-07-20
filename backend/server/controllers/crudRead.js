@@ -8,7 +8,7 @@ const fetchBookmarks = require('../functions/fetchBookmarks'),
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const curdRead = async (req, res) => {
+const crudRead = async (req, res) => {
 	try {
 		const { queryType } = req.query
 
@@ -34,8 +34,8 @@ const curdRead = async (req, res) => {
 
 		res.status(200).send(data)
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 
-module.exports = curdRead
+module.exports = crudRead

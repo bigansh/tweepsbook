@@ -20,7 +20,7 @@ const importValidation = async (importType, user) => {
 				'Please read some bookmarks before importing new ones.'
 			)
 	} catch (error) {
-		throw new Error(error)
+		throw error
 	}
 }
 
