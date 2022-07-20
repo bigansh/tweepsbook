@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "2.0.0",
+  "description": "API for TweepsBook.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "bigansh",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^7.0.0",
+    "@fastify/helmet": "^8.0.0",
+    "@fastify/jwt": "^5.0.0",
+    "@twitter-api-v2/plugin-rate-limit": "^1.1.0",
+    "@twitter-api-v2/plugin-token-refresher": "^1.0.0",
+    "dotenv": "^16.0.0",
+    "fastify": "^3.27.2",
+    "fastify-plugin": "^3.0.1",
+    "joi": "^17.6.0",
+    "mixpanel": "^0.14.0",
+    "mongoose": "^6.3.0",
+    "node-cache": "^5.1.2",
+    "passport": "^0.5.3",
+    "passport-pinterest": "^1.0.0",
+    "passport-reddit": "^0.2.4",
+    "snoowrap": "^1.23.0",
+    "twitter-api-v2": "^1.11.0",
+    "uuid": "^8.3.2"
+  }
+}

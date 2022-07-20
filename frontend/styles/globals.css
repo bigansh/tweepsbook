@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Merriweather&display=swap');
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Inter', sans-serif;
+	-webkit-tap-highlight-color: transparent;
+}
+.font-header {
+	font-family: 'Merriweather', serif;
+}
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #004965;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #708790;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #004965;
+}
+.content {
+	height: calc(100vh - 80px);
+}
+@media only screen and (min-width: 768px) {
+	.my-content {
+		margin-left: 180px;
+	}
+}
+.icon-grey {
+	color: rgb(95, 95, 95);
+}
+.icon-light-grey {
+	color: #afafaf;
+}
+.tweet a {
+	text-decoration: inherit;
+	font-weight: inherit;
+}
+.my-masonry-grid {
+	display: -webkit-box; /* Not needed if autoprefixing */
+	display: -ms-flexbox; /* Not needed if autoprefixing */
+	display: flex;
+	margin-left: -30px; /* gutter size offset */
+	width: 80vw;
+}
+@media only screen and (max-width: 768px) {
+	.my-masonry-grid {
+		margin: 0;
+		width: auto;
+	}
+}
+
+.my-masonry-grid_column {
+	padding-left: 10px; /* gutter size */
+	background-clip: padding-box;
+}
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 40px;
+	height: 24px;
+	/* width: 60px;
+	height: 34px; */
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+}
+
+.slider:before {
+	position: absolute;
+	content: '';
+	height: 24px;
+	width: 24px;
+	left: 0px;
+	bottom: 0px;
+	background-color: white;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+}
+
+input:checked + .slider {
+	background-color: #2196f3;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(17px);
+	-ms-transform: translateX(17px);
+	transform: translateX(17px);
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 24px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
