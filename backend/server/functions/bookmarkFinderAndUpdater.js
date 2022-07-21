@@ -33,6 +33,8 @@ const bookmarkFinderAndUpdater = async (
 			for (const bookmark of userBookmarks) {
 				const tagIndex = bookmark.tags.indexOf(tagId)
 
+				if (tagIndex === -1) return
+
 				bookmark.tags.splice(tagIndex, 1)
 
 				await bookmark.save()

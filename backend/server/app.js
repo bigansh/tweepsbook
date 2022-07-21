@@ -15,11 +15,7 @@ app.register(require('@fastify/cors'), {
 	credentials: true,
 	strictPreflight: false,
 	methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-	origin: [
-		'http://localhost:8080',
-		'https://tweepsbook.ml',
-		'https://tweepsbook.com',
-	],
+	origin: [process.env.CLIENT],
 })
 
 app.register(require('./utils/controllers/jwtPlugin'))
