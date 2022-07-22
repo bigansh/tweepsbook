@@ -26,12 +26,20 @@ const twtrUserClient = (profile_id, refreshToken, accessToken) => {
 
 	let clientToken = accessToken
 
-	const tokenRefreshPlugin = new TwitterApiAutoTokenRefresher({
-		refreshToken: refreshToken,
-		refreshCredentials: {
+	const accountTwtrClient = new TwitterApi(
+		{
 			clientId: process.env.CLIENT_ID_TWITTER_MAIN,
 			clientSecret: process.env.CLIENT_SECRET_TWITTER_MAIN,
 		},
+		{
+			plugins: [rateLimitPlugin],
+		}
+	)
+
+	const tokenRefreshPlugin = new TwitterApiAutoTokenRefresher({
+		refreshToken: refreshToken,
+		refreshCredentials: accountTwtrClient,
+
 		async onTokenUpdate(token) {
 			clientToken = token.accessToken
 
@@ -48,7 +56,7 @@ const twtrUserClient = (profile_id, refreshToken, accessToken) => {
 	})
 
 	return new TwitterApi(clientToken, {
-		plugins: [rateLimitPlugin, tokenRefreshPlugin],
+		plugins: [tokenRefreshPlugin],
 	})
 }
 
