@@ -71,6 +71,6 @@ const getTweets = async (ids) => {
 			}
 
 			return [tweetWithAuthor, ...allTweets]
-		}, []) || [] // If the Twitter API key isn't set, don't break the build
+		}, []) || []
 	)
 }
