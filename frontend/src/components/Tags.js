@@ -4,7 +4,7 @@ import { MdSystemUpdateAlt } from 'react-icons/md'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 
 const tags = () => {
-	const { fetchTags, activeTag, setActiveTag, bookmarks, deleteTag } =
+	const { fetchTags, activeTag, setActiveTag, bookmarks, deleteTag,stripHashtag } =
 		useContext(BookmarksContext)
 	const [tags, setTags] = useState([])
 const [importDisabled, setImportDisabled] = useState(false)
@@ -70,7 +70,7 @@ const [importDisabled, setImportDisabled] = useState(false)
 									}
 								>
 									<div className=' overflow-hidden w-[80%] text-ellipsis text-left'>
-									#{tag.tag}
+									#{stripHashtag(tag.tag)}
 									</div>
 									<div>
 									{tag?._id === activeTag?._id && tag?._id !== "all" && <IoIosClose

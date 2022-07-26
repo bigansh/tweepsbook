@@ -11,7 +11,7 @@ import SearchBar from './SearchBar'
 import { UserContext } from '../../contexts/UserContext'
 
 const DashNavbar = ({ search }) => {
-    const { searchTerm, setSearchTerm } = useContext(BookmarksContext)
+    const { searchTerm, setSearchTerm,stripHashtag } = useContext(BookmarksContext)
     const { user, getUser } = useContext(UserContext)
     const [menuActive, setMenuActive] = useState(false)
 
@@ -89,7 +89,7 @@ const DashNavbar = ({ search }) => {
                                                         : 'bg-transparent hover:bg-hovertagColor hover:bg-opacity-50')
                                                 }
                                             >
-                                                #{tag.tag}
+                                                #{stripHashtag(tag.tag)}
                                                 {tag?._id === activeTag?._id && tag?._id !== "all" && <IoIosClose
                                                     className='w-5 h-5 ml-0.5 cursor-pointer rounded-full hover:bg-dark-blue opacity-50 hover:bg-opacity-5 hover:opacity-100 transition-all duration-100'
                                                     onClick={() => removeTag(tag)}

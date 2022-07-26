@@ -10,6 +10,9 @@ const BookmarksProvider = ({ children }) => {
 	const [showLoader, setShowLoader] = useState(false)
 	const [sortByDate, setSortByDate] = useState(false)
 	const [sortBySource, setSortBySource] = useState(false)
+	const stripHashtag = (text) => {
+		return text.replace('#', '')
+	}
 	const updateReadStatus = async ({ id, currentStatus }) => {
 		try {
 			setShowLoader(true)
@@ -322,6 +325,7 @@ const BookmarksProvider = ({ children }) => {
 				setSortBySource,
 				sortBySource,
 				updateNotes,
+				stripHashtag,
 			}}
 		>
 			{children}
