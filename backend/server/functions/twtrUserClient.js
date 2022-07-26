@@ -28,8 +28,8 @@ const twtrUserClient = (profile_id, refreshToken, accessToken) => {
 
 	const accountTwtrClient = new TwitterApi(
 		{
-			clientId: process.env.CLIENT_ID_TWITTER_MAIN,
-			clientSecret: process.env.CLIENT_SECRET_TWITTER_MAIN,
+			clientId: process.env.CLIENT_ID_TWITTER,
+			clientSecret: process.env.CLIENT_SECRET_TWITTER,
 		},
 		{
 			plugins: [rateLimitPlugin],
