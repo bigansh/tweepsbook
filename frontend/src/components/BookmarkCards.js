@@ -84,17 +84,7 @@ const bookmarkCards = ({ archive }) => {
 	})
 
 	return (
-		<div className='flex flex-wrap p-3 overflow-auto w-full '>
-			{/* {showLoader && (
-				<div className='w-[100vw] h-[100vh] absolute top-0 left-0 flex items-center justify-center bg-[#00000029]'>
-					<Lottie
-						loop
-						animationData={Loader}
-						play
-						className='w-40 h-40 '
-					/>
-				</div>
-			)} */}
+		<div className='flex flex-wrap p-3 overflow-auto w-full justify-center'>
 			<Masonry
 				breakpointCols={{ default: 3, 768: 1 }}
 				className='my-masonry-grid'
