@@ -134,7 +134,7 @@ export default function dashboard({ children }) {
 						<div className='flex border-b border-[#0000001e] items-center justify-between p-2 mr-8'>
 							<h1 className='pl-2 font-bold text-3xl font-header'>
 								{children ? (
-									<>#Archive</>
+									<>#archive</>
 								) : (
 									activeTag && (
 										<>#{stripHashtag(activeTag.tag)}</>
