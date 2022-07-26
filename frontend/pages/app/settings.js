@@ -135,9 +135,9 @@ const Settings = () => {
 								onClick={() => enableInput('userEmail')}
 							/>
 						</div>
-						<span className='text-sm w-full p-3 text-[#666666]'>
+						{/* <span className='text-sm w-full p-3 text-[#666666]'>
 							UID-{user?._id}
-						</span>
+						</span> */}
 					</div>
 					<div className='flex flex-col justify-between col-span-2'>
 						<div className='bg-white p-4 mb-4 flex flex-col items-start justify-center w-full rounded-lg'>
