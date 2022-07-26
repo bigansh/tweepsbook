@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-// TODO To exclude referenced tweets
 const rules = {
 	add: [
 		{
