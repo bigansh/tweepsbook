@@ -4,7 +4,7 @@ import { BookmarksContext } from '../../contexts/BookmarksContext'
 import { IoIosClose } from 'react-icons/io'
 
 const TagPill = ({ bookmark }) => {
-	const { updateTags } = useContext(BookmarksContext)
+	const { updateTags, stripHashtag } = useContext(BookmarksContext)
 	const [tags, setTags] = useState([])
 
 	useEffect(() => {
@@ -91,7 +91,7 @@ const TagPill = ({ bookmark }) => {
 						{!tag.showEdit && (
 							<div className='border flex items-center border-dark-blue text-sm font-normal px-2 py-1 rounded-full my-1 text-dark-blue'>
 								<span onClick={() => editTag(tag)}>
-									#{tag.tag}
+									#{stripHashtag(tag.tag)}
 								</span>
 								<IoIosClose
 									className='w-5 h-5 ml-0.5 cursor-pointer rounded-full hover:bg-dark-blue opacity-50 hover:bg-opacity-5 hover:opacity-100 transition-all duration-100'
@@ -105,7 +105,7 @@ const TagPill = ({ bookmark }) => {
 									type='text'
 									className='border px-4 p-1 rounded-full text-sm '
 									name='tagName'
-									placeholder={tag.tag}
+									placeholder={stripHashtag(tag.tag)}
 								/>
 							</form>
 						)}

@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { IoIosClose, IoMdArchive } from 'react-icons/io'
 import { MdSystemUpdateAlt } from 'react-icons/md'
+import Lottie from 'react-lottie-player'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
+import Loader from './loader.json'
 
 const tags = () => {
-	const { fetchTags, activeTag, setActiveTag, bookmarks, deleteTag } =
+	const { fetchTags, activeTag, setActiveTag, bookmarks, deleteTag,stripHashtag,showLoader } =
 		useContext(BookmarksContext)
 	const [tags, setTags] = useState([])
 const [importDisabled, setImportDisabled] = useState(false)
@@ -49,7 +51,9 @@ const [importDisabled, setImportDisabled] = useState(false)
 		}
 	}
 	return (
+		
 		<div className='flex flex-col justify-between items-start min-h-eigthy overflow-hidden w-full text-white flex-grow '>
+			
 			<div className='text-xl px-8 py-10'>
 				<h1 className='text-xl font-semibold tracking-wider'>TAGS</h1>
 			</div>
@@ -70,7 +74,7 @@ const [importDisabled, setImportDisabled] = useState(false)
 									}
 								>
 									<div className=' overflow-hidden w-[80%] text-ellipsis text-left'>
-									#{tag.tag}
+									#{stripHashtag(tag.tag)}
 									</div>
 									<div>
 									{tag?._id === activeTag?._id && tag?._id !== "all" && <IoIosClose
