@@ -96,7 +96,7 @@ const Settings = () => {
 								className='w-full h-full rounded-full'
 							/>
 						</div>
-						<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center'>
+						<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center w-full'>
 							<input
 								type='text'
 								className=' bg-[#FAFAFA] text-sm text-[#666666] p-2'
@@ -117,7 +117,7 @@ const Settings = () => {
 								}}
 							/>
 						</div>
-						<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center'>
+						<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center w-full'>
 							<input
 								type='text'
 								className=' bg-[#FAFAFA] text-sm text-[#666666] p-2'
@@ -136,6 +136,9 @@ const Settings = () => {
 								onClick={() => enableInput('userEmail')}
 							/>
 						</div>
+						<span className='text-sm w-full p-3 text-[#666666]'>
+							UID-{user?._id}
+						</span>
 					</div>
 					<div className='flex flex-col justify-between col-span-2'>
 						<div className='bg-white p-4 mb-4 flex flex-col items-start justify-center w-full rounded-lg'>
