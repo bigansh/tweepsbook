@@ -59,6 +59,7 @@ export default function dashboard({ children }) {
 		}
 		verifyUser()
 		fetchBookmarks()
+		importBookmarks()
 		setActiveTag(JSON.parse(localStorage.getItem('activeTag')))
 	}, [])
 
