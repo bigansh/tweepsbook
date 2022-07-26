@@ -155,14 +155,16 @@ const notes = () => {
 							</button>
 						</div>
 					)}
-					{showLoader && (
-						<Lottie
-							loop
-							animationData={Loader}
-							play
-							className='w-10 h-10 mx-auto'
-						/>
-					)}
+					{/* {showLoader && (
+						<div className='w-[100vw] h-[100vh] absolute top-0 left-0 flex items-center justify-center bg-[#00000029]'>
+							<Lottie
+								loop
+								animationData={Loader}
+								play
+								className='w-40 h-40 '
+							/>
+						</div>
+					)} */}
 				</div>
 
 				<div

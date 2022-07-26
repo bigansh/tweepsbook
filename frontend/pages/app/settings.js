@@ -11,7 +11,6 @@ const Settings = () => {
 	useEffect(() => {
 		getUser()
 	}, [])
-	console.log('user', user)
 	const [showDeleteAccountConfirmation, setShowDeleteAccountConfirmation] =
 		useState(false)
 	const enableInput = (id) => {
@@ -36,7 +35,7 @@ const Settings = () => {
 			},
 		}
 		await updateUser(newUserDetails)
-		window.location.href = '/app/settings'
+		window.location.href = '/app/dashboard'
 	}
 	return (
 		<div className='w-full h-full absolute top-0 left-0 bg-sh-gray bg-opacity-80 z-50 flex items-center justify-center'>

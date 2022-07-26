@@ -32,7 +32,7 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
-			fetchBookmarks()
+			await fetchBookmarks()
 			setShowLoader(false)
 			toast.success('Read status updated successfully')
 		} catch (err) {
@@ -59,7 +59,7 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
-			fetchBookmarks()
+			await fetchBookmarks()
 			setShowLoader(false)
 			toast.success('Share status updated successfully')
 		} catch (err) {
@@ -85,8 +85,8 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
-			fetchBookmarks()
-			fetchTags()
+			await fetchBookmarks()
+			await fetchTags()
 			setShowLoader(false)
 			toast.success('Tags updated successfully')
 		} catch (err) {
@@ -109,7 +109,7 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			// console.log(bookmarks)
-			fetchBookmarks()
+			await fetchBookmarks()
 			setShowLoader(false)
 			toast.success('Bookmarks imported successfully')
 		} catch (err) {
@@ -230,6 +230,7 @@ const BookmarksProvider = ({ children }) => {
 	const fetchTags = async () => {
 		try {
 			setShowLoader(true)
+			console.log('fetching tags', showLoader)
 			const res = await axios.get(
 				process.env.NEXT_PUBLIC_HOST + `/crud/read?queryType=tags`,
 				{
@@ -291,8 +292,8 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
-			console.log(res)
-			fetchBookmarks()
+
+			await fetchBookmarks()
 			setShowLoader(false)
 			toast.success('Tag deleted successfully')
 		} catch (err) {

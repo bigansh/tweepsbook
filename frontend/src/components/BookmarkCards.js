@@ -84,19 +84,19 @@ const bookmarkCards = ({ archive }) => {
 	})
 
 	return (
-		<div className='flex flex-wrap p-3 overflow-auto w-full'>
-			{showLoader && (
-				<div className='w-[80vw] h-[10vh] flex items-center'>
-				<Lottie
-					loop
-					animationData={Loader}
-					play
-					className='w-10 h-10 mx-auto'
-				/>
+		<div className='flex flex-wrap p-3 overflow-auto w-full '>
+			{/* {showLoader && (
+				<div className='w-[100vw] h-[100vh] absolute top-0 left-0 flex items-center justify-center bg-[#00000029]'>
+					<Lottie
+						loop
+						animationData={Loader}
+						play
+						className='w-40 h-40 '
+					/>
 				</div>
-			)}
+			)} */}
 			<Masonry
-				breakpointCols={{default: 3, 768: 1}}
+				breakpointCols={{ default: 3, 768: 1 }}
 				className='my-masonry-grid'
 				columnClassName='my-masonry-grid_column'
 			>

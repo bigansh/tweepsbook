@@ -12,7 +12,8 @@ import { UserContext } from '../../contexts/UserContext'
 import { BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs'
 import Head from 'next/head'
 import Script from 'next/script'
-
+import Loader from '../../src/components/loader.json'
+import Lottie from 'react-lottie-player'
 export default function dashboard({ children }) {
 	const router = useRouter()
 	const sortMenuRef = useRef(null)
@@ -47,6 +48,7 @@ export default function dashboard({ children }) {
 		sortBySource,
 		setSortBySource,
 		stripHashtag,
+		showLoader,
 	} = useContext(BookmarksContext)
 
 	useEffect(() => {
@@ -68,9 +70,21 @@ export default function dashboard({ children }) {
 	useEffect(() => {
 		window.addEventListener('resize', handleResize)
 	})
-
+	// useEffect(() => {
+	// 	console.log(showLoader)
+	// }, [showLoader])
 	return (
 		<div onClick={(e) => handleClickOutside(e)}>
+			{showLoader && (
+				<div className='w-[100vw] h-[100vh] absolute top-0 left-0 flex items-center justify-center bg-[#ffffff99] z-50'>
+					<Lottie
+						loop
+						animationData={Loader}
+						play
+						className='w-60 h-60 '
+					/>
+				</div>
+			)}
 			<Head>
 				<title>Dashboard / TweepsBook</title>
 				<link rel='icon' href='/Logo.ico' />
