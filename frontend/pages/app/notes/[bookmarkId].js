@@ -53,7 +53,7 @@ const notes = () => {
 			navigator?.clipboard?.writeText(window?.location?.href)
 			setShowLoader(false)
 			setCopyButtonText('Copied!')
-			toast.success('URL Copiured to clipboard!')
+			toast.success('URL Copied to clipboard!')
 		}, [200])
 		setTimeout(() => {
 			setCopyButtonText('Copy URL')
@@ -74,7 +74,7 @@ const notes = () => {
 	return (
 		<div className='min-h-[100vh] bg-[#FBFAFA] flex flex-col'>
 			<Head>
-				<title>Notes | TweepsBook</title>
+				<title>Notes / TweepsBook</title>
 				<link rel='icon' href='/Logo.ico' />
 				<meta
 					property='og:title'
@@ -121,8 +121,8 @@ const notes = () => {
 			</Head>
 			<DashNavbar search={false} />
 
-			<div className='flex justify-around flex-grow'>
-				<div className='flex flex-col p-1 w-1/3'>
+			<div className='flex justify-around flex-col sm:flex-row flex-grow'>
+				<div className='flex flex-col p-1 w-full sm:w-1/3'>
 					{selectedBookmark && (
 						<BookmarkCard
 							bookmark={selectedBookmark}
@@ -132,7 +132,7 @@ const notes = () => {
 
 					{/* Tweet Menu Functions */}
 					{selectedBookmark?.ownershipStatus && (
-						<div className='flex items-center w-full justify-between p-2'>
+						<div className='flex items-center w-full justify-between p-2 m-1'>
 							Share bookmark to web
 							<Toggle
 								checked={shareChecked}
@@ -168,24 +168,24 @@ const notes = () => {
 				</div>
 
 				<div
-					className='flex flex-col m-4 w-1/2 '
+					className='flex flex-col p-2 sm:p-1 sm:m-4 w-full sm:w-1/2 '
 					data-color-mode='light'
 				>
 					<MDEditor
 						value={value}
 						onChange={setValue}
-						height='80vh'
+						height='70vh'
 						preview={
 							selectedBookmark?.ownershipStatus
 								? 'live'
 								: 'preview'
 						}
-						visibleDragbar='false'
-						className='border rounded w-full '
+						visibleDragbar={false}
+						className='border border-light-blue rounded w-full '
 					/>
 					{selectedBookmark?.ownershipStatus && (
 						<button
-							className='text-white text-sm py-2 ml-auto my-2 px-4 rounded-lg border-dark-blue border-2 bg-dark-blue font-semibold'
+							className='text-white text-sm py-2 mr-1 ml-auto my-2 px-4 rounded-lg border-dark-blue border-2 bg-dark-blue font-semibold'
 							onClick={() => {
 								updateNotes({
 									id: selectedBookmark?.backend._id,
