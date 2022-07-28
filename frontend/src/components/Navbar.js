@@ -26,10 +26,20 @@ const Navbar = () => {
 						</Link>
 					</div>
 					<div className='w-full text-xs sm:text-base sm:w-fit sm:mx-8 hover:text-light-blue-text self-center font-medium block'>
-						<Link href='/pages/privacy-policy'>Privacy Policy</Link>
+						<Link
+							href='/?page=privacy-policy'
+							as='/pages/privacy-policy'
+						>
+							Privacy Policy
+						</Link>
 					</div>
 					<div className='w-full text-xs sm:text-base sm:w-fit sm:mx-8 hover:text-light-blue-text self-center font-medium block'>
-						<Link href='/pages/terms-of-service'>Terms of Service</Link>
+						<Link
+							href='/?page=terms-of-service'
+							as='/pages/terms-of-service'
+						>
+							Terms of Service
+						</Link>
 					</div>
 				</div>
 				<div className=' md:mr-10 mr-6 hidden sm:flex'>
@@ -38,7 +48,10 @@ const Navbar = () => {
 							href='https://twitter.com/tweepsbookcom'
 							target='_blank'
 						>
-							<AiFillTwitterCircle size={32} style={{ color: '#1DA1F2' }} />
+							<AiFillTwitterCircle
+								size={32}
+								style={{ color: '#1DA1F2' }}
+							/>
 						</a>
 					</div>
 					<div>

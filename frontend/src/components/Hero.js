@@ -5,7 +5,14 @@ import Lottie from 'react-lottie-player'
 import LandingAnimation from './landing_animation.json'
 import { useContext } from 'react'
 import { UserContext } from '../../contexts/UserContext'
+import Modal from './Modal'
+import { useRouter } from 'next/router'
+import PrivacyPolicy from '../../pages/pages/privacy-policy'
+import TOS from '../../pages/pages/terms-of-service'
 const Hero = () => {
+	const router = useRouter()
+	const query = router.query
+	console.log(query)
 	const { user, getUser } = useContext(UserContext)
 	const handleAuth = () => {
 		const token = localStorage.getItem('sessionToken')
@@ -32,14 +39,19 @@ const Hero = () => {
 	return (
 		<div className='max-h-[100vh]'>
 			<Navbar />
+			{query.page === 'privacy-policy' && <PrivacyPolicy />}
+			{query.page === 'terms-of-service' && <TOS />}
 			<div className='md:ml-10 sm:ml-6 mt-4 sm:mt-12 '>
 				<div className='md:mx-12 flex flex-col lg:flex-row sm:align-middle'>
 					<div className='flex flex-col items-center sm:items-start my-16 w-full sm:w-2/3'>
-						<h2 className="text-center sm:text-justify mx-2 sm:m-1 p-1 text-dark-blue font-black font-header text-[48px] tracking-wide my-4 sm:leading-tight">If Notion &amp; Pocket <br /> Had a Baby</h2>
+						<h2 className='text-center sm:text-justify mx-2 sm:m-1 p-1 text-dark-blue font-black font-header text-[48px] tracking-wide my-4 sm:leading-tight'>
+							If Notion &amp; Pocket <br /> Had a Baby
+						</h2>
 
-						<p className='text-center sm:text-left mx-2 sm:m-1 text-light-blue-text md:w-5/6 font-medium text-[16px] max-w-md'>We’d call it <strong>TweepsBook</strong>. A notebook for storing,
-							organizing, taking &amp; sharing notes for all your
-							favorite bookmarks.
+						<p className='text-center sm:text-left mx-2 sm:m-1 text-light-blue-text md:w-5/6 font-medium text-[16px] max-w-md'>
+							We’d call it <strong>TweepsBook</strong>. A notebook
+							for storing, organizing, taking &amp; sharing notes
+							for all your favorite bookmarks.
 						</p>
 
 						<div className='my-8 mb-2 sm:my-12 flex flex-col items-center justify-center sm:justify-start sm:flex-row w-[60vw] sm:w-full'>
@@ -71,7 +83,10 @@ const Hero = () => {
 									href='https://twitter.com/tweepsbookcom'
 									target='_blank'
 								>
-									<AiFillTwitterCircle size={36} style={{ color: '#1DA1F2' }} />
+									<AiFillTwitterCircle
+										size={36}
+										style={{ color: '#1DA1F2' }}
+									/>
 								</a>
 							</div>
 							<div>
@@ -92,7 +107,6 @@ const Hero = () => {
 							className=' h-full mx-auto'
 						/>
 					</div>
-
 				</div>
 			</div>
 		</div>
