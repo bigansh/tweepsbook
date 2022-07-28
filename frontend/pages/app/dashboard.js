@@ -70,9 +70,9 @@ export default function dashboard({ children }) {
 	useEffect(() => {
 		window.addEventListener('resize', handleResize)
 	})
-	// useEffect(() => {
-	// 	console.log(showLoader)
-	// }, [showLoader])
+	useEffect(() => {
+		user?.importCount?.twitter?.length > 0 && importBookmarks()
+	}, [user])
 	return (
 		<div onClick={(e) => handleClickOutside(e)}>
 			{showLoader && (
