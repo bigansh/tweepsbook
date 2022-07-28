@@ -184,7 +184,7 @@ const BookmarksProvider = ({ children }) => {
 				})
 			})
 			setBookmarks(mergedArr)
-			mergedArr.length === 0 && importBookmarks()
+
 			// console.log(mergedArr)
 			// console.log('mergedBookmarks', mergedBookmarks)
 			// console.log('twt', res.data)
