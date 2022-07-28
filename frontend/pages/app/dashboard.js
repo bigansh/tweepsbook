@@ -143,9 +143,9 @@ export default function dashboard({ children }) {
 						<Tags />
 					</div>
 
-					<div className='flex flex-col my-content w-screen bg-[#FBFAFA] pt-12 pl-8'>
+					<div className='flex flex-col my-content w-screen bg-[#FBFAFA] pt-12 sm:pl-8'>
 						{/* Sorting and filtering buttons */}
-						<div className='flex border-b border-[#0000001e] items-center justify-between p-2 mr-8'>
+						<div className='flex border-b border-[#0000001e] items-center justify-between p-1 mr-3 ml-[15px] sm:ml-4 sm:mr-11'>
 							<h1 className='pl-2 font-bold text-3xl font-header'>
 								{children ? (
 									<>#archive</>
