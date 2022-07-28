@@ -84,7 +84,7 @@ const bookmarkCards = ({ archive }) => {
 	})
 
 	return (
-		<div className='flex flex-wrap p-3 overflow-auto w-full justify-center'>
+		<div className='flex flex-wrap sm:p-3 overflow-auto w-full justify-center'>
 			<Masonry
 				breakpointCols={{ default: 3, 768: 1 }}
 				className='my-masonry-grid'
