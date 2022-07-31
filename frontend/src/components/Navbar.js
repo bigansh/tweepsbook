@@ -18,34 +18,40 @@ const Navbar = () => {
 						height={60}
 						layout='fixed'
 					/>
-					{/* <TweepsBookIcon className="" /> */}
 				</div>
 				<div className='flex font-semibold text-center text-dark-blue text-base flex-auto justify-center'>
-					<div className='mx-8 self-center hidden hover:text-light-blue-text font-medium text-[16px] lg:block'>
+					<div className='w-full text-xs sm:text-base sm:w-fit sm:mx-8 self-center hover:text-light-blue-text font-medium block'>
 						<Link href='https://public.tweepsbook.com'>
 							Public Pages
 						</Link>
 					</div>
-					{/* <div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
-						<Link href='/'>Wall of Love</Link>
-					</div> */}
-					{/* <div className='mx-8 self-center font-medium text-[16px] hidden lg:block'>
-						<Link href='/'>Usage Guide</Link>
-					</div> */}
-					<div className='mx-8 hover:text-light-blue-text self-center font-medium text-[16px] hidden lg:block'>
-						<Link href='/pages/privacy-policy'>Privacy Policy</Link>
+					<div className='w-full text-xs sm:text-base sm:w-fit sm:mx-8 hover:text-light-blue-text self-center font-medium block'>
+						<Link
+							href='/?page=privacy-policy'
+							as='/pages/privacy-policy'
+						>
+							Privacy Policy
+						</Link>
 					</div>
-					<div className='mx-8 hover:text-light-blue-text self-center font-medium text-[16px] hidden lg:block'>
-						<Link href='/pages/terms-of-service'>Terms of Service</Link>
+					<div className='w-full text-xs sm:text-base sm:w-fit sm:mx-8 hover:text-light-blue-text self-center font-medium block'>
+						<Link
+							href='/?page=terms-of-service'
+							as='/pages/terms-of-service'
+						>
+							Terms of Service
+						</Link>
 					</div>
 				</div>
-				<div className='flex md:mr-10 mr-6'>
+				<div className=' md:mr-10 mr-6 hidden sm:flex'>
 					<div className='mr-3 '>
 						<a
 							href='https://twitter.com/tweepsbookcom'
 							target='_blank'
 						>
-							<AiFillTwitterCircle size={32} style={{color:'#1DA1F2'}} />
+							<AiFillTwitterCircle
+								size={32}
+								style={{ color: '#1DA1F2' }}
+							/>
 						</a>
 					</div>
 					<div>

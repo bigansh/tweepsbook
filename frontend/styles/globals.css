@@ -68,6 +68,12 @@ body {
 	padding-left: 10px; /* gutter size */
 	background-clip: padding-box;
 }
+@media only screen and (max-width: 768px) {
+	.my-masonry-grid_column {
+		background-clip: padding-box;
+	}
+}
+
 .switch {
 	position: relative;
 	display: inline-block;

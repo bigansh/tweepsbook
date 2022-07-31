@@ -12,7 +12,7 @@ const BookmarkCard = ({ bookmark, ownershipStatus }) => {
 	const { updateReadStatus, deleteBookmark } = useContext(BookmarksContext)
 	return (
 		<div
-			className='flex border border-light-blue flex-col bg-white rounded-md justify-between p-4 m-2 animate-[scale_.2s]'
+			className='flex border border-light-blue flex-col bg-white rounded-md justify-between p-4 mx-1 m-2 animate-[scale_.2s]'
 			key={bookmark.backend._id}
 		>
 			<div className='w-full flex items-center justify-between'>
