@@ -1,6 +1,7 @@
 require('dotenv').config()
 
-const twtrClient_o2 = require('../utils/auth/oauth2.0')
+const twtrClient_o2 = require('../utils/auth/oauth2.0'),
+	mixpanel = require('../utils/auth/mixpanelConnect')
 
 /**
  * @type {import('../utils/schemas/User').UserModel}
@@ -60,6 +61,10 @@ const twitterCallback = async (
 		)
 			.lean()
 			.exec()
+
+		mixpanel.people.set(user.profile_id, {
+			$email: email,
+		})
 
 		return user
 	} catch (error) {
