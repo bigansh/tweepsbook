@@ -14,6 +14,7 @@
     "@fastify/jwt": "^5.0.0",
     "@twitter-api-v2/plugin-rate-limit": "^1.1.0",
     "@twitter-api-v2/plugin-token-refresher": "^1.0.0",
+    "axios": "^0.27.2",
     "dotenv": "^16.0.0",
     "fastify": "^3.27.2",
     "fastify-plugin": "^3.0.1",

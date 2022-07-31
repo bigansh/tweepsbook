@@ -14,20 +14,27 @@ const twitterCallback = require('../functions/twitterCallback')
  */
 const authCallback = async (req, res) => {
 	try {
-		const { callbackType } = req.query
+		const { callbackType, email } = req.query
+
+		if (!email) throw new Error('Please enter an email address.')
 
 		switch (callbackType) {
 			case 'twitter':
 				const { state, code } = req.query
 
-				const { state: sessionState, codeVerifier } =
-					cache.take('token')
+				const authObjects = cache.take('token')
+
+				if (!authObjects)
+					throw new Error(
+						'Authorization token expired. Please try again.'
+					)
 
 				const { profile_id } = await twitterCallback(
-					sessionState,
-					codeVerifier,
+					authObjects.state,
+					authObjects.codeVerifier,
 					state,
-					code
+					code,
+					email
 				)
 
 				const sessionToken = await res.jwtSign(

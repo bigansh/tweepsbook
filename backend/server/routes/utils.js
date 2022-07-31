@@ -2,7 +2,7 @@ const { fastify } = require('fastify')
 
 const app = fastify()
 
-const indexGet = require('../controllers/indexGet')
+const utilsEmail = require('../controllers/utilsEmail')
 
 /**
  * A route that handles the index requests.
@@ -12,7 +12,13 @@ const indexGet = require('../controllers/indexGet')
  * @param {*} done
  */
 const index = (fastify, _options, done) => {
-	fastify.get('/', indexGet)
+	fastify.post(
+		'/email',
+		{
+			onRequest: [fastify.verify],
+		},
+		utilsEmail
+	)
 
 	done()
 }
