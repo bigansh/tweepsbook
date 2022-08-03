@@ -64,6 +64,7 @@ const DashNavbar = ({ search }) => {
 
     const handleClick = async (tag) => {
         setActiveTag(tag)
+        setMenuActive(!menuActive)
         localStorage.setItem('activeTag', JSON.stringify(tag))
         window?.location.pathname !== '/app/dashboard' && (window?.location.href = '/app/dashboard')
     }
@@ -71,17 +72,15 @@ const DashNavbar = ({ search }) => {
 
     return (
         <div className='flex sm:hidden items-center px-5 justify-between py-4 shadow-lg bg-gray'>
-
             <button onClick={menuClick}> <AiOutlineMenuUnfold /></button>
             <motion.nav animate={menuActive ? "open" : "closed"}
-                variants={variants} className='flex items-center absolute left-0 top-24 justify-center text-[#3A3A3D] bg-dark-blue '>
+                variants={variants} className='flex items-center w-1/3 z-10 absolute left-0 top-20 justify-center text-[#3A3A3D] bg-dark-blue '>
                 {menuActive && (
-                    <div className='flex flex-col justify-between h-[80vh] items-start w-1/2 text-white flex-grow '>
-                        <div className='flex text-sm px-8 py-8'>
+                    <div className='flex flex-col justify-between h-[88vh] items-start text-white flex-grow '>
+                        <div className='flex w-full justify-between text-sm px-8 py-8'>
                             <h1 className='text-sm mr-2 font-semibold tracking-wider'>TAGS</h1>
-                            <button onClick={menuClick}> <IoIosClose size={18} /></button>
                         </div>
-                        <div className='flex text-xs justify-between overflow-y-scroll w-full flex-col items-start flex-grow'>
+                        <div className='flex text-sm justify-between overflow-y-scroll w-full flex-col items-start flex-grow'>
 
                             <div className='flex overflow-y-scroll flex-col items-start w-full px-4'>
                                 {tags &&
@@ -91,7 +90,7 @@ const DashNavbar = ({ search }) => {
                                                 key={tag._id}
                                                 onClick={() => handleClick(tag)}
                                                 className={
-                                                    'my-1 pl-4 py-1 min-h-[1.5rem] rounded-md w-full flex text-ellipsis justify-between overflow-hidden whitespace-nowrap items-start ' +
+                                                    'my-1 pl-4 py-1 min-h-[1.5rem] rounded-md w-full flex text-ellipsis justify-between overflow-hidden whitespace-nowrap items-center ' +
                                                     (activeTag?._id === tag?._id
                                                         ? 'bg-hovertagColor'
                                                         : 'bg-transparent hover:bg-hovertagColor hover:bg-opacity-50')
