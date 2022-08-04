@@ -56,15 +56,15 @@ const twitterCallback = async (
 					accessToken: accessToken,
 					refreshToken: refreshToken,
 				},
-				email: email,
+				// email: email,
 			}
 		)
 			.lean()
 			.exec()
 
-		mixpanel.people.set(user.profile_id, {
-			$email: email,
-		})
+		// mixpanel.people.set(user.profile_id, {
+		// 	$email: email,
+		// })
 
 		return user
 	} catch (error) {

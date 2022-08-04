@@ -12,7 +12,7 @@ const authTwitter = (req, res) => {
 	try {
 		const { email } = req.query
 
-		if (!email) throw new Error('Please enter an email address.')
+		// if (!email) throw new Error('Please enter an email address.')
 
 		const { url, state, codeVerifier } = twitterAuthFlow(email)
 
