@@ -61,7 +61,7 @@ const getTweets = async (ids) => {
 			const tweetWithAuthor = {
 				...tweet,
 				media:
-					tweet?.attachments?.media_keys.map((key) =>
+					tweet?.attachments?.media_keys?.map((key) =>
 						tweets.includes.media.find(
 							(media) => media.media_key === key
 						)
