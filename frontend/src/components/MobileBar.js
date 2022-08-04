@@ -74,13 +74,13 @@ const DashNavbar = ({ search }) => {
         <div className='flex sm:hidden items-center px-5 justify-between py-4 shadow-lg bg-gray'>
             <button onClick={menuClick}> <AiOutlineMenuUnfold /></button>
             <motion.nav animate={menuActive ? "open" : "closed"}
-                variants={variants} className='flex items-center w-1/3 z-10 absolute left-0 top-20 justify-center text-[#3A3A3D] bg-dark-blue '>
+                variants={variants} className='flex items-center w-1/2 z-10 absolute left-0 top-20 justify-center text-[#3A3A3D] bg-dark-blue '>
                 {menuActive && (
-                    <div className='flex flex-col justify-between h-[88vh] items-start text-white flex-grow '>
-                        <div className='flex w-full justify-between text-sm px-8 py-8'>
-                            <h1 className='text-sm mr-2 font-semibold tracking-wider'>TAGS</h1>
+                    <div className='flex flex-col justify-between h-[91vh] items-start text-white flex-grow '>
+                        <div className='flex w-full justify-between px-8 py-8'>
+                            <h1 className='mr-2 font-semibold tracking-wider'>TAGS</h1>
                         </div>
-                        <div className='flex text-sm justify-between overflow-y-scroll w-full flex-col items-start flex-grow'>
+                        <div className='flex justify-between overflow-y-scroll w-full flex-col items-start flex-grow'>
 
                             <div className='flex overflow-y-scroll flex-col items-start w-full px-4'>
                                 {tags &&
