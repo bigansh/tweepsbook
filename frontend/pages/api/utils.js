@@ -61,18 +61,18 @@ const getTweets = async (ids) => {
 	const tweets = await response.json()
 
 	const getAuthorInfo = (author_id) => {
-		return tweets.includes.users.find((user) => user.id === author_id)
+		return tweets?.includes?.users?.find((user) => user?.id === author_id)
 	}
 
 	const getReferencedTweets = (mainTweet) => {
 		return (
 			mainTweet?.referenced_tweets?.map((referencedTweet) => {
-				const fullReferencedTweet = tweets.includes.tweets.find(
-					(tweet) => tweet.id === referencedTweet.id
+				const fullReferencedTweet = tweets?.includes?.tweets?.find(
+					(tweet) => tweet?.id === referencedTweet?.id
 				)
 
 				return {
-					type: referencedTweet.type,
+					type: referencedTweet?.type,
 					author: getAuthorInfo(fullReferencedTweet?.author_id),
 					...fullReferencedTweet,
 				}
@@ -86,12 +86,12 @@ const getTweets = async (ids) => {
 				...tweet,
 				media:
 					tweet?.attachments?.media_keys?.map((key) =>
-						tweets.includes.media.find(
-							(media) => media.media_key === key
+						tweets?.includes?.media?.find(
+							(media) => media?.media_key === key
 						)
 					) || [],
 				referenced_tweets: getReferencedTweets(tweet),
-				author: getAuthorInfo(tweet.author_id),
+				author: getAuthorInfo(tweet?.author_id),
 			}
 
 			return [tweetWithAuthor, ...allTweets]
