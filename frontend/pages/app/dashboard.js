@@ -71,7 +71,7 @@ export default function dashboard({ children }) {
 		window.addEventListener('resize', handleResize)
 	})
 	useEffect(() => {
-		user?.importCount?.twitter?.length > 0 && importBookmarks()
+		user?.importCount?.twitter?.length = 0 && importBookmarks()
 	}, [user])
 	return (
 		<div onClick={(e) => handleClickOutside(e)}>
