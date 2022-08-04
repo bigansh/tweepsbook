@@ -86,12 +86,12 @@ const getTweets = async (ids) => {
 				...tweet,
 				media:
 					tweet?.attachments?.media_keys?.map((key) =>
-						tweets?.includes?.media?.find(
-							(media) => media?.media_key === key
+						tweets.includes.media.find(
+							(media) => media.media_key === key
 						)
 					) || [],
 				referenced_tweets: getReferencedTweets(tweet),
-				author: getAuthorInfo(tweet?.author_id),
+				author: getAuthorInfo(tweet.author_id),
 			}
 
 			return [tweetWithAuthor, ...allTweets]
