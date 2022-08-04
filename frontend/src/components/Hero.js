@@ -43,7 +43,7 @@ const Hero = () => {
 			{query.page === 'terms-of-service' && <TOS />}
 			<div className='md:ml-10 sm:ml-6 mt-4 sm:mt-12 '>
 				<div className='md:mx-12 flex flex-col lg:flex-row sm:align-middle'>
-				<div className='sm:hidden flex md:mr-10 mr-6 h-[600px] p-5'>
+				<div className='sm:hidden flex h-[600px]'>
 						<Lottie
 							loop
 							animationData={LandingAnimation}
@@ -107,7 +107,7 @@ const Hero = () => {
 							</div>
 						</div>
 					</div>
-					<div className='hidden sm:flex md:mr-10 mr-6 h-[600px] p-5'>
+					<div className='hidden sm:flex md:mr-10 mr-6 h-[600px]'>
 						<Lottie
 							loop
 							animationData={LandingAnimation}
