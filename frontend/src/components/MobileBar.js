@@ -72,7 +72,7 @@ const DashNavbar = ({ search }) => {
 
     return (
         <div className='flex sm:hidden items-center px-5 justify-between py-4 shadow-lg bg-gray'>
-            <button onClick={menuClick}> <AiOutlineMenuUnfold /></button>
+            <button onClick={menuClick}><AiOutlineMenuUnfold /></button>
             <motion.nav animate={menuActive ? "open" : "closed"}
                 variants={variants} className='flex items-center w-1/2 z-10 absolute left-0 top-20 justify-center text-[#3A3A3D] bg-dark-blue '>
                 {menuActive && (

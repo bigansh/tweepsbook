@@ -51,7 +51,7 @@ const Hero = () => {
 							className='h-full mx-auto'
 						/>
 					</div>
-					<div className='flex flex-col items-center sm:items-start my-16 w-full sm:w-2/3'>
+					<div className='flex flex-col items-center sm:items-start sm:my-16 w-full sm:w-2/3'>
 						<h2 className='text-center sm:text-justify mx-2 sm:m-1 p-1 text-dark-blue font-black font-header text-[48px] tracking-wide my-4 sm:leading-tight'>
 							If Notion &amp; Pocket <br /> Had a Baby
 						</h2>
@@ -85,7 +85,7 @@ const Hero = () => {
 								<BsArrowRightShort size={24} />
 							</button>
 						</div>
-						<div className='flex mt-7 w-full p-1 justify-end sm:hidden'>
+						<div className='flex items-end mt-2 w-full p-1 justify-end sm:hidden'>
 							<div className='mr-3 '>
 								<a
 									href='https://twitter.com/tweepsbookcom'
