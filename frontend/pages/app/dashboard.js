@@ -169,7 +169,7 @@ export default function dashboard({ children }) {
 										className='flex text-xs h-8 items-center px-4 py-2 justify-around opacity-100 border border-hover-blue rounded-full hover:bg-white'
 										onClick={() => setSortMenu(!sortMenu)}
 									>
-										Sort By{' '}
+										Sort Bys{' '}
 										<AiOutlineDown className='ml-2' />
 									</button>
 									{sortMenu && (
