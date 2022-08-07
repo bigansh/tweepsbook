@@ -44,7 +44,9 @@ export default function dashboard({ children }) {
 		activeTag,
 		setActiveTag,
 		sortByDate,
+		sortByTweetDate,
 		setSortByDate,
+		setSortByTweetDate,
 		sortBySource,
 		setSortBySource,
 		stripHashtag,
@@ -71,8 +73,11 @@ export default function dashboard({ children }) {
 		window.addEventListener('resize', handleResize)
 	})
 	useEffect(() => {
-		user?.importCount?.twitter?.length > 0 && importBookmarks()
+		user?.importCount?.twitter?.length === 0 && importBookmarks()
 	}, [user])
+	useEffect(() => {
+		console.log({ showLoader })
+	}, [showLoader])
 	return (
 		<div onClick={(e) => handleClickOutside(e)}>
 			{showLoader && (
@@ -164,7 +169,7 @@ export default function dashboard({ children }) {
 										className='flex text-xs h-8 items-center px-4 py-2 justify-around opacity-100 border border-hover-blue rounded-full hover:bg-white'
 										onClick={() => setSortMenu(!sortMenu)}
 									>
-										Sort By{' '}
+										Sort Bys{' '}
 										<AiOutlineDown className='ml-2' />
 									</button>
 									{sortMenu && (
@@ -172,12 +177,21 @@ export default function dashboard({ children }) {
 											<button
 												className={
 													'flex p-2 w-[100px] items-center hover:bg-gray-50 rounded ' +
-													(!sortByDate
+													(sortByDate !== null &&
+													!sortByDate
 														? 'bg-gray-100'
 														: 'bg-white')
 												}
 												onClick={() => {
+													localStorage?.setItem(
+														'sortByDate',
+														false
+													)
+													localStorage?.removeItem(
+														'sortByTweetDate'
+													)
 													setSortByDate(false)
+													setSortByTweetDate(null)
 													setSortBySource(false)
 													setSortMenu(false)
 												}}
@@ -187,19 +201,78 @@ export default function dashboard({ children }) {
 											</button>
 											<button
 												className={
-													'flex p-2 w-[100px] items-center hover:bg-gray-50 rounded ' +
-													(sortByDate
+													'flex p-2 w-[100px] items-center hover:bg-gray-50 rounded  ' +
+													(sortByDate !== null &&
+													sortByDate
 														? 'bg-gray-100'
 														: 'bg-white')
 												}
 												onClick={() => {
+													localStorage?.setItem(
+														'sortByDate',
+														true
+													)
+													localStorage?.removeItem(
+														'sortByTweetDate'
+													)
 													setSortByDate(true)
+													setSortByTweetDate(null)
 													setSortBySource(false)
 													setSortMenu(false)
 												}}
 											>
 												<AiOutlineCalendar className='mr-1' />
 												Date <BsArrowDownShort />
+											</button>
+											<button
+												className={
+													'flex p-2 w-[100px] items-center hover:bg-gray-50 rounded ' +
+													(sortByTweetDate !== null &&
+													!sortByTweetDate
+														? 'bg-gray-100'
+														: 'bg-white')
+												}
+												onClick={() => {
+													localStorage?.setItem(
+														'sortByTweetDate',
+														true
+													)
+													localStorage?.removeItem(
+														'sortByDate'
+													)
+													setSortByDate(null)
+													setSortByTweetDate(false)
+													setSortBySource(false)
+													setSortMenu(false)
+												}}
+											>
+												<AiOutlineCalendar className='mr-1' />
+												Tweet Date <BsArrowUpShort />
+											</button>
+											<button
+												className={
+													'flex p-2 w-[100px] items-center hover:bg-gray-50 rounded ' +
+													(sortByTweetDate !== null &&
+													sortByTweetDate
+														? 'bg-gray-100'
+														: 'bg-white')
+												}
+												onClick={() => {
+													localStorage?.setItem(
+														'sortByTweetDate',
+														false
+													)
+													localStorage?.removeItem(
+														'sortByDate'
+													)
+													setSortByDate(null)
+													setSortByTweetDate(true)
+													setSortBySource(false)
+													setSortMenu(false)
+												}}
+											>
+												<AiOutlineCalendar className='mr-1' />
+												Tweet Date <BsArrowDownShort />
 											</button>
 										</div>
 									)}

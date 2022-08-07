@@ -2,10 +2,7 @@ const { fastify } = require('fastify')
 
 const app = fastify()
 
-const authGoogle = require('../controllers/authGoogle'),
-	authTwitter = require('../controllers/authTwitter'),
-	authLogin = require('../controllers/authLogin'),
-	authSignup = require('../controllers/authSignup'),
+const authTwitter = require('../controllers/authTwitter'),
 	authCallback = require('../controllers/authCallback')
 
 /**
@@ -24,9 +21,6 @@ const auth = (fastify, _options, done) => {
 		},
 		authTwitter
 	)
-	// fastify.get('/google', authGoogle)
-	// fastify.post('/login', authLogin)
-	// fastify.post('/sign-up', authSignup)
 
 	done()
 }

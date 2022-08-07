@@ -4,7 +4,7 @@
  * @param {import('fastify').FastifyRequest} req
  * @param {import('fastify').FastifyReply} res
  */
-const indexRead = (req, res) => {
+const indexGet = (req, res) => {
 	try {
 		data = {
 			message:
@@ -18,4 +18,4 @@ const indexRead = (req, res) => {
 	}
 }
 
-module.exports = indexRead
+module.exports = indexGet

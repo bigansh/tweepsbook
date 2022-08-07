@@ -9,6 +9,9 @@ const bookmarkCards = ({ archive }) => {
 	const {
 		bookmarks,
 		sortByDate,
+		sortByTweetDate,
+		setSortByDate,
+		setSortByTweetDate,
 		activeTag,
 		searchTerm,
 		showLoader,
@@ -16,20 +19,46 @@ const bookmarkCards = ({ archive }) => {
 	} = useContext(BookmarksContext)
 	const [bookmarksToShow, setBookmarksToShow] = useState([])
 	const sortBookmarksByDate = () => {
+		if (sortByDate === null) {
+			return []
+		}
+		console.log(bookmarks)
 		return bookmarks.sort((a, b) => {
 			return sortByDate
 				? new Date(b.backend.createdAt) - new Date(a.backend.createdAt)
 				: new Date(a.backend.createdAt) - new Date(b.backend.createdAt)
 		})
 	}
+	const sortBookmarksByTweetDate = () => {
+		if (sortBookmarksByDate === null) {
+			return []
+		}
+		return bookmarks.sort((a, b) => {
+			return sortByTweetDate
+				? new Date(b.twitter.created_at) -
+						new Date(a.twitter.created_at)
+				: new Date(a.twitter.created_at) -
+						new Date(b.twitter.created_at)
+		})
+	}
 	useEffect(() => {
-		console.log('sorting by date')
+		console.log('sorting by date', sortByDate)
+		console.log(
+			'sorting by date type',
+			sortByDate === null,
+			typeof sortByDate
+		)
 		setBookmarksToShow([...sortBookmarksByDate()])
 		console.log(sortBookmarksByDate())
 	}, [sortByDate])
+	useEffect(() => {
+		console.log('sorting by tweet date', sortByTweetDate)
+		setBookmarksToShow([...sortBookmarksByTweetDate()])
+		console.log(sortBookmarksByTweetDate())
+	}, [sortByTweetDate])
 
 	const filterByTag = () => {
-		setShowLoader(true)
+		//setShowLoader(true)
 		// console.log('called')
 		let tempBookmarksToShow = []
 		bookmarks.forEach((bookmark) => {
@@ -48,11 +77,11 @@ const bookmarkCards = ({ archive }) => {
 				}
 			})
 		})
-		setShowLoader(false)
+		//setShowLoader(false)
 		return tempBookmarksToShow
 	}
 	const filterBySearchTerm = () => {
-		setShowLoader(true)
+		//setShowLoader(true)
 		let tempBookmarksToShow = []
 		let bookmarksFilteredByTag = filterByTag()
 		bookmarksFilteredByTag.map((bookmark) => {
@@ -64,13 +93,17 @@ const bookmarkCards = ({ archive }) => {
 				tempBookmarksToShow.push(bookmark)
 			}
 		})
-		setShowLoader(false)
+		//setShowLoader(false)
 		return tempBookmarksToShow
 	}
 
 	useEffect(() => {
 		const tempBookmarksToShow = filterByTag()
 		setBookmarksToShow([...tempBookmarksToShow])
+		const tempSortByTweetDate = localStorage?.getItem('sortByTweetDate')
+		setSortByTweetDate(tempSortByTweetDate)
+		const tempSortByDate = localStorage?.getItem('sortByDate')
+		setSortByDate(tempSortByDate)
 	}, [bookmarks, activeTag])
 
 	useEffect(() => {

@@ -28,6 +28,9 @@ app.register(require('./utils/controllers/authPlugin'))
 app.register(require('./routes/index'), {
 	prefix: '/',
 })
+app.register(require('./routes/utils'), {
+	prefix: '/utils',
+})
 app.register(require('./routes/auth'), {
 	prefix: '/auth',
 })

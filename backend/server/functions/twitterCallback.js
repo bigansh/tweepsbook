@@ -1,6 +1,7 @@
 require('dotenv').config()
 
-const twtrClient_o2 = require('../utils/auth/oauth2.0')
+const twtrClient_o2 = require('../utils/auth/oauth2.0'),
+	mixpanel = require('../utils/auth/mixpanelConnect')
 
 /**
  * @type {import('../utils/schemas/User').UserModel}
@@ -16,8 +17,15 @@ const twitterUserFinder = require('../functions/twitterUserFinder')
  * @param {String} codeVerifier
  * @param {String} state
  * @param {String} code
+ * @param {String} email
  */
-const twitterCallback = async (sessionState, codeVerifier, state, code) => {
+const twitterCallback = async (
+	sessionState,
+	codeVerifier,
+	state,
+	code,
+	email
+) => {
 	try {
 		if (!codeVerifier || !state || !sessionState || !code)
 			throw new Error('You denied the app or your session expired!')
@@ -32,7 +40,7 @@ const twitterCallback = async (sessionState, codeVerifier, state, code) => {
 		} = await twtrClient_o2.loginWithOAuth2({
 			code,
 			codeVerifier,
-			redirectUri: `${process.env.HOST}/auth/callback?callbackType=twitter`,
+			redirectUri: `${process.env.HOST}/auth/callback?callbackType=twitter&email=${email}`,
 		})
 
 		const { data: userObject } = await loggedClient.v2.me({
@@ -48,10 +56,15 @@ const twitterCallback = async (sessionState, codeVerifier, state, code) => {
 					accessToken: accessToken,
 					refreshToken: refreshToken,
 				},
+				// email: email,
 			}
 		)
 			.lean()
 			.exec()
+
+		// mixpanel.people.set(user.profile_id, {
+		// 	$email: email,
+		// })
 
 		return user
 	} catch (error) {
