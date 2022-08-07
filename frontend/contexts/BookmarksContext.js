@@ -7,8 +7,9 @@ const BookmarksProvider = ({ children }) => {
 	const [bookmarks, setBookmarks] = useState([])
 	const [activeTag, setActiveTag] = useState()
 	const [searchTerm, setSearchTerm] = useState('')
-	const [showLoader, setShowLoader] = useState(false)
-	const [sortByDate, setSortByDate] = useState(false)
+	const [showLoader, setShowLoader] = useState(true)
+	const [sortByDate, setSortByDate] = useState(null)
+	const [sortByTweetDate, setSortByTweetDate] = useState(null)
 	const [sortBySource, setSortBySource] = useState(false)
 	const stripHashtag = (text) => {
 		return text.replace('#', '')
@@ -33,16 +34,16 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			await fetchBookmarks()
-			setShowLoader(false)
+			// setShowLoader(false)
 			toast.success('Read status updated successfully')
 		} catch (err) {
-			setShowLoader(false)
+			// setShowLoader(false)
 			throw err
 		}
 	}
 	const updateShareStatus = async ({ id, currentStatus }) => {
 		try {
-			setShowLoader()
+			// setShowLoader()
 			const res = await axios.patch(
 				process.env.NEXT_PUBLIC_HOST +
 					`/crud/update?queryType=shareStatus`,
@@ -60,16 +61,16 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			await fetchBookmarks()
-			setShowLoader(false)
+			// setShowLoader(false)
 			toast.success('Share status updated successfully')
 		} catch (err) {
-			setShowLoader(false)
+			// setShowLoader(false)
 			throw err
 		}
 	}
 	const updateTags = async ({ id, tags }) => {
 		try {
-			setShowLoader()
+			// setShowLoader()
 			const res = await axios.patch(
 				process.env.NEXT_PUBLIC_HOST + `/crud/update?queryType=tags`,
 				{
@@ -87,16 +88,16 @@ const BookmarksProvider = ({ children }) => {
 			)
 			await fetchBookmarks()
 			await fetchTags()
-			setShowLoader(false)
+			// setShowLoader(false)
 			toast.success('Tags updated successfully')
 		} catch (err) {
-			setShowLoader(false)
+			// setShowLoader(false)
 			throw err
 		}
 	}
 	const importBookmarks = async () => {
 		try {
-			setShowLoader()
+			setShowLoader(true)
 			const bookmarks = await axios.post(
 				process.env.NEXT_PUBLIC_HOST + `/crud/create?queryType=twitter`,
 				{},
@@ -123,7 +124,7 @@ const BookmarksProvider = ({ children }) => {
 	}
 	const updateNotes = async ({ id, notes }) => {
 		try {
-			setShowLoader()
+			// setShowLoader()
 			const res = await axios.patch(
 				process.env.NEXT_PUBLIC_HOST + `/crud/update?queryType=notes`,
 				{
@@ -140,17 +141,17 @@ const BookmarksProvider = ({ children }) => {
 				}
 			)
 			fetchBookmarks()
-			setShowLoader(false)
+			// setShowLoader(false)
 			toast.success('Notes updated successfully')
 		} catch (err) {
-			setShowLoader(false)
+			// setShowLoader(false)
 			throw err
 		}
 	}
 
 	const fetchBookmarks = async () => {
 		try {
-			setShowLoader()
+			setShowLoader(true)
 			const bookmarks = await axios.get(
 				process.env.NEXT_PUBLIC_HOST + `/crud/read?queryType=bookmarks`,
 				{
@@ -191,14 +192,16 @@ const BookmarksProvider = ({ children }) => {
 			// console.log('be', bookmarks.data)
 			// setBookmarks(res.data)
 			setShowLoader(false)
+			console.log('loader false')
 		} catch (err) {
 			setShowLoader(false)
+			console.log('loader false')
 			throw err
 		}
 	}
 	const fetchBookmark = async ({ id }) => {
 		try {
-			setShowLoader()
+			// setShowLoader()
 			const bookmark = await axios.get(
 				process.env.NEXT_PUBLIC_HOST +
 					`/crud/read?queryType=bookmark&bookmarkId=` +
@@ -215,21 +218,21 @@ const BookmarksProvider = ({ children }) => {
 				ids: [bookmark?.data?.bookmark?.twitter_status_id],
 			})
 
-			setShowLoader(false)
+			// setShowLoader(false)
 			return {
 				backend: bookmark?.data?.bookmark,
 				twitter: res.data[0],
 				ownershipStatus: bookmark?.data?.ownershipStatus,
 			}
 		} catch (err) {
-			setShowLoader(false)
+			// setShowLoader(false)
 			toast.error('Error fetching bookmarks')
 			throw err
 		}
 	}
 	const fetchTags = async () => {
 		try {
-			setShowLoader()
+			// setShowLoader()
 			console.log('fetching tags', showLoader)
 			const res = await axios.get(
 				process.env.NEXT_PUBLIC_HOST + `/crud/read?queryType=tags`,
@@ -241,18 +244,18 @@ const BookmarksProvider = ({ children }) => {
 					},
 				}
 			)
-			setShowLoader(false)
+			// setShowLoader(false)
 			// toast.success('Tags fetched successfully')
 			return res.data
 		} catch (err) {
-			setShowLoader(false)
+			// setShowLoader(false)
 			toast.error('Error fetching tags')
 			throw err
 		}
 	}
 	const deleteBookmark = async (id) => {
 		try {
-			setShowLoader()
+			// setShowLoader()
 			const res = await axios.delete(
 				process.env.NEXT_PUBLIC_HOST +
 					`/crud/delete?queryType=bookmark`,
@@ -269,16 +272,16 @@ const BookmarksProvider = ({ children }) => {
 			)
 			console.log(res)
 			fetchBookmarks()
-			setShowLoader(false)
+			// setShowLoader(false)
 			toast.success('Bookmark deleted successfully')
 		} catch (err) {
-			setShowLoader(false)
+			// setShowLoader(false)
 			throw err
 		}
 	}
 	const deleteTag = async (tagId) => {
 		try {
-			setShowLoader()
+			// setShowLoader()
 			const res = await axios.delete(
 				process.env.NEXT_PUBLIC_HOST + `/crud/delete?queryType=tag`,
 				{
@@ -294,10 +297,10 @@ const BookmarksProvider = ({ children }) => {
 			)
 
 			await fetchBookmarks()
-			setShowLoader(false)
+			// setShowLoader(false)
 			toast.success('Tag deleted successfully')
 		} catch (err) {
-			setShowLoader(false)
+			// setShowLoader(false)
 			throw err
 		}
 	}
@@ -328,6 +331,8 @@ const BookmarksProvider = ({ children }) => {
 				sortBySource,
 				updateNotes,
 				stripHashtag,
+				sortByTweetDate,
+				setSortByTweetDate,
 			}}
 		>
 			{children}

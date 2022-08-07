@@ -9,7 +9,7 @@ const UserProvider = ({ children }) => {
 	const [user, setUser] = useState()
 	const getUser = async () => {
 		try {
-			setShowLoader(true)
+			//setShowLoader(true)
 			const res = await axios.get(
 				process.env.NEXT_PUBLIC_HOST + `/account/read`,
 				{
@@ -22,16 +22,16 @@ const UserProvider = ({ children }) => {
 			)
 			console.log(res.data)
 			setUser(res.data)
-			setShowLoader(false)
+			//setShowLoader(false)
 		} catch (err) {
-			setShowLoader(false)
+			//setShowLoader(false)
 			window.location.href = '/'
 			throw err
 		}
 	}
 	const updateUser = async (user) => {
 		try {
-			setShowLoader(true)
+			//setShowLoader(true)
 			const res = await axios.patch(
 				process.env.NEXT_PUBLIC_HOST +
 					`/account/update?queryType=accountDetails`,
@@ -46,15 +46,15 @@ const UserProvider = ({ children }) => {
 			)
 			console.log(res.data)
 			getUser()
-			setShowLoader(false)
+			//setShowLoader(false)
 		} catch (err) {
-			setShowLoader(false)
+			//setShowLoader(false)
 			throw err
 		}
 	}
 	const deleteUser = async () => {
 		try {
-			setShowLoader(true)
+			//setShowLoader(true)
 			const res = await axios.delete(
 				process.env.NEXT_PUBLIC_HOST + `/account/delete`,
 				{
@@ -69,11 +69,11 @@ const UserProvider = ({ children }) => {
 				}
 			)
 			console.log(res.data)
-			setShowLoader(false)
+			//setShowLoader(false)
 			localStorage.removeItem('sessionToken')
 			window?.location?.href = '/'
 		} catch (err) {
-			setShowLoader(false)
+			//setShowLoader(false)
 			
 			throw err
 		}
