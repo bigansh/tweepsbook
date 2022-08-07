@@ -1,14 +1,14 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { TwitterApi } from 'twitter-api-v2'
+// import { NextApiRequest, NextApiResponse } from 'next'
+// import { TwitterApi } from 'twitter-api-v2'
 
-const twtrClient = new TwitterApi(process.env.NEXT_PUBLIC_TWITTER_API_KEY)
+// const twtrClient = new TwitterApi(process.env.NEXT_PUBLIC_TWITTER_API_KEY)
 
-/**
- * A function that sends the realtime data for the the tweets.
- *
- * @param {NextApiRequest} req
- * @param {NextApiResponse}} res
- */
+// /**
+//  * A function that sends the realtime data for the the tweets.
+//  *
+//  * @param {NextApiRequest} req
+//  * @param {NextApiResponse}} res
+//  */
 export default async function fetchTweets(req, res) {
 	const resp = await getTweets(req.body.ids)
 	res.send(resp)
@@ -86,12 +86,12 @@ const getTweets = async (ids) => {
 				...tweet,
 				media:
 					tweet?.attachments?.media_keys?.map((key) =>
-						tweets.includes.media.find(
-							(media) => media.media_key === key
+						tweets?.includes?.media?.find(
+							(media) => media?.media_key === key
 						)
 					) || [],
 				referenced_tweets: getReferencedTweets(tweet),
-				author: getAuthorInfo(tweet.author_id),
+				author: getAuthorInfo(tweet?.author_id),
 			}
 
 			return [tweetWithAuthor, ...allTweets]
