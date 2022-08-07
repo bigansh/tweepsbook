@@ -34,6 +34,7 @@ const TagPill = ({ bookmark }) => {
 		const data = new FormData(e.target)
 		let tagName = data.get('tagName')
 		tagName = tagName.replace('#', '')
+		tagName = tagName.replace(' ', '_')
 		if (tagName === '') {
 			alert('Tag name cannot be empty')
 			returns
