@@ -25,6 +25,8 @@ const authEmail = async (email) => {
 			}
 		)
 
+		if (!response.data.success) throw new Error(response.data)
+
 		return response.data
 	} catch (error) {
 		throw error

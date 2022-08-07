@@ -1,5 +1,14 @@
-import axios from 'axios'
+import { NextApiRequest, NextApiResponse } from 'next'
+import { TwitterApi } from 'twitter-api-v2'
 
+const twtrClient = new TwitterApi(process.env.NEXT_PUBLIC_TWITTER_API_KEY)
+
+/**
+ * A function that sends the realtime data for the the tweets.
+ *
+ * @param {NextApiRequest} req
+ * @param {NextApiResponse}} res
+ */
 export default async function fetchTweets(req, res) {
 	const resp = await getTweets(req.body.ids)
 	res.send(resp)
@@ -12,6 +21,21 @@ const getTweets = async (ids) => {
 	if (ids.length === 0) {
 		return []
 	}
+
+	// const fetchedTweets = await twtrClient.v2.tweets(ids, {
+	// 	'media.fields': [
+	// 		'duration_ms,height,media_key,preview_image_url,type,url,width,public_metrics',
+	// 	],
+	// 	'user.fields': [
+	// 		'id,name,profile_image_url,protected,url,username,verified',
+	// 	],
+	// 	'tweet.fields': [
+	// 		'attachments,author_id,public_metrics,created_at,id,in_reply_to_user_id,referenced_tweets,text',
+	// 	],
+	// 	expansions: [
+	// 		'author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id',
+	// 	],
+	// })
 
 	const queryParams = new URLSearchParams({
 		ids: ids.join(','),
@@ -43,7 +67,7 @@ const getTweets = async (ids) => {
 	const getReferencedTweets = (mainTweet) => {
 		return (
 			mainTweet?.referenced_tweets?.map((referencedTweet) => {
-				const fullReferencedTweet = tweets.includes.tweets.find(
+				const fullReferencedTweet = tweets?.includes?.tweets?.find(
 					(tweet) => tweet.id === referencedTweet.id
 				)
 

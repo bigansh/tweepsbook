@@ -10,7 +10,7 @@ const Navbar = () => {
 	return (
 		<header className='border-b-2 border-lg-gray shadow-sm'>
 			<div className='md:mx-12 my-2 flex align-middle items-center'>
-				<div className='flex items-center self-center md:ml-10 ml-6'>
+				<div className='flex items-center self-center md:ml-10 ml-2'>
 					<Image
 						src={tweeps}
 						alt='Picture of the author'
