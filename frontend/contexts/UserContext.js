@@ -1,11 +1,13 @@
 import axios from 'axios'
+import { useRouter } from 'next/router'
+
 import { createContext, useState } from 'react'
 
 const UserContext = createContext()
 
 const UserProvider = ({ children }) => {
 	const [showLoader, setShowLoader] = useState(false)
-
+	const router = useRouter()
 	const [user, setUser] = useState()
 	const getUser = async () => {
 		try {
@@ -71,10 +73,11 @@ const UserProvider = ({ children }) => {
 			console.log(res.data)
 			//setShowLoader(false)
 			localStorage.removeItem('sessionToken')
-			window?.location?.href = '/'
+			router.push('/')
+			// router.push('/')
 		} catch (err) {
 			//setShowLoader(false)
-			
+
 			throw err
 		}
 	}
