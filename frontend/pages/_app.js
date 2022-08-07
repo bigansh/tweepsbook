@@ -21,7 +21,7 @@ const MyApp = ({ Component, pageProps }) => {
 					<link
 						rel='preconnect'
 						href='https://fonts.gstatic.com'
-						crossOrigin="true"
+						crossOrigin='true'
 					/>
 					<link
 						href='https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap'
@@ -48,7 +48,7 @@ const MyApp = ({ Component, pageProps }) => {
 						property='og:image'
 						content='https://i.postimg.cc/Qd2WknqK/Message-Header.png'
 					/>
-					<meta name="twitter:card" content="summary_large_image" />
+					<meta name='twitter:card' content='summary_large_image' />
 					<Script
 						async
 						src='https://www.googletagmanager.com/gtag/js?id=G-J0QPJQF85V'
@@ -85,7 +85,7 @@ const MyApp = ({ Component, pageProps }) => {
 					pauseOnFocusLoss
 					draggable
 					pauseOnHover
-					theme='dark'
+					theme='light'
 				/>
 				<Component {...pageProps} />
 			</UserProvider>
