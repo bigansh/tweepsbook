@@ -53,7 +53,7 @@ const privacy = () => {
 					}}
 				/>
 			</Head>
-			<div className=' bg-white shadow-md w-4/5 rounded p-32 overflow-y-scroll h-4/5'>
+			<div className='flex flex-col bg-white shadow-md w-4/5 rounded p-4 sm:p-32 overflow-y-scroll h-4/5'>
 				<h1 className='text-5xl text-[#004964] font-bold text-center mb-11 flex justify-between'>
 					<span className='opacity-0'>.</span>
 					Privacy Policy
@@ -65,7 +65,7 @@ const privacy = () => {
 						}}
 					/>
 				</h1>
-				<p className='text-xl text-gray-600 leading-8'>
+				<div className='text-xl text-gray-600 leading-8'>
 					At TweepsBook, accessible from https://tweepsbook.com, one
 					of our main priorities is the privacy of our visitors. This
 					Privacy Policy document contains types of information
@@ -232,7 +232,7 @@ const privacy = () => {
 					this kind of information on our website, we strongly
 					encourage you to contact us immediately, and we will do our
 					best to promptly remove such information from our records.
-				</p>
+				</div>
 			</div>
 		</div>
 	)
