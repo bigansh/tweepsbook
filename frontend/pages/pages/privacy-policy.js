@@ -54,11 +54,11 @@ const privacy = () => {
 				/>
 			</Head>
 			<div className='flex flex-col bg-white shadow-md w-4/5 rounded p-4 sm:p-32 overflow-y-scroll h-4/5'>
-				<h1 className='text-5xl text-[#004964] font-bold text-center mb-11 flex justify-between'>
+				<h1 className=' text-5xl text-[#004964] font-bold text-center mb-11 items-center flex justify-between'>
 					<span className='opacity-0'>.</span>
 					Privacy Policy
 					<AiOutlineClose
-						className='icon-grey cursor-pointer '
+						className='icon-grey cursor-pointer ml-2 '
 						size={30}
 						onClick={() => {
 							window.location.href = '/'
