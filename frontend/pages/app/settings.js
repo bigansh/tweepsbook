@@ -1,18 +1,19 @@
 import { useContext, useEffect, useState } from 'react'
+import Head from 'next/head'
+import Script from 'next/script'
 import { BiPencil } from 'react-icons/bi'
 import { UserContext } from '../../contexts/UserContext'
 import twitterIcon from '../../src/images/twitter_icon_blue.png'
-import Head from 'next/head'
-import Script from 'next/script'
 
 const Settings = () => {
 	const { user, setUser, getUser, updateUser, deleteUser } =
 		useContext(UserContext)
+
 	useEffect(() => {
 		getUser()
 	}, [])
-	const [showDeleteAccountConfirmation, setShowDeleteAccountConfirmation] =
-		useState(false)
+
+	const [showDeleteAccountConfirmation, setShowDeleteAccountConfirmation] = useState(false)
 	const enableInput = (id) => {
 		document.getElementById(id).disabled = false
 		document.getElementById(id).focus()
@@ -85,20 +86,20 @@ const Settings = () => {
 					}}
 				/>
 			</Head>
-			<div className='bg-[#F5F5F5] rounded flex flex-col py-10 px-10'>
-				<div className='grid grid-cols-3 gap-x-8 auto-rows-auto'>
-					<div className='bg-white p-4 flex flex-col items-center justify-center rounded-lg'>
-						<div className='w-32 h-32 '>
+			<div className='bg-[#FAFAFA] mt-16 sm:mt-0 rounded-lg py-10 px-10'>
+				<div className='grid grid-cols-1 sm:grid-cols-3 gap-x-8 auto-rows-auto'>
+					<div className='bg-white p-4 flex flex-col items-center border border-gray-200 justify-center rounded-lg'>
+						<div className='w-32 h-32'>
 							<img
 								src={user?.profile_image}
 								alt='User Profile Image'
 								className='w-full h-full rounded-full'
 							/>
 						</div>
-						<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center w-full'>
+						<div className='relative flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center w-full'>
 							<input
 								type='text'
-								className=' bg-[#FAFAFA] text-sm text-[#666666] p-2'
+								className='bg-[#] text-sm text-[#666666] p-2 w-full'
 								placeholder={'Your Name'}
 								defaultValue={user?.name}
 								disabled={true}
@@ -110,16 +111,16 @@ const Settings = () => {
 								onBlur={() => disableInput('userName')}
 							/>
 							<BiPencil
-								className='icon-light-grey cursor-pointer'
+								className='absolute right-5 icon-light-grey cursor-pointer'
 								onClick={() => {
 									enableInput('userName')
 								}}
 							/>
 						</div>
-						<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center w-full'>
+						<div className='relative flex bg-[#FAFAFA] p-3 rounded-md border border-gray mt-5 items-center w-full'>
 							<input
 								type='text'
-								className=' bg-[#FAFAFA] text-sm text-[#666666] p-2'
+								className='bg-[#FAFAFA] text-sm text-[#666666] p-2 w-full'
 								placeholder={'Your Email'}
 								defaultValue={user?.email}
 								disabled={true}
@@ -131,7 +132,7 @@ const Settings = () => {
 								onBlur={() => disableInput('userEmail')}
 							/>
 							<BiPencil
-								className='icon-light-grey cursor-pointer'
+								className='absolute right-5 icon-light-grey cursor-pointer'
 								onClick={() => enableInput('userEmail')}
 							/>
 						</div>
@@ -139,15 +140,15 @@ const Settings = () => {
 							UID-{user?._id}
 						</span> */}
 					</div>
-					<div className='flex flex-col justify-between col-span-2'>
-						<div className='bg-white p-4 mb-4 flex flex-col items-start justify-center w-full rounded-lg'>
+					<div className='flex flex-col justify-between col-span-1 sm:col-span-2 mt-4 sm:mt-0'>
+						<div className='bg-white p-4 mb-4 flex flex-col items-start justify-center w-full rounded-lg border border-gray-200'>
 							<p className='text-[16px] font-semibold text-[#666666]'>
 								Workspace Settings
 							</p>
-							<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 w-1/2 justify-between items-center'>
+							<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 w-full sm:w-1/2 justify-between items-center'>
 								<input
 									type='text'
-									className=' bg-[#FAFAFA] text-sm text-[#666666] p-2'
+									className=' bg-[#FAFAFA] text-sm text-[#666666] p-2 w-full'
 									placeholder={'Unread Count'}
 									defaultValue={user?.unreadCount}
 									disabled={true}
@@ -164,7 +165,7 @@ const Settings = () => {
 								/>
 							</div>
 						</div>
-						<div className='bg-white p-4 mb-4 flex flex-col items-start justify-center w-full rounded-lg'>
+						<div className='bg-white p-4 mb-4 flex flex-col items-start justify-center w-full rounded-lg border border-gray-200'>
 							<p className='text-[16px] font-semibold text-[#666666]'>
 								Connected Apps
 							</p>
@@ -173,11 +174,11 @@ const Settings = () => {
 								TweepsBook integration
 							</p>
 							<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 w-1/2 justify-start items-center'>
-								<img src={twitterIcon.src} alt='' />
+								<img src={twitterIcon.src} alt='Twitter' />
 								Twitter
 							</div>
 						</div>
-						<div className='bg-white p-4 flex  items-center justify-between w-full rounded-lg'>
+						<div className='bg-white p-4 flex items-center justify-between w-full rounded-lg border border-gray-200'>
 							<div className='flex flex-col'>
 								<p className='text-[16px] font-semibold text-[#666666]'>
 									Account Removal
