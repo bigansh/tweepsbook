@@ -4,6 +4,7 @@ import Script from 'next/script'
 import { BiPencil } from 'react-icons/bi'
 import { UserContext } from '../../contexts/UserContext'
 import twitterIcon from '../../src/images/twitter_icon_blue.png'
+import Image from 'next/image'
 
 const Settings = () => {
 	const { user, setUser, getUser, updateUser, deleteUser } =
@@ -13,7 +14,8 @@ const Settings = () => {
 		getUser()
 	}, [])
 
-	const [showDeleteAccountConfirmation, setShowDeleteAccountConfirmation] = useState(false)
+	const [showDeleteAccountConfirmation, setShowDeleteAccountConfirmation] =
+		useState(false)
 	const enableInput = (id) => {
 		document.getElementById(id).disabled = false
 		document.getElementById(id).focus()
@@ -89,12 +91,16 @@ const Settings = () => {
 			<div className='bg-[#FAFAFA] mt-16 sm:mt-0 rounded-lg py-10 px-10'>
 				<div className='grid grid-cols-1 sm:grid-cols-3 gap-x-8 auto-rows-auto'>
 					<div className='bg-white p-4 flex flex-col items-center border border-gray-200 justify-center rounded-lg'>
-						<div className='w-32 h-32'>
-							<img
-								src={user?.profile_image}
-								alt='User Profile Image'
-								className='w-full h-full rounded-full'
-							/>
+						<div>
+							{user?.profile_image ? (
+								<img
+									src={user?.profile_image}
+									alt='User Profile'
+									className='w-32 h-32 rounded-full'
+								/>
+							) : (
+								<div className='w-32 h-32 animate-pulse rounded-full bg-gray-200' />
+							)}
 						</div>
 						<div className='relative flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center w-full'>
 							<input
@@ -185,8 +191,8 @@ const Settings = () => {
 								</p>
 								<p className='text-[12px]  text-[#666666]'>
 									Deleting your account will remove all your
-									bookmarks & cannot be restored.
-									Please be certain.
+									bookmarks & cannot be restored. Please be
+									certain.
 								</p>
 							</div>
 							<button
