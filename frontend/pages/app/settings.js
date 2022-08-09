@@ -1,16 +1,19 @@
 import { useContext, useEffect, useState } from 'react'
+import Head from 'next/head'
+import Script from 'next/script'
 import { BiPencil } from 'react-icons/bi'
 import { UserContext } from '../../contexts/UserContext'
 import twitterIcon from '../../src/images/twitter_icon_blue.png'
-import Head from 'next/head'
-import Script from 'next/script'
+import Image from 'next/image'
 
 const Settings = () => {
 	const { user, setUser, getUser, updateUser, deleteUser } =
 		useContext(UserContext)
+
 	useEffect(() => {
 		getUser()
 	}, [])
+
 	const [showDeleteAccountConfirmation, setShowDeleteAccountConfirmation] =
 		useState(false)
 	const enableInput = (id) => {
@@ -85,20 +88,24 @@ const Settings = () => {
 					}}
 				/>
 			</Head>
-			<div className='bg-[#F5F5F5] rounded flex flex-col py-10 px-10'>
-				<div className='grid grid-cols-3 gap-x-8 auto-rows-auto'>
-					<div className='bg-white p-4 flex flex-col items-center justify-center rounded-lg'>
-						<div className='w-32 h-32 '>
-							<img
-								src={user?.profile_image}
-								alt='User Profile Image'
-								className='w-full h-full rounded-full'
-							/>
+			<div className='bg-[#FAFAFA] mt-16 sm:mt-0 rounded-lg py-10 px-10'>
+				<div className='grid grid-cols-1 sm:grid-cols-3 gap-x-8 auto-rows-auto'>
+					<div className='bg-white p-4 flex flex-col items-center border border-gray-200 justify-center rounded-lg'>
+						<div>
+							{user?.profile_image ? (
+								<img
+									src={user?.profile_image}
+									alt='User Profile'
+									className='w-32 h-32 rounded-full'
+								/>
+							) : (
+								<div className='w-32 h-32 animate-pulse rounded-full bg-gray-200' />
+							)}
 						</div>
-						<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center w-full'>
+						<div className='relative flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center w-full'>
 							<input
 								type='text'
-								className=' bg-[#FAFAFA] text-sm text-[#666666] p-2'
+								className='bg-[#] text-sm text-[#666666] p-2 w-full'
 								placeholder={'Your Name'}
 								defaultValue={user?.name}
 								disabled={true}
@@ -110,16 +117,16 @@ const Settings = () => {
 								onBlur={() => disableInput('userName')}
 							/>
 							<BiPencil
-								className='icon-light-grey cursor-pointer'
+								className='absolute right-5 icon-light-grey cursor-pointer'
 								onClick={() => {
 									enableInput('userName')
 								}}
 							/>
 						</div>
-						<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 items-center w-full'>
+						<div className='relative flex bg-[#FAFAFA] p-3 rounded-md border border-gray mt-5 items-center w-full'>
 							<input
 								type='text'
-								className=' bg-[#FAFAFA] text-sm text-[#666666] p-2'
+								className='bg-[#FAFAFA] text-sm text-[#666666] p-2 w-full'
 								placeholder={'Your Email'}
 								defaultValue={user?.email}
 								disabled={true}
@@ -131,7 +138,7 @@ const Settings = () => {
 								onBlur={() => disableInput('userEmail')}
 							/>
 							<BiPencil
-								className='icon-light-grey cursor-pointer'
+								className='absolute right-5 icon-light-grey cursor-pointer'
 								onClick={() => enableInput('userEmail')}
 							/>
 						</div>
@@ -139,15 +146,15 @@ const Settings = () => {
 							UID-{user?._id}
 						</span> */}
 					</div>
-					<div className='flex flex-col justify-between col-span-2'>
-						<div className='bg-white p-4 mb-4 flex flex-col items-start justify-center w-full rounded-lg'>
+					<div className='flex flex-col justify-between col-span-1 sm:col-span-2 mt-4 sm:mt-0'>
+						<div className='bg-white p-4 mb-4 flex flex-col items-start justify-center w-full rounded-lg border border-gray-200'>
 							<p className='text-[16px] font-semibold text-[#666666]'>
 								Workspace Settings
 							</p>
-							<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 w-1/2 justify-between items-center'>
+							<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 w-full sm:w-1/2 justify-between items-center'>
 								<input
 									type='text'
-									className=' bg-[#FAFAFA] text-sm text-[#666666] p-2'
+									className=' bg-[#FAFAFA] text-sm text-[#666666] p-2 w-full'
 									placeholder={'Unread Count'}
 									defaultValue={user?.unreadCount}
 									disabled={true}
@@ -164,7 +171,7 @@ const Settings = () => {
 								/>
 							</div>
 						</div>
-						<div className='bg-white p-4 mb-4 flex flex-col items-start justify-center w-full rounded-lg'>
+						<div className='bg-white p-4 mb-4 flex flex-col items-start justify-center w-full rounded-lg border border-gray-200'>
 							<p className='text-[16px] font-semibold text-[#666666]'>
 								Connected Apps
 							</p>
@@ -173,22 +180,23 @@ const Settings = () => {
 								TweepsBook integration
 							</p>
 							<div className='flex bg-[#FAFAFA] p-3 rounded-md border border-lg-gray mt-5 w-1/2 justify-start items-center'>
-								<img src={twitterIcon.src} alt='' />
+								<img src={twitterIcon.src} alt='Twitter' />
 								Twitter
 							</div>
 						</div>
-						<div className='bg-white p-4 flex  items-center justify-between w-full rounded-lg'>
-							<div className='flex flex-col'>
+						<div className='bg-white p-4 flex flex-row gap-x-2 items-center justify-between w-full rounded-lg border border-gray-200'>
+							<div className='flex flex-col max-w-sm'>
 								<p className='text-[16px] font-semibold text-[#666666]'>
 									Account Removal
 								</p>
 								<p className='text-[12px]  text-[#666666]'>
 									Deleting your account will remove all your
-									bookmarks & cannot be restored.
+									bookmarks & cannot be restored. Please be
+									certain.
 								</p>
 							</div>
 							<button
-								className='text-white text-sm py-2 mx-2 px-4 rounded-lg border-[#B00020] border-2 bg-[#B00020] font-semibold'
+								className='text-red-600 hover:text-white text-sm py-2 mx-2 px-4 rounded-lg bg-white hover:bg-red-600 active:bg-red-500 border-2 border-red-600 font-semibold transition duration-150'
 								onClick={() =>
 									setShowDeleteAccountConfirmation(true)
 								}
@@ -216,14 +224,14 @@ const Settings = () => {
 				</div>
 			</div>
 			{showDeleteAccountConfirmation && (
-				<div className='w-full h-full absolute top-0 left-0 bg-sh-gray bg-opacity-80 z-50 flex items-center justify-center'>
-					<div className='bg-white p-4 flex flex-col items-center justify-center w-120 rounded-lg'>
+				<div className='w-full h-full absolute right-0 left-0 px-4 bg-sh-gray bg-opacity-80 z-50 flex items-center justify-center'>
+					<div className='bg-white p-6 flex flex-col items-center justify-center rounded-lg'>
 						<p className='text-[16px] font-semibold text-[#666666] mb-6'>
 							Are your sure you want to delete your account?
 						</p>
-						<div className='flex '>
+						<div className='inline-flex gap-x-4'>
 							<button
-								className='text-white text-sm py-2 mx-2 px-4 rounded-lg border-[#03b000] border-2 bg-[#03b000] font-semibold'
+								className='text-white text-sm py-2 px-6 rounded-lg bg-[#03b000] hover:shadow-lg active:bg-green-500 font-semibold'
 								onClick={() =>
 									setShowDeleteAccountConfirmation(false)
 								}
@@ -231,7 +239,7 @@ const Settings = () => {
 								Cancel
 							</button>
 							<button
-								className='text-white text-sm py-2 mx-2 px-4 rounded-lg border-[#B00020] border-2 bg-[#B00020] font-semibold'
+								className='text-red-600 hover:text-white text-sm py-2 mx-2 px-4 hover:shadow-lg rounded-lg bg-white hover:bg-red-600 active:bg-red-500 border-2 border-red-600 font-semibold transition duration-150'
 								onClick={() => deleteUser()}
 							>
 								Delete Account
