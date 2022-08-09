@@ -1,4 +1,9 @@
 import { useEffect, useState, useContext, useRef } from 'react'
+import Head from 'next/head'
+import Script from 'next/script'
+import { Router, useRouter } from 'next/router'
+import Lottie from 'react-lottie-player'
+import { BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs'
 import { AiOutlineDown } from 'react-icons/ai'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import Tags from '../../src/components/Tags'
@@ -6,14 +11,10 @@ import BookmarkCards from '../../src/components/BookmarkCards'
 import DashNavbar from '../../src/components/DashNavbar'
 import MobileBar from '../../src/components/MobileBar'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
-import { Router, useRouter } from 'next/router'
 import Settings from './settings'
 import { UserContext } from '../../contexts/UserContext'
-import { BsArrowDownShort, BsArrowUpShort } from 'react-icons/bs'
-import Head from 'next/head'
-import Script from 'next/script'
 import Loader from '../../src/components/loader.json'
-import Lottie from 'react-lottie-player'
+
 export default function dashboard({ children }) {
 	const router = useRouter()
 	const sortMenuRef = useRef(null)
@@ -169,14 +170,14 @@ export default function dashboard({ children }) {
 										className='flex text-xs h-8 items-center px-4 py-2 justify-around opacity-100 border border-hover-blue rounded-full hover:bg-white'
 										onClick={() => setSortMenu(!sortMenu)}
 									>
-										Sort Bys{' '}
+										Sort By{' '}
 										<AiOutlineDown className='ml-2' />
 									</button>
 									{sortMenu && (
-										<div className='absolute text-sm flex flex-col top-[180px] drop-shadow-xl rounded-md p-1 z-10 bg-white'>
+										<div className='absolute text-sm flex flex-col top-[180px] right-10 drop-shadow-xl rounded-md p-1 z-10 bg-white'>
 											<button
 												className={
-													'flex p-2 w-[100px] items-center hover:bg-gray-50 rounded ' +
+													'flex p-2 items-center hover:bg-gray-50 rounded ' +
 													(sortByDate !== null &&
 													!sortByDate
 														? 'bg-gray-100'
@@ -201,7 +202,7 @@ export default function dashboard({ children }) {
 											</button>
 											<button
 												className={
-													'flex p-2 w-[100px] items-center hover:bg-gray-50 rounded  ' +
+													'flex p-2 items-center hover:bg-gray-50 rounded' +
 													(sortByDate !== null &&
 													sortByDate
 														? 'bg-gray-100'
@@ -226,7 +227,7 @@ export default function dashboard({ children }) {
 											</button>
 											<button
 												className={
-													'flex p-2 w-[100px] items-center hover:bg-gray-50 rounded ' +
+													'flex p-2 items-center hover:bg-gray-50 rounded ' +
 													(sortByTweetDate !== null &&
 													!sortByTweetDate
 														? 'bg-gray-100'
@@ -251,7 +252,7 @@ export default function dashboard({ children }) {
 											</button>
 											<button
 												className={
-													'flex p-2 w-[100px] items-center hover:bg-gray-50 rounded ' +
+													'flex p-2 items-center hover:bg-gray-50 rounded ' +
 													(sortByTweetDate !== null &&
 													sortByTweetDate
 														? 'bg-gray-100'
