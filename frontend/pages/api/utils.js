@@ -1,6 +1,8 @@
 // import { NextApiRequest, NextApiResponse } from 'next'
 // import { TwitterApi } from 'twitter-api-v2'
 
+import axios from 'axios'
+
 // const twtrClient = new TwitterApi(process.env.NEXT_PUBLIC_TWITTER_API_KEY)
 
 // /**
@@ -49,7 +51,7 @@ const getTweets = async (ids) => {
 			'duration_ms,height,media_key,preview_image_url,type,url,width,public_metrics',
 	})
 
-	const response = await fetch(
+	const response = await axios.get(
 		`https://api.twitter.com/2/tweets?${queryParams}`,
 		{
 			headers: {
@@ -57,8 +59,8 @@ const getTweets = async (ids) => {
 			},
 		}
 	)
-
-	const tweets = await response.json()
+	console.log(response.data)
+	const tweets = await response.data
 
 	const getAuthorInfo = (author_id) => {
 		return tweets.includes.users.find((user) => user.id === author_id)
