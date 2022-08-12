@@ -12,6 +12,7 @@ const callback = () => {
 				console.log('setSessionToken')
 				query.sessionToken &&
 					localStorage.setItem('sessionToken', query.sessionToken)
+				console.log('st', localStorage.getItem('sessionToken'))
 			}
 			await new Promise((resolve) => {
 				setSessionToken()
@@ -20,6 +21,7 @@ const callback = () => {
 			})
 
 			try {
+				console.log('try', localStorage.getItem('sessionToken'))
 				console.log('getting user')
 				await getUser()
 				query.sessionToken && router.push('/app/dashboard')
