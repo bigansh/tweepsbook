@@ -8,12 +8,14 @@ const callback = () => {
 	const { getUser } = useContext(UserContext)
 	useEffect(() => {
 		const handleLogin = async () => {
+			const setSessionToken = () => {
+				query.sessionToken &&
+					localStorage.setItem('sessionToken', query.sessionToken)
+			}
 			await new Promise((resolve) => {
 				setTimeout(() => {
-					console.log('resolving')
-					query.sessionToken &&
-						localStorage.setItem('sessionToken', query.sessionToken)
-					resolve()
+					resolve
+					setSessionToken()
 				}, 500)
 			})
 
