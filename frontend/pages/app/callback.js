@@ -14,8 +14,9 @@ const callback = () => {
 			}
 			await new Promise((resolve) => {
 				setTimeout(() => {
-					resolve
 					setSessionToken()
+					console.log('done')
+					resolve
 				}, 500)
 			})
 
