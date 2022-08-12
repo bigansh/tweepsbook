@@ -79,7 +79,10 @@ export default function dashboard({ children }) {
 		window.addEventListener('resize', handleResize)
 	})
 	useEffect(() => {
-		user?.importCount?.twitter === 0 && importBookmarks()
+		const importOnFirstLogin = async () => {
+			user?.importCount?.twitter === 0 && (await importBookmarks())
+		}
+		importOnFirstLogin()
 	}, [user])
 	useEffect(() => {
 		console.log({ showLoader })

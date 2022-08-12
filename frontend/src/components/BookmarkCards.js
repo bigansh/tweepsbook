@@ -23,7 +23,7 @@ const bookmarkCards = ({ archive }) => {
 			return []
 		}
 		console.log(bookmarks)
-		return bookmarks.sort((a, b) => {
+		return bookmarksToShow.sort((a, b) => {
 			return sortByDate
 				? new Date(b.backend.createdAt) - new Date(a.backend.createdAt)
 				: new Date(a.backend.createdAt) - new Date(b.backend.createdAt)
@@ -33,7 +33,7 @@ const bookmarkCards = ({ archive }) => {
 		if (sortBookmarksByDate === null) {
 			return []
 		}
-		return bookmarks.sort((a, b) => {
+		return bookmarksToShow.sort((a, b) => {
 			return sortByTweetDate
 				? new Date(b.twitter.created_at) -
 						new Date(a.twitter.created_at)
@@ -51,6 +51,7 @@ const bookmarkCards = ({ archive }) => {
 		setBookmarksToShow([...sortBookmarksByDate()])
 		console.log(sortBookmarksByDate())
 	}, [sortByDate])
+
 	useEffect(() => {
 		console.log('sorting by tweet date', sortByTweetDate)
 		setBookmarksToShow([...sortBookmarksByTweetDate()])
