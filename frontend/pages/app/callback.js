@@ -8,9 +8,17 @@ const callback = () => {
 	const { getUser } = useContext(UserContext)
 	useEffect(() => {
 		const handleLogin = async () => {
-			query.sessionToken &&
-				localStorage.setItem('sessionToken', query.sessionToken)
+			await new Promise((resolve) => {
+				setTimeout(() => {
+					console.log('resolving')
+					query.sessionToken &&
+						localStorage.setItem('sessionToken', query.sessionToken)
+					resolve()
+				}, 500)
+			})
+
 			try {
+				console.log('getting user')
 				await getUser()
 				query.sessionToken && router.push('/app/dashboard')
 			} catch (err) {
