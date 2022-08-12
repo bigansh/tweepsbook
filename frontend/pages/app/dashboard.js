@@ -52,19 +52,24 @@ export default function dashboard({ children }) {
 		setSortBySource,
 		stripHashtag,
 		showLoader,
+		setShowLoader,
 	} = useContext(BookmarksContext)
 
 	useEffect(() => {
+		// setShowLoader(true)
 		const verifyUser = async () => {
 			try {
+				setShowLoader(true)
 				await getUser()
+				await fetchBookmarks()
+				setActiveTag(JSON.parse(localStorage.getItem('activeTag')))
+				setShowLoader(false)
 			} catch (err) {
 				router.push('/')
 			}
 		}
 		verifyUser()
-		fetchBookmarks()
-		setActiveTag(JSON.parse(localStorage.getItem('activeTag')))
+		// setShowLoader(false)
 	}, [])
 
 	const [width, setWidth] = useState(1200) // default width, detect on server.
@@ -74,7 +79,7 @@ export default function dashboard({ children }) {
 		window.addEventListener('resize', handleResize)
 	})
 	useEffect(() => {
-		user?.importCount?.twitter?.length === 0 && importBookmarks()
+		user?.importCount?.twitter === 0 && importBookmarks()
 	}, [user])
 	useEffect(() => {
 		console.log({ showLoader })

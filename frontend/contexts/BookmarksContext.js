@@ -151,7 +151,7 @@ const BookmarksProvider = ({ children }) => {
 
 	const fetchBookmarks = async () => {
 		try {
-			setShowLoader(true)
+			// setShowLoader(true)
 			const bookmarks = await axios.get(
 				process.env.NEXT_PUBLIC_HOST + `/crud/read?queryType=bookmarks`,
 				{
@@ -191,7 +191,7 @@ const BookmarksProvider = ({ children }) => {
 			// console.log('twt', res.data)
 			// console.log('be', bookmarks.data)
 			// setBookmarks(res.data)
-			setShowLoader(false)
+			// setShowLoader(false)
 			console.log('loader false')
 		} catch (err) {
 			setShowLoader(false)
