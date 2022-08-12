@@ -17,7 +17,7 @@ const callback = () => {
 				setTimeout(() => {
 					setSessionToken()
 					console.log('done')
-					resolve
+					resolve()
 				}, 500)
 			})
 
