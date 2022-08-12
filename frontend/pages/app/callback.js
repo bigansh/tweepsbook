@@ -14,11 +14,9 @@ const callback = () => {
 					localStorage.setItem('sessionToken', query.sessionToken)
 			}
 			await new Promise((resolve) => {
-				setTimeout(() => {
-					setSessionToken()
-					console.log('done')
-					resolve()
-				}, 500)
+				setSessionToken()
+				console.log('done')
+				setTimeout(resolve, 500)
 			})
 
 			try {
