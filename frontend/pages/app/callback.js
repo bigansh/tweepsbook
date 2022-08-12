@@ -9,6 +9,7 @@ const callback = () => {
 	useEffect(() => {
 		const handleLogin = async () => {
 			const setSessionToken = () => {
+				console.log('setSessionToken')
 				query.sessionToken &&
 					localStorage.setItem('sessionToken', query.sessionToken)
 			}
