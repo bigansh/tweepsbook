@@ -80,7 +80,7 @@ export default function dashboard({ children }) {
 	})
 	useEffect(() => {
 		const importOnFirstLogin = async () => {
-			user?.importCount?.twitter === 0 && (await importBookmarks())
+			// user?.importCount?.twitter === 0 && (await importBookmarks())
 		}
 		importOnFirstLogin()
 	}, [user])
