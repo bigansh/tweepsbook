@@ -19,7 +19,7 @@ export default function dashboard({ children }) {
 	const router = useRouter()
 	const sortMenuRef = useRef(null)
 	const filterMenuRef = useRef(null)
-
+	const [showImportModal, setShowImportModal] = useState(false)
 	const { user, setUser, getUser } = useContext(UserContext)
 
 	const [sortMenu, setSortMenu] = useState(false)
@@ -78,10 +78,13 @@ export default function dashboard({ children }) {
 	useEffect(() => {
 		window.addEventListener('resize', handleResize)
 	})
+	const handleFirstImport = async () => {
+		setShowImportModal(false)
+		await importBookmarks()
+	}
 	useEffect(() => {
-		console.log('user', user)
 		const importOnFirstLogin = async () => {
-			// user?.importCount?.twitter === 0 && (await importBookmarks())
+			user?.importCount?.twitter === 0 && setShowImportModal(true)
 		}
 		importOnFirstLogin()
 	}, [user])
@@ -314,6 +317,24 @@ export default function dashboard({ children }) {
 
 						{/* Bookmarks */}
 						<div className='overflow-y-scroll'>
+							{showImportModal && (
+								<div className='w-full h-full flex justify-center items-center'>
+									<div className='border-2 rounded-lg flex flex-col p-4 items-center'>
+										<span className='text-center text-lg'>
+											You don't have any bookmarks to
+											read.
+											<br /> Import some from your
+											twitter.
+										</span>
+										<button
+											onClick={handleFirstImport}
+											className='text-[16px] flex m-2 mx-4 bg-dark-blue hover:bg-hover-blue active:bg-dark-blue shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-100 text-white py-3 px-5 rounded-xl items-center w-[14rem] sm:w-[15rem] sm:h-[3rem] justify-center'
+										>
+											Import Bookmarks
+										</button>
+									</div>
+								</div>
+							)}
 							{children || <BookmarkCards />}
 						</div>
 					</div>
