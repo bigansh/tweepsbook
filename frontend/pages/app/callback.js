@@ -7,15 +7,30 @@ const callback = () => {
 	const query = router.query
 	const { getUser } = useContext(UserContext)
 	useEffect(() => {
-		query.sessionToken &&
-			localStorage.setItem('sessionToken', query.sessionToken)
-		try {
-			getUser()
-			query.sessionToken && router.push('/app/dashboard')
-		} catch (err) {
-			console.log(err)
-			router.push('/')
+		const handleLogin = async () => {
+			const setSessionToken = () => {
+				console.log('setSessionToken')
+				query.sessionToken &&
+					localStorage.setItem('sessionToken', query.sessionToken)
+				console.log('st', localStorage.getItem('sessionToken'))
+			}
+			await new Promise((resolve) => {
+				setSessionToken()
+				console.log('done')
+				setTimeout(resolve, 500)
+			})
+
+			try {
+				console.log('try', localStorage.getItem('sessionToken'))
+				console.log('getting user')
+				await getUser()
+				query.sessionToken && router.push('/app/dashboard')
+			} catch (err) {
+				console.log(err)
+				router.push('/')
+			}
 		}
+		handleLogin()
 	}, [query])
 
 	return <div>Redirecting...</div>

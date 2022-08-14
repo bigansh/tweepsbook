@@ -11,6 +11,7 @@ const UserProvider = ({ children }) => {
 	const [user, setUser] = useState()
 	const getUser = async () => {
 		try {
+			console.log('getting user called')
 			//setShowLoader(true)
 			const res = await axios.get(
 				process.env.NEXT_PUBLIC_HOST + `/account/read`,
@@ -22,7 +23,7 @@ const UserProvider = ({ children }) => {
 					},
 				}
 			)
-			console.log(res.data)
+			// console.log(res.data)
 			setUser(res.data)
 			//setShowLoader(false)
 		} catch (err) {
@@ -46,7 +47,7 @@ const UserProvider = ({ children }) => {
 					},
 				}
 			)
-			console.log(res.data)
+			// console.log(res.data)
 			getUser()
 			//setShowLoader(false)
 		} catch (err) {
@@ -70,7 +71,7 @@ const UserProvider = ({ children }) => {
 					},
 				}
 			)
-			console.log(res.data)
+			// console.log(res.data)
 			//setShowLoader(false)
 			localStorage.removeItem('sessionToken')
 			router.push('/')
