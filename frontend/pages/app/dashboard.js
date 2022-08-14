@@ -324,7 +324,7 @@ export default function dashboard({ children }) {
 											You don't have any bookmarks to
 											read.
 											<br /> Import some from your
-											twitter.
+											Twitter.
 										</span>
 										<button
 											onClick={handleFirstImport}
