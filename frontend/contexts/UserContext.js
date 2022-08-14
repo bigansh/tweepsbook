@@ -11,6 +11,7 @@ const UserProvider = ({ children }) => {
 	const [user, setUser] = useState()
 	const getUser = async () => {
 		try {
+			console.log('getting user called')
 			//setShowLoader(true)
 			const res = await axios.get(
 				process.env.NEXT_PUBLIC_HOST + `/account/read`,
