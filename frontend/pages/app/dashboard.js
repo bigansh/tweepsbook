@@ -79,6 +79,7 @@ export default function dashboard({ children }) {
 		window.addEventListener('resize', handleResize)
 	})
 	useEffect(() => {
+		console.log('user', user)
 		const importOnFirstLogin = async () => {
 			// user?.importCount?.twitter === 0 && (await importBookmarks())
 		}

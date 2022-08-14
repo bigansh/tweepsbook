@@ -97,6 +97,7 @@ const BookmarksProvider = ({ children }) => {
 	}
 	const importBookmarks = async () => {
 		try {
+			console.log('importing bookmarks')
 			setShowLoader(true)
 			const bookmarks = await axios.post(
 				process.env.NEXT_PUBLIC_HOST + `/crud/create?queryType=twitter`,
