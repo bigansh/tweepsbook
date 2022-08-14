@@ -22,7 +22,7 @@ const UserProvider = ({ children }) => {
 					},
 				}
 			)
-			console.log(res.data)
+			// console.log(res.data)
 			setUser(res.data)
 			//setShowLoader(false)
 		} catch (err) {
@@ -46,7 +46,7 @@ const UserProvider = ({ children }) => {
 					},
 				}
 			)
-			console.log(res.data)
+			// console.log(res.data)
 			getUser()
 			//setShowLoader(false)
 		} catch (err) {
@@ -70,7 +70,7 @@ const UserProvider = ({ children }) => {
 					},
 				}
 			)
-			console.log(res.data)
+			// console.log(res.data)
 			//setShowLoader(false)
 			localStorage.removeItem('sessionToken')
 			router.push('/')
