@@ -3,6 +3,7 @@ import { IoMdExit } from 'react-icons/io'
 import { FiSettings } from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
 import { AiOutlineUp } from 'react-icons/ai'
+import { AiOutlineMessage } from 'react-icons/ai'
 
 import TweepsBookIcon from './Icon'
 import SearchBar from './SearchBar'
@@ -41,13 +42,7 @@ const DashNavbar = ({ search }) => {
 
 				{menuActive && (
 					<div className='absolute top-[100%] right-4 drop-shadow-xl rounded-md p-1.5 border z-10 bg-white w-36'>
-						<button
-							className='flex items-center mb-1 px-2 py-2 rounded text-sm w-full  hover:bg-gray-100 transition-all duration-100'
-							onClick={Logout}
-						>
-							<IoMdExit className='text-xl mr-4' />
-							Logout
-						</button>
+						
 						<button
 							className='flex items-center px-2 py-2 rounded text-sm w-full  hover:bg-gray-100 transition-all duration-100'
 							onClick={() =>
@@ -56,6 +51,20 @@ const DashNavbar = ({ search }) => {
 						>
 							<FiSettings className='text-xl mr-4' />
 							Settings
+						</button>
+                                                <button
+							className='flex items-center mb-1 px-2 py-2 rounded text-sm w-full  hover:bg-gray-100 transition-all duration-100'
+							
+						>
+							<AiOutlineMessage className='text-xl mr-4' />
+							 Send Feedback
+						</button>
+                                                <button
+							className='flex items-center mb-1 px-2 py-2 rounded text-sm w-full  hover:bg-gray-100 transition-all duration-100'
+							onClick={Logout}
+						>
+							<IoMdExit className='text-xl mr-4' />
+							Logout
 						</button>
 					</div>
 				)}
