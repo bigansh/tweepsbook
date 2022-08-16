@@ -94,7 +94,7 @@ const Settings = () => {
 						<div>
 							{user?.profile_image ? (
 								<img
-									src={user?.profile_image}
+									src={user?.profile_image_400x400}
 									alt='User Profile'
 									className='w-32 h-32 rounded-full'
 								/>
