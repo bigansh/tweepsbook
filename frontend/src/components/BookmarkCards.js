@@ -73,7 +73,7 @@ const bookmarkCards = ({ archive }) => {
 			bookmark.backend.tags.map((tag) => {
 				// console.log('bookmark', bookmark)
 
-				if (tag.tag === activeTag.tag) {
+				if (tag.tag === activeTag?.tag) {
 					tempBookmarksToShow.push(bookmark)
 				}
 			})
