@@ -5,7 +5,7 @@ import Script from 'next/script'
 
 const privacy = () => {
 	return (
-		<div className='w-full h-full absolute top-0 left-0 bg-sh-gray bg-opacity-80 z-50 flex items-center justify-center overflow-hidden'>
+		<div className='w-full h-full absolute top-0 left-0 bg-sh-gray bg-opacity-80 z-50 flex items-center justify-center overflow-hidden backdrop-blur-sm'>
 			<Head>
 				<title>Privacy Policy / TweepsBook</title>
 				<link rel='icon' href='/Logo.ico' />
@@ -38,7 +38,7 @@ const privacy = () => {
 					window.dataLayer = window.dataLayer || [];
 					function gtag(){dataLayer.push(arguments);}
 					gtag('js', new Date());
-				  
+
 					gtag('config', 'G-J0QPJQF85V'); `,
 					}}
 				/>
@@ -53,8 +53,8 @@ const privacy = () => {
 					}}
 				/>
 			</Head>
-			<div className='flex flex-col bg-white shadow-md w-4/5 rounded p-4 sm:p-32 overflow-y-scroll h-4/5'>
-				<h1 className=' text-5xl text-[#004964] font-bold text-center mb-11 items-center flex justify-between'>
+			<div className='flex flex-col bg-white shadow-xl w-4/5 rounded-xl p-2 sm:p-12 overflow-y-scroll h-4/5 border-4 border-cyan-400 flow'>
+				<h1 className='text-4xl text-[#004964] font-bold text-center mb-11 items-center flex justify-between'>
 					<span className='opacity-0'>.</span>
 					Privacy Policy
 					<AiOutlineClose
@@ -65,7 +65,7 @@ const privacy = () => {
 						}}
 					/>
 				</h1>
-				<div className='text-xl text-gray-600 leading-8'>
+				<div className='text-md text-gray-600 leading-8'>
 					At TweepsBook, accessible from https://tweepsbook.com, one
 					of our main priorities is the privacy of our visitors. This
 					Privacy Policy document contains types of information
@@ -79,10 +79,10 @@ const privacy = () => {
 					policy does not apply to any information collected offline
 					or via channels other than this website.
 					<br /> <br />
-					<h2 className='text-2xl font-semibold'>Consent</h2> You
+					<h2 className='text-lg font-semibold'>Consent</h2> You
 					hereby consent to our Privacy Policy and agree to its terms
 					by using our website. <br /> <br />
-					<h2 className='text-2xl font-semibold'>
+					<h2 className='text-lg font-semibold'>
 						Information we collect
 					</h2>
 					The personal information you are asked to provide, and the
@@ -96,7 +96,7 @@ const privacy = () => {
 					Account, we may ask for your contact information, including
 					items such as name, company name, address, email address,
 					and telephone number. <br /> <br />
-					<h2 className='text-2xl font-semibold'>
+					<h2 className='text-lg font-semibold'>
 						How we use your information
 					</h2>{' '}
 					We use the information we collect in various ways,
@@ -119,7 +119,7 @@ const privacy = () => {
 					</li>
 					<li>Send you emails - Find and prevent fraud</li>
 					<br />
-					<h2 className='text-2xl font-semibold'>Log Files</h2>
+					<h2 className='text-lg font-semibold'>Log Files</h2>
 					TweepsBook follows a standard procedure of using log files.
 					These files log visitors when they visit websites. All
 					hosting companies do this and are a part of hosting
@@ -132,7 +132,7 @@ const privacy = () => {
 					administer the site, track users' movement on the website,
 					and gather demographic information.
 					<br /> <br />
-					<h2 className='text-2xl font-semibold'>Cookies and Web</h2>
+					<h2 className='text-lg font-semibold'>Cookies and Web</h2>
 					Beacons Like any other website, TweepsBook uses ‘cookies.’
 					These cookies store information, including visitors'
 					preferences and the pages on the website that the visitor
@@ -140,7 +140,7 @@ const privacy = () => {
 					users' experience by customizing our web page content based
 					on visitors' browser type and/or other information.
 					<br /> <br />
-					<h2 className='text-2xl font-semibold'>
+					<h2 className='text-lg font-semibold'>
 						Advertising Partners Privacy Policies
 					</h2>
 					You may consult this list to find the Privacy Policy for
@@ -157,7 +157,7 @@ const privacy = () => {
 					cookies that are used by third-party advertisers.
 					<br />
 					<br />
-					<h2 className='text-2xl font-semibold'>
+					<h2 className='text-lg font-semibold'>
 						Third Party Privacy Policies
 					</h2>
 					TweepsBook's Privacy Policy does not apply to other
@@ -171,7 +171,7 @@ const privacy = () => {
 					information about cookie management with specific web
 					browsers. <br />
 					<br />
-					<h2 className='text-2xl font-semibold'>
+					<h2 className='text-lg font-semibold'>
 						CCPA Privacy Rights (Do Not Sell My Personal
 						Information)
 					</h2>{' '}
@@ -196,7 +196,7 @@ const privacy = () => {
 						of these rights.
 					</li>
 					<br />
-					<h2 className='text-2xl font-semibold'>
+					<h2 className='text-lg font-semibold'>
 						GDPR Data Protection Rights
 					</h2>{' '}
 					We would like to make sure you are fully aware of all of
@@ -220,7 +220,7 @@ const privacy = () => {
 					conditions. <br /> If you make a request, we have one month
 					to respond to you. Please contact us if you would like to
 					exercise any of these rights. <br /> <br />
-					<h2 className='text-2xl font-semibold'>
+					<h2 className='text-lg font-semibold'>
 						Children's Information
 					</h2>
 					Another part of our priority is adding protection for

@@ -9,9 +9,12 @@ import Modal from './Modal'
 import { useRouter } from 'next/router'
 import PrivacyPolicy from '../../pages/pages/privacy-policy'
 import TOS from '../../pages/pages/terms-of-service'
+import Demo from '../../pages/pages/30-sec-video'
+
 const Hero = () => {
 	const router = useRouter()
 	const query = router.query
+	query.page = query.page || '30-sec-video'
 	console.log(query)
 	const { user, getUser } = useContext(UserContext)
 	const handleAuth = () => {
@@ -41,6 +44,8 @@ const Hero = () => {
 			<Navbar />
 			{query.page === 'privacy-policy' && <PrivacyPolicy />}
 			{query.page === 'terms-of-service' && <TOS />}
+			{query.page === '30-sec-video' && <Demo />}
+			{/* <Demo/> */}
 			<div className='md:ml-10 sm:ml-6 mt-4 sm:mt-12 '>
 				<div className='md:mx-12 flex flex-col lg:flex-row sm:align-middle'>
 					<div className='sm:hidden flex h-[600px]'>
@@ -93,7 +98,7 @@ const Hero = () => {
 								>
 									<AiFillTwitterCircle
 										size={36}
-										style={{ color: '#1DA1F2' }}
+										style={{ color: '#000000' }}
 									/>
 								</a>
 							</div>

@@ -50,7 +50,7 @@ const Navbar = () => {
 						>
 							<AiFillTwitterCircle
 								size={32}
-								style={{ color: '#1DA1F2' }}
+								// style={{ color: '#1DA1F2' }}
 							/>
 						</a>
 					</div>

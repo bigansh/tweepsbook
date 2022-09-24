@@ -62,7 +62,7 @@ const tags = () => {
 		}
 	}
 	return (
-		<div className='flex flex-col justify-between items-start min-h-eigthy overflow-hidden w-full text-white flex-grow '>
+		<div className='flex flex-col justify-between items-start min-h-eigthy overflow-hidden w-full text-white flex-grow circle'>
 			<div className='text-xl px-8 py-10'>
 				<h1 className='text-xl font-semibold tracking-wider'>TAGS</h1>
 			</div>

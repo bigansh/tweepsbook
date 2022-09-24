@@ -27,8 +27,6 @@ const searchBar = () => {
 			<button>
 				{<AiOutlineSearch className='text-2xl text-[#848484] ' />}
 			</button>
-
-
 		</div>
 	)
 }

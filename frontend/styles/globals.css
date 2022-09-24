@@ -15,23 +15,27 @@ body {
 	font-family: 'Merriweather', serif;
 }
 ::-webkit-scrollbar {
-	width: 8px;
+	/* width: 8px; */
+	display: none;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
 	background: #004965;
-}
+	border-radius: 5px !important;
+	margin: auto;
+} */
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
 	background: #708790;
-}
+	border-radius: 5px !important;
+} */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
 	background: #004965;
-}
+} */
 .content {
 	height: calc(100vh - 80px);
 }
@@ -134,4 +138,20 @@ input:checked + .slider:before {
 
 .slider.round:before {
 	border-radius: 50%;
+}
+
+
+/* .circle {
+	add circle.png in the background
+	background: url("/circle.png") no-repeat;
+} */
+
+.modal{
+	/* display: inherit; */
+}
+
+.flow {
+	/* add flow.png as a background image with white background */
+	background: url("/flow.png") no-repeat;
+	background-color: #ffffff;
 }

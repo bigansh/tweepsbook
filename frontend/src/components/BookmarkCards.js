@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState , React} from 'react'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 import Lottie from 'react-lottie-player'
 import Loader from './loader.json'
@@ -36,9 +36,9 @@ const bookmarkCards = ({ archive }) => {
 		return bookmarksToShow.sort((a, b) => {
 			return sortByTweetDate
 				? new Date(b.twitter.created_at) -
-						new Date(a.twitter.created_at)
+				new Date(a.twitter.created_at)
 				: new Date(a.twitter.created_at) -
-						new Date(b.twitter.created_at)
+				new Date(b.twitter.created_at)
 		})
 	}
 	useEffect(() => {
@@ -81,6 +81,21 @@ const bookmarkCards = ({ archive }) => {
 		//setShowLoader(false)
 		return tempBookmarksToShow
 	}
+
+	function getHighlightedText(text, higlight) {
+		// Split text on higlight term, include term itself into parts, ignore case
+		var parts = text.split(new RegExp(`(${higlight})`, "gi"));
+		return parts.map((part, index) => (
+			<div key={index}>
+				{part.toLowerCase() === higlight.toLowerCase() ? (
+					<b style={{ backgroundColor: "#e8bb49" }}>{part}</b>
+				) : (
+					part
+				)}
+			</div>
+		));
+	}
+
 	const filterBySearchTerm = () => {
 		//setShowLoader(true)
 		let tempBookmarksToShow = []
@@ -91,6 +106,7 @@ const bookmarkCards = ({ archive }) => {
 					.toLowerCase()
 					.includes(searchTerm.toLowerCase())
 			) {
+				getHighlightedText(bookmark.twitter.text, searchTerm)
 				tempBookmarksToShow.push(bookmark)
 			}
 		})
