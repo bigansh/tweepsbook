@@ -141,10 +141,9 @@ input:checked + .slider:before {
 }
 
 
-/* .circle {
-	add circle.png in the background
-	background: url("/circle.png") no-repeat;
-} */
+.circle {
+	background: url("/circles.svg") no-repeat;
+}
 
 .modal{
 	/* display: inherit; */
