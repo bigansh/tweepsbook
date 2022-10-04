@@ -11,6 +11,8 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@headlessui/react": "^1.7.3",
+    "@heroicons/react": "^2.0.11",
     "@uiw/react-md-editor": "^3.14.5",
     "axios": "^0.27.2",
     "date-fns": "^2.28.0",

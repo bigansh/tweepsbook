@@ -2,10 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BsPlus } from 'react-icons/bs'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
 import { IoIosClose } from 'react-icons/io'
+import { Listbox } from '@headlessui/react'
 
 const TagPill = ({ bookmark }) => {
-	const { updateTags, stripHashtag } = useContext(BookmarksContext)
+	const { fetchTags,
+		updateTags,
+		stripHashtag,
+		setActiveTag,
+		bookmarks } = useContext(BookmarksContext)
 	const [tags, setTags] = useState([])
+	const [dtags, setdTags] = useState([])
 
 	useEffect(() => {
 		const tempTags = bookmark.backend.tags.map((tag) => {
@@ -18,6 +24,21 @@ const TagPill = ({ bookmark }) => {
 		const editTagsList = document.getElementsByName('tagName')
 		editTagsList[editTagsList.length - 1]?.focus()
 	}, [tags])
+	const importTags = async () => {
+		const tempTags = await fetchTags()
+		setdTags([{ tag: 'all', _id: 'all' }, ...tempTags])
+		if (window.location.pathname === '/app/dashboard/archive') {
+			setActiveTag({ tag: 'all', _id: 'all' })
+			return
+		}
+		localStorage.getItem('activeTag')
+			? setActiveTag(JSON.parse(localStorage.getItem('activeTag')))
+			: setActiveTag({ tag: 'all', _id: 'all' })
+	}
+	useEffect(() => {
+		importTags()
+		// console.log(activeTag)
+	}, [bookmarks])
 	const editTag = (tag) => {
 		// console.log(tag)
 		const tempTags = tags.map((t) => {
@@ -101,15 +122,29 @@ const TagPill = ({ bookmark }) => {
 							</div>
 						)}
 						{tag.showEdit && (
-							<form onSubmit={(e) => handleTagUpdate({ e, tag })}>
-								<input
+								<form onSubmit={(e) => handleTagUpdate({ e, tag })}>
+									{/* <input
 									type='text'
-									className='border px-4 p-1 rounded-full text-sm '
+									className='border px-4 p-1 rounded-full text-sm'
 									name='tagName'
 									placeholder={stripHashtag(tag.tag)}
-								/>
-							</form>
-						)}
+								/> */}
+									<Listbox value={tag} onChange={handleTagUpdate}>
+										<Listbox.Button>{tag.tagName}</Listbox.Button>
+										<Listbox.Options>
+											{dtags.map((dtag) => (
+												<Listbox.Option
+													key={dtag._id}
+													value={stripHashtag(dtag.tag)}
+												>
+													{stripHashtag(dtag.tag)}
+												</Listbox.Option>
+											))}
+										</Listbox.Options>
+									</Listbox>
+								</form>
+							)
+						}
 					</div>
 				)
 			})}
