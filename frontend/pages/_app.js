@@ -1,6 +1,7 @@
 import '@uiw/react-md-editor/markdown-editor.css'
 import '@uiw/react-markdown-preview/markdown.css'
 import '../styles/globals.css'
+import '../styles/normalize.css'
 import Head from 'next/head'
 import Link from 'next/link'
 import { BookmarksProvider } from '../contexts/BookmarksContext'
@@ -8,6 +9,7 @@ import { UserProvider } from '../contexts/UserContext'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Script from 'next/script'
+// import 'flowbite'
 
 const MyApp = ({ Component, pageProps }) => {
 	return (

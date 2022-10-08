@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { BsPlus } from 'react-icons/bs'
 import { BookmarksContext } from '../../contexts/BookmarksContext'
-import { IoIosClose } from 'react-icons/io'
-import { Listbox } from '@headlessui/react'
+import { IoIosClose, IoIosCheckmark } from 'react-icons/io'
+
 
 const TagPill = ({ bookmark }) => {
 	const { fetchTags,
@@ -52,6 +52,8 @@ const TagPill = ({ bookmark }) => {
 	}
 	const handleTagUpdate = ({ e, tag }) => {
 		e.preventDefault()
+		console.log(e.target.tagName.value)
+		console.log(tag)
 		const data = new FormData(e.target)
 		let tagName = data.get('tagName')
 		tagName = tagName.replace('#', '')
@@ -122,33 +124,63 @@ const TagPill = ({ bookmark }) => {
 							</div>
 						)}
 						{tag.showEdit && (
-								<form onSubmit={(e) => handleTagUpdate({ e, tag })}>
+							<form
+								className='flex flex-row'
+								onChange={
+									(e) => {
+										tag.showEdit = false
+									}
+								}
+								onSubmit={(e) => {
+									e.preventDefault()
+									handleTagUpdate({ e, tag })
+								}}
+							>
+								<div>
 									{/* <input
-									type='text'
-									className='border px-4 p-1 rounded-full text-sm'
-									name='tagName'
-									placeholder={stripHashtag(tag.tag)}
-								/> */}
-									<Listbox value={tag} onChange={handleTagUpdate}>
-										<Listbox.Button>{tag.tagName}</Listbox.Button>
-										<Listbox.Options>
-											{dtags.map((dtag) => (
-												<Listbox.Option
-													key={dtag._id}
-													value={stripHashtag(dtag.tag)}
+										type='text'
+										className='border px-4 p-1 rounded-full text-sm'
+										name='tagName'
+										placeholder={stripHashtag(tag.tag)}
+									/> */}
+									<select
+										id='tagName'
+										className='border flex items-center border-dark-blue text-sm font-normal rounded-full mx-1 my-1 text-dark-blue px-4 py-1'
+										name='tagName'
+									>
+										{dtags.map((dt) => {
+											return (
+												<option
+													// make the option look good
+													className='border border-dark-blue text-sm font-normal rounded-full my-1 text-dark-blue px-4 py-1'
+													key={dt._id}
+													value={stripHashtag(dt.tag)}
+													placeholder={stripHashtag(dt.tag)}
+													selected={
+														stripHashtag(dt.tag)
+													}
+													onSelect={
+														() => {
+															tag.tag = dt.tag
+														}
+													}
 												>
-													{stripHashtag(dtag.tag)}
-												</Listbox.Option>
-											))}
-										</Listbox.Options>
-									</Listbox>
-								</form>
-							)
+													#{stripHashtag(dt.tag)}
+												</option>
+											)
+										})}
+									</select>
+								</div>
+								<button className='bg-dark-blue text-white p-2 rounded-full'>
+									<IoIosCheckmark className='w-2' />
+								</button>
+							</form>
+						)
 						}
 					</div>
 				)
 			})}
-			<BsPlus
+			<BsPlus id="dropdownDefault" data-dropdown-toggle="dropdown"
 				onClick={addTag}
 				className='bg-lg-gray p-1 w-6 h-6 ml-2 rounded-full hover:cursor-pointer hover:scale-125 transition-all duration-100'
 			/>

@@ -1,21 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { motion, useScroll, useReducedMotion } from 'framer-motion'
 
 const Demo = () => {
-    // hide this modal after 35seconds
-    const [showModal, setShowModal] = React.useState(true)
-    setTimeout(() => {
-        setShowModal(false)
-        // document.querySelector('#modal').style.display = 'none'
-    }, 35000)
+    const { scrollYProgress } = useScroll();
+
+    // modal should come in from the bottom as a user scrolls down
+    // the modal contains a youtube video in an iframe
+    // the modal should disappear as the user scrolls up
+    // the modal should disappear when the user clicks on the backdrop
+
+    const [showModal, setShowModal] = useState(true);
 
 
-    return showModal && (
-        <div className='w-full h-full absolute shadow-lg top-0 left-0 bg-sh-gray bg-opacity-80 z-50 flex items-center justify-center overflow-hidden backdrop-blur-sm' id="modal">
-            <div className='w-5/10 h-11/12 bg-white rounded-lg flex flex-col items-center justify-center border-2 border-cyan-500'>
-                <iframe className='rounded-md' width="560" height="315" src="https://www.youtube.com/embed/7c2T3PfAEyE" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-            </div>
-        </div>
-    )
+    // modal should come in from the bottom as a user scrolls down
+    // the modal contains a youtube video in an iframe
+    // the modal should disappear as the user scrolls up
+    // the modal should disappear when the user clicks on the backdrop
+    const [isOpen, setIsOpen] = useState(false);
+
+    const shouldReduceMotion = useReducedMotion();
+    /*return !isOpen ? (
+
+    ) : (
+        <ModalVideo
+            channel="youtube"
+            autoplay
+            isOpen={isOpen}
+            videoId="cYvI8qKOfLc"
+            onClose={() => setIsOpen(false)}
+        />
+    )*/
 }
 
 export default Demo
